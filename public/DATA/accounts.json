@@ -1,0 +1,98 @@
+[
+  {
+    "LevelID": 1,
+    "TenTK": "Admin",
+    "Password": "admin123",
+    "Email": "admin@web.com",
+    "SDT": "0000000000",
+    "DiaChi": "System"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Trương Anh Kiệt",
+    "Password": "user123",
+    "Email": "anhkiet@gmail.com",
+    "SDT": "0987654321",
+    "DiaChi": "TP Hồ Chí Minh"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Nguyễn Văn Hùng",
+    "Password": "hung123",
+    "Email": "hungnv@gmail.com",
+    "SDT": "0912345678",
+    "DiaChi": "Hà Nội"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Lê Thị Minh",
+    "Password": "minh456",
+    "Email": "minhl@gmail.com",
+    "SDT": "0909876543",
+    "DiaChi": "Đà Nẵng"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Phạm Tuấn Kiệt",
+    "Password": "kiet321",
+    "Email": "ptkiet@gmail.com",
+    "SDT": "0977554433",
+    "DiaChi": "Cần Thơ"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Trần Bảo Ngọc",
+    "Password": "ngoc999",
+    "Email": "tbn123@gmail.com",
+    "SDT": "0933445566",
+    "DiaChi": "Nha Trang"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Vũ Hoàng Long",
+    "Password": "longvu",
+    "Email": "longvh@gmail.com",
+    "SDT": "0922334455",
+    "DiaChi": "Hải Phòng"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Đặng Nhật Minh",
+    "Password": "nhatminh",
+    "Email": "dnminh@gmail.com",
+    "SDT": "0944556677",
+    "DiaChi": "Bình Dương"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Ngô Thị Kim Liên",
+    "Password": "kimlien",
+    "Email": "ngokl@gmail.com",
+    "SDT": "0966887788",
+    "DiaChi": "Huế"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Huỳnh Văn Nam",
+    "Password": "namhv",
+    "Email": "namhv@gmail.com",
+    "SDT": "0955667788",
+    "DiaChi": "Đồng Nai"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Bùi Thị Thanh",
+    "Password": "thanhbt",
+    "Email": "btthanh@gmail.com",
+    "SDT": "0911223344",
+    "DiaChi": "Quảng Nam"
+  },
+  {
+    "LevelID": 0,
+    "TenTK": "Đỗ Minh Khoa",
+    "Password": "khoa999",
+    "Email": "dmkhoa@gmail.com",
+    "SDT": "0933221100",
+    "DiaChi": "Bạc Liêu"
+  }
+]
