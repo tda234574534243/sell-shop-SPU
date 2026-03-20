@@ -1,0 +1,16 @@
+[
+  {
+    "MaTK": "000001",
+    "MaSP": "SP0001",
+    "SoLuong": 2,
+    "GiaTien": 500000,
+    "State": "Đang giao"
+  },
+  {
+    "MaTK": "000002",
+    "MaSP": "SP0002",
+    "SoLuong": 1,
+    "GiaTien": 750000,
+    "State": "Chờ lấy hàng"
+  }
+]

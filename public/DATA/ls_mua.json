@@ -1,0 +1,79 @@
+[
+  {
+    "MaHD": "000001",
+    "MaTK": "000001",
+    "MaSP": "SP0001",
+    "SoLuong": 2,
+    "State": "Đã giao"
+  },
+  {
+    "MaHD": "000002",
+    "MaTK": "000002",
+    "MaSP": "SP0002",
+    "SoLuong": 1,
+    "State": "Đang giao"
+  },
+  {
+    "MaHD": "000003",
+    "MaTK": "000003",
+    "MaSP": "SP0003",
+    "SoLuong": 3,
+    "State": "Đã giao"
+  },
+  {
+    "MaHD": "000004",
+    "MaTK": "000001",
+    "MaSP": "SP0004",
+    "SoLuong": 1,
+    "State": "Chờ lấy hàng"
+  },
+  {
+    "MaHD": "000005",
+    "MaTK": "000002",
+    "MaSP": "SP0001",
+    "SoLuong": 4,
+    "State": "Đã giao"
+  },
+  {
+    "MaHD": "000006",
+    "MaTK": "000003",
+    "MaSP": "SP0005",
+    "SoLuong": 2,
+    "State": "Đang giao"
+  },
+  {
+    "MaHD": "000007",
+    "MaTK": "000002",
+    "MaSP": "SP0002",
+    "SoLuong": 2,
+    "State": "Đã hủy"
+  },
+  {
+    "MaHD": "000008",
+    "MaTK": "000001",
+    "MaSP": "SP0003",
+    "SoLuong": 1,
+    "State": "Đã giao"
+  },
+  {
+    "MaHD": "000009",
+    "MaTK": "000003",
+    "MaSP": "SP0006",
+    "SoLuong": 2,
+    "State": "Chờ lấy hàng"
+  },
+  {
+    "MaHD": "000010",
+    "MaTK": "000002",
+    "MaSP": "SP0004",
+    "SoLuong": 3,
+    "State": "Đã giao"
+  },
+  {
+    "MaHD": "000011",
+    "MaTK": "000001",
+    "MaSP": "SP0002",
+    "SoLuong": 1,
+    "State": "Đang giao"
+  }
+]
