@@ -111,4 +111,3 @@ class SanPhamModel extends M_database {
         return $this->excuteQuery();
     }
 }
-// Update mới nhất ngày 20/03/2026
