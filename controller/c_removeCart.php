@@ -4,6 +4,11 @@
     
     $cart = new M_giohang();
     $return_url = $_GET['return_url'] ?? '../index.php';
+    // Prevent open redirect / header injection: only allow relative paths, otherwise fallback
+    $return_url = str_replace(["\r", "\n"], '', $return_url);
+    if (preg_match('#^https?://#i', $return_url)) {
+        $return_url = '../index.php';
+    }
 
     if (!isset($_SESSION['user_id'])) {
         header("Location: ../signin.php");

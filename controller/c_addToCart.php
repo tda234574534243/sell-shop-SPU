@@ -14,6 +14,8 @@
         die("Thiếu thông tin hoặc không hợp lệ.");
     }
   
+    // sanitize MaSP to avoid injection in queries
+    $maSP = mysqli_real_escape_string($db->conn, $maSP);
     $db->setQuery("SELECT GiaTien FROM products WHERE MaSP = '$maSP'");
     $result = $db->excuteQuery();
     $row = $result ? $result->fetch_assoc() : null;
@@ -40,6 +42,12 @@
         'type' => 'success',
         'duration' => 3000
     ];
-    header("Location: " . $_SERVER['HTTP_REFERER']);
+    // safe redirect: validate referer and fallback
+    $referer = $_SERVER['HTTP_REFERER'] ?? '../index.php';
+    $referer = str_replace(["\r", "\n"], '', $referer);
+    if (preg_match('#^https?://#i', $referer)) {
+        $referer = '../index.php';
+    }
+    header("Location: " . $referer);
     exit;
 ?>

@@ -11,6 +11,15 @@ class M_account extends M_database
         return $stmt->get_result();
     }
 
+    public function findAccountByEmail($email)
+    {
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare("SELECT * FROM account WHERE Email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     public function getAccount($maTK)
     {
         $conn = $this->getConnection();
@@ -35,8 +44,10 @@ class M_account extends M_database
         $conn = $this->getConnection();
         $level = 0; // mặc định user
 
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
         $stmt = $conn->prepare("INSERT INTO account (TenTK, Email, SDT, DiaChi, Password, LevelID) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssi", $tenTK, $email, $phone, $diaChi, $password, $level);
+        $stmt->bind_param("sssssi", $tenTK, $email, $phone, $diaChi, $passwordHash, $level);
         return $stmt->execute();
     }
 

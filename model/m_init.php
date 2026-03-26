@@ -7,7 +7,7 @@
                 LevelID int(1) Not Null Default 0,
                 MaTK int(6) Zerofill Unsigned Auto_Increment Primary Key ,
                 TenTK varchar(100) Not Null,
-                Password varchar(10) Not Null,
+                Password varchar(255) Not Null,
                 Email varchar(100) Unique Not Null,
                 SDT varchar(10) Unique Not Null,
                 DiaChi varchar(100) Not Null
@@ -88,12 +88,12 @@
         foreach ($accounts as $acc) {
             $LevelID = $acc['LevelID'];
             $TenTK = addslashes($acc['TenTK']);
-            $Password = $acc['Password'];
+            $Password = password_hash($acc['Password'], PASSWORD_DEFAULT);
             $Email = $acc['Email'];
             $SDT = $acc['SDT'];
             $DiaChi = addslashes($acc['DiaChi']);
 
-            $sql = "INSERT INTO Account (LevelID, TenTK, Password, Email, SDT, DiaChi)
+                $sql = "INSERT INTO Account (LevelID, TenTK, Password, Email, SDT, DiaChi)
                     VALUES ($LevelID, '$TenTK', '$Password', '$Email', '$SDT', '$DiaChi')";
             $this->setQuery($sql);
             $this->excuteQuery();

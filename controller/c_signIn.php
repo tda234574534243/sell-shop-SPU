@@ -20,32 +20,34 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 $acc = new M_account();
-$result = $acc->findAccount($email, $password);
+$result = $acc->findAccountByEmail($email);
 
 if ($result && $result->num_rows > 0) {
     $account = $result->fetch_assoc();
 
-    // Lưu thông tin vào session
-    $_SESSION['user_id'] = $account["MaTK"];
-    $_SESSION['username'] =  $account['TenTK'];
-    $_SESSION['levelID'] = $account['LevelID'];
+    if (password_verify($password, $account['Password'])) {
+        // Lưu thông tin vào session
+        $_SESSION['user_id'] = $account["MaTK"];
+        $_SESSION['username'] =  $account['TenTK'];
+        $_SESSION['levelID'] = $account['LevelID'];
 
-    // Điều hướng theo quyền
-    if ($account['LevelID'] == 1) {
-        header('Location: ../admin/analystic_product.php');
-    } else {
-        $_SESSION['toast'] = [
-            'title' => 'Thông báo',
-            'message' => 'Đăng nhập thành công!',
-            'type' => 'success',
-            'duration' => 3000
-        ];
-        header('Location: ../index.php');
+        // Điều hướng theo quyền
+        if ($account['LevelID'] == 1) {
+            header('Location: ../admin/analystic_product.php');
+        } else {
+            $_SESSION['toast'] = [
+                'title' => 'Thông báo',
+                'message' => 'Đăng nhập thành công!',
+                'type' => 'success',
+                'duration' => 3000
+            ];
+            header('Location: ../index.php');
+        }
+        exit();
     }
-    exit();
-} else {
-    header('Location: ../signIn.php?error=invalid');
-    exit();
 }
+
+header('Location: ../signIn.php?error=invalid');
+exit();
 
 ?>

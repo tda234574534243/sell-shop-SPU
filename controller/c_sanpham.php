@@ -43,7 +43,30 @@ class SanPhamController {
     }
     public function themSanPham($data, $image) {
         $target_dir = "../media/image/Product_img/";
-        $imageFileType = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
+
+        if (!is_dir($target_dir)) {
+            if (!mkdir($target_dir, 0755, true)) {
+                $_SESSION['toast'] = [
+                    'title' => 'Lỗi hệ thống',
+                    'message' => 'Không thể tạo thư mục lưu ảnh trên server.',
+                    'type' => 'error',
+                    'duration' => 5000
+                ];
+                return false;
+            }
+        }
+
+        if (!isset($image) || !isset($image['name']) || $image['name'] === '') {
+            $_SESSION['toast'] = [
+                'title' => 'Thông báo',
+                'message' => 'Vui lòng chọn file ảnh.',
+                'type' => 'error',
+                'duration' => 3000
+            ];
+            return false;
+        }
+
+        $imageFileType = strtolower(pathinfo(basename($image["name"]), PATHINFO_EXTENSION));
         $newFileName = $data['masp'] .'.' . $imageFileType;
         $target_file = $target_dir . $newFileName;
 
@@ -69,6 +92,16 @@ class SanPhamController {
         }
 
         if (in_array($imageFileType, ["jpg", "png", "jpeg", "gif", "webp"])) {
+            if (!isset($image['tmp_name']) || !is_uploaded_file($image['tmp_name'])) {
+                $_SESSION['toast'] = [
+                    'title' => 'Thông báo',
+                    'message' => 'File upload không hợp lệ.',
+                    'type' => 'error',
+                    'duration' => 3000
+                ];
+                return false;
+            }
+
             if (move_uploaded_file($image["tmp_name"], $target_file)) {
                 $_SESSION['toast'] = [
                     'title' => 'Thông báo',
@@ -79,10 +112,9 @@ class SanPhamController {
                 return $this->model->addProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image_path, $MaTK);
             }
         }
-
         $_SESSION['toast'] = [
             'title' => 'Thông báo',
-            'message' => 'Chỉ áp dụng định dạng ảnh png, jpg, jpeg',
+            'message' => 'Chỉ áp dụng định dạng ảnh png, jpg, jpeg, gif, webp',
             'type' => 'error',
             'duration' => 3000
         ];

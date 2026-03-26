@@ -15,28 +15,28 @@
                     <!-- Mã đơn hàng -->
                     <div class="col-md-3">
                         <label class="form-label">Mã đơn hàng</label>
-                        <input type="text" name="ma_hd" placeholder="Mã đơn hàng..." value="<?= $_GET['ma_hd'] ?? '' ?>" class="form-control">
+                        <input type="text" name="ma_hd" placeholder="Mã đơn hàng..." value="<?= htmlspecialchars($_GET['ma_hd'] ?? '') ?>" class="form-control">
                     </div>
                     <!-- Tên tài khoản -->
                     <div class="col-md-3">
                         <label class="form-label">Tài khoản</label>
-                        <input type="text" name="ten_tk" placeholder="Tên tài khoản..." value="<?= $_GET['ten_tk'] ?? '' ?>" class="form-control">
+                        <input type="text" name="ten_tk" placeholder="Tên tài khoản..." value="<?= htmlspecialchars($_GET['ten_tk'] ?? '') ?>" class="form-control">
                     </div>
 
                     <!-- Tên sản phẩm -->
                     <div class="col-md-3">
                         <label class="form-label">Sản phẩm</label>
-                        <input type="text" name="ten_sp" placeholder="Tên sản phẩm..." value="<?= $_GET['ten_sp'] ?? '' ?>" class="form-control">
+                        <input type="text" name="ten_sp" placeholder="Tên sản phẩm..." value="<?= htmlspecialchars($_GET['ten_sp'] ?? '') ?>" class="form-control">
                     </div>
 
                     <!-- Ngày mua (Từ ngày - Đến ngày) -->
                     <div class="col-md-3">
                         <label class="form-label">Từ ngày</label>
-                        <input type="date" name="ngay_tu" value="<?= $_GET['ngay_tu'] ?? '' ?>" class="form-control">
+                        <input type="date" name="ngay_tu" value="<?= htmlspecialchars($_GET['ngay_tu'] ?? '') ?>" class="form-control">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Đến ngày</label>
-                        <input type="date" name="ngay_den" value="<?= $_GET['ngay_den'] ?? '' ?>" class="form-control">
+                        <input type="date" name="ngay_den" value="<?= htmlspecialchars($_GET['ngay_den'] ?? '') ?>" class="form-control">
                     </div>
 
                     <!-- Nút lọc -->
@@ -84,27 +84,27 @@
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item <?= ($current_page == 1) ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=1&ten_tk=<?= $_GET['ten_tk'] ?? '' ?>&ten_sp=<?= $_GET['ten_sp'] ?? '' ?>&ngay_tu=<?= $_GET['ngay_tu'] ?? '' ?>&ngay_den=<?= $_GET['ngay_den'] ?? '' ?>" aria-label="First">
+                    <a class="page-link" href="?page=1&ten_tk=<?= rawurlencode($_GET['ten_tk'] ?? '') ?>&ten_sp=<?= rawurlencode($_GET['ten_sp'] ?? '') ?>&ngay_tu=<?= rawurlencode($_GET['ngay_tu'] ?? '') ?>&ngay_den=<?= rawurlencode($_GET['ngay_den'] ?? '') ?>" aria-label="First">
                         <span aria-hidden="true">&laquo;&laquo;</span>
                     </a>
                 </li>
                 <li class="page-item <?= ($current_page == 1) ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= max(1, $current_page - 1) ?>&ten_tk=<?= $_GET['ten_tk'] ?? '' ?>&ten_sp=<?= $_GET['ten_sp'] ?? '' ?>&ngay_tu=<?= $_GET['ngay_tu'] ?? '' ?>&ngay_den=<?= $_GET['ngay_den'] ?? '' ?>" aria-label="Previous">
+                    <a class="page-link" href="?page=<?= max(1, $current_page - 1) ?>&ten_tk=<?= rawurlencode($_GET['ten_tk'] ?? '') ?>&ten_sp=<?= rawurlencode($_GET['ten_sp'] ?? '') ?>&ngay_tu=<?= rawurlencode($_GET['ngay_tu'] ?? '') ?>&ngay_den=<?= rawurlencode($_GET['ngay_den'] ?? '') ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                     <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
-                        <a class="page-link" href="?page=<?= $i ?>&ten_tk=<?= $_GET['ten_tk'] ?? '' ?>&ten_sp=<?= $_GET['ten_sp'] ?? '' ?>&ngay_tu=<?= $_GET['ngay_tu'] ?? '' ?>&ngay_den=<?= $_GET['ngay_den'] ?? '' ?>"><?= $i ?></a>
+                        <a class="page-link" href="?page=<?= $i ?>&ten_tk=<?= rawurlencode($_GET['ten_tk'] ?? '') ?>&ten_sp=<?= rawurlencode($_GET['ten_sp'] ?? '') ?>&ngay_tu=<?= rawurlencode($_GET['ngay_tu'] ?? '') ?>&ngay_den=<?= rawurlencode($_GET['ngay_den'] ?? '') ?>"><?= $i ?></a>
                     </li>
                 <?php endfor; ?>
                 <li class="page-item <?= ($current_page == $total_pages) ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= min($total_pages, $current_page + 1) ?>&ten_tk=<?= $_GET['ten_tk'] ?? '' ?>&ten_sp=<?= $_GET['ten_sp'] ?? '' ?>&ngay_tu=<?= $_GET['ngay_tu'] ?? '' ?>&ngay_den=<?= $_GET['ngay_den'] ?? '' ?>" aria-label="Next">
+                    <a class="page-link" href="?page=<?= min($total_pages, $current_page + 1) ?>&ten_tk=<?= rawurlencode($_GET['ten_tk'] ?? '') ?>&ten_sp=<?= rawurlencode($_GET['ten_sp'] ?? '') ?>&ngay_tu=<?= rawurlencode($_GET['ngay_tu'] ?? '') ?>&ngay_den=<?= rawurlencode($_GET['ngay_den'] ?? '') ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
                 <li class="page-item <?= ($current_page == $total_pages) ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $total_pages ?>&ten_tk=<?= $_GET['ten_tk'] ?? '' ?>&ten_sp=<?= $_GET['ten_sp'] ?? '' ?>&ngay_tu=<?= $_GET['ngay_tu'] ?? '' ?>&ngay_den=<?= $_GET['ngay_den'] ?? '' ?>" aria-label="Last">
+                    <a class="page-link" href="?page=<?= $total_pages ?>&ten_tk=<?= rawurlencode($_GET['ten_tk'] ?? '') ?>&ten_sp=<?= rawurlencode($_GET['ten_sp'] ?? '') ?>&ngay_tu=<?= rawurlencode($_GET['ngay_tu'] ?? '') ?>&ngay_den=<?= rawurlencode($_GET['ngay_den'] ?? '') ?>" aria-label="Last">
                         <span aria-hidden="true">&raquo;&raquo;</span>
                     </a>
                 </li>

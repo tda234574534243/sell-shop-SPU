@@ -130,10 +130,10 @@ a.cancel-payment:hover {
 
                 <?php while ($row = $orders->fetch_assoc()): ?>
                 <div class="d-flex align-items-center mb-3">
-                    <img src="<?php echo $row['ImageSP']; ?>" alt="<?php echo $row['TenSP']; ?>" class="product-img"
+                    <img src="<?php echo htmlspecialchars($row['ImageSP']); ?>" alt="<?php echo htmlspecialchars($row['TenSP']); ?>" class="product-img"
                         width="40" height="40" />
                     <div class="flex-grow-1">
-                        <p class="product-name mb-0"><?php echo $row['TenSP']; ?></p>
+                        <p class="product-name mb-0"><?php echo htmlspecialchars($row['TenSP']); ?></p>
                         <p class="product-price mb-0"><?php echo number_format($row['GiaTien'], 0, ',','.'); ?> đ</p>
                         <p class="product-qty mb-0">× <?php echo $row['SoLuong']; ?></p>
                     </div>

@@ -21,14 +21,15 @@
         <!-- Thêm sản phẩm -->
         <div class="card mb-4 shadow-sm border-0">
             <div class="card-header bg-dark text-white">
-                <i class="fa-solid"></i> Tạo sản phẩm mới
+                Thêm sản phẩm
             </div>
             <div class="card-body">
                 <form class="row g-3" method="POST" enctype="multipart/form-data">
                     <!-- Mã sản phẩm -->
                     <div class="col-md-3">
                         <label class="form-label">Mã sản phẩm</label>
-                        <input type="text" class="form-control" name="masp" placeholder="Mã sản phẩm..." required>
+                        <input type="text" class="form-control" name="masp" placeholder="Mã sản phẩm..."
+                            value="<?= htmlspecialchars($_GET['masp'] ?? '') ?>" required>
                     </div>
 
                     <!-- Tên sản phẩm -->
@@ -102,14 +103,14 @@
                     <div class="col-md-3">
                         <label class="form-label">Mã sản phẩm</label>
                         <input type="text" class="form-control" name="masp" placeholder="Mã sản phẩm..."
-                            value="<?= $_GET['masp'] ?? '' ?>">
+                            value="<?= htmlspecialchars($_GET['masp'] ?? '') ?>">
                     </div>
 
                     <!-- Tên sản phẩm -->
                     <div class="col-md-3">
                         <label class="form-label">Từ khóa</label>
                         <input type="text" class="form-control" name="keyword" placeholder="Tên sản phẩm..."
-                            value="<?= $_GET['keyword'] ?? '' ?>">
+                            value="<?= htmlspecialchars($_GET['keyword'] ?? '') ?>">
                     </div>
 
                     <!-- Trạng thái -->

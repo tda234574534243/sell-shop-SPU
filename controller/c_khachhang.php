@@ -77,7 +77,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'xoa' && isset($_GET['id'])) {
             'type' => 'success',
             'duration' => 3000
         ];
-        header("Location: ?ten_khach={$_GET['ten_khach']}&email={$_GET['email']}&sdt={$_GET['sdt']}&page=" . $page);
+        $ten = rawurlencode($_GET['ten_khach'] ?? '');
+        $emailParam = rawurlencode($_GET['email'] ?? '');
+        $sdt = rawurlencode($_GET['sdt'] ?? '');
+        header("Location: ?ten_khach={$ten}&email={$emailParam}&sdt={$sdt}&page=" . $page);
         exit;
     }
 }
