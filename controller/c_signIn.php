@@ -25,6 +25,19 @@ $result = $acc->findAccountByEmail($email);
 if ($result && $result->num_rows > 0) {
     $account = $result->fetch_assoc();
 
+    // Nếu cột Locked tồn tại và bằng 1 thì chặn đăng nhập
+    if (isset($account['Locked']) && intval($account['Locked']) === 1) {
+        if (session_status() == PHP_SESSION_NONE) session_start();
+        $_SESSION['toast'] = [
+            'title' => 'Tài khoản bị khóa',
+            'message' => 'Tài khoản của bạn đã bị khóa, vui lòng liên hệ admin để được trợ giúp.',
+            'type' => 'error',
+            'duration' => 5000
+        ];
+        header('Location: ../signIn.php');
+        exit();
+    }
+
     if (password_verify($password, $account['Password'])) {
         // Lưu thông tin vào session
         $_SESSION['user_id'] = $account["MaTK"];

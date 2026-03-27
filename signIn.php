@@ -1,3 +1,6 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -14,6 +17,12 @@
 
 </head>
 <body>
+    <style>
+        /* Page-specific override: place toast under the login box */
+        .uf-form-signin #toastcs { position: relative; top: auto; right: auto; left: auto; margin: 12px auto 0; width: 100%; display: flex; justify-content: center; z-index: 10; }
+        .uf-form-signin #toastcs .toastcs { position: relative; min-width: 320px; max-width: 520px; border-left: 0; }
+        .uf-form-signin #toastcs .toast--error { background: linear-gradient(90deg, #ff6b5f 0%, #ff4d4d 100%); color: #fff; }
+    </style>
     <div class="uf-form-signin">
         <div class="text-center">
             <a href="index.php"><img src="./media/image/other/logo-fb.png" alt="" width="100" height="100"></a>
@@ -59,11 +68,13 @@
                 <a href="signUp.php">Sign Up</a>
             </div>
         </form>
+        <?php include 'template/toastMess.php'; ?>
     </div>
 
     <!-- JavaScript -->
 
     <!-- Separate Popper and Bootstrap JS -->
+    <script src="./public/JS/main.js"></script>
     <script src="./public/js/popper.min.js"></script>
     <script src="./public/js/bootstrap.min.js"></script>
 </body>

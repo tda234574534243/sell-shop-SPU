@@ -210,6 +210,33 @@ main{
   .toast--error .toast__icon {
     color: #ff623d;
   }
+
+  /* More prominent error toast (used for account locked) */
+  .toast--error {
+    background: linear-gradient(90deg, #ff6b5f 0%, #ff4d4d 100%);
+    color: #fff;
+    border-left: none;
+    min-width: 520px;
+    max-width: 720px;
+    padding: 18px 18px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(255,77,77,0.18);
+  }
+
+  .toast--error .toast__title,
+  .toast--error .toast__msg {
+    color: #fff;
+  }
+
+  .toast--error .toast__icon {
+    color: #fff;
+    font-size: 26px;
+    padding-right: 12px;
+  }
+
+  .toast--error .toast__close {
+    color: rgba(255,255,255,0.9);
+  }
   
   .toastcs + .toastcs {
     margin-top: 24px;

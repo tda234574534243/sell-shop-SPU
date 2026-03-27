@@ -70,6 +70,7 @@ require_once '../controller/c_khachhang.php';
                                 <td>
                                     <!-- <a href="sua_khach_hang.php?id=<?= $khachHang['MaTK'] ?>" class="btn btn-warning btn-sm">Sửa</a> -->
                                     <?php if (isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1): ?>
+                                        <?php $isSelf = isset($_SESSION['user_id']) && intval($_SESSION['user_id']) === intval($khachHang['MaTK']); ?>
                                         <?php if (($khachHang['LevelID'] ?? 0) == 0): ?>
                                             <a href="?action=promote&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc chắn muốn nâng quyền người dùng này lên admin?');">Thăng quyền</a>
                                         <?php else: ?>
@@ -89,6 +90,20 @@ require_once '../controller/c_khachhang.php';
                                     class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này?');">
                                         Xóa
                                     </a>
+
+                                    <?php if (isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1): ?>
+                                        <a href="edit_user.php?id=<?= $khachHang['MaTK'] ?>" class="btn btn-primary btn-sm">Sửa</a>
+                                        <?php $isLocked = isset($khachHang['Locked']) && $khachHang['Locked'] == 1; ?>
+                                        <?php if ($isSelf): ?>
+                                            <!-- no lock button for self -->
+                                        <?php else: ?>
+                                            <?php if ($isLocked): ?>
+                                                <a href="?action=unlock&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc chắn muốn mở khóa tài khoản này?');">Mở khóa</a>
+                                            <?php else: ?>
+                                                <a href="?action=lock&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" class="btn btn-warning btn-sm" onclick="return confirm('Bạn có chắc chắn muốn khóa tài khoản này?');">Khóa</a>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
 
                                 </td>
                             </tr>
