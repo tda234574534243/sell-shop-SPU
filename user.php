@@ -11,12 +11,12 @@
     }
 
     .main__container {
-        max-width: 900px;
-        margin: 40px auto;
-        background-color: #fff;
-        padding: 30px;
+        max-width: 920px;
+        margin: 36px auto;
+        background-color: #ffffff;
+        padding: 28px;
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     }
 
     h2 {
@@ -28,13 +28,16 @@
 
     form input[type="text"],
     form input[type="email"],
-    form textarea {
+    form input[type="password"],
+    form textarea,
+    form input[type="file"] {
         width: 100%;
         padding: 10px 12px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        transition: border 0.3s ease;
+        margin-bottom: 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        transition: border 0.18s ease, box-shadow 0.18s ease;
+        background: #fbfbfb;
     }
 
     form input:focus,
@@ -44,18 +47,17 @@
     }
 
     form button {
-        padding: 10px 20px;
-        background-color: #3498db;
+        padding: 10px 18px;
+        background-color: #1f6feb;
         color: white;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background 0.3s;
+        transition: background 0.18s ease, transform 0.08s ease;
+        box-shadow: 0 4px 10px rgba(31,111,235,0.12);
     }
 
-    form button:hover {
-        background-color: #2980b9;
-    }
+    form button:hover { background-color: #155ed8; transform: translateY(-1px); }
 
     table {
         width: 100%;
@@ -109,6 +111,11 @@
             text-align: left;
         }
     }
+
+    /* Profile layout tweaks */
+    .profile-grid { display: grid; grid-template-columns: 160px 1fr; gap: 18px; align-items: start; }
+    .avatar-box img { width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 1px solid #f0f0f0; }
+    .profile-card { padding: 18px; background: #ffffff; border-radius: 10px; }
 </style>
 
 <div class="main__container">
@@ -135,17 +142,49 @@
     ?>
 
     <h2>Thông tin cá nhân</h2>
-    <form action="controller/c_updateProfile.php" method="post">
-        <label for="HoTen">Họ tên:</label>
-        <input type="text" name="HoTen" value="<?= $user['TenTK'] ?>" required><br>
-        <label for="Email">Email:</label>
-        <input type="email" name="Email" value="<?= $user['Email'] ?>" required><br>
-        <label for="SDT">Số điện thoại:</label>
-        <input type="text" name="SDT" value="<?= $user['SDT'] ?>"><br>
-        <label for="DiaChi">Địa chỉ:</label>
-        <textarea name="DiaChi"><?= $user['DiaChi'] ?></textarea><br>
-        <button type="submit">Cập nhật</button>
+    <div class="profile-card">
+    <form action="controller/c_updateProfile.php" method="post" enctype="multipart/form-data">
+        <div class="profile-grid">
+            <div class="avatar-box">
+                <?php if (!empty($user['Avatar'])): ?>
+                    <img src="<?= htmlspecialchars($user['Avatar']) ?>" alt="Avatar">
+                <?php else: ?>
+                    <div style="width:140px;height:140px;background:#f5f7fb;display:flex;align-items:center;justify-content:center;border-radius:12px;margin-bottom:8px;color:#9aa4b2;font-weight:600;">No Avatar</div>
+                <?php endif; ?>
+                <input type="file" name="Avatar" accept="image/*">
+            </div>
+
+            <div>
+                <label for="HoTen">Họ tên:</label>
+                <input type="text" name="HoTen" value="<?= htmlspecialchars($user['TenTK']) ?>" required>
+
+                <label for="Email">Email:</label>
+                <input type="email" name="Email" value="<?= htmlspecialchars($user['Email']) ?>" required>
+
+                <label for="SDT">Số điện thoại:</label>
+                <input type="text" name="SDT" value="<?= htmlspecialchars($user['SDT']) ?>">
+
+                <label for="DiaChi">Địa chỉ:</label>
+                <textarea name="DiaChi"><?= htmlspecialchars($user['DiaChi']) ?></textarea>
+
+                <hr>
+                <h3 style="margin-top:6px;margin-bottom:8px;font-size:1rem;color:#444;">Đổi mật khẩu</h3>
+                <label for="CurrentPassword">Mật khẩu hiện tại (nhập nếu muốn đổi):</label>
+                <input type="password" name="CurrentPassword">
+
+                <label for="NewPassword">Mật khẩu mới:</label>
+                <input type="password" name="NewPassword">
+
+                <label for="ConfirmPassword">Xác nhận mật khẩu mới:</label>
+                <input type="password" name="ConfirmPassword">
+
+                <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+                    <button type="submit">Cập nhật</button>
+                </div>
+            </div>
+        </div>
     </form>
+    </div>
 
     <hr>
 
