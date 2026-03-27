@@ -1,6 +1,10 @@
 <?php
 require_once "../model/m_sanpham.php";
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 class SanPhamController {
     private $model;
 
@@ -63,6 +67,10 @@ class SanPhamController {
                 'type' => 'error',
                 'duration' => 3000
             ];
+            // Log missing file upload
+            $logDir = __DIR__ . '/../logs';
+            if (!is_dir($logDir)) @mkdir($logDir, 0755, true);
+            @error_log(date('Y-m-d H:i:s') . " | AddProduct: No file provided for product " . ($data['masp'] ?? '') . PHP_EOL, 3, $logDir . '/add_product.log');
             return false;
         }
 
@@ -79,7 +87,8 @@ class SanPhamController {
         $mota = $data['mota'];
         $baohanh = $data['baohanh'];
         $image_path = $target_file;
-        $MaTK = "000001";
+        // Use currently logged-in user MaTK if available
+        $MaTK = $_SESSION['user_id'] ?? null;
 
         if ($this->model->isProductExist($masp, $tensp)) {
             $_SESSION['toast'] = [
@@ -88,6 +97,7 @@ class SanPhamController {
                 'type' => 'error',
                 'duration' => 3000
             ];
+            @error_log(date('Y-m-d H:i:s') . " | AddProduct: Duplicate product masp=" . $masp . " or tensp=" . $tensp . PHP_EOL, 3, __DIR__ . '/../logs/add_product.log');
             return false;
         }
 
@@ -99,6 +109,7 @@ class SanPhamController {
                     'type' => 'error',
                     'duration' => 3000
                 ];
+                @error_log(date('Y-m-d H:i:s') . " | AddProduct: invalid upload tmp_name=" . ($image['tmp_name'] ?? 'NULL') . " for masp=" . $masp . PHP_EOL, 3, __DIR__ . '/../logs/add_product.log');
                 return false;
             }
 
@@ -109,7 +120,18 @@ class SanPhamController {
                     'type' => 'success',
                     'duration' => 3000
                 ];
-                return $this->model->addProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image_path, $MaTK);
+                $addResult = $this->model->addProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image_path, $MaTK);
+                if ($addResult === false) {
+                    $logDir = __DIR__ . '/../logs';
+                    if (!is_dir($logDir)) @mkdir($logDir, 0755, true);
+                    $dbErr = $this->model->getConnection()->error ?? 'Unknown DB error';
+                    @error_log(date('Y-m-d H:i:s') . " | AddProduct DB Error: " . $dbErr . " | masp=" . $masp . "\n", 3, $logDir . '/add_product.log');
+                }
+                return $addResult;
+            }
+            else {
+                // Log move failure
+                @error_log(date('Y-m-d H:i:s') . " | AddProduct: move_uploaded_file failed tmp_name=" . ($image['tmp_name'] ?? 'NULL') . " target=" . $target_file . " masp=" . $masp . PHP_EOL, 3, __DIR__ . '/../logs/add_product.log');
             }
         }
         $_SESSION['toast'] = [
@@ -134,7 +156,7 @@ class SanPhamController {
         $giatien = $data['giatien'];
         $mota = $data['mota'];
         $baohanh = $data['baohanh'];
-        $MaTK = '000001';
+        $MaTK = $_SESSION['user_id'] ?? null;
         
         $image_path = null;
         if ($image && $image['error'] == 0) {
@@ -232,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
             'type' => 'success',
             'duration' => 3000
         ];
-        echo "window.location.href = '?';</script>";
+        echo "<script>window.location.href = '?';</script>";
     } else {
         $_SESSION['toast'] = [
             'title' => 'Thông báo',

@@ -63,15 +63,33 @@ class SanPhamModel extends M_database {
         return $this->excuteQuery();
     }
 
-    public function addProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image, $MaTK) {
+    public function addProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image, $MaTK = null) {
         if (strpos($image, '../') === 0) {
             $image_path = './' . substr($image, 3); // Cắt bỏ ../ và thêm lại ./
         } else {
             $image_path = $image;
         }
 
+        // Prepare MaTK value for SQL (NULL if not provided)
+        if ($MaTK === null) {
+            $maTK_value = "NULL";
+        } else {
+            $maTK_value = "'" . $this->real_escape_string($MaTK) . "'";
+        }
+
+        // Escape other values
+        $masp_e = $this->real_escape_string($masp);
+        $tensp_e = $this->real_escape_string($tensp);
+        $nsx_e = $this->real_escape_string($nsx);
+        $phanloai_e = $this->real_escape_string($phanloai);
+        $soluong_e = $this->real_escape_string($soluong);
+        $giatien_e = $this->real_escape_string($giatien);
+        $mota_e = $this->real_escape_string($mota);
+        $baohanh_e = $this->real_escape_string($baohanh);
+        $image_e = $this->real_escape_string($image_path);
+
         $sql = "INSERT INTO Products (MaSP, TenSP, NSX, PhanLoai, SoLuong, GiaTien, MoTa, BaoHanh, ImageSP, MaTK) 
-                VALUES ('$masp', '$tensp', '$nsx', '$phanloai', '$soluong', '$giatien', '$mota', '$baohanh', '$image_path', '$MaTK')";
+                VALUES ('$masp_e', '$tensp_e', '$nsx_e', '$phanloai_e', '$soluong_e', '$giatien_e', '$mota_e', '$baohanh_e', '$image_e', $maTK_value)";
         
         $this->setQuery($sql);
         return $this->excuteQuery();
@@ -84,22 +102,38 @@ class SanPhamModel extends M_database {
         return $result->fetch_assoc();
     }
 
-    public function updateProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image_path = null, $MaTK) {
+    public function updateProduct($masp, $tensp, $nsx, $phanloai, $soluong, $giatien, $mota, $baohanh, $image_path = null, $MaTK = null) {
         if ($image_path) {
             if (strpos($image_path, '../') === 0) {
                 $image_path = './' . substr($image_path, 3); // Cắt bỏ ../ và thêm lại ./
             }
         }
 
+        // Prepare MaTK value for SQL
+        if ($MaTK === null) {
+            $maTK_set = "MaTK = NULL";
+        } else {
+            $maTK_set = "MaTK = '" . $this->real_escape_string($MaTK) . "'";
+        }
+
+        // Escape other values
+        $tensp_e = $this->real_escape_string($tensp);
+        $nsx_e = $this->real_escape_string($nsx);
+        $phanloai_e = $this->real_escape_string($phanloai);
+        $soluong_e = $this->real_escape_string($soluong);
+        $giatien_e = $this->real_escape_string($giatien);
+        $mota_e = $this->real_escape_string($mota);
+        $baohanh_e = $this->real_escape_string($baohanh);
+
         $sql = "UPDATE Products SET 
-                TenSP = '$tensp',
-                NSX = '$nsx',
-                PhanLoai = '$phanloai',
-                SoLuong = '$soluong',
-                GiaTien = '$giatien',
-                MoTa = '$mota',
-                BaoHanh = '$baohanh',
-                MaTK = '$MaTK'";
+                TenSP = '$tensp_e',
+                NSX = '$nsx_e',
+                PhanLoai = '$phanloai_e',
+                SoLuong = '$soluong_e',
+                GiaTien = '$giatien_e',
+                MoTa = '$mota_e',
+                BaoHanh = '$baohanh_e',
+                $maTK_set";
         
         if ($image_path) {
             $sql .= ", ImageSP = '$image_path'";
