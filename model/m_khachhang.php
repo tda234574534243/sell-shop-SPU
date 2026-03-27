@@ -72,6 +72,26 @@ class KhachHangModel extends M_database {
         $this->setQuery($sql);
         return $this->excuteQuery();
     }
+    
+    // Lấy LevelID của tài khoản
+    public function getLevelByMaTK($maTK) {
+        $maTK = intval($maTK);
+        $this->setQuery("SELECT LevelID FROM Account WHERE MaTK = $maTK");
+        $res = $this->excuteQuery();
+        if ($res) {
+            $row = $res->fetch_assoc();
+            return $row['LevelID'] ?? null;
+        }
+        return null;
+    }
+
+    // Cập nhật quyền (LevelID) cho tài khoản
+    public function setLevelByMaTK($maTK, $level) {
+        $maTK = intval($maTK);
+        $level = intval($level);
+        $this->setQuery("UPDATE Account SET LevelID = $level WHERE MaTK = $maTK");
+        return $this->excuteQuery();
+    }
 
     
 

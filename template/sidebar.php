@@ -108,13 +108,34 @@
 </head>
 <body>
     <div class="container-fluid p-0 d-flex h-90vh flex-column">
+        <?php
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            // Load cart model to show cart count for logged-in admin
+            $cartCount = 0;
+            $maKH = $_SESSION['user_id'] ?? null;
+            if ($maKH) {
+                include_once __DIR__ . '/../model/m_giohang.php';
+                $cartModel = new M_giohang();
+                $resCart = $cartModel->getCartItems($maKH);
+                if ($resCart) $cartCount = $resCart->num_rows;
+            }
+        ?>
         <div id="sidebarMenu" class="sidebar  collapsed d-flex flex-column flex-shrink-0 p-3">
        
             <button id="toggleSidebar" class="btn btn-light d-flex justify-content-center align-items-center" style="width: 100%; height: 40px; margin-bottom:10px;">
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <h4 class="text-center mb-4"><i class="fa-solid fa-store me-2"></i>Trang Admin</h4> <hr>
+            <h4 class="text-center mb-4"><i class="fa-solid fa-store me-2"></i>Trang Admin</h4>
+            <div class="text-center mb-2">
+                <a href="../payProduct.php" class="btn btn-sm btn-light">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <span class="badge bg-danger ms-1"><?= $cartCount ?></span>
+                </a>
+            </div>
+            <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <!-- <li>
                     <a href="./analystic_general.php"><i class="fa-solid fa-chart-line"></i><span class="ms-2">Thống kê</span></a>

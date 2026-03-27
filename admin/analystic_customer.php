@@ -45,6 +45,7 @@ require_once '../controller/c_khachhang.php';
                 <thead class="table-dark">
                     <tr>
                         <th>Mã tài khoản</th>
+                        <th>Quyền</th>
                         <th>Tên tài khoản</th>
                         <th>Email</th>
                         <th>Số điện thoại</th>
@@ -56,11 +57,26 @@ require_once '../controller/c_khachhang.php';
                         <?php foreach ($khachHangs['khachHangs'] as $khachHang): ?>
                             <tr>
                                 <td><?= $khachHang['MaTK'] ?></td>
+                                <td>
+                                    <?php if (($khachHang['LevelID'] ?? 0) == 1): ?>
+                                        <span class="badge bg-primary">Admin</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary">User</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?= htmlspecialchars($khachHang['TenTK']) ?></td>
                                 <td><?= htmlspecialchars($khachHang['Email']) ?></td>
                                 <td><?= htmlspecialchars($khachHang['SDT']) ?></td>
                                 <td>
                                     <!-- <a href="sua_khach_hang.php?id=<?= $khachHang['MaTK'] ?>" class="btn btn-warning btn-sm">Sửa</a> -->
+                                    <?php if (isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1): ?>
+                                        <?php if (($khachHang['LevelID'] ?? 0) == 0): ?>
+                                            <a href="?action=promote&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc chắn muốn nâng quyền người dùng này lên admin?');">Thăng quyền</a>
+                                        <?php else: ?>
+                                            <button class="btn btn-outline-secondary btn-sm" disabled>Admin</button>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
                                     <a href="?action=xoa&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" 
                                     class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này?');">
                                         Xóa
