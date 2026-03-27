@@ -290,5 +290,16 @@ main{
 .star-rating { font-size: 24px; color: #d1d5db; cursor: pointer; user-select: none; }
 .star-rating .star { padding: 0 4px; }
 .star-rating .star.filled { color: #f39c12; }
+
+/* Side promo styles */
+.side-promo { position: sticky; top: 90px; }
+.promo-card { background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.promo-card h5, .promo-card h6 { margin: 0 0 8px 0; }
+.promo-card p { margin: 0 0 10px 0; color: #555; }
+.promo-card a { font-size: 13px; }
+
+@media (max-width: 991px) {
+  .side-promo { display: none; }
+}
 /* -----------------end toastMess--------------------- */
   

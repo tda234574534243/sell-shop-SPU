@@ -43,6 +43,8 @@ if ($result && $result->num_rows > 0) {
         $_SESSION['user_id'] = $account["MaTK"];
         $_SESSION['username'] =  $account['TenTK'];
         $_SESSION['levelID'] = $account['LevelID'];
+        // show welcome banner on next page load (homepage)
+        $_SESSION['show_welcome_banner'] = true;
 
         // Always redirect to the public site home. Admins can access the admin panel from the site.
         $_SESSION['toast'] = [

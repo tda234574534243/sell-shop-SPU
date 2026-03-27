@@ -1,40 +1,148 @@
 <?php include('template/head.php') ?>
 <?php include('template/header.php') ?>
 <?php include('template/toastMess.php') ?>
-<div class="main__container">
-    <div class="container__banner">
-        <div class="banner__inner">
-            <div class="banner__title">
-                <h3>PSHOP</h3>
+<?php
+    if (session_status() == PHP_SESSION_NONE) session_start();
+    $showBanner = false;
+    if (!empty($_SESSION['show_welcome_banner'])) {
+        $showBanner = true;
+        // unset so it only shows once after login
+        unset($_SESSION['show_welcome_banner']);
+    }
+?>
+<div class="container-fluid">
+    <div class="row gx-4">
+        <aside class="col-lg-2 d-none d-lg-block">
+            <div class="side-promo">
+                <div class="promo-card">
+                    <h5>Ưu đãi hôm nay</h5>
+                    <p>Giảm đến 30% cho điện thoại chọn lọc.</p>
+                    <a href="searchProduct.php?query=điện+thoại" class="btn btn-sm btn-outline-primary">Xem ngay</a>
+                </div>
+                <div class="promo-card mt-3">
+                    <h6>Miễn phí vận chuyển</h6>
+                    <p>Đơn hàng trên 500k</p>
+                </div>
             </div>
+        </aside>
 
-            <div class="banner__description">
-                <p>Đồ điện tử ? Ghé PSHOP</p>
+        <main class="col-12 col-lg-8">
+            <div class="main__container">
+                <div class="container__banner">
+                    <div class="banner__inner">
+                        <div class="banner__title">
+                            <h3>PSHOP</h3>
+                        </div>
+
+                        <div class="banner__description">
+                            <p>Đồ điện tử ? Ghé PSHOP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="slider" style="
+                        --width: 100px;
+                        --height: 50px;
+                        --quantity: 10;
+                    ">
+                        <div class="list">
+                            <div class="item" style="--position: 1"><img src="./media/image/Slider/slider1_1.png" alt=""></div>
+                            <div class="item" style="--position: 2"><img src="./media/image/Slider/slider1_2.png" alt=""></div>
+                            <div class="item" style="--position: 3"><img src="./media/image/Slider/slider1_3.png" alt=""></div>
+                            <div class="item" style="--position: 4"><img src="./media/image/Slider/slider1_4.png" alt=""></div>
+                            <div class="item" style="--position: 5"><img src="./media/image/Slider/slider1_5.png" alt=""></div>
+                            <div class="item" style="--position: 6"><img src="./media/image/Slider/slider1_6.png" alt=""></div>
+                            <div class="item" style="--position: 7"><img src="./media/image/Slider/slider1_7.png" alt=""></div>
+                            <div class="item" style="--position: 8"><img src="./media/image/Slider/slider1_8.png" alt=""></div>
+                            <div class="item" style="--position: 9"><img src="./media/image/Slider/slider1_9.png" alt=""></div>
+                            <div class="item" style="--position: 10"><img src="./media/image/Slider/slider1_10.png" alt=""></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </main>
+
+        <aside class="col-lg-2 d-none d-lg-block">
+            <div class="side-promo">
+                <div class="promo-card">
+                    <h5>Top danh mục</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="searchProduct.php?query=phukien">Phụ kiện</a></li>
+                        <li><a href="searchProduct.php?query=loa">Loa &amp; Âm thanh</a></li>
+                        <li><a href="searchProduct.php?query=smartwatch">Đồng hồ thông minh</a></li>
+                    </ul>
+                </div>
+                <div class="promo-card mt-3">
+                    <h6>Đăng ký nhận tin</h6>
+                    <p>Nhận mã giảm giá qua email.</p>
+                    <a href="signUp.php" class="btn btn-sm btn-outline-primary">Đăng ký</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+<?php if ($showBanner): ?>
+    <div id="welcome-banner" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1050;">
+        <div style="background:#fff;max-width:960px;width:92%;padding:24px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.45);position:relative;z-index:1060;">
+            <button id="close-banner" style="position:absolute;right:12px;top:12px;border:none;background:transparent;font-size:28px;line-height:1;cursor:pointer;">×</button>
+            <div style="display:flex;gap:20px;align-items:center;">
+                <img src="media/image/Slider/slider1_1.png" alt="banner" style="width:260px;height:260px;object-fit:cover;border-radius:6px;">
+                <div>
+                    <h2 style="margin-top:0;">Chào mừng, <?= htmlspecialchars($_SESSION['username'] ?? 'Khách') ?>!</h2>
+                    <p style="font-size:16px;color:#444;">Cảm ơn bạn đã đăng nhập. Xem ngay các ưu đãi và sản phẩm mới nhất của chúng tôi.</p>
+                    <div style="margin-top:12px;"><a href="index.php#" class="btn btn-primary">Khám phá</a></div>
+                </div>
+            </div>
+        </div>
+        <div id="banner-backdrop" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1055;"></div>
+    </div>
+    <script>
+        (function(){
+            var close = document.getElementById('close-banner');
+            if (close) close.addEventListener('click', function(){
+                var b = document.getElementById('welcome-banner'); if (b) b.style.display='none';
+            });
+        })();
+    </script>
+<?php endif; ?>
+<!-- Prominent search area -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form class="input-group" method="GET" action="searchProduct.php">
+                <input type="search" name="query" class="form-control form-control-lg" placeholder="Tìm sản phẩm, mã, phân loại..." required>
+                <button class="btn btn-primary btn-lg" type="submit">Tìm kiếm</button>
+            </form>
         </div>
     </div>
-
-    <main>
-        <div class="slider" style="
-            --width: 100px;
-            --height: 50px;
-            --quantity: 10;
-        ">
-            <div class="list">
-                <div class="item" style="--position: 1"><img src="./media/image/Slider/slider1_1.png" alt=""></div>
-                <div class="item" style="--position: 2"><img src="./media/image/Slider/slider1_2.png" alt=""></div>
-                <div class="item" style="--position: 3"><img src="./media/image/Slider/slider1_3.png" alt=""></div>
-                <div class="item" style="--position: 4"><img src="./media/image/Slider/slider1_4.png" alt=""></div>
-                <div class="item" style="--position: 5"><img src="./media/image/Slider/slider1_5.png" alt=""></div>
-                <div class="item" style="--position: 6"><img src="./media/image/Slider/slider1_6.png" alt=""></div>
-                <div class="item" style="--position: 7"><img src="./media/image/Slider/slider1_7.png" alt=""></div>
-                <div class="item" style="--position: 8"><img src="./media/image/Slider/slider1_8.png" alt=""></div>
-                <div class="item" style="--position: 9"><img src="./media/image/Slider/slider1_9.png" alt=""></div>
-                <div class="item" style="--position: 10"><img src="./media/image/Slider/slider1_10.png" alt=""></div>
-            </div>
-        </div>
-    </main>
 </div>
-<?php $sql = "SELECT * FROM products WHERE 1=1"?>
+
+<!-- Popular products (top sold) -->
+<?php
+    $db = new M_database();
+    $db->setQuery("SELECT * FROM products ORDER BY Sold DESC LIMIT 8");
+    $popular = $db->excuteQuery();
+?>
+<?php if ($popular && $popular->num_rows > 0): ?>
+<div class="container py-4">
+    <h3 class="mb-3">Sản phẩm nổi bật</h3>
+    <div class="row">
+        <?php while ($p = $popular->fetch_assoc()): ?>
+            <div class="col-6 col-md-3 mb-3">
+                <div class="card h-100">
+                    <img src="<?= $p['ImageSP'] ?>" class="card-img-top" alt="<?= htmlspecialchars($p['TenSP']) ?>">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title mb-1" style="font-size:14px"><?= htmlspecialchars($p['TenSP']) ?></h6>
+                        <p class="text-danger fw-bold mb-2" style="font-size:14px"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
+                        <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary mt-auto">Xem</a>
+                    </div>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
+</div>
+<?php endif; ?>
+
 <?php include('template/productList.php'); ?>
 <?php include('template/footer.php') ?>
