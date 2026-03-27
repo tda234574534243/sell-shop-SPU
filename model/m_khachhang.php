@@ -76,10 +76,20 @@ class KhachHangModel extends M_database {
     // Lấy LevelID của tài khoản
     public function getLevelByMaTK($maTK) {
         $maTK = intval($maTK);
-        $this->setQuery("SELECT LevelID FROM Account WHERE MaTK = $maTK");
-        $res = $this->excuteQuery();
-        if ($res) {
-            $row = $res->fetch_assoc();
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare("SELECT LevelID FROM Account WHERE MaTK = ?");
+        if (!$stmt) return null;
+        $stmt->bind_param('i', $maTK);
+        $ok = $stmt->execute();
+        if (!$ok) {
+            $logDir = __DIR__ . '/../logs';
+            if (!is_dir($logDir)) @mkdir($logDir, 0755, true);
+            $message = date('Y-m-d H:i:s') . " | GetLevel Error: " . $conn->error . " | MaTK: " . $maTK . PHP_EOL;
+            @error_log($message, 3, $logDir . '/db_errors.log');
+            return null;
+        }
+        $res = $stmt->get_result();
+        if ($res && $row = $res->fetch_assoc()) {
             return $row['LevelID'] ?? null;
         }
         return null;
@@ -89,8 +99,25 @@ class KhachHangModel extends M_database {
     public function setLevelByMaTK($maTK, $level) {
         $maTK = intval($maTK);
         $level = intval($level);
-        $this->setQuery("UPDATE Account SET LevelID = $level WHERE MaTK = $maTK");
-        return $this->excuteQuery();
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare("UPDATE Account SET LevelID = ? WHERE MaTK = ?");
+        if (!$stmt) {
+            $logDir = __DIR__ . '/../logs';
+            if (!is_dir($logDir)) @mkdir($logDir, 0755, true);
+            $message = date('Y-m-d H:i:s') . " | Prepare Update Error: " . $conn->error . " | Query: UPDATE Account SET LevelID = $level WHERE MaTK = $maTK" . PHP_EOL;
+            @error_log($message, 3, $logDir . '/db_errors.log');
+            return false;
+        }
+        $stmt->bind_param('ii', $level, $maTK);
+        $ok = $stmt->execute();
+        if (!$ok) {
+            $logDir = __DIR__ . '/../logs';
+            if (!is_dir($logDir)) @mkdir($logDir, 0755, true);
+            $message = date('Y-m-d H:i:s') . " | Execute Update Error: " . $stmt->error . " | Level: $level MaTK: $maTK" . PHP_EOL;
+            @error_log($message, 3, $logDir . '/db_errors.log');
+            return false;
+        }
+        return true;
     }
 
     

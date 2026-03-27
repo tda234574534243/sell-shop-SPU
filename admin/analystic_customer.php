@@ -73,7 +73,15 @@ require_once '../controller/c_khachhang.php';
                                         <?php if (($khachHang['LevelID'] ?? 0) == 0): ?>
                                             <a href="?action=promote&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc chắn muốn nâng quyền người dùng này lên admin?');">Thăng quyền</a>
                                         <?php else: ?>
-                                            <button class="btn btn-outline-secondary btn-sm" disabled>Admin</button>
+                                            <?php
+                                                // Nếu là admin, cho hiển thị nút Hạ quyền cho admin khác (không cho tự hạ)
+                                                $isSelf = isset($_SESSION['user_id']) && intval($_SESSION['user_id']) === intval($khachHang['MaTK']);
+                                            ?>
+                                            <?php if ($isSelf): ?>
+                                                <button class="btn btn-secondary btn-sm" disabled>Admin (Bạn)</button>
+                                            <?php else: ?>
+                                                <a href="?action=demote&id=<?= $khachHang['MaTK'] ?>&ten_khach=<?= rawurlencode($_GET['ten_khach'] ?? '') ?>&email=<?= rawurlencode($_GET['email'] ?? '') ?>&sdt=<?= rawurlencode($_GET['sdt'] ?? '') ?>&page=<?= $page ?>" class="btn btn-warning btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hạ quyền admin này xuống user?');">Hạ quyền</a>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     <?php endif; ?>
 

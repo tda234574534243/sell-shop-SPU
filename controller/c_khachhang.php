@@ -133,10 +133,17 @@ if (isset($_GET['action']) && in_array($_GET['action'], ['promote','demote']) &&
         if ($currentLevel === null) {
             $_SESSION['toast'] = [ 'title'=>'Lỗi','message'=>'Tài khoản không tồn tại.','type'=>'error','duration'=>3000];
         } elseif ($currentLevel == 1) {
-            // Không cho hạ admin xuống user
-            $_SESSION['toast'] = [ 'title'=>'Thông báo','message'=>'Không cho phép hạ quyền admin.','type'=>'error','duration'=>3000];
+            // Target is admin: allow demotion except self-demote
+            $currentUserId = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
+            if ($currentUserId !== null && $currentUserId === $targetId) {
+                $_SESSION['toast'] = [ 'title'=>'Thông báo','message'=>'Bạn không thể hạ quyền chính mình.','type'=>'error','duration'=>3000];
+            } else {
+                $ok = $controller->setLevelByMaTK($targetId, 0);
+                if ($ok) $_SESSION['toast'] = [ 'title'=>'Thành công','message'=>'Đã hạ quyền admin thành user.','type'=>'success','duration'=>3000];
+                else $_SESSION['toast'] = [ 'title'=>'Lỗi','message'=>'Không thể cập nhật quyền.','type'=>'error','duration'=>3000];
+            }
         } else {
-            // Nếu target không phải admin thì có thể hạ (nhiều khả năng không cần)
+            // Target is not admin: set to user (idempotent)
             $ok = $controller->setLevelByMaTK($targetId, 0);
             if ($ok) $_SESSION['toast'] = [ 'title'=>'Thành công','message'=>'Đã cập nhật quyền.','type'=>'success','duration'=>3000];
             else $_SESSION['toast'] = [ 'title'=>'Lỗi','message'=>'Không thể cập nhật quyền.','type'=>'error','duration'=>3000];
