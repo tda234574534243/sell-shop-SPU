@@ -44,18 +44,14 @@ if ($result && $result->num_rows > 0) {
         $_SESSION['username'] =  $account['TenTK'];
         $_SESSION['levelID'] = $account['LevelID'];
 
-        // Điều hướng theo quyền
-        if ($account['LevelID'] == 1) {
-            header('Location: ../admin/analystic_product.php');
-        } else {
-            $_SESSION['toast'] = [
-                'title' => 'Thông báo',
-                'message' => 'Đăng nhập thành công!',
-                'type' => 'success',
-                'duration' => 3000
-            ];
-            header('Location: ../index.php');
-        }
+        // Always redirect to the public site home. Admins can access the admin panel from the site.
+        $_SESSION['toast'] = [
+            'title' => 'Thông báo',
+            'message' => 'Đăng nhập thành công!',
+            'type' => 'success',
+            'duration' => 3000
+        ];
+        header('Location: ../index.php');
         exit();
     }
 }

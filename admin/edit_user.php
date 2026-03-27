@@ -7,6 +7,16 @@ $acc = new M_account();
 $result = $acc->getAccount($id);
 if (!$result) die('User not found');
 $user = $result->fetch_assoc();
+// Normalize avatar path for admin pages (admin/ is one level deeper)
+$avatarSrc = '';
+if (!empty($user['Avatar'])) {
+    $raw = $user['Avatar'];
+    if (preg_match('#^https?://#i', $raw) || strpos($raw, '/') === 0) {
+        $avatarSrc = $raw; // absolute or full URL
+    } else {
+        $avatarSrc = '../' . ltrim($raw, '/');
+    }
+}
 include '../template/toastMess.php';
 include "../template/sidebar.php";
 ?>
@@ -19,8 +29,8 @@ include "../template/sidebar.php";
                 <input type="hidden" name="id" value="<?= $user['MaTK'] ?>">
                 <div class="row">
                     <div class="col-md-3">
-                        <?php if (!empty($user['Avatar'])): ?>
-                            <img src="<?= htmlspecialchars($user['Avatar']) ?>" style="width:100%;object-fit:cover;border-radius:6px;">
+                        <?php if (!empty($avatarSrc)): ?>
+                            <img src="<?= htmlspecialchars($avatarSrc) ?>" style="width:100%;object-fit:cover;border-radius:6px;">
                         <?php else: ?>
                             <div style="width:100%;height:180px;background:#f5f7fb;display:flex;align-items:center;justify-content:center;color:#9aa4b2;">No Avatar</div>
                         <?php endif; ?>
