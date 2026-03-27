@@ -11,6 +11,14 @@
     $maKH = $_SESSION['user_id'] ?? 0;
     $currentPage = basename($_SERVER['PHP_SELF']);
 
+    // load current user's account info (for avatar)
+    $currentAccount = null;
+    if ($isLoggedIn) {
+        $accModel = new M_account();
+        $accRes = $accModel->getAccount($maKH);
+        if ($accRes && $accRes->num_rows > 0) $currentAccount = $accRes->fetch_assoc();
+    }
+
     if ($isLoggedIn) {
         $result = $cart->getCartItems($maKH);
 
@@ -72,10 +80,9 @@
                         </li>
                     <?php endif; ?>
                     <li class="nav-item dropdown d-none d-lg-block">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                        </svg>
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <?php $hdrAvatar = ($currentAccount && !empty($currentAccount['Avatar'])) ? $currentAccount['Avatar'] : 'media/image/avatars/default.png'; ?>
+                        <img src="<?= htmlspecialchars($hdrAvatar) ?>" alt="avatar" style="width:32px;height:32px;object-fit:cover;border-radius:50%;margin-right:8px;">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="user.php">Thông tin tài khoản</a></li>

@@ -273,5 +273,22 @@ main{
     color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
   }
+  
+  /* Dimmed look for hidden comments (visible to owner/admin) */
+  .comment-hidden {
+    background: #f0f2f5;
+    color: #707782;
+    border-left: 4px solid #d1d5db;
+  }
+
+  .comment-hidden .toast__title,
+  .comment-hidden .toast__msg {
+    color: inherit;
+  }
+
+/* Star rating UI */
+.star-rating { font-size: 24px; color: #d1d5db; cursor: pointer; user-select: none; }
+.star-rating .star { padding: 0 4px; }
+.star-rating .star.filled { color: #f39c12; }
 /* -----------------end toastMess--------------------- */
   
