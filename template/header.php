@@ -72,7 +72,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quản lý</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
-                                <li><a class="dropdown-item" href="admin/homepage.php">Trang chủ</a></li>
+                                <li><a class="dropdown-item" href="admin/page-builder.php"><i class="fas fa-wand-magic-sparkles"></i> Page Builder</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="admin/analystic_product.php">Sản phẩm</a></li>
                                 <li><a class="dropdown-item" href="admin/analystic_customer.php">Khách hàng</a></li>
                                 <li><a class="dropdown-item" href="admin/notifications.php">Thông báo</a></li>

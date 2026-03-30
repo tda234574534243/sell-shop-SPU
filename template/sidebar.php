@@ -157,7 +157,10 @@
                     <a href="./vouchers.php"><i class="fa-solid fa-ticket"></i><span class="ms-2">Voucher</span></a>
                 </li>
                 <li>
-                    <a href="./homepage.php"><i class="fa-solid fa-home"></i><span class="ms-2">Trang chủ</span></a>
+                    <a href="./pages.php"><i class="fa-solid fa-file-alt"></i><span class="ms-2">Quản lý trang</span></a>
+                </li>
+                <li>
+                    <a href="./page-builder.php"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="ms-2">Page Builder</span></a>
                 </li>
                 <li>
                     <a href="#" id="logoutButton">

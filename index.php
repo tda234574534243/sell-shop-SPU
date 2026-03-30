@@ -11,101 +11,149 @@
     }
     
     // Load homepage customization
-    include_once 'model/m_homepage.php';
     include_once 'model/m_database.php';
-    $homeModel = new M_homepage();
-    $homeData = $homeModel->getData();
+    include_once 'model/m_pagebuilder.php';
+    include_once 'helper/block_renderer.php';
+    $pageBuilder = new M_pagebuilder();
+    $leftBlocks = $pageBuilder->getBlocksBySection('homepage', 'left');
+    $centerBlocks = $pageBuilder->getBlocksBySection('homepage', 'center');
+    $rightBlocks = $pageBuilder->getBlocksBySection('homepage', 'right');
 ?>
 <div class="container-fluid">
     <div class="row gx-4">
         <aside class="col-lg-2 d-none d-lg-block">
             <div class="side-promo">
-                <?php
-                    include_once 'model/m_notification.php';
-                    include_once 'model/m_voucher.php';
-                    $nm = new M_notification();
-                    $vm = new M_voucher();
-                    $sideNotifs = $nm->getActive(5);
-                    $sideVouchers = $vm->getAll(5);
-                ?>
-                <?php if ($sideNotifs && $sideNotifs->num_rows>0): while($s = $sideNotifs->fetch_assoc()): ?>
-                    <div class="promo-card">
-                        <h6><?= htmlspecialchars($s['Title']) ?></h6>
-                        <p><?= nl2br(htmlspecialchars(substr($s['Content'],0,120))) ?></p>
-                        <a href="notification_detail.php?id=<?= $s['id'] ?>" class="btn btn-sm btn-outline-primary">Xem</a>
-                    </div>
-                <?php endwhile; else: ?>
-                    <div class="promo-card"><h6>Ưu đãi hôm nay</h6><p>Giảm giá &amp; khuyến mãi mới.</p></div>
-                <?php endif; ?>
+                <!-- LEFT SIDEBAR BLOCKS -->
+                <?php if (count($leftBlocks) > 0): ?>
+                    <?php foreach ($leftBlocks as $block): ?>
+                        <?= renderBlock($block) ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <!-- Default Left Sidebar Content -->
+                    <?php
+                        include_once 'model/m_notification.php';
+                        include_once 'model/m_voucher.php';
+                        $nm = new M_notification();
+                        $vm = new M_voucher();
+                        $sideNotifs = $nm->getActive(5);
+                        $sideVouchers = $vm->getAll(5);
+                    ?>
+                    <?php if ($sideNotifs && $sideNotifs->num_rows>0): while($s = $sideNotifs->fetch_assoc()): ?>
+                        <div class="promo-card">
+                            <h6><?= htmlspecialchars($s['Title']) ?></h6>
+                            <p><?= nl2br(htmlspecialchars(substr($s['Content'],0,120))) ?></p>
+                            <a href="notification_detail.php?id=<?= $s['id'] ?>" class="btn btn-sm btn-outline-primary">Xem</a>
+                        </div>
+                    <?php endwhile; else: ?>
+                        <div class="promo-card"><h6>Ưu đãi hôm nay</h6><p>Giảm giá &amp; khuyến mãi mới.</p></div>
+                    <?php endif; ?>
 
-                <?php if ($sideVouchers && $sideVouchers->num_rows>0): ?>
-                    <div class="promo-card mt-3">
-                        <h6>Voucher nổi bật</h6>
-                        <?php while($vv = $sideVouchers->fetch_assoc()): ?>
-                            <div style="margin-bottom:8px;">
-                                <strong><?= htmlspecialchars($vv['Code']) ?></strong><br>
-                                <small class="text-muted"><?= htmlspecialchars(substr($vv['Description'],0,60)) ?></small>
-                                <div><a href="voucher_detail.php?id=<?= $vv['id'] ?>" class="btn btn-sm btn-link">Chi tiết</a></div>
-                            </div>
-                        <?php endwhile; ?>
-                    </div>
+                    <?php if ($sideVouchers && $sideVouchers->num_rows>0): ?>
+                        <div class="promo-card mt-3">
+                            <h6>Voucher nổi bật</h6>
+                            <?php while($vv = $sideVouchers->fetch_assoc()): ?>
+                                <div style="margin-bottom:8px;">
+                                    <strong><?= htmlspecialchars($vv['Code']) ?></strong><br>
+                                    <small class="text-muted"><?= htmlspecialchars(substr($vv['Description'],0,60)) ?></small>
+                                    <div><a href="voucher_detail.php?id=<?= $vv['id'] ?>" class="btn btn-sm btn-link">Chi tiết</a></div>
+                                </div>
+                            <?php endwhile; ?>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </aside>
 
         <main class="col-12 col-lg-8">
             <div class="main__container">
-                <div class="container__banner" style="background-image: url('<?= htmlspecialchars($homeData['banner']['backgroundImage'] ?? '/sell-shop-SPU/media/image/Slider/slider-1.jpg') ?>'); background-size: cover; background-position: center;">
-                    <div class="banner__inner">
-                        <div class="banner__title">
-                            <h3><?= htmlspecialchars($homeData['banner']['title'] ?? 'PSHOP') ?></h3>
-                        </div>
-
-                        <div class="banner__description">
-                            <p><?= htmlspecialchars($homeData['banner']['subtitle'] ?? 'Đồ điện tử ? Ghé PSHOP') ?></p>
-                            <a href="#products" class="btn btn-primary btn-sm"><?= htmlspecialchars($homeData['banner']['buttonText'] ?? 'Mua ngay') ?></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="slider" style="
-                        --width: 100px;
-                        --height: 50px;
-                        --quantity: 10;
-                    ">
-                        <div class="list">
-                            <div class="item" style="--position: 1"><img src="./media/image/Slider/slider1_1.png" alt=""></div>
-                            <div class="item" style="--position: 2"><img src="./media/image/Slider/slider1_2.png" alt=""></div>
-                            <div class="item" style="--position: 3"><img src="./media/image/Slider/slider1_3.png" alt=""></div>
-                            <div class="item" style="--position: 4"><img src="./media/image/Slider/slider1_4.png" alt=""></div>
-                            <div class="item" style="--position: 5"><img src="./media/image/Slider/slider1_5.png" alt=""></div>
-                            <div class="item" style="--position: 6"><img src="./media/image/Slider/slider1_6.png" alt=""></div>
-                            <div class="item" style="--position: 7"><img src="./media/image/Slider/slider1_7.png" alt=""></div>
-                            <div class="item" style="--position: 8"><img src="./media/image/Slider/slider1_8.png" alt=""></div>
-                            <div class="item" style="--position: 9"><img src="./media/image/Slider/slider1_9.png" alt=""></div>
-                            <div class="item" style="--position: 10"><img src="./media/image/Slider/slider1_10.png" alt=""></div>
+                <!-- CENTER BLOCKS -->
+                <?php if (count($centerBlocks) > 0): ?>
+                    <?php foreach ($centerBlocks as $block): ?>
+                        <?= renderBlock($block) ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <!-- Fallback: Default slider if no blocks -->
+                    <div>
+                        <div class="slider" style="
+                            --width: 100px;
+                            --height: 50px;
+                            --quantity: 10;
+                        ">
+                            <div class="list">
+                                <div class="item" style="--position: 1"><img src="./media/image/Slider/slider1_1.png" alt=""></div>
+                                <div class="item" style="--position: 2"><img src="./media/image/Slider/slider1_2.png" alt=""></div>
+                                <div class="item" style="--position: 3"><img src="./media/image/Slider/slider1_3.png" alt=""></div>
+                                <div class="item" style="--position: 4"><img src="./media/image/Slider/slider1_4.png" alt=""></div>
+                                <div class="item" style="--position: 5"><img src="./media/image/Slider/slider1_5.png" alt=""></div>
+                                <div class="item" style="--position: 6"><img src="./media/image/Slider/slider1_6.png" alt=""></div>
+                                <div class="item" style="--position: 7"><img src="./media/image/Slider/slider1_7.png" alt=""></div>
+                                <div class="item" style="--position: 8"><img src="./media/image/Slider/slider1_8.png" alt=""></div>
+                                <div class="item" style="--position: 9"><img src="./media/image/Slider/slider1_9.png" alt=""></div>
+                                <div class="item" style="--position: 10"><img src="./media/image/Slider/slider1_10.png" alt=""></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </main>
 
         <aside class="col-lg-2 d-none d-lg-block">
             <div class="side-promo">
-                <div class="promo-card">
-                    <h5>Top danh mục</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="searchProduct.php?query=phukien">Phụ kiện</a></li>
-                        <li><a href="searchProduct.php?query=loa">Loa &amp; Âm thanh</a></li>
-                        <li><a href="searchProduct.php?query=smartwatch">Đồng hồ thông minh</a></li>
-                    </ul>
-                </div>
-                <div class="promo-card mt-3">
-                    <h6>Đăng ký nhận tin</h6>
-                    <p>Nhận mã giảm giá qua email.</p>
-                    <a href="signUp.php" class="btn btn-sm btn-outline-primary">Đăng ký</a>
-                </div>
+                <?php if (!empty($rightBlocks)): ?>
+                    <?php foreach ($rightBlocks as $block): ?>
+                        <div class="promo-card mb-3">
+                            <?php
+                                $blockType = $block['type'] ?? 'text';
+                                $blockData = $block['data'] ?? [];
+                                
+                                if ($blockType === 'banner' && !empty($blockData['image'])): ?>
+                                    <img src="<?= htmlspecialchars($blockData['image']) ?>" alt="<?= htmlspecialchars($blockData['title'] ?? '') ?>" class="img-fluid rounded mb-2">
+                                    <?php if (!empty($blockData['title'])): ?>
+                                        <h5><?= htmlspecialchars($blockData['title']) ?></h5>
+                                    <?php endif;
+                                    if (!empty($blockData['description'])): ?>
+                                        <p class="small"><?= htmlspecialchars($blockData['description']) ?></p>
+                                    <?php endif;
+                                
+                                elseif ($blockType === 'text'): ?>
+                                    <?php if (!empty($blockData['title'])): ?>
+                                        <h5><?= htmlspecialchars($blockData['title']) ?></h5>
+                                    <?php endif;
+                                    if (!empty($blockData['content'])): ?>
+                                        <p class="small"><?= htmlspecialchars($blockData['content']) ?></p>
+                                    <?php endif;
+                                
+                                elseif ($blockType === 'html' && !empty($blockData['content'])): ?>
+                                    <div class="html-block"><?= $blockData['content'] ?></div>
+                                
+                                elseif ($blockType === 'announcement'): ?>
+                                    <div class="alert alert-info mb-0">
+                                        <?php if (!empty($blockData['title'])): ?>
+                                            <h6><?= htmlspecialchars($blockData['title']) ?></h6>
+                                        <?php endif;
+                                        if (!empty($blockData['message'])): ?>
+                                            <p class="small mb-0"><?= htmlspecialchars($blockData['message']) ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <!-- Default Right Sidebar Content -->
+                    <div class="promo-card">
+                        <h5>Top danh mục</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="searchProduct.php?query=phukien">Phụ kiện</a></li>
+                            <li><a href="searchProduct.php?query=loa">Loa &amp; Âm thanh</a></li>
+                            <li><a href="searchProduct.php?query=smartwatch">Đồng hồ thông minh</a></li>
+                        </ul>
+                    </div>
+                    <div class="promo-card mt-3">
+                        <h6>Đăng ký nhận tin</h6>
+                        <p>Nhận mã giảm giá qua email.</p>
+                        <a href="signUp.php" class="btn btn-sm btn-outline-primary">Đăng ký</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </aside>
     </div>
@@ -147,36 +195,31 @@
 </div>
 
 <!-- Popular products (top sold) -->
-<?php
-    $db = new M_database();
-    $db->setQuery("SELECT * FROM products ORDER BY Sold DESC LIMIT 8");
-    $popular = $db->excuteQuery();
-?>
-<?php if ($popular && $popular->num_rows > 0): ?>
-<?php if ($homeData['announcement']['enabled'] ?? false): ?>
-<div class="alert alert-<?= $homeData['announcement']['type'] ?? 'info' ?> mx-3 mt-3 mb-0 alert-dismissible fade show" role="alert">
-    <strong><?= 'Thông báo:' ?></strong> <?= htmlspecialchars($homeData['announcement']['message'] ?? '') ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-<?php endif; ?>
-<div class="container py-4" id="products">
-    <h3 class="mb-3"><?= htmlspecialchars($homeData['featured']['title'] ?? 'Sản phẩm nổi bật') ?></h3>
-    <p class="text-muted"><?= htmlspecialchars($homeData['featured']['description'] ?? '') ?></p>
-    <div class="row">
-        <?php while ($p = $popular->fetch_assoc()): ?>
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card h-100">
-                    <img src="<?= $p['ImageSP'] ?>" class="card-img-top" alt="<?= htmlspecialchars($p['TenSP']) ?>">
-                    <div class="card-body d-flex flex-column">
-                        <h6 class="card-title mb-1" style="font-size:14px"><?= htmlspecialchars($p['TenSP']) ?></h6>
-                        <p class="text-danger fw-bold mb-2" style="font-size:14px"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
-                        <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary mt-auto">Xem</a>
+<?php if (count($pageBlocks) == 0): ?>
+    <?php
+        $db = new M_database();
+        $db->setQuery("SELECT * FROM products ORDER BY Sold DESC LIMIT 8");
+        $popular = $db->excuteQuery();
+    ?>
+    <?php if ($popular && $popular->num_rows > 0): ?>
+    <div class="container py-4" id="products">
+        <h3 class="mb-3">Sản phẩm nổi bật</h3>
+        <div class="row">
+            <?php while ($p = $popular->fetch_assoc()): ?>
+                <div class="col-6 col-md-3 mb-3">
+                    <div class="card h-100">
+                        <img src="<?= $p['ImageSP'] ?>" class="card-img-top" alt="<?= htmlspecialchars($p['TenSP']) ?>">
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title mb-1" style="font-size:14px"><?= htmlspecialchars($p['TenSP']) ?></h6>
+                            <p class="text-danger fw-bold mb-2" style="font-size:14px"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
+                            <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary mt-auto">Xem</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endwhile; ?>
+            <?php endwhile; ?>
+        </div>
     </div>
-</div>
+    <?php endif; ?>
 <?php endif; ?>
 
 <?php include('template/productList.php'); ?>

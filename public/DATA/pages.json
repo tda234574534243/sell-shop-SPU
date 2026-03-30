@@ -1,0 +1,67 @@
+{
+    "pages": {
+        "homepage": {
+            "title": "Trang chủ",
+            "slug": "homepage",
+            "blocks": {
+                "2": {
+                    "id": "block-69c9f2e628052",
+                    "type": "banner",
+                    "order": 1,
+                    "data": {
+                        "title": "Banner",
+                        "subtitle": "",
+                        "buttonText": "Mua ngay",
+                        "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774844332_2e287b21.jpg"
+                    }
+                },
+                "3": {
+                    "id": "block-69c9f60540c9d",
+                    "type": "featured_products",
+                    "order": 3,
+                    "data": {
+                        "title": "Sản phẩm nổi bật",
+                        "description": ""
+                    }
+                },
+                "4": {
+                    "id": "block-69c9fd70f3792",
+                    "type": "text",
+                    "section": "left",
+                    "order": 1,
+                    "data": {
+                        "content": "Nội dung ở đây"
+                    }
+                },
+                "5": {
+                    "id": "block-69c9fd8086390",
+                    "type": "text",
+                    "section": "right",
+                    "order": 1,
+                    "data": {
+                        "content": "Nội dung ở đây"
+                    }
+                }
+            },
+            "status": "private",
+            "updatedAt": "2026-03-30 06:24:21"
+        },
+        "about": {
+            "title": "Giới thiệu",
+            "slug": "about",
+            "blocks": [
+                {
+                    "id": "block-69c9f813b91d6",
+                    "type": "banner",
+                    "order": 1,
+                    "data": {
+                        "title": "Banner",
+                        "subtitle": "",
+                        "buttonText": "Mua ngay",
+                        "backgroundImage": ""
+                    }
+                }
+            ]
+        }
+    }
+}
