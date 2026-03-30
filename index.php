@@ -14,15 +14,36 @@
     <div class="row gx-4">
         <aside class="col-lg-2 d-none d-lg-block">
             <div class="side-promo">
-                <div class="promo-card">
-                    <h5>Ưu đãi hôm nay</h5>
-                    <p>Giảm đến 30% cho điện thoại chọn lọc.</p>
-                    <a href="searchProduct.php?query=điện+thoại" class="btn btn-sm btn-outline-primary">Xem ngay</a>
-                </div>
-                <div class="promo-card mt-3">
-                    <h6>Miễn phí vận chuyển</h6>
-                    <p>Đơn hàng trên 500k</p>
-                </div>
+                <?php
+                    include_once 'model/m_notification.php';
+                    include_once 'model/m_voucher.php';
+                    $nm = new M_notification();
+                    $vm = new M_voucher();
+                    $sideNotifs = $nm->getActive(5);
+                    $sideVouchers = $vm->getAll(5);
+                ?>
+                <?php if ($sideNotifs && $sideNotifs->num_rows>0): while($s = $sideNotifs->fetch_assoc()): ?>
+                    <div class="promo-card">
+                        <h6><?= htmlspecialchars($s['Title']) ?></h6>
+                        <p><?= nl2br(htmlspecialchars(substr($s['Content'],0,120))) ?></p>
+                        <a href="notification_detail.php?id=<?= $s['id'] ?>" class="btn btn-sm btn-outline-primary">Xem</a>
+                    </div>
+                <?php endwhile; else: ?>
+                    <div class="promo-card"><h6>Ưu đãi hôm nay</h6><p>Giảm giá &amp; khuyến mãi mới.</p></div>
+                <?php endif; ?>
+
+                <?php if ($sideVouchers && $sideVouchers->num_rows>0): ?>
+                    <div class="promo-card mt-3">
+                        <h6>Voucher nổi bật</h6>
+                        <?php while($vv = $sideVouchers->fetch_assoc()): ?>
+                            <div style="margin-bottom:8px;">
+                                <strong><?= htmlspecialchars($vv['Code']) ?></strong><br>
+                                <small class="text-muted"><?= htmlspecialchars(substr($vv['Description'],0,60)) ?></small>
+                                <div><a href="voucher_detail.php?id=<?= $vv['id'] ?>" class="btn btn-sm btn-link">Chi tiết</a></div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </aside>
 

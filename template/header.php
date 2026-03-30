@@ -1,6 +1,6 @@
 <?php
-    include_once('model/m_giohang.php');
-    include_once('model/m_account.php');
+    include_once(__DIR__ . '/../model/m_giohang.php');
+    include_once(__DIR__ . '/../model/m_account.php');
 
     $cart = new M_giohang();
     session_start();
@@ -18,6 +18,12 @@
         $accRes = $accModel->getAccount($maKH);
         if ($accRes && $accRes->num_rows > 0) $currentAccount = $accRes->fetch_assoc();
     }
+
+    // notifications for header bell
+    include_once(__DIR__ . '/../model/m_notification.php');
+    $notifModel = new M_notification();
+    $notifCount = $notifModel->countActive();
+    $notifList = $notifModel->getActive(5);
 
     if ($isLoggedIn) {
         $result = $cart->getCartItems($maKH);
@@ -63,8 +69,15 @@
 
                 <?php if ($isLoggedIn): ?>
                     <?php if ($isAdmin): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin/analystic_product.php">Quản lý</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quản lý</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
+                                <li><a class="dropdown-item" href="admin/analystic_product.php">Sản phẩm</a></li>
+                                <li><a class="dropdown-item" href="admin/analystic_customer.php">Khách hàng</a></li>
+                                <li><a class="dropdown-item" href="admin/notifications.php">Thông báo</a></li>
+                                <li><a class="dropdown-item" href="admin/vouchers.php">Voucher</a></li>
+                                <li><a class="dropdown-item" href="admin/statistic_order.php">Đơn hàng</a></li>
+                            </ul>
                         </li>
                     <?php else: ?>
                         <li class="nav-item cart-icon d-none d-lg-block">
@@ -77,6 +90,25 @@
                         </li>
                         <li class="nav-item cart-sub-icon d-block d-lg-none">
                          <a class="nav-link" href="#">Giỏ hàng</a>
+                        </li>
+                        <li class="nav-item dropdown d-none d-lg-block">
+                            <a class="nav-link position-relative" href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                                    <path d="M8 16a2 2 0 0 0 1.985-1.75H6.015A2 2 0 0 0 8 16z"/>
+                                    <path d="M8 1a4 4 0 0 0-4 4v2.086l-.707.707A1 1 0 0 0 3 10h10a1 1 0 0 0 .707-1.707L13 7.086V5a4 4 0 0 0-4-4z"/>
+                                </svg>
+                                <?php if ($notifCount > 0): ?><span class="badge bg-danger rounded-pill position-absolute" style="top:-6px;right:-6px;font-size:11px;"><?= $notifCount>99? '99+': $notifCount ?></span><?php endif; ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:320px;">
+                                <li class="dropdown-header">Thông báo mới</li>
+                                <?php if ($notifList && $notifList->num_rows>0): while($n = $notifList->fetch_assoc()): ?>
+                                    <li><a class="dropdown-item" href="/notification_detail.php?id=<?= $n['id'] ?>"><?= htmlspecialchars($n['Title']) ?> <br><small class="text-muted"><?= substr(strip_tags($n['Content']),0,60) ?></small></a></li>
+                                <?php endwhile; else: ?>
+                                    <li class="dropdown-item text-muted">Không có thông báo</li>
+                                <?php endif; ?>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-center" href="admin/notifications.php">Quản lý thông báo</a></li>
+                            </ul>
                         </li>
                     <?php endif; ?>
                     <li class="nav-item dropdown d-none d-lg-block">

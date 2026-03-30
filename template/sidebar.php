@@ -84,10 +84,11 @@
             border-radius: 0; /* Không bo góc, để có dạng ô vuông */
         }
 
-        /* Màu cam khi ô phân trang được chọn (active) */
+        /* Active pagination matches sidebar theme */
         .pagination .page-item.active .page-link {
-            background-color: #ff8c00; /* Màu cam đẹp */
-            border-color: #ff8c00; /* Viền cam */
+            background-color: #34495e;
+            border-color: #34495e;
+            color: #fff;
         }
 
         /* Khi hover lên các ô phân trang */
@@ -148,6 +149,12 @@
                 </li>
                 <li>
                     <a href="./analystic_customer.php"><i class="fa-solid fa-users"></i><span class="ms-2">Khách hàng</span></a>
+                </li>
+                <li>
+                    <a href="./notifications.php"><i class="fa-regular fa-bell"></i><span class="ms-2">Thông báo</span></a>
+                </li>
+                <li>
+                    <a href="./vouchers.php"><i class="fa-solid fa-ticket"></i><span class="ms-2">Voucher</span></a>
                 </li>
                 <li>
                     <a href="#" id="logoutButton">
