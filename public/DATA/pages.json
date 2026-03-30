@@ -3,11 +3,11 @@
         "homepage": {
             "title": "Trang chủ",
             "slug": "homepage",
-            "blocks": [
-                {
+            "blocks": {
+                "0": {
                     "id": "block-69c9f2e628052",
                     "type": "banner",
-                    "order": 1,
+                    "order": 2,
                     "data": {
                         "title": "Banner",
                         "subtitle": "",
@@ -16,48 +16,29 @@
                     },
                     "section": "center"
                 },
-                {
-                    "id": "block-69c9f60540c9d",
-                    "type": "featured_products",
-                    "order": 3,
-                    "data": {
-                        "title": "Sản phẩm nổi bật",
-                        "description": ""
-                    },
-                    "section": "center"
-                },
-                {
-                    "id": "block-69c9fd70f3792",
-                    "type": "text",
-                    "section": "left",
-                    "order": 1,
-                    "data": {
-                        "content": "Nội dung ở đây"
-                    }
-                },
-                {
+                "3": {
                     "id": "block-69c9fd8086390",
                     "type": "text",
                     "section": "right",
                     "order": 1,
                     "data": {
-                        "content": "Trả cho anh"
+                        "content": ""
                     }
                 },
-                {
+                "4": {
                     "id": "block-69ca063bc7895",
                     "type": "announcement",
                     "section": "center",
-                    "order": 4,
+                    "order": 3,
                     "data": {
                         "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
                         "type": "success",
                         "enabled": true
                     }
                 }
-            ],
+            },
             "status": "published",
-            "updatedAt": "2026-03-30 07:11:40"
+            "updatedAt": "2026-03-30 20:26:05"
         },
         "about": {
             "title": "Giới thiệu",
