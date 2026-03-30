@@ -8,6 +8,16 @@
         public function __construct() {
             $this->conn = new mysqli($this->CONFIG_serverName, $this->CONFIG_userName, 
                                         $this->CONFIG_password, $this->CONFIG_dbName);
+            
+            // Check connection
+            if ($this->conn->connect_error) {
+                $logDir = __DIR__ . '/../logs';
+                if (!is_dir($logDir)) {
+                    @mkdir($logDir, 0755, true);
+                }
+                $message = date('Y-m-d H:i:s') . " | DATABASE CONNECTION FAILED: " . $this->conn->connect_error . PHP_EOL;
+                @error_log($message, 3, $logDir . '/db_errors.log');
+            }
         }
         public function setQuery($sql_query) {
             $this->query = $sql_query;

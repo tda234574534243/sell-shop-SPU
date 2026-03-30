@@ -9,6 +9,12 @@
         // unset so it only shows once after login
         unset($_SESSION['show_welcome_banner']);
     }
+    
+    // Load homepage customization
+    include_once 'model/m_homepage.php';
+    include_once 'model/m_database.php';
+    $homeModel = new M_homepage();
+    $homeData = $homeModel->getData();
 ?>
 <div class="container-fluid">
     <div class="row gx-4">
@@ -49,14 +55,15 @@
 
         <main class="col-12 col-lg-8">
             <div class="main__container">
-                <div class="container__banner">
+                <div class="container__banner" style="background-image: url('<?= htmlspecialchars($homeData['banner']['backgroundImage'] ?? '/sell-shop-SPU/media/image/Slider/slider-1.jpg') ?>'); background-size: cover; background-position: center;">
                     <div class="banner__inner">
                         <div class="banner__title">
-                            <h3>PSHOP</h3>
+                            <h3><?= htmlspecialchars($homeData['banner']['title'] ?? 'PSHOP') ?></h3>
                         </div>
 
                         <div class="banner__description">
-                            <p>Đồ điện tử ? Ghé PSHOP</p>
+                            <p><?= htmlspecialchars($homeData['banner']['subtitle'] ?? 'Đồ điện tử ? Ghé PSHOP') ?></p>
+                            <a href="#products" class="btn btn-primary btn-sm"><?= htmlspecialchars($homeData['banner']['buttonText'] ?? 'Mua ngay') ?></a>
                         </div>
                     </div>
                 </div>
@@ -146,8 +153,15 @@
     $popular = $db->excuteQuery();
 ?>
 <?php if ($popular && $popular->num_rows > 0): ?>
-<div class="container py-4">
-    <h3 class="mb-3">Sản phẩm nổi bật</h3>
+<?php if ($homeData['announcement']['enabled'] ?? false): ?>
+<div class="alert alert-<?= $homeData['announcement']['type'] ?? 'info' ?> mx-3 mt-3 mb-0 alert-dismissible fade show" role="alert">
+    <strong><?= 'Thông báo:' ?></strong> <?= htmlspecialchars($homeData['announcement']['message'] ?? '') ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<?php endif; ?>
+<div class="container py-4" id="products">
+    <h3 class="mb-3"><?= htmlspecialchars($homeData['featured']['title'] ?? 'Sản phẩm nổi bật') ?></h3>
+    <p class="text-muted"><?= htmlspecialchars($homeData['featured']['description'] ?? '') ?></p>
     <div class="row">
         <?php while ($p = $popular->fetch_assoc()): ?>
             <div class="col-6 col-md-3 mb-3">

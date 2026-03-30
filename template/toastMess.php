@@ -1,4 +1,3 @@
-<div id="toastcs"></div>
 <?php
     if (isset($_SESSION['toast'])) {
         $toast = $_SESSION['toast'];

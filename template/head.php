@@ -21,3 +21,5 @@
     <link rel="stylesheet" href="/sell-shop-SPU/public/CSS/base.css">
 </head>
 <body>
+    <!-- Toast Container -->
+    <div id="toastcs"></div>

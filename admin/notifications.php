@@ -69,8 +69,8 @@
                                 <td><?= htmlspecialchars($row['Type']) ?></td>
                                 <td><?= $row['IsActive']? 'Hoạt động':'Không hoạt động' ?></td>
                                 <td>
-                                    <a href="edit_notification.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-outline-secondary">Sửa</a>
-                                    <a href="../controller/c_notification.php?action=delete&id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Xóa?')">Xóa</a>
+                                    <a href="notifications.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Sửa</a>
+                                    <a href="../controller/c_notification.php?action=delete&id=<?= $row['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i class="fas fa-trash"></i> Xóa</a>
                                 </td>
                             </tr>
                         <?php endwhile; else: ?>
@@ -84,3 +84,4 @@
     </div>
 </div>
 
+<?php include('../template/script_footer.php'); ?>
