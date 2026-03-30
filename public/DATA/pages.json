@@ -3,8 +3,8 @@
         "homepage": {
             "title": "Trang chủ",
             "slug": "homepage",
-            "blocks": {
-                "2": {
+            "blocks": [
+                {
                     "id": "block-69c9f2e628052",
                     "type": "banner",
                     "order": 1,
@@ -13,18 +13,20 @@
                         "subtitle": "",
                         "buttonText": "Mua ngay",
                         "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774844332_2e287b21.jpg"
-                    }
+                    },
+                    "section": "center"
                 },
-                "3": {
+                {
                     "id": "block-69c9f60540c9d",
                     "type": "featured_products",
                     "order": 3,
                     "data": {
                         "title": "Sản phẩm nổi bật",
                         "description": ""
-                    }
+                    },
+                    "section": "center"
                 },
-                "4": {
+                {
                     "id": "block-69c9fd70f3792",
                     "type": "text",
                     "section": "left",
@@ -33,18 +35,29 @@
                         "content": "Nội dung ở đây"
                     }
                 },
-                "5": {
+                {
                     "id": "block-69c9fd8086390",
                     "type": "text",
                     "section": "right",
                     "order": 1,
                     "data": {
-                        "content": "Nội dung ở đây"
+                        "content": "Trả cho anh"
+                    }
+                },
+                {
+                    "id": "block-69ca063bc7895",
+                    "type": "announcement",
+                    "section": "center",
+                    "order": 4,
+                    "data": {
+                        "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                        "type": "success",
+                        "enabled": true
                     }
                 }
-            },
-            "status": "private",
-            "updatedAt": "2026-03-30 06:24:21"
+            ],
+            "status": "published",
+            "updatedAt": "2026-03-30 07:11:40"
         },
         "about": {
             "title": "Giới thiệu",
@@ -61,7 +74,9 @@
                         "backgroundImage": ""
                     }
                 }
-            ]
+            ],
+            "status": "private",
+            "updatedAt": "2026-03-30 07:11:45"
         }
     }
 }

@@ -195,7 +195,7 @@
 </div>
 
 <!-- Popular products (top sold) -->
-<?php if (count($pageBlocks) == 0): ?>
+<?php if (empty($centerBlocks)): ?>
     <?php
         $db = new M_database();
         $db->setQuery("SELECT * FROM products ORDER BY Sold DESC LIMIT 8");

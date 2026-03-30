@@ -132,6 +132,30 @@ class M_pagebuilder {
     }
     
     /**
+     * Lấy tất cả blocks của một page (từ tất cả sections)
+     */
+    public function getBlocks($pageSlug) {
+        $page = $this->getPage($pageSlug);
+        if (!$page) return [];
+        
+        $blocks = $page['blocks'] ?? [];
+        
+        // Sort by section order and block order
+        usort($blocks, function($a, $b) {
+            $sectionOrder = ['left' => 0, 'center' => 1, 'right' => 2];
+            $sectionA = $sectionOrder[$a['section'] ?? 'center'] ?? 1;
+            $sectionB = $sectionOrder[$b['section'] ?? 'center'] ?? 1;
+            
+            if ($sectionA === $sectionB) {
+                return $a['order'] - $b['order'];
+            }
+            return $sectionA - $sectionB;
+        });
+        
+        return $blocks;
+    }
+    
+    /**
      * Lấy blocks của một section
      */
     public function getBlocksBySection($pageSlug, $section = 'center') {

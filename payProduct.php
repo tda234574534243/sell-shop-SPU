@@ -161,7 +161,6 @@ a.cancel-payment:hover {
                 </div>
                 <form action="controller/c_thanhToan.php" method="post">
                     <input type="hidden" name="maTK" value="<?php echo $user['MaTK']; ?>">
-                    <input type="hidden" name="soTien" value="<?php echo $tongTien+$tax; ?>">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <input type="text" class="form-control me-2" id="voucherInput" placeholder="Nhập mã giảm giá">
                         <button type="button" class="btn btn-success" id="applyVoucherBtn">Enter</button>
