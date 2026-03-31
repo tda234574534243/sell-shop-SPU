@@ -206,6 +206,28 @@ class M_voucher extends M_database {
         return $res ? $res->fetch_assoc() : null;
     }
 
+    public function getByCode($code) {
+        $conn = $this->getConnection();
+        
+        if (empty($code)) {
+            error_log("Voucher getByCode: Code is empty");
+            return null;
+        }
+        
+        $stmt = $conn->prepare("SELECT * FROM Vouchers WHERE Code = ?");
+        if ($stmt === false) {
+            error_log("Voucher getByCode prepare error: " . $conn->error);
+            return null;
+        }
+        $stmt->bind_param('s', $code);
+        if (!$stmt->execute()) {
+            error_log("Voucher getByCode execute error: " . $stmt->error);
+            return null;
+        }
+        $res = $stmt->get_result();
+        return $res ? $res->fetch_assoc() : null;
+    }
+
     public function getAll($limit = 50) {
         $conn = $this->getConnection();
         $limit = (int)$limit;
@@ -224,6 +246,32 @@ class M_voucher extends M_database {
             return null;
         }
         return $stmt->get_result();
+    }
+
+    public function updateQuantity($id, $quantity) {
+        $conn = $this->getConnection();
+        
+        if (!$id) {
+            error_log("Voucher updateQuantity: Invalid ID");
+            return false;
+        }
+        
+        $quantity = intval($quantity);
+        $stmt = $conn->prepare("UPDATE Vouchers SET Quantity = ? WHERE id = ?");
+        if ($stmt === false) {
+            error_log("Voucher updateQuantity prepare error: " . $conn->error);
+            return false;
+        }
+        
+        $stmt->bind_param('ii', $quantity, $id);
+        $result = $stmt->execute();
+        
+        if (!$result) {
+            error_log("Voucher updateQuantity execute error: " . $stmt->error);
+            return false;
+        }
+        
+        return true;
     }
 }
 

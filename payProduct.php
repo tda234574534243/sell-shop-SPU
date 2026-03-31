@@ -1,28 +1,54 @@
+<?php
+// Start session and load all data BEFORE any HTML output
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+include_once('model/m_database.php');
+$db = new M_database();
+$maKH = $_SESSION['user_id'] ?? 0;
+
+if ($maKH <= 0) {
+    $_SESSION['toast'] = [
+        'title' => 'Lỗi',
+        'message' => 'Vui lòng đăng nhập để thanh toán',
+        'type' => 'error'
+    ];
+    header('Location: signIn.php');
+    exit;
+}
+
+// Get user info
+$db->setQuery("SELECT * FROM account WHERE MaTK = $maKH");
+$user = $db->excuteQuery()->fetch_assoc();
+
+if (!$user) {
+    $_SESSION['toast'] = [
+        'title' => 'Lỗi',
+        'message' => 'Không tìm thấy thông tin tài khoản',
+        'type' => 'error'
+    ];
+    header('Location: index.php');
+    exit;
+}
+
+// Get cart items
+$db->setQuery("
+    SELECT c.MaSP, c.SoLuong, c.GiaTien, c.NgayMua, c.State, p.TenSP, p.ImageSP
+    FROM cart c
+    JOIN products p ON c.MaSP = p.MaSP
+    WHERE c.MaTK = $maKH
+");
+$orders = $db->excuteQuery();
+$tongTien = 0;
+
+// Get vouchers list
+$db->setQuery("SELECT * FROM vouchers");
+$list_voucher = $db->excuteQuery();
+$db->close();
+?>
 <?php include('template/head.php'); ?>
 <?php include('template/header.php');?>
-<?php
-  include_once('model/m_database.php');
-  $db = new M_database();
-  $maKH = $_SESSION['user_id'] ?? 0;
-  if ($maKH <= 0) die("Vui lòng đăng nhập");
-
-  $db->setQuery("SELECT * FROM account WHERE MaTK = $maKH");
-  $user = $db->excuteQuery()->fetch_assoc();
-
-  // Lấy lịch sử đơn hàng
-  $db->setQuery("
-      SELECT c.MaSP, c.SoLuong, c.GiaTien, c.NgayMua, c.State, p.TenSP, p.ImageSP
-      FROM cart c
-      JOIN products p ON c.MaSP = p.MaSP
-      WHERE c.MaTK = $maKH
-  ");
-  $orders = $db->excuteQuery();
-  $tongTien = 0;
-  
-  $db->setQuery("SELECT * FROM vouchers");
-  $list_voucher = $db->excuteQuery();
-  $db->close();
-?>
 <style>
 body {
     font-family: 'Inter', sans-serif;
@@ -173,6 +199,7 @@ a.cancel-payment:hover {
                         <span id="discountedTotal"><?php echo number_format($tongTien+$tax, 0,',','.'); ?> đ</span>
                     </div>
                     <input type="hidden" name="soTien" id="soTienInput" value="<?php echo $tongTien+$tax; ?>">
+                    <input type="hidden" name="voucherCode" id="voucherCodeInput" value="">
                     <button type="submit" class="btn btn-secure w-100 mb-2">
                         Tiếp tục thanh toán
                     </button>
@@ -189,6 +216,8 @@ a.cancel-payment:hover {
 
         if (voucherCode === '') {
             messageDiv.textContent = 'Vui lòng nhập mã giảm giá.';
+            messageDiv.classList.remove('text-success');
+            messageDiv.classList.add('text-danger');
             return;
         }
         fetch('model/m_checkVoucher.php?voucher=' + encodeURIComponent(voucherCode))
@@ -200,19 +229,37 @@ a.cancel-payment:hover {
             })
             .then(data => {
                 if (data.valid) {
-                    const discountPercent = parseFloat(data.discount);
                     const originalTotal = <?= $tongTien + $tax ?>;
-                    const discounted = Math.round(originalTotal * (1 - discountPercent / 100));
+                    let discounted = originalTotal;
+                    
+                    // Kiểm tra giảm theo percentage
+                    if (data.discountPercent && data.discountPercent > 0) {
+                        discounted = Math.round(originalTotal * (1 - data.discountPercent / 100));
+                    }
+                    // Kiểm tra giảm theo số tiền
+                    else if (data.discountAmount && data.discountAmount > 0) {
+                        discounted = Math.round(originalTotal - data.discountAmount);
+                    }
+                    
+                    // Đảm bảo số tiền không âm
+                    if (discounted < 0) discounted = 0;
 
                     document.getElementById('discountedTotal').textContent = discounted.toLocaleString(
                         'vi-VN') + ' đ';
                     document.getElementById('soTienInput').value = discounted;
 
-                    messageDiv.textContent = 'Áp dụng mã thành công!';
+                    messageDiv.textContent = data.message || 'Áp dụng mã thành công!';
                     messageDiv.classList.remove('text-danger');
                     messageDiv.classList.add('text-success');
+                    
+                    // Lưu voucher code vào hidden input
+                    document.getElementById('voucherCodeInput').value = voucherCode;
+                    
+                    // Disable voucherInput và button để tránh áp dụng nhiều lần
+                    document.getElementById('voucherInput').disabled = true;
+                    document.getElementById('applyVoucherBtn').disabled = true;
                 } else {
-                    messageDiv.textContent = 'Mã giảm giá không hợp lệ.';
+                    messageDiv.textContent = data.message || 'Mã giảm giá không hợp lệ.';
                     messageDiv.classList.remove('text-success');
                     messageDiv.classList.add('text-danger');
                 }

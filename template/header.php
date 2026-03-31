@@ -3,7 +3,9 @@
     include_once(__DIR__ . '/../model/m_account.php');
 
     $cart = new M_giohang();
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     $isLoggedIn = isset($_SESSION['user_id']);
     $isAdmin = isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1;
@@ -150,7 +152,7 @@
             </svg>
         </span>
     </header>
-    <form action="/PHP_Finalterm/payProduct.php" method="POST">
+    <form action="/sell-shop-SPU/payProduct.php" method="POST">
     <div class="listCart">
         <?php if (count($cartItems) > 0): ?>
             <?php foreach ($cartItems as $item): ?>
