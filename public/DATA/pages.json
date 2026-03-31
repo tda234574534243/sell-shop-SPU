@@ -38,7 +38,7 @@
                 }
             ],
             "status": "published",
-            "updatedAt": "2026-03-31 04:29:06",
+            "updatedAt": "2026-03-31 18:08:37",
             "layout": "sidebar-right"
         },
         "contact": {
@@ -60,18 +60,18 @@
         "introduce": {
             "title": "Giới thiệu",
             "slug": "introduce",
-            "status": "draft",
+            "status": "published",
             "createdAt": "2026-03-30",
-            "updatedAt": "2026-03-31 04:23:45",
+            "updatedAt": "2026-03-31 18:08:48",
             "blocks": [],
             "layout": "full-width"
         },
         "chinh-sach": {
             "title": "Chính sách",
             "slug": "chinh-sach",
-            "status": "published",
+            "status": "private",
             "createdAt": "2026-03-31 04:43:48",
-            "updatedAt": "2026-03-31 04:45:50",
+            "updatedAt": "2026-03-31 18:11:28",
             "blocks": [
                 {
                     "id": "block-69cb34ef73b91",
@@ -87,14 +87,6 @@
                     }
                 }
             ]
-        },
-        "about": {
-            "title": "Giới thiệu",
-            "slug": "about",
-            "status": "draft",
-            "createdAt": "2026-03-30",
-            "updatedAt": "2026-03-30",
-            "blocks": []
         },
         "nhung-con-song-xo": {
             "title": "nhung con song xo",
@@ -136,6 +128,14 @@
                     }
                 }
             ]
+        },
+        "about": {
+            "title": "Giới thiệu",
+            "slug": "about",
+            "status": "draft",
+            "createdAt": "2026-03-30",
+            "updatedAt": "2026-03-30",
+            "blocks": []
         }
     }
 }

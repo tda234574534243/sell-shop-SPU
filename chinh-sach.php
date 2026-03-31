@@ -19,6 +19,11 @@
     // Page slug
     $pageSlug = 'chinh-sach';
     
+    // Kiểm tra quyền truy cập trang
+    if (!$pageBuilder->canAccessPage($pageSlug)) {
+        die('404 - Trang không tồn tại hoặc bạn không có quyền truy cập');
+    }
+    
     // Load blocks từ page builder
     $leftBlocks = $pageBuilder->getBlocksBySection($pageSlug, 'left');
     $centerBlocks = $pageBuilder->getBlocksBySection($pageSlug, 'center');

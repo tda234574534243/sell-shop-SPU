@@ -168,6 +168,11 @@ class M_pagebuilder {
     // Page slug
     $pageSlug = \'' . addslashes($slug) . '\';
     
+    // Kiểm tra quyền truy cập trang
+    if (!$pageBuilder->canAccessPage($pageSlug)) {
+        die("404 - Trang không tồn tại hoặc bạn không có quyền truy cập");
+    }
+    
     // Load blocks từ page builder
     $leftBlocks = $pageBuilder->getBlocksBySection($pageSlug, \'left\');
     $centerBlocks = $pageBuilder->getBlocksBySection($pageSlug, \'center\');
@@ -708,5 +713,34 @@ class M_pagebuilder {
             return false;
         }
     }
+
+    /**
+     * Kiểm tra xem user có thể truy cập trang hay không
+     * Trả về true nếu:
+     * - Trang được published
+     * - Người dùng là admin (levelID = 1)
+     */
+    public function canAccessPage($pageSlug) {
+        $page = $this->getPage($pageSlug);
+        
+        if (!$page) {
+            return false; // Trang không tồn tại
+        }
+        
+        $status = $page['status'] ?? 'draft';
+        
+        // Nếu trang được published, ai cũng có thể truy cập
+        if ($status === 'published') {
+            return true;
+        }
+        
+        // Nếu chưa published, chỉ admin mới truy cập được
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        return isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1;
+    }
 }
 ?>
+
