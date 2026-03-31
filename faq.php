@@ -17,7 +17,7 @@
     $vm = new M_voucher();
 
     // Page slug
-    $pageSlug = 'introduce';
+    $pageSlug = 'faq';
     
     // Load blocks từ page builder
     $leftBlocks = $pageBuilder->getBlocksBySection($pageSlug, 'left');
@@ -84,10 +84,10 @@
                 <?php else: ?>
                     <!-- Default Content -->
                     <div class="alert alert-info" role="alert">
-                        <h4 class="alert-heading">Trang Giới thiệu</h4>
+                        <h4 class="alert-heading">Câu hỏi thường gặp</h4>
                         <p>Sử dụng Page Builder trong Admin để thêm nội dung cho trang này.</p>
                         <hr>
-                        <p class="mb-0">Vào <strong>Admin > Quản lý trang > Giới thiệu</strong> để bắt đầu chỉnh sửa.</p>
+                        <p class="mb-0">Vào <strong>Admin > Quản lý trang > Câu hỏi thường gặp</strong> để bắt đầu chỉnh sửa.</p>
                     </div>
                 <?php endif; ?>
             </div>

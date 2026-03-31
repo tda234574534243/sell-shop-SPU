@@ -17,7 +17,7 @@
     $vm = new M_voucher();
 
     // Page slug
-    $pageSlug = 'introduce';
+    $pageSlug = 'about';
     
     // Load blocks từ page builder
     $leftBlocks = $pageBuilder->getBlocksBySection($pageSlug, 'left');

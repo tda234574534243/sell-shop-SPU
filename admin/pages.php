@@ -162,9 +162,9 @@
     <div id="mainContent" class="p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4 class="fw-bold mb-0"><i class="fas fa-file-alt"></i> Quản lý trang</h4>
-            <a href="page-builder.php?page=homepage" class="btn btn-primary btn-sm">
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createPageModal">
                 <i class="fas fa-plus"></i> Tạo trang mới
-            </a>
+            </button>
         </div>
         
         <?php
@@ -240,6 +240,8 @@
                                     <div class="action-buttons">
                                         <a href="page-builder.php?page=<?= $slug ?>">📝 Sửa</a>
                                         
+                                        <button class="btn btn-sm btn-outline-primary" style="padding: 6px 12px; border-radius: 4px; border: 1px solid #dee2e6; font-size: 12px; transition: all 0.2s;" onclick="editPageInfo('<?= $slug ?>', '<?= htmlspecialchars(addslashes($page['title'])) ?>')">⚙️ Thông tin</button>
+                                        
                                         <select class="form-select" style="padding: 6px 8px; border-radius: 4px; border: 1px solid #dee2e6; font-size: 12px; width: auto;" onchange="changeStatus('<?= $slug ?>', this.value)">
                                             <option value="">Đổi trạng thái</option>
                                             <option value="draft" <?= $status === 'draft' ? 'disabled' : '' ?>>Nháp</option>
@@ -300,16 +302,182 @@ function deletePage(slug) {
     fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `action=deletePage&pageSlug=${slug}`
+        body: `action=deletePage&pageSlug=${encodeURIComponent(slug)}`
     })
-    .then(r => r.json())
+    .then(r => {
+        if (!r.ok) {
+            throw new Error(`HTTP error! status: ${r.status}`);
+        }
+        return r.json();
+    })
     .then(data => {
+        console.log('Delete response:', data);
         if (data.success) {
             toast({title: 'Thành công', message: 'Xóa trang thành công', type: 'success'});
             setTimeout(() => location.reload(), 1000);
         } else {
-            toast({title: 'Lỗi', message: 'Không thể xóa trang', type: 'error'});
+            toast({title: 'Lỗi', message: data.message || 'Không thể xóa trang', type: 'error'});
         }
+    })
+    .catch(err => {
+        console.error('Delete error:', err);
+        toast({title: 'Lỗi', message: 'Lỗi kết nối: ' + err.message, type: 'error'});
+    });
+}
+
+function createPage() {
+    const title = document.getElementById('newPageTitle').value.trim();
+    const slug = document.getElementById('newPageSlug').value.trim();
+    
+    if (!title) {
+        toast({title: 'Lỗi', message: 'Vui lòng nhập tên trang', type: 'error'});
+        return;
+    }
+    
+    if (!slug) {
+        toast({title: 'Lỗi', message: 'Vui lòng nhập slug trang', type: 'error'});
+        return;
+    }
+    
+    // Validate slug format (only lowercase, numbers, hyphens)
+    if (!/^[a-z0-9-]+$/.test(slug)) {
+        toast({title: 'Lỗi', message: 'Slug chỉ được chứa chữ thường, số và gạch ngang', type: 'error'});
+        return;
+    }
+    
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=createPage&title=${encodeURIComponent(title)}&slug=${encodeURIComponent(slug)}`
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            toast({title: 'Thành công', message: 'Tạo trang mới thành công', type: 'success'});
+            setTimeout(() => {
+                window.location.href = `page-builder.php?page=${slug}`;
+            }, 1000);
+        } else {
+            toast({title: 'Lỗi', message: 'Trang này đã tồn tại hoặc có lỗi xảy ra', type: 'error'});
+        }
+    })
+    .catch(err => {
+        toast({title: 'Lỗi', message: 'Không thể tạo trang: ' + err.message, type: 'error'});
+    });
+}
+
+function generateSlug() {
+    const title = document.getElementById('newPageTitle').value.trim();
+    if (!title) return;
+    
+    const slug = title
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove accents
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    
+    document.getElementById('newPageSlug').value = slug;
+}
+
+function editPageInfo(slug, title) {
+    document.getElementById('editPageSlug').value = slug;
+    document.getElementById('editPageTitle').value = title;
+    const modal = new bootstrap.Modal(document.getElementById('editPageModal'));
+    modal.show();
+}
+
+function savePageInfo() {
+    const slug = document.getElementById('editPageSlug').value;
+    const title = document.getElementById('editPageTitle').value.trim();
+    
+    if (!title) {
+        toast({title: 'Lỗi', message: 'Vui lòng nhập tên trang', type: 'error'});
+        return;
+    }
+    
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=updatePageTitle&pageSlug=${encodeURIComponent(slug)}&title=${encodeURIComponent(title)}`
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            toast({title: 'Thành công', message: 'Cập nhật thông tin trang thành công', type: 'success'});
+            setTimeout(() => location.reload(), 1000);
+        } else {
+            toast({title: 'Lỗi', message: 'Không thể cập nhật thông tin trang', type: 'error'});
+        }
+    })
+    .catch(err => {
+        toast({title: 'Lỗi', message: 'Lỗi: ' + err.message, type: 'error'});
     });
 }
 </script>
+
+<!-- Modal Chỉnh sửa thông tin trang -->
+<div class="modal fade" id="editPageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-edit"></i> Chỉnh sửa thông tin trang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Slug (không thể thay đổi)</label>
+                    <input type="text" class="form-control" id="editPageSlug" disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tên trang <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="editPageTitle" placeholder="Nhập tên trang mới">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="savePageInfo()">
+                    <i class="fas fa-save"></i> Lưu thay đổi
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tạo Trang Mới -->
+<div class="modal fade" id="createPageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-plus"></i> Tạo trang mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tên trang <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="newPageTitle" placeholder="VD: Liên hệ, Chính sách, ..." oninput="generateSlug()">
+                    <small class="text-muted">Tên sẽ xuất hiện trong menu điều hướng</small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Slug URL <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text">/</span>
+                        <input type="text" class="form-control" id="newPageSlug" placeholder="vd: lien-he">
+                    </div>
+                    <small class="text-muted">Tự động tạo từ tên trang hoặc nhập thủ công</small>
+                </div>
+                <div class="alert alert-info alert-sm" role="alert">
+                    <strong>Lưu ý:</strong> Slug phải là duy nhất và chỉ chứa chữ thường, số và gạch ngang
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="createPage()">
+                    <i class="fas fa-check"></i> Tạo trang
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

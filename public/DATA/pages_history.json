@@ -1,0 +1,1469 @@
+{
+    "faq": {
+        "current": 3,
+        "items": [
+            {
+                "timestamp": "2026-03-31 03:13:31",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Câu hỏi thường gặp",
+                    "slug": "faq",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1f670923a",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": null
+                        },
+                        {
+                            "id": "block-69cb1f8c80194",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        },
+                        {
+                            "id": "block-69cb1f8c8daa1",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét \nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:13:34",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Câu hỏi thường gặp",
+                    "slug": "faq",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1f8c80194",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        },
+                        {
+                            "id": "block-69cb1f8c8daa1",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét \nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:13:36",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Câu hỏi thường gặp",
+                    "slug": "faq",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1f8c8daa1",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét \nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:13:38",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Câu hỏi thường gặp",
+                    "slug": "faq",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": []
+                }
+            }
+        ]
+    },
+    "contact": {
+        "current": 13,
+        "items": [
+            {
+                "timestamp": "2026-03-31 03:13:53",
+                "action": "addBlock",
+                "description": "Thêm block text",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1fd114da8",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": "Nội dung ở đây"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:14:01",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1fd114da8",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": "hello"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:23:04",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1fd114da8",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": "hello"
+                            }
+                        },
+                        {
+                            "id": "block-69cb21f8554b5",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:23:27",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1fd114da8",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": "hello"
+                            }
+                        },
+                        {
+                            "id": "block-69cb21f8554b5",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "columns": "3",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774920195_467a6648.jpg",
+                                        "caption": ""
+                                    },
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774920200_4ba2ce4c.jpg",
+                                        "caption": ""
+                                    },
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774920205_3a6b7906.png",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:23:33",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb1fd114da8",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": "hello"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:23:37",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:04",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb22349a1fd",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:15",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:17",
+                "action": "addBlock",
+                "description": "Thêm block contact",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb224197add",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:34",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:44",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb225cbd097",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:50",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:53",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": [
+                        {
+                            "id": "block-69cb2265d831b",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:24:56",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Liên hệ",
+                    "slug": "contact",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 03:22:59",
+                    "blocks": []
+                }
+            }
+        ]
+    },
+    "about": {
+        "current": 4,
+        "items": [
+            {
+                "timestamp": "2026-03-31 03:14:49",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "about",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb2009246dc",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:15:01",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "about",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb2009246dc",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774919700_dbf823d8.PNG"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:15:21",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "about",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:16:56",
+                "action": "addBlock",
+                "description": "Thêm block vouchers",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "about",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb208818e41",
+                            "type": "vouchers",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "title": "Vouchers",
+                                "description": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:21:55",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "about",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": []
+                }
+            }
+        ]
+    },
+    "homepage": {
+        "current": 9,
+        "items": [
+            {
+                "timestamp": "2026-03-31 03:19:17",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb2115ce4df",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:22",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:26",
+                "action": "addBlock",
+                "description": "Thêm block announcement",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb211e285d6",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "message": "",
+                                "type": "info",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:29",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:31",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb2123e5e2a",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:39",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:42",
+                "action": "addBlock",
+                "description": "Thêm block contact",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb212ebac72",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:42",
+                "action": "addBlock",
+                "description": "Thêm block contact",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb212ebac72",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        },
+                        {
+                            "id": "block-69cb212ebeb0d",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 5,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:46",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb212ebac72",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:19:50",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-30 20:26:05"
+                }
+            }
+        ]
+    },
+    "chinhsach": {
+        "current": 6,
+        "items": [
+            {
+                "timestamp": "2026-03-31 03:35:00",
+                "action": "addBlock",
+                "description": "Thêm block announcement",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "",
+                                "type": "info",
+                                "enabled": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:35:11",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "đây là trang demo",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:35:14",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "đây là trang demo",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb24d29bc53",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:35:18",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "đây là trang demo",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:35:19",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "đây là trang demo",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb24d7ad546",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:36:05",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "đây là trang demo",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb24d7ad546",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Chào mừng bạn đền với shop",
+                                "subtitle": "ở đây có rất nhiều đồ điện tử ngon hơn người yêu của bạn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774920962_8db2b404.jpg"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:36:16",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinhsach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:34:56",
+                    "updatedAt": "2026-03-31 03:34:56",
+                    "blocks": [
+                        {
+                            "id": "block-69cb24c48e258",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "message": "đây là trang demo",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb24d7ad546",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Chào mừng bạn đền với shop",
+                                "subtitle": "ở đây có rất nhiều đồ điện tử ngon hơn người yêu của bạn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774920974_b08da342.jpg"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "chinh-sach": {
+        "current": 3,
+        "items": [
+            {
+                "timestamp": "2026-03-31 03:37:26",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinh-sach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:37:22",
+                    "updatedAt": "2026-03-31 03:37:22",
+                    "blocks": [
+                        {
+                            "id": "block-69cb25560964f",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:37:27",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinh-sach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:37:22",
+                    "updatedAt": "2026-03-31 03:37:22",
+                    "blocks": [
+                        {
+                            "id": "block-69cb25560964f",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        },
+                        {
+                            "id": "block-69cb2557caac3",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:37:30",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinh-sach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:37:22",
+                    "updatedAt": "2026-03-31 03:37:22",
+                    "blocks": [
+                        {
+                            "id": "block-69cb25560964f",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        },
+                        {
+                            "id": "block-69cb2557caac3",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        },
+                        {
+                            "id": "block-69cb255a6ef1f",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 03:37:38",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinh-sach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 03:37:22",
+                    "updatedAt": "2026-03-31 03:37:22",
+                    "blocks": [
+                        {
+                            "id": "block-69cb25560964f",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        },
+                        {
+                            "id": "block-69cb2557caac3",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        },
+                        {
+                            "id": "block-69cb255a6ef1f",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<h2><em>Nhập nội dung của bạn ở đây<\/em><\/h2>"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

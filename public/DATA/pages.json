@@ -3,20 +3,20 @@
         "homepage": {
             "title": "Trang chủ",
             "slug": "homepage",
-            "blocks": {
-                "0": {
+            "blocks": [
+                {
                     "id": "block-69c9f2e628052",
                     "type": "banner",
                     "order": 2,
+                    "section": "center",
                     "data": {
                         "title": "Banner",
                         "subtitle": "",
                         "buttonText": "Mua ngay",
-                        "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774844332_2e287b21.jpg"
-                    },
-                    "section": "center"
+                        "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                    }
                 },
-                "3": {
+                {
                     "id": "block-69c9fd8086390",
                     "type": "text",
                     "section": "right",
@@ -25,7 +25,7 @@
                         "content": ""
                     }
                 },
-                "4": {
+                {
                     "id": "block-69ca063bc7895",
                     "type": "announcement",
                     "section": "center",
@@ -36,28 +36,79 @@
                         "enabled": true
                     }
                 }
-            },
+            ],
             "status": "published",
             "updatedAt": "2026-03-30 20:26:05"
+        },
+        "contact": {
+            "title": "Liên hệ",
+            "slug": "contact",
+            "status": "published",
+            "createdAt": "2026-03-30",
+            "updatedAt": "2026-03-31 03:22:59",
+            "blocks": []
+        },
+        "faq": {
+            "title": "Câu hỏi thường gặp",
+            "slug": "faq",
+            "status": "draft",
+            "createdAt": "2026-03-30",
+            "updatedAt": "2026-03-30",
+            "blocks": []
+        },
+        "introduce": {
+            "title": "Giới thiệu",
+            "slug": "introduce",
+            "status": "draft",
+            "createdAt": "2026-03-30",
+            "updatedAt": "2026-03-30",
+            "blocks": []
         },
         "about": {
             "title": "Giới thiệu",
             "slug": "about",
+            "status": "draft",
+            "createdAt": "2026-03-30",
+            "updatedAt": "2026-03-30",
+            "blocks": []
+        },
+        "chinh-sach": {
+            "title": "Chính sách",
+            "slug": "chinh-sach",
+            "status": "published",
+            "createdAt": "2026-03-31 03:37:22",
+            "updatedAt": "2026-03-31 03:38:09",
             "blocks": [
                 {
-                    "id": "block-69c9f813b91d6",
-                    "type": "banner",
+                    "id": "block-69cb25560964f",
+                    "type": "testimonials",
+                    "section": "center",
                     "order": 1,
                     "data": {
-                        "title": "Banner",
-                        "subtitle": "",
-                        "buttonText": "Mua ngay",
-                        "backgroundImage": ""
+                        "title": "Nhận xét từ khách hàng",
+                        "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                    }
+                },
+                {
+                    "id": "block-69cb2557caac3",
+                    "type": "gallery",
+                    "section": "center",
+                    "order": 2,
+                    "data": {
+                        "columns": 3,
+                        "images": []
+                    }
+                },
+                {
+                    "id": "block-69cb255a6ef1f",
+                    "type": "richtext",
+                    "section": "center",
+                    "order": 3,
+                    "data": {
+                        "content": "<h2><em>Nhập nội dung của bạn ở đây<\/em><\/h2>"
                     }
                 }
-            ],
-            "status": "private",
-            "updatedAt": "2026-03-30 07:11:45"
+            ]
         }
     }
 }

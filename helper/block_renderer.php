@@ -20,6 +20,16 @@ function renderBlock($block, $pageContext = []) {
             return renderTextBlock($data);
         case 'html':
             return renderHtmlBlock($data);
+        case 'richtext':
+            return renderRichTextBlock($data);
+        case 'gallery':
+            return renderGalleryBlock($data);
+        case 'hero':
+            return renderHeroBlock($data);
+        case 'contact':
+            return renderContactBlock($data);
+        case 'testimonials':
+            return renderTestimonialsBlock($data);
         default:
             return '';
     }
@@ -161,6 +171,161 @@ function renderHtmlBlock($data) {
         $content
     </div>
 HTML;
+}
+
+function renderHeroBlock($data) {
+    $title = htmlspecialchars($data['title'] ?? '');
+    $subtitle = htmlspecialchars($data['subtitle'] ?? '');
+    $buttonText = htmlspecialchars($data['buttonText'] ?? 'Bắt đầu');
+    $buttonLink = htmlspecialchars($data['buttonLink'] ?? '#');
+    $bgImage = $data['backgroundImage'] ?? '/sell-shop-SPU/media/image/Slider/slider-1.jpg';
+    
+    return <<<HTML
+    <div class="hero-section" style="background-image: url('$bgImage'); background-size: cover; background-position: center; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);"></div>
+        <div style="position: relative; z-index: 1; max-width: 600px; padding: 40px 20px;">
+            <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">$title</h1>
+            <p style="font-size: 16px; margin-bottom: 30px;">$subtitle</p>
+            <a href="$buttonLink" class="btn btn-primary btn-lg">$buttonText</a>
+        </div>
+    </div>
+HTML;
+}
+
+function renderContactBlock($data) {
+    $title = htmlspecialchars($data['title'] ?? 'Liên hệ');
+    $description = htmlspecialchars($data['description'] ?? '');
+    $email = htmlspecialchars($data['email'] ?? '');
+    $phone = htmlspecialchars($data['phone'] ?? '');
+    $address = htmlspecialchars($data['address'] ?? '');
+    
+    return <<<HTML
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>$title</h3>
+                <p>$description</p>
+                <div class="mt-4">
+                    <h6><i class="fas fa-envelope"></i> Email</h6>
+                    <p><a href="mailto:$email">$email</a></p>
+                </div>
+                <div class="mt-3">
+                    <h6><i class="fas fa-phone"></i> Điện thoại</h6>
+                    <p><a href="tel:$phone">$phone</a></p>
+                </div>
+                <div class="mt-3">
+                    <h6><i class="fas fa-map-marker-alt"></i> Địa chỉ</h6>
+                    <p>$address</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form method="post" action="contact.php">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="fullname" placeholder="Tên của bạn" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" name="email" placeholder="Email của bạn" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" name="message" rows="4" placeholder="Nội dung tin nhắn" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Gửi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+HTML;
+}
+
+function renderTestimonialsBlock($data) {
+    $title = htmlspecialchars($data['title'] ?? 'Nhận xét');
+    $content = $data['content'] ?? '';
+    $testimonials = array_filter(array_map('trim', explode("\n", $content)));
+    
+    $html = <<<HTML
+    <div class="container py-4">
+        <h3 class="text-center mb-4">$title</h3>
+        <div class="row">
+HTML;
+    
+    foreach ($testimonials as $i => $testimonial) {
+        if (empty($testimonial)) continue;
+        $html .= <<<HTML
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"$testimonial"</p>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <small class="text-muted">Khách hàng</small>
+                    </div>
+                </div>
+            </div>
+HTML;
+    }
+    
+    $html .= <<<HTML
+        </div>
+    </div>
+HTML;
+    
+    return $html;
+}
+
+function renderRichTextBlock($data) {
+    $content = $data['content'] ?? '';
+    return <<<HTML
+    <div class="container py-4">
+        <div class="rich-text-content">
+            $content
+        </div>
+    </div>
+HTML;
+}
+
+function renderGalleryBlock($data) {
+    $images = $data['images'] ?? [];
+    $columns = (int)($data['columns'] ?? 3);
+    
+    if (empty($images)) {
+        return '<div class="container py-4"><p class="text-muted">Không có hình ảnh</p></div>';
+    }
+    
+    $colSize = $columns === 1 ? 12 : ($columns === 2 ? 6 : 4);
+    
+    $html = <<<HTML
+    <div class="container py-4">
+        <div class="row g-3">
+HTML;
+    
+    foreach ($images as $img) {
+        if (empty($img['url'])) continue;
+        $caption = htmlspecialchars($img['caption'] ?? '');
+        $html .= <<<HTML
+            <div class="col-12 col-md-$colSize">
+                <div class="gallery-item">
+                    <img src="{$img['url']}" class="img-fluid rounded shadow-sm" alt="$caption" style="width: 100%; height: auto;">
+                    <?php if (!empty('$caption')): ?>
+                        <p class="text-center mt-2 small text-muted">$caption</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+HTML;
+    }
+    
+    $html .= <<<HTML
+        </div>
+    </div>
+HTML;
+    
+    return $html;
 }
 
 ?>

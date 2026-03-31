@@ -12,6 +12,10 @@
 
 <?php include('../template/head.php'); ?>
 
+<!-- Quill Rich Text Editor -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <style>
     .builder-wrapper {
         display: flex;
@@ -256,6 +260,16 @@
         padding: 60px 20px;
         color: #999;
     }
+    
+    /* Quill Editor */
+    .ql-container { font-size: 14px; }
+    .ql-editor { min-height: 250px; }
+    .ql-toolbar { border: 1px solid #ddd; border-bottom: none; border-radius: 4px 4px 0 0; }
+    .ql-container { border: 1px solid #ddd; border-radius: 0 0 4px 4px; }
+    
+    /* Gallery Styles */
+    .gallery-preview { background: #f9f9f9; }
+    .gallery-preview img { object-fit: cover; }
 </style>
 
 <div class="builder-wrapper">
@@ -272,6 +286,15 @@
             <a href="pages.php" class="btn btn-outline-secondary btn-sm">
                 <i class="fas fa-list"></i> Quản lý trang
             </a>
+            
+            <!-- Undo/Redo Buttons -->
+            <button type="button" class="btn btn-outline-info btn-sm" id="undoBtn" onclick="undoAction()" disabled title="Hoàn tác">
+                <i class="fas fa-undo"></i>
+            </button>
+            <button type="button" class="btn btn-outline-info btn-sm" id="redoBtn" onclick="redoAction()" disabled title="Làm lại">
+                <i class="fas fa-redo"></i>
+            </button>
+            
             <select class="form-select form-select-sm" style="width: auto;" onchange="changePage(this.value)">
                 <option value="">Chuyển trang...</option>
                 <?php foreach ($allPages as $slug => $p): ?>
@@ -327,6 +350,11 @@
                     <button class="add-block-btn" onclick="addBlockType('banner', 'center')">🖼️ Banner</button>
                     <button class="add-block-btn" onclick="addBlockType('featured_products', 'center')">⭐ Sản phẩm</button>
                     <button class="add-block-btn" onclick="addBlockType('announcement', 'center')">📢 Thông báo</button>
+                    <button class="add-block-btn" onclick="addBlockType('hero', 'center')">🎯 Hero Section</button>
+                    <button class="add-block-btn" onclick="addBlockType('contact', 'center')">📧 Liên hệ</button>
+                    <button class="add-block-btn" onclick="addBlockType('testimonials', 'center')">⭐ Nhận xét</button>
+                    <button class="add-block-btn" onclick="addBlockType('richtext', 'center')">✏️ Rich Text</button>
+                    <button class="add-block-btn" onclick="addBlockType('gallery', 'center')">🖼️ Thư viện ảnh</button>
                 </div>
             </div>
             
@@ -512,6 +540,83 @@ function selectBlock(blockId) {
                     <button class="btn btn-success w-100 btn-sm mt-2" onclick="saveBlock('${blockId}')">Lưu</button>
                 `;
                 break;
+            case 'hero':
+                form += `
+                    <input type="text" class="form-control block-field mb-2" name="title" value="${esc(blockData.title)}" placeholder="Tiêu đề chính">
+                    <textarea class="form-control block-field mb-2" name="subtitle" placeholder="Tiêu đề phụ" rows="2">${esc(blockData.subtitle)}</textarea>
+                    <input type="text" class="form-control block-field mb-2" name="buttonText" value="${esc(blockData.buttonText)}" placeholder="Text nút">
+                    <input type="text" class="form-control block-field mb-2" name="buttonLink" value="${esc(blockData.buttonLink)}" placeholder="Link">
+                    <label style="font-size: 11px; font-weight: bold; display: block; margin-bottom: 6px;">Ảnh nền:</label>
+                    <div class="input-group mb-2" style="gap: 5px;">
+                        <input type="text" class="form-control block-field" name="backgroundImage" value="${esc(blockData.backgroundImage)}" placeholder="URL">
+                        <button class="btn btn-outline-primary btn-sm" type="button" onclick="openImageUpload('${blockId}', 'backgroundImage')">Chọn</button>
+                    </div>
+                    ${blockData.backgroundImage ? `<img src="${esc(blockData.backgroundImage)}" style="max-width: 100%;">` : ''}
+                    <button class="btn btn-success w-100 btn-sm mt-2" onclick="saveBlock('${blockId}')">Lưu</button>
+                `;
+                break;
+            case 'contact':
+                form += `
+                    <input type="text" class="form-control block-field mb-2" name="title" value="${esc(blockData.title)}" placeholder="Tiêu đề">
+                    <textarea class="form-control block-field mb-2" name="description" placeholder="Mô tả" rows="2">${esc(blockData.description)}</textarea>
+                    <input type="email" class="form-control block-field mb-2" name="email" value="${esc(blockData.email)}" placeholder="Email để nhận liên hệ">
+                    <input type="text" class="form-control block-field mb-2" name="phone" value="${esc(blockData.phone)}" placeholder="Số điện thoại">
+                    <input type="text" class="form-control block-field mb-2" name="address" value="${esc(blockData.address)}" placeholder="Địa chỉ">
+                    <button class="btn btn-success w-100 btn-sm mt-2" onclick="saveBlock('${blockId}')">Lưu</button>
+                `;
+                break;
+            case 'testimonials':
+                form += `
+                    <input type="text" class="form-control block-field mb-2" name="title" value="${esc(blockData.title)}" placeholder="Tiêu đề">
+                    <textarea class="form-control block-field mb-2" name="content" placeholder="Nội dung nhận xét, cách nhau bởi dòng mới" rows="4">${esc(blockData.content)}</textarea>
+                    <button class="btn btn-success w-100 btn-sm mt-2" onclick="saveBlock('${blockId}')">Lưu</button>
+                `;
+                break;
+            case 'richtext':
+                form += `
+                    <div id="richTextEditor-${blockId}" class="form-section" style="height: 300px; margin-bottom: 10px;"></div>
+                    <input type="hidden" class="block-field" name="content">
+                    <button class="btn btn-success w-100 btn-sm mt-2" onclick="saveRichTextBlock('${blockId}')">Lưu</button>
+                `;
+                setTimeout(() => {
+                    const quill = new Quill(`#richTextEditor-${blockId}`, {
+                        theme: 'snow',
+                        modules: {
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                ['blockquote', 'code-block'],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                ['link', 'image'],
+                                ['clean']
+                            ]
+                        }
+                    });
+                    quill.root.innerHTML = blockData.content || '';
+                    window[`quillEditor_${blockId}`] = quill;
+                }, 100);
+                break;
+            case 'gallery':
+                form += `
+                    <div class="form-section">
+                        <h6>Cài đặt</h6>
+                        <label style="font-size: 11px; font-weight: bold; display: block; margin-bottom: 6px;">Số cột</label>
+                        <select class="form-select form-select-sm block-field mb-3" name="columns">
+                            <option value="1" ${blockData.columns === 1 ? 'selected' : ''}>1 cột</option>
+                            <option value="2" ${blockData.columns === 2 ? 'selected' : ''}>2 cột</option>
+                            <option value="3" ${blockData.columns === 3 ? 'selected' : ''}>3 cột</option>
+                        </select>
+                        
+                        <h6>Hình ảnh</h6>
+                        <div id="galleryImages-${blockId}" class="mb-3"></div>
+                        <button type="button" class="btn btn-outline-primary btn-sm w-100 mb-2" onclick="addGalleryImage('${blockId}')">
+                            <i class="fas fa-plus"></i> Thêm hình ảnh
+                        </button>
+                    </div>
+                    <button class="btn btn-success w-100 btn-sm mt-2" onclick="saveGalleryBlock('${blockId}')">Lưu</button>
+                `;
+                setTimeout(() => renderGalleryImages('${blockId}', blockData.images || []), 100);
+                break;
         }
         
         form += '</div>';
@@ -536,6 +641,7 @@ function saveBlock(blockId) {
     .then(data => {
         if (data.success) {
             toast({title: 'Lưu', message: 'Block đã cập nhật', type: 'success'});
+            saveHistoryAction('updateBlock', 'Cập nhật block');
             refreshPreview();
         }
     });
@@ -548,7 +654,12 @@ function addBlockType(type, section = 'center') {
         announcement: {message: '', type: 'info', enabled: true},
         vouchers: {title: 'Vouchers', description: ''},
         text: {content: 'Nội dung ở đây'},
-        html: {content: '<p>HTML code</p>'}
+        html: {content: '<p>HTML code</p>'},
+        hero: {title: 'Chào mừng', subtitle: 'Mô tả ngắn gọn', buttonText: 'Bắt đầu', buttonLink: '#', backgroundImage: ''},
+        contact: {title: 'Liên hệ với chúng tôi', description: 'Chúng tôi rất sẵn lòng nghe từ bạn', email: '', phone: '', address: ''},
+        testimonials: {title: 'Nhận xét từ khách hàng', content: 'Nhận xét 1\nNhận xét 2\nNhận xét 3'},
+        richtext: {content: '<p>Nhập nội dung của bạn ở đây</p>'},
+        gallery: {columns: 3, images: []}
     };
     
     fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
@@ -560,6 +671,7 @@ function addBlockType(type, section = 'center') {
     .then(d => {
         if (d.success) {
             toast({title: 'Thêm', message: 'Block mới thêm thành công', type: 'success'});
+            saveHistoryAction('addBlock', `Thêm block ${type}`);
             refreshPreview();
         }
     });
@@ -576,6 +688,7 @@ function deleteBlock(blockId) {
     .then(d => {
         if (d.success) {
             toast({title: 'Xóa', message: 'Block đã xóa', type: 'success'});
+            saveHistoryAction('deleteBlock', 'Xóa block');
             refreshPreview();
         }
     });
@@ -632,5 +745,169 @@ function esc(text) {
     div.textContent = text || '';
     return div.innerHTML;
 }
+
+// ===== RICH TEXT BLOCK =====
+function saveRichTextBlock(blockId) {
+    const quill = window[`quillEditor_${blockId}`];
+    if (!quill) {
+        toast({title: 'Lỗi', message: 'Editor chưa sẵn sàng', type: 'error'});
+        return;
+    }
+    
+    const content = quill.root.innerHTML;
+    const data = { content };
+    
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=updateBlock&pageSlug=${pageSlug}&blockId=${blockId}&data=${JSON.stringify(data)}`
+    })
+    .then(r => r.json())
+    .then(d => {
+        if (d.success) {
+            toast({title: 'Lưu', message: 'Block đã cập nhật', type: 'success'});
+            saveHistoryAction('updateBlock', 'Cập nhật Rich Text');
+            refreshPreview();
+        }
+    });
+}
+
+// ===== GALLERY BLOCK =====
+function addGalleryImage(blockId) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e) => uploadGalleryImage(e, blockId);
+    input.click();
+}
+
+function uploadGalleryImage(event, blockId) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const formData = new FormData();
+    formData.append('action', 'uploadImage');
+    formData.append('image', file);
+    
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            if (!window[`galleryImages_${blockId}`]) {
+                window[`galleryImages_${blockId}`] = [];
+            }
+            window[`galleryImages_${blockId}`].push({ url: data.imageUrl, caption: '' });
+            renderGalleryImages(blockId, window[`galleryImages_${blockId}`]);
+        }
+    });
+}
+
+function renderGalleryImages(blockId, images) {
+    window[`galleryImages_${blockId}`] = images;
+    let html = '';
+    images.forEach((img, idx) => {
+        html += `
+            <div class="gallery-preview" style="border: 1px solid #ddd; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
+                <img src="${img.url}" style="width: 100%; height: 120px; object-fit: cover; margin-bottom: 8px; border-radius: 3px;">
+                <input type="text" class="form-control form-control-sm mb-2" value="${img.caption || ''}" placeholder="Chú thích" onchange="updateGalleryCaption('${blockId}', ${idx}, this.value)">
+                <button type="button" class="btn btn-sm btn-danger w-100" onclick="removeGalleryImage('${blockId}', ${idx})">Xóa</button>
+            </div>
+        `;
+    });
+    document.getElementById(`galleryImages-${blockId}`).innerHTML = html || '<p class="text-muted small">Chưa có hình ảnh</p>';
+}
+
+function updateGalleryCaption(blockId, index, caption) {
+    window[`galleryImages_${blockId}`][index].caption = caption;
+}
+
+function removeGalleryImage(blockId, index) {
+    window[`galleryImages_${blockId}`].splice(index, 1);
+    renderGalleryImages(blockId, window[`galleryImages_${blockId}`]);
+}
+
+function saveGalleryBlock(blockId) {
+    const columns = document.querySelector('[name="columns"]').value;
+    const images = window[`galleryImages_${blockId}`] || [];
+    
+    const data = { columns, images };
+    
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=updateBlock&pageSlug=${pageSlug}&blockId=${blockId}&data=${JSON.stringify(data)}`
+    })
+    .then(r => r.json())
+    .then(d => {
+        if (d.success) {
+            toast({title: 'Lưu', message: 'Block đã cập nhật', type: 'success'});
+            saveHistoryAction('updateBlock', 'Cập nhật Gallery');
+            refreshPreview();
+        }
+    });
+}
+
+// ===== UNDO/REDO =====
+function undoAction() {
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=undo&pageSlug=${pageSlug}`
+    })
+    .then(r => r.json())
+    .then(d => {
+        if (d.success) {
+            toast({title: 'Hoàn tác', message: 'Đã hoàn tác thay đổi', type: 'success'});
+            refreshPreview();
+            updateHistoryButtons();
+        }
+    });
+}
+
+function redoAction() {
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=redo&pageSlug=${pageSlug}`
+    })
+    .then(r => r.json())
+    .then(d => {
+        if (d.success) {
+            toast({title: 'Làm lại', message: 'Đã làm lại thay đổi', type: 'success'});
+            refreshPreview();
+            updateHistoryButtons();
+        }
+    });
+}
+
+function saveHistoryAction(action, description) {
+    fetch('/sell-shop-SPU/controller/c_pagebuilder.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `action=saveHistory&pageSlug=${pageSlug}&historyAction=${action}&description=${encodeURIComponent(description)}`
+    })
+    .then(r => r.json())
+    .then(d => {
+        if (d.success) {
+            updateHistoryButtons();
+        }
+    });
+}
+
+function updateHistoryButtons() {
+    fetch(`/sell-shop-SPU/controller/c_pagebuilder.php?action=getHistoryState&pageSlug=${pageSlug}`)
+    .then(r => r.json())
+    .then(d => {
+        if (d.success && d.state) {
+            document.getElementById('undoBtn').disabled = !d.state.canUndo;
+            document.getElementById('redoBtn').disabled = !d.state.canRedo;
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', updateHistoryButtons);
 </script>
 

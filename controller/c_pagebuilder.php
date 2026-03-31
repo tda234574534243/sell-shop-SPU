@@ -64,14 +64,24 @@ try {
             break;
             
         case 'deletePage':
+            if (!$pageSlug) {
+                echo json_encode(['success' => false, 'message' => 'pageSlug không hợp lệ']);
+                break;
+            }
+            
+            if ($pageSlug === 'homepage') {
+                echo json_encode(['success' => false, 'message' => 'Không thể xóa trang chủ']);
+                break;
+            }
+            
             $result = $m->deletePage($pageSlug);
             $_SESSION['toast'] = [
                 'title' => $result ? 'Thành công' : 'Lỗi',
-                'message' => $result ? 'Xóa trang thành công' : 'Lỗi khi xóa trang',
+                'message' => $result ? 'Xóa trang thành công' : 'Lỗi khi xóa trang (có thể do quyền tập tin)',
                 'type' => $result ? 'success' : 'error',
                 'duration' => 3000
             ];
-            echo json_encode(['success' => $result]);
+            echo json_encode(['success' => $result, 'message' => $result ? 'Xóa trang thành công' : 'Lỗi khi xóa trang']);
             break;
             
         // ========== BLOCK MANAGEMENT ==========
@@ -196,6 +206,28 @@ try {
                 'type' => $result ? 'success' : 'error'
             ];
             echo json_encode(['success' => $result]);
+            break;
+            
+        case 'saveHistory':
+            $action = $_POST['historyAction'] ?? 'save';
+            $description = $_POST['description'] ?? '';
+            $result = $m->saveHistory($pageSlug, $action, $description);
+            echo json_encode(['success' => $result]);
+            break;
+            
+        case 'undo':
+            $result = $m->undo($pageSlug);
+            echo json_encode(['success' => $result]);
+            break;
+            
+        case 'redo':
+            $result = $m->redo($pageSlug);
+            echo json_encode(['success' => $result]);
+            break;
+            
+        case 'getHistoryState':
+            $state = $m->getHistoryState($pageSlug);
+            echo json_encode(['success' => true, 'state' => $state]);
             break;
             
         default:
