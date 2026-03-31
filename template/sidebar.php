@@ -138,9 +138,19 @@
             </div>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <!-- <li>
-                    <a href="./analystic_general.php"><i class="fa-solid fa-chart-line"></i><span class="ms-2">Thống kê</span></a>
-                </li> -->
+                <!-- Thống Kê -->
+                <li>
+                    <a href="./analystic_general.php"><i class="fa-solid fa-chart-line"></i><span class="ms-2">📊 Thống Kê Chung</span></a>
+                </li>
+                <li>
+                    <a href="./revenue_detail.php"><i class="fa-solid fa-money-bill-wave"></i><span class="ms-2">💰 Doanh Thu</span></a>
+                </li>
+                <li>
+                    <a href="./users_online.php"><i class="fa-solid fa-user-check"></i><span class="ms-2">👥 Online</span></a>
+                </li>
+                <hr>
+                
+                <!-- Quản Lý -->
                 <li>
                     <a href="./analystic_product.php"><i class="fa-solid fa-box"></i><span class="ms-2">Sản phẩm</span></a>
                 </li>

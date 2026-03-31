@@ -5,25 +5,47 @@
 </head>
 <?php include "../template/sidebar.php" ?>
 <?php include('../template/toastMess.php') ?>
+<?php
+    require_once '../model/m_statistic.php';
+    $stat = new M_statistic();
+    
+    $month = date('n');
+    $year = date('Y');
+    
+    // Doanh thu
+    $monthlyRevenue = $stat->getMonthlyRevenue($month, $year);
+    $revenueChange = $stat->getRevenueChange($month, $year);
+    
+    // Đơn hàng
+    $totalOrders = $stat->getTotalOrders($month, $year);
+    $ordersChange = $stat->getOrdersChange($month, $year);
+    
+    // Sản phẩm & Khách hàng
+    $totalProducts = $stat->getTotalProducts();
+    $totalCustomers = $stat->getTotalCustomers();
+    
+    // Doanh thu theo tháng trong năm
+    $yearlyData = $stat->getYearlyRevenue($year);
+?>
 <div class="bg-light flex-fill">
     <style>
         .card {
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Đổ bóng cho card ngay từ ban đầu */
-            transition: transform 0.3s ease; /* Thêm hiệu ứng phóng to khi hover */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
 
         .card:hover {
-            transform: scale(1.05); /* Phóng to 5% khi hover */
+            transform: scale(1.05);
         }
 
         .card-link {
-            text-decoration: none; /* Bỏ gạch chân của link */
-            color: inherit; /* Giữ màu sắc mặc định của card */
+            text-decoration: none;
+            color: inherit;
         }
 
         .card-header i {
-            font-size: 2rem; /* Làm cho icon to hơn */
+            font-size: 2rem;
         }
 
         .card-body .d-flex {
@@ -52,86 +74,75 @@
     <!-- Main Content -->
     <div id="mainContent" class="p-4">
         <div class="mb-4">
-            <?php
-                $month = date('n');
-                $year = date('Y');
-                echo "<h4 class='fw-bold'>Thống kê tháng $month/$year</h4>";
-            ?>
+            <h4 class='fw-bold'>Thống kê tháng <?= $month ?>/<?= $year ?></h4>
         </div>
         <hr>
         <div class="d-flex justify-content-between flex-wrap gap-4 px-5">
             <!-- Tổng doanh thu -->
-            <a href="link-to-doanh-thu-page.php" class="card-link">
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <i class="fa-solid fa-money-bill-wave fa-2x"></i>
-                    </div>
-                    <div class="card-body py-5">
-                        <p class="card-text">Tổng doanh thu</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title"><b>35,000,000 VNĐ</b></h4>
-                            <p class="mb-0 fw-semibold text-success percentage percentage-positive">+5.5%</p>
-                        </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <i class="fa-solid fa-money-bill-wave fa-2x"></i>
+                </div>
+                <div class="card-body py-5">
+                    <p class="card-text">Tổng doanh thu</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><b><?= number_format($monthlyRevenue, 0, ',', '.') ?> VNĐ</b></h4>
+                        <p class="mb-0 fw-semibold percentage <?= $revenueChange >= 0 ? 'percentage-positive text-success' : 'percentage-negative text-danger' ?>">
+                            <?= $revenueChange >= 0 ? '+' : '' ?><?= $revenueChange ?>%
+                        </p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- Tổng sản phẩm -->
-            <a href="link-to-san-pham-page.php" class="card-link">
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <i class="fa-solid fa-boxes fa-2x"></i>
-                    </div>
-                    <div class="card-body py-5">
-                        <p class="card-text">Tổng sản phẩm</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title"><b>98</b></h4>
-                            <p class="mb-0 fw-semibold text-success percentage percentage-positive">+12.75%</p>
-                        </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <i class="fa-solid fa-boxes fa-2x"></i>
+                </div>
+                <div class="card-body py-5">
+                    <p class="card-text">Tổng sản phẩm</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><b><?= $totalProducts ?></b></h4>
+                        <p class="mb-0 fw-semibold text-success percentage percentage-positive">Đang kinh doanh</p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- Tổng đơn hàng -->
-            <a href="link-to-don-hang-page.php" class="card-link">
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <i class="fa-solid fa-cart-shopping fa-2x"></i> <!-- Giỏ hàng -->
-                    </div>
-                    <div class="card-body py-5">
-                        <p>Tổng đơn hàng</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title"><b>256</b></h4>
-                            <p class="mb-0 fw-semibold text-danger percentage percentage-negative">-4.95%</p>
-                        </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <i class="fa-solid fa-cart-shopping fa-2x"></i>
+                </div>
+                <div class="card-body py-5">
+                    <p>Tổng đơn hàng</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><b><?= $totalOrders ?></b></h4>
+                        <p class="mb-0 fw-semibold percentage <?= $ordersChange >= 0 ? 'percentage-positive text-success' : 'percentage-negative text-danger' ?>">
+                            <?= $ordersChange >= 0 ? '+' : '' ?><?= $ordersChange ?>%
+                        </p>
                     </div>
                 </div>
-            </a>
+            </div>
 
             <!-- Tổng khách hàng -->
-            <a href="link-to-khach-hang-page.php" class="card-link">
-                <div class="card mb-4" style="width: 18rem;">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <i class="fa-solid fa-users fa-2x"></i>
-                    </div>
-                    <div class="card-body py-5">
-                        <p class="card-text">Tổng khách hàng</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="card-title"><b>3,125</b></h4>
-                            <p class="mb-0 fw-semibold text-success percentage percentage-positive">+3.5%</p>
-                        </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <i class="fa-solid fa-users fa-2x"></i>
+                </div>
+                <div class="card-body py-5">
+                    <p class="card-text">Tổng khách hàng</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><b><?= $totalCustomers ?></b></h4>
+                        <p class="mb-0 fw-semibold text-success percentage percentage-positive">Đang hoạt động</p>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         <hr>
 
         <!-- biểu đồ -->
         <div class="mb-4">
-            <?php
-                $year = date('Y');
-                echo "<h4 class='fw-bold'>Thống kê doanh thu năm $year</h4>";
-            ?>
+            <h4 class='fw-bold'>Thống kê doanh thu năm <?= $year ?></h4>
         </div>
         <canvas id="revenueChart" height="100"></canvas>
     </div>
@@ -139,16 +150,23 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
 <script>
     const ctx = document.getElementById('revenueChart').getContext('2d');
+    const yearlyData = <?= json_encode($yearlyData) ?>;
+    
+    // Tạo mảng 12 tháng
+    const monthlyRevenue = [];
+    for (let i = 1; i <= 12; i++) {
+        monthlyRevenue.push(yearlyData[i] || 0);
+    }
+    
     const revenueChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             datasets: [{
                 label: 'Doanh thu (VNĐ)',
-                data: [50000000, 71000000, 60000000, 80000000, 35000000],
+                data: monthlyRevenue,
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,

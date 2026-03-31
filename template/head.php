@@ -19,6 +19,12 @@
     
     <link rel="stylesheet" href="/sell-shop-SPU/public/CSS/style.css">
     <link rel="stylesheet" href="/sell-shop-SPU/public/CSS/base.css">
+    <?php
+        // Track user activity on every page
+        if (file_exists(__DIR__ . '/../helper/user_tracking.php')) {
+            include __DIR__ . '/../helper/user_tracking.php';
+        }
+    ?>
 </head>
 <body>
     <!-- Toast Container -->

@@ -101,3 +101,10 @@ function toast({
     }
 }
 </script>
+
+<?php
+// Track user activity
+if (file_exists(__DIR__ . '/../helper/user_tracking.php')) {
+    include __DIR__ . '/../helper/user_tracking.php';
+}
+?>
