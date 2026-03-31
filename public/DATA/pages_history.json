@@ -441,7 +441,7 @@
         ]
     },
     "about": {
-        "current": 4,
+        "current": 5,
         "items": [
             {
                 "timestamp": "2026-03-31 03:14:49",
@@ -546,11 +546,38 @@
                     "updatedAt": "2026-03-30",
                     "blocks": []
                 }
+            },
+            {
+                "timestamp": "2026-03-31 04:34:15",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "about",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-30",
+                    "blocks": [
+                        {
+                            "id": "block-69cb32a7815ee",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
             }
         ]
     },
     "homepage": {
-        "current": 9,
+        "current": 32,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:17",
@@ -1083,6 +1110,1125 @@
                     "status": "published",
                     "updatedAt": "2026-03-30 20:26:05"
                 }
+            },
+            {
+                "timestamp": "2026-03-31 04:24:22",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: two-column",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:24:22",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:24:25",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: full-width",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:24:25",
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:24:54",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: two-column",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:24:54",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:24:59",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: full-width",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:24:59",
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:25:00",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: sidebar-right",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:00",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:25:02",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: grid",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:02",
+                    "layout": "grid"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:25:05",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: full-width",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:05",
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:25:57",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: three-column",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:57",
+                    "layout": "three-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:00",
+                "action": "addBlock",
+                "description": "Thêm block vouchers",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb30b8e0caf",
+                            "type": "vouchers",
+                            "section": "right",
+                            "order": 2,
+                            "data": {
+                                "title": "Vouchers",
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:57",
+                    "layout": "three-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:05",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:57",
+                    "layout": "three-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:07",
+                "action": "addBlock",
+                "description": "Thêm block announcement",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb30bfc1b6d",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "message": "",
+                                "type": "info",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:57",
+                    "layout": "three-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:11",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:57",
+                    "layout": "three-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:13",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb30c579573",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:25:57",
+                    "layout": "three-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:15",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: two-column",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb30c579573",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:26:15",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:21",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:26:15",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:23",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb30cfdf11a",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:26:15",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:26:28",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:26:15",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:28:59",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: full-width",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:28:59",
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:29:02",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: sidebar-right",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:29:02",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:29:04",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: two-column",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:29:04",
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:29:06",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: sidebar-right",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:29:06",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:29:15",
+                "action": "addBlock",
+                "description": "Thêm block vouchers",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69cb317b7b455",
+                            "type": "vouchers",
+                            "section": "right",
+                            "order": 2,
+                            "data": {
+                                "title": "Vouchers",
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:29:06",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:34:06",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 04:29:06",
+                    "layout": "sidebar-right"
+                }
             }
         ]
     },
@@ -1318,7 +2464,7 @@
         ]
     },
     "chinh-sach": {
-        "current": 3,
+        "current": 5,
         "items": [
             {
                 "timestamp": "2026-03-31 03:37:26",
@@ -1462,6 +2608,160 @@
                             }
                         }
                     ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:35:24",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinh-sach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 04:35:10",
+                    "updatedAt": "2026-03-31 04:35:10",
+                    "blocks": [
+                        {
+                            "id": "block-69cb32ec31491",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:43:59",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Chính sách",
+                    "slug": "chinh-sach",
+                    "status": "draft",
+                    "createdAt": "2026-03-31 04:43:48",
+                    "updatedAt": "2026-03-31 04:43:48",
+                    "blocks": [
+                        {
+                            "id": "block-69cb34ef73b91",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "introduce": {
+        "current": 5,
+        "items": [
+            {
+                "timestamp": "2026-03-31 04:23:16",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: two-column",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 04:23:16",
+                    "blocks": [],
+                    "layout": "two-column"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:23:20",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: sidebar-right",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 04:23:20",
+                    "blocks": [],
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:23:35",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: grid",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 04:23:35",
+                    "blocks": [],
+                    "layout": "grid"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:23:39",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 04:23:35",
+                    "blocks": [
+                        {
+                            "id": "block-69cb302bee78d",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "layout": "grid"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:23:42",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 04:23:35",
+                    "blocks": [],
+                    "layout": "grid"
+                }
+            },
+            {
+                "timestamp": "2026-03-31 04:23:45",
+                "action": "updateLayout",
+                "description": "Chuyển sang layout: full-width",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "draft",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 04:23:45",
+                    "blocks": [],
+                    "layout": "full-width"
                 }
             }
         ]

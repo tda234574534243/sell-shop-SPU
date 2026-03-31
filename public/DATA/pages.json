@@ -38,7 +38,8 @@
                 }
             ],
             "status": "published",
-            "updatedAt": "2026-03-30 20:26:05"
+            "updatedAt": "2026-03-31 04:29:06",
+            "layout": "sidebar-right"
         },
         "contact": {
             "title": "Liên hệ",
@@ -61,8 +62,31 @@
             "slug": "introduce",
             "status": "draft",
             "createdAt": "2026-03-30",
-            "updatedAt": "2026-03-30",
-            "blocks": []
+            "updatedAt": "2026-03-31 04:23:45",
+            "blocks": [],
+            "layout": "full-width"
+        },
+        "chinh-sach": {
+            "title": "Chính sách",
+            "slug": "chinh-sach",
+            "status": "published",
+            "createdAt": "2026-03-31 04:43:48",
+            "updatedAt": "2026-03-31 04:45:50",
+            "blocks": [
+                {
+                    "id": "block-69cb34ef73b91",
+                    "type": "hero",
+                    "section": "center",
+                    "order": 1,
+                    "data": {
+                        "title": "Chào mừng",
+                        "subtitle": "Mô tả ngắn gọn",
+                        "buttonText": "Bắt đầu",
+                        "buttonLink": "#",
+                        "backgroundImage": ""
+                    }
+                }
+            ]
         },
         "about": {
             "title": "Giới thiệu",
@@ -71,44 +95,6 @@
             "createdAt": "2026-03-30",
             "updatedAt": "2026-03-30",
             "blocks": []
-        },
-        "chinh-sach": {
-            "title": "Chính sách",
-            "slug": "chinh-sach",
-            "status": "published",
-            "createdAt": "2026-03-31 03:37:22",
-            "updatedAt": "2026-03-31 03:38:09",
-            "blocks": [
-                {
-                    "id": "block-69cb25560964f",
-                    "type": "testimonials",
-                    "section": "center",
-                    "order": 1,
-                    "data": {
-                        "title": "Nhận xét từ khách hàng",
-                        "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
-                    }
-                },
-                {
-                    "id": "block-69cb2557caac3",
-                    "type": "gallery",
-                    "section": "center",
-                    "order": 2,
-                    "data": {
-                        "columns": 3,
-                        "images": []
-                    }
-                },
-                {
-                    "id": "block-69cb255a6ef1f",
-                    "type": "richtext",
-                    "section": "center",
-                    "order": 3,
-                    "data": {
-                        "content": "<h2><em>Nhập nội dung của bạn ở đây<\/em><\/h2>"
-                    }
-                }
-            ]
         }
     }
 }

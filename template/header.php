@@ -106,7 +106,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" style="min-width:320px;">
                                 <li class="dropdown-header">Thông báo mới</li>
                                 <?php if ($notifList && $notifList->num_rows>0): while($n = $notifList->fetch_assoc()): ?>
-                                    <li><a class="dropdown-item" href="/notification_detail.php?id=<?= $n['id'] ?>"><?= htmlspecialchars($n['Title']) ?> <br><small class="text-muted"><?= substr(strip_tags($n['Content']),0,60) ?></small></a></li>
+                                    <li><a class="dropdown-item" href="/sell-shop-SPU/notification_detail.php?id=<?= $n['id'] ?>"><?= htmlspecialchars($n['Title']) ?> <br><small class="text-muted"><?= substr(strip_tags($n['Content']),0,60) ?></small></a></li>
                                 <?php endwhile; else: ?>
                                     <li class="dropdown-item text-muted">Không có thông báo</li>
                                 <?php endif; ?>
