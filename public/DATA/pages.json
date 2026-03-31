@@ -95,6 +95,47 @@
             "createdAt": "2026-03-30",
             "updatedAt": "2026-03-30",
             "blocks": []
+        },
+        "nhung-con-song-xo": {
+            "title": "nhung con song xo",
+            "slug": "nhung-con-song-xo",
+            "status": "draft",
+            "createdAt": "2026-03-31 17:49:54",
+            "updatedAt": "2026-03-31 17:49:54",
+            "blocks": [
+                {
+                    "id": "block-69cbed2640f4c",
+                    "type": "hero",
+                    "section": "center",
+                    "order": 1,
+                    "data": {
+                        "title": "Chào mừng",
+                        "subtitle": "Mô tả ngắn gọn",
+                        "buttonText": "Bắt đầu",
+                        "buttonLink": "#",
+                        "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774972206_84338f45.png"
+                    }
+                },
+                {
+                    "id": "block-69cbed35643c9",
+                    "type": "text",
+                    "section": "center",
+                    "order": 2,
+                    "data": {
+                        "content": "siuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+                    }
+                },
+                {
+                    "id": "block-69cbed379ab52",
+                    "type": "vouchers",
+                    "section": "right",
+                    "order": 1,
+                    "data": {
+                        "title": "Vouchers",
+                        "description": ""
+                    }
+                }
+            ]
         }
     }
 }

@@ -114,7 +114,7 @@ $centerBlocks = $pageBuilder->getBlocksBySection('voucher_detail', 'center');
                 Ngày tạo: <?= $item['CreatedAt'] ?? 'N/A' ?>
             </small>
             
-            <?php if ($item['ExpiryDate']): ?>
+            <?php if (isset($item['ExpiryDate']) && $item['ExpiryDate']): ?>
                 <small class="text-danger d-block mt-2">
                     <i class="fas fa-clock"></i> 
                     Hết hạn: <?= $item['ExpiryDate'] ?>

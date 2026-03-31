@@ -60,6 +60,7 @@
                         <th>Số lượng</th>
                         <th>Tổng tiền</th>
                         <th>Ngày mua</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +73,14 @@
                                 <td><?= $row['SoLuong'] ?></td>
                                 <td><?= number_format($row['TongTien'], 0, ',', '.') ?> ₫</td>
                                 <td><?= $row['NgayMua'] ?></td>
+                                <td>
+                                    <a href="../controller/c_exportInvoice.php?ma_hd=<?= urlencode($row['MaHD']) ?>&action=pdf" class="btn btn-sm btn-danger" target="_blank" title="Xuất PDF">
+                                        <i class="fa-solid fa-file-pdf"></i> PDF
+                                    </a>
+                                    <a href="../controller/c_exportInvoice.php?ma_hd=<?= urlencode($row['MaHD']) ?>&action=csv" class="btn btn-sm btn-success" title="Xuất CSV">
+                                        <i class="fa-solid fa-file-csv"></i> CSV
+                                    </a>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                         </tbody>
