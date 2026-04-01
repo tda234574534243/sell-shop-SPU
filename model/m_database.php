@@ -17,6 +17,15 @@
                 }
                 $message = date('Y-m-d H:i:s') . " | DATABASE CONNECTION FAILED: " . $this->conn->connect_error . PHP_EOL;
                 @error_log($message, 3, $logDir . '/db_errors.log');
+            } else {
+                // Ensure MySQL session timezone is UTC so TIMESTAMP/DATETIME values
+                // are consistent with PHP's UTC-based timestamps used elsewhere.
+                // This prevents mismatches when storing/reading automatic TIMESTAMP columns.
+                try {
+                    $this->conn->query("SET time_zone = '+00:00'");
+                } catch (Exception $e) {
+                    // ignore failure to set timezone; database still usable
+                }
             }
         }
         public function setQuery($sql_query) {

@@ -93,7 +93,9 @@ class M_statistic extends M_database {
      * Lấy tổng khách hàng
      */
     public function getTotalCustomers() {
-        $this->setQuery("SELECT COUNT(*) as total FROM Account WHERE MaLV != 1");
+        // Đếm tổng tài khoản người dùng trong bảng `account`.
+        // Sửa tên bảng/cột cho phù hợp với schema hiện tại (LevelID là cột quyền)
+        $this->setQuery("SELECT COUNT(*) as total FROM account WHERE LevelID != 1");
         $result = $this->excuteQuery();
         if ($result && $result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -252,15 +254,15 @@ class M_statistic extends M_database {
             if (!$ip_address) {
                 $ip_address = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
             }
-            
-            // Use UTC timestamp to avoid PHP/MySQL timezone mismatches
-            $timestamp = gmdate('Y-m-d H:i:s');
             $sessionId = session_id();
-            
+            $usernameEsc = $this->real_escape_string($username);
+            $ipEsc = $this->real_escape_string($ip_address);
+
+            // Use MySQL UTC_TIMESTAMP() to set times on the DB side (avoids PHP/MySQL timezone issues)
             $query = "
                 INSERT INTO users_online (username, session_id, ip_address, login_time, last_activity)
-                VALUES ('" . $this->real_escape_string($username) . "', '$sessionId', '$ip_address', '$timestamp', '$timestamp')
-                ON DUPLICATE KEY UPDATE last_activity = '$timestamp'
+                VALUES ('$usernameEsc', '$sessionId', '$ipEsc', UTC_TIMESTAMP(), UTC_TIMESTAMP())
+                ON DUPLICATE KEY UPDATE last_activity = UTC_TIMESTAMP()
             ";
             $this->setQuery($query);
             $res = $this->excuteQuery();
@@ -287,11 +289,11 @@ class M_statistic extends M_database {
                 return false;
             }
 
-            $timestamp = gmdate('Y-m-d H:i:s');
+            $usernameEsc = $this->real_escape_string($username);
             $query = "
                 UPDATE users_online 
-                SET last_activity = '$timestamp'
-                WHERE username = '" . $this->real_escape_string($username) . "'
+                SET last_activity = UTC_TIMESTAMP()
+                WHERE username = '$usernameEsc'
             ";
             
             $this->setQuery($query);
@@ -331,17 +333,8 @@ class M_statistic extends M_database {
             if (!$this->tableUsersOnlineExists()) {
                 return null; // Return null nếu bảng chưa tạo
             }
-            // Fetch all rows and let the caller filter by activity time (PHP-side)
-            $query = "
-                SELECT 
-                    id,
-                    username,
-                    ip_address,
-                    login_time,
-                    last_activity
-                FROM users_online
-                ORDER BY last_activity DESC
-            ";
+            // Fetch all rows and return as array (normalize return type).
+            $query = "SELECT id, username, ip_address, login_time, last_activity FROM users_online ORDER BY last_activity DESC";
 
             $this->setQuery($query);
             $result = $this->excuteQuery();
@@ -350,7 +343,12 @@ class M_statistic extends M_database {
                 return null;
             }
 
-            return $result;
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+
+            return $rows;
         } catch (Exception $e) {
             error_log("getOnlineUsers error: " . $e->getMessage());
             return null;
@@ -375,10 +373,13 @@ class M_statistic extends M_database {
                 $count = 0;
                 // Compare using multiple parsing strategies to avoid timezone/format issues
                 $nowUtc = (new DateTime('now', new DateTimeZone('UTC')))->getTimestamp();
+                $utcTz = new DateTimeZone('UTC');
                 while ($row = $result->fetch_assoc()) {
                     $candidates = [];
-                    try { $dt1 = new DateTime($row['last_activity'], new DateTimeZone('UTC')); $candidates[] = $dt1->getTimestamp(); } catch (Exception $e) {}
-                    try { $dt2 = new DateTime($row['login_time'], new DateTimeZone('UTC')); $candidates[] = $dt2->getTimestamp(); } catch (Exception $e) {}
+                    // Prefer parsing as UTC (we set connection timezone to UTC)
+                    try { $dt1 = new DateTime($row['last_activity'], $utcTz); $candidates[] = $dt1->getTimestamp(); } catch (Exception $e) {}
+                    try { $dt2 = new DateTime($row['login_time'], $utcTz); $candidates[] = $dt2->getTimestamp(); } catch (Exception $e) {}
+                    // Fallback to strtotime (should also reflect UTC because session tz set)
                     $s1 = strtotime($row['last_activity']); if ($s1 !== false) $candidates[] = $s1;
                     $s2 = strtotime($row['login_time']); if ($s2 !== false) $candidates[] = $s2;
                     if (count($candidates) === 0) continue;
@@ -412,15 +413,17 @@ class M_statistic extends M_database {
             if ($res === false) return false;
 
             $nowUtc = (new DateTime('now', new DateTimeZone('UTC')))->getTimestamp();
+            $utcTz = new DateTimeZone('UTC');
             $toDelete = [];
             while ($row = $res->fetch_assoc()) {
-                try {
-                    $dt1 = new DateTime($row['last_activity'], new DateTimeZone('UTC'));
-                    $dt2 = new DateTime($row['login_time'], new DateTimeZone('UTC'));
-                    $mostRecent = max($dt1->getTimestamp(), $dt2->getTimestamp());
-                } catch (Exception $e) {
-                    $mostRecent = 0;
-                }
+                $candidates = [];
+                // Prefer parsing as UTC (session TZ set to UTC)
+                try { $dt1 = new DateTime($row['last_activity'], $utcTz); $candidates[] = $dt1->getTimestamp(); } catch (Exception $e) {}
+                try { $dt2 = new DateTime($row['login_time'], $utcTz); $candidates[] = $dt2->getTimestamp(); } catch (Exception $e) {}
+                // Fallback to strtotime
+                $s1 = strtotime($row['last_activity']); if ($s1 !== false) $candidates[] = $s1;
+                $s2 = strtotime($row['login_time']); if ($s2 !== false) $candidates[] = $s2;
+                $mostRecent = count($candidates) ? max($candidates) : 0;
                 if ($mostRecent <= $nowUtc - 30 * 60) {
                     $toDelete[] = intval($row['id']);
                 }

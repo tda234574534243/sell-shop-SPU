@@ -133,7 +133,7 @@
                     <p class="card-text">Tổng khách hàng</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-title"><b><?= $totalCustomers ?></b></h4>
-                        <p class="mb-0 fw-semibold text-success percentage percentage-positive">Đang hoạt động</p>
+                        <p class="mb-0 fw-semibold text-success percentage percentage-positive">Đã đăng ký</p>
                     </div>
                 </div>
             </div>

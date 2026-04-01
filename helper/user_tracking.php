@@ -13,22 +13,26 @@ if (session_status() === PHP_SESSION_NONE) {
 $stat = new M_statistic();
 
 // Nếu user đã đăng nhập
-if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
-    try {
-        // Ghi nhận user online
-        $result = $stat->registerUserOnline($_SESSION['username']);
-        
-        // Debug: Log thành công
-        if (!$result) {
-            error_log("⚠️ registerUserOnline returned: " . var_export($result, true) . " for user: " . $_SESSION['username']);
-        }
-    } catch (Exception $e) {
-        // Nếu bảng users_online chưa tồn tại, sẽ tạo sau
-        error_log("❌ User tracking error: " . $e->getMessage());
+// Ghi nhận user online cho cả user đã đăng nhập và khách (guest)
+try {
+    if (isset($_SESSION['user_id']) && isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        $usernameToTrack = $_SESSION['username'];
+    } else {
+        // Tạo username cho guest dựa trên session id để phân biệt các phiên duyệt
+        $sid = session_id();
+        if (empty($sid)) session_start();
+        $sid = session_id();
+        $usernameToTrack = 'guest_' . substr($sid, 0, 20);
+        // Ghi debug ngắn gọn vào log để biết có guest không
+        error_log("ℹ️ Tracking guest session as: " . $usernameToTrack);
     }
-} else {
-    // Debug: Log khi user chưa đăng nhập
-    error_log("ℹ️ User not logged in - Session data: user_id=" . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'NOT SET') . ", username=" . (isset($_SESSION['username']) ? $_SESSION['username'] : 'NOT SET'));
+
+    $result = $stat->registerUserOnline($usernameToTrack);
+    if (!$result) {
+        error_log("⚠️ registerUserOnline returned: " . var_export($result, true) . " for user: " . $usernameToTrack);
+    }
+} catch (Exception $e) {
+    error_log("❌ User tracking error: " . $e->getMessage());
 }
 
 // Ghi nhận page view

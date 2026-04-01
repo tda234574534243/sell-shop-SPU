@@ -179,9 +179,12 @@
                     </a>
                 </div>
             <?php else:
-                // If we have a result object, fetch all rows and filter by PHP time (last 30 minutes)
+                // Normalize result to an array of rows (getOnlineUsers() now returns an array)
                 $rows = [];
-                if (is_object($result)) {
+                if (is_array($result)) {
+                    $rows = $result;
+                } elseif (is_object($result)) {
+                    // Backwards compatibility: if a mysqli_result slipped through
                     while ($r = $result->fetch_assoc()) {
                         $rows[] = $r;
                     }
@@ -193,6 +196,28 @@
                 $debugMode = isset($_GET['dbg']) && $_GET['dbg'] == '1';
                 $logDir = __DIR__ . '/../logs';
                 if ($debugMode && !is_dir($logDir)) @mkdir($logDir, 0755, true);
+
+                // Fallback: nếu model trả về rỗng nhưng bảng có dữ liệu (ví dụ do hàm model không trả về mảng),
+                // thử lấy trực tiếp từ DB và dùng kết quả để hiển thị. Giúp đưa phần debug ra trang chính.
+                if (count($rows) === 0) {
+                    $conn = null;
+                    if (method_exists($stat, 'getConnection')) {
+                        $conn = $stat->getConnection();
+                    } elseif (property_exists($stat, 'conn')) {
+                        $conn = $stat->conn;
+                    }
+                    if ($conn) {
+                        $raw = $conn->query('SELECT * FROM users_online ORDER BY last_activity DESC');
+                        if ($raw !== false && $raw->num_rows > 0) {
+                            $rows = $raw->fetch_all(MYSQLI_ASSOC);
+                            if ($debugMode) {
+                                $msg2 = date('Y-m-d H:i:s') . " | users_online debug: fallback_raw_rows=" . count($rows) . "\n";
+                                @error_log($msg2, 3, $logDir . '/db_errors.log');
+                            }
+                        }
+                    }
+                }
+
                 $onlineRows = array_filter($rows, function($r) use ($nowUtc) {
                     $candidates = [];
                     // try DateTime UTC parse
