@@ -1,196 +1,238 @@
 <?php 
-    require_once("m_database.php");
-    
-    class M_init extends M_database {   
-        public function Create_Structure() {
-            $sql_account = "Create Table If Not Exists Account (
-                LevelID int(1) Not Null Default 0,
-                MaTK int(6) Zerofill Unsigned Auto_Increment Primary Key ,
-                TenTK varchar(100) Not Null,
-                Password varchar(255) Not Null,
-                Email varchar(100) Unique Not Null,
-                SDT varchar(10) Unique Not Null,
-                DiaChi varchar(100) Not Null
-            )";
-            $this->setQuery($sql_account);
-            $this->excuteQuery();
+require_once("m_database.php");
 
-            $sql_product = "Create Table If Not Exists Products (
-                MaSP varchar(6) Primary Key,
-                TenSP varchar(50) Unique Not Null,
-                NSX varchar(15) Not Null,
-                PhanLoai varchar(100) Not Null,
-                SoLuong int Not Null,
-                GiaTien float Not Null,
-                MoTa varchar(100) Not Null,
-                BaoHanh varchar(100) Not Null,
-                ImageSP varchar(100) Not Null,
-                TagName varchar(100) Not Null,
-                MaTK int(6) Zerofill,
-                Constraint P_MaTK_FK Foreign Key (MaTK) References Account(MaTK) On Delete Cascade
-            )";
-            $this->setQuery($sql_product);
-            $this->excuteQuery();
+class M_init extends M_database {   
 
-            $sql_Carts = "Create Table If Not Exists Cart (
-                MaTK int(6) Zerofill Not Null,
-                MaSP varchar(6) Not Null,
-                SoLuong int Not Null,
-                GiaTien float Not Null,
-                State varchar(50) Not Null,
+    public function Create_Structure() {
+
+        // ACCOUNT
+        $this->setQuery("
+            CREATE TABLE IF NOT EXISTS Account (
+                LevelID INT(1) NOT NULL DEFAULT 0,
+                MaTK INT(6) ZEROFILL UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                TenTK VARCHAR(100) NOT NULL,
+                Password VARCHAR(255) NOT NULL,
+                Email VARCHAR(100) UNIQUE NOT NULL,
+                SDT VARCHAR(10) UNIQUE NOT NULL,
+                DiaChi VARCHAR(100) NOT NULL,
+                MaLV INT(1) NOT NULL DEFAULT 0
+            )
+        ");
+        $this->excuteQuery();
+
+        // PRODUCTS
+        $this->setQuery("
+            CREATE TABLE IF NOT EXISTS Products (
+                MaSP VARCHAR(6) PRIMARY KEY,
+                TenSP VARCHAR(50) UNIQUE NOT NULL,
+                NSX VARCHAR(15) NOT NULL,
+                PhanLoai VARCHAR(100) NOT NULL,
+                SoLuong INT NOT NULL,
+                GiaTien FLOAT NOT NULL,
+                MoTa VARCHAR(100) NOT NULL,
+                BaoHanh VARCHAR(100) NOT NULL,
+                ImageSP VARCHAR(100) NOT NULL,
+                TagName VARCHAR(100) NOT NULL,
+                MaTK INT(6) ZEROFILL,
+                Sold INT NOT NULL DEFAULT 0,
+                FOREIGN KEY (MaTK) REFERENCES Account(MaTK) ON DELETE CASCADE
+            )
+        ");
+        $this->excuteQuery();
+
+        // CART
+        $this->setQuery("
+            CREATE TABLE IF NOT EXISTS Cart (
+                MaTK INT(6) ZEROFILL NOT NULL,
+                MaSP VARCHAR(6) NOT NULL,
+                SoLuong INT NOT NULL,
+                GiaTien FLOAT NOT NULL,
+                State VARCHAR(50) NOT NULL,
                 NgayMua TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                Primary Key (MaTK, MaSP),
-                Constraint C_MaTK_FK Foreign Key (MaTK) References Account(MaTK) On Delete cascade,
-                Constraint C_MaSP_FK Foreign Key (MaSP) References Products(MaSP) On Delete cascade
-                )";
-            $this->setQuery($sql_Carts);
-            $this->excuteQuery();
+                PRIMARY KEY (MaTK, MaSP),
+                FOREIGN KEY (MaTK) REFERENCES Account(MaTK) ON DELETE CASCADE,
+                FOREIGN KEY (MaSP) REFERENCES Products(MaSP) ON DELETE CASCADE
+            )
+        ");
+        $this->excuteQuery();
 
-             $sql_HD = "Create Table If Not Exists HoaDon (
-                MaHD int(6) Zerofill Auto_Increment Primary Key,
-                MaTK int(6) Zerofill Not Null,
-                SoTien float Not Null,
+        // HOADON
+        $this->setQuery("
+            CREATE TABLE IF NOT EXISTS HoaDon (
+                MaHD INT(6) ZEROFILL AUTO_INCREMENT PRIMARY KEY,
+                MaTK INT(6) ZEROFILL NOT NULL,
+                SoTien FLOAT NOT NULL,
                 NgayThanhToan TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                Constraint HD_MaTK_FK Foreign Key (MaTK) References Account(MaTK) On Delete cascade
-                )";
-            $this->setQuery($sql_HD);
-            $this->excuteQuery();
+                FOREIGN KEY (MaTK) REFERENCES Account(MaTK) ON DELETE CASCADE
+            )
+        ");
+        $this->excuteQuery();
 
-            $sql_LS_Mua = "Create Table If Not Exists LS_Mua (
-            MaHD int(6) Zerofill Not Null,
-            MaTK int(6) Zerofill Not Null,
-            MaSP varchar(6) Not Null,
-            TenSP varchar(100) Not Null,
-            SoLuong int Not Null,
-            GiaTien float Not Null,
-            State varchar(50) Not Null,
-            NgayMua TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            primary key (MaHD, MaSP),
-            Constraint LS_MaHD_FK Foreign Key (MaHD) References HoaDon(MaHD) On Delete cascade,
-            Constraint LS_MaSP_FK Foreign Key (MaSP) References Products(MaSP) On Delete cascade
-            )";
+        // LS_MUA (FIX THIẾU CỘT)
+        $this->setQuery("
+            CREATE TABLE IF NOT EXISTS LS_Mua (
+                MaHD INT(6) ZEROFILL NOT NULL,
+                MaTK INT(6) ZEROFILL NOT NULL,
+                MaSP VARCHAR(6) NOT NULL,
+                TenSP VARCHAR(100) NOT NULL,
+                SoLuong INT NOT NULL,
+                GiaTien FLOAT NOT NULL,
+                State VARCHAR(50) NOT NULL,
+                NgayMua TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                PRIMARY KEY (MaHD, MaSP),
+                FOREIGN KEY (MaHD) REFERENCES HoaDon(MaHD) ON DELETE CASCADE,
+                FOREIGN KEY (MaSP) REFERENCES Products(MaSP) ON DELETE CASCADE
+            )
+        ");
+        $this->excuteQuery();
 
-            $this->setQuery($sql_LS_Mua);
-            $this->excuteQuery();
-
-            $sql_Voucher = "Create Table If Not Exists Vouchers (
-                MaV varchar(10) Not Null Primary Key,
-                Discount float Not Null
-                )";
-            $this->setQuery($sql_Voucher);
-            $this->excuteQuery();
-        }
-        public function Insert_Data() {
-        // Đọc file accounts.json
-        $jsonAccounts = file_get_contents('../public/Data/accounts.json');
-        $accounts = json_decode($jsonAccounts, true);
-
-        foreach ($accounts as $acc) {
-            $LevelID = $acc['LevelID'];
-            $TenTK = addslashes($acc['TenTK']);
-            $Password = password_hash($acc['Password'], PASSWORD_DEFAULT);
-            $Email = $acc['Email'];
-            $SDT = $acc['SDT'];
-            $DiaChi = addslashes($acc['DiaChi']);
-
-                $sql = "INSERT INTO Account (LevelID, TenTK, Password, Email, SDT, DiaChi)
-                    VALUES ($LevelID, '$TenTK', '$Password', '$Email', '$SDT', '$DiaChi')";
-            $this->setQuery($sql);
-            $this->excuteQuery();
-        }
-
-        // Đọc file products.json
-        $jsonProducts = file_get_contents('../public/Data/products.json');
-        $products = json_decode($jsonProducts, true);
-
-        foreach ($products as $product) {
-            $MaSP = $product['MaSP'];
-            $TenSP = addslashes($product['TenSP']);
-            $NSX = $product['NSX'];
-            $PhanLoai = addslashes($product['PhanLoai']);
-            $SoLuong = (int)$product['SoLuong'];
-            $GiaTien = (float)$product['GiaTien'];
-            $MoTa = addslashes($product['MoTa']);
-            $BaoHanh = addslashes($product['BaoHanh']);
-            $ImageSP = addslashes($product['ImageSP']);
-            $TagName = addslashes($product['TagName']);
-            // $Sold = (int)$product['Sold'];
-            $MaTK = $product['MaTK'];
-
-            $sql = "INSERT INTO Products (MaSP, TenSP, NSX, PhanLoai, SoLuong, GiaTien, MoTa, BaoHanh, ImageSP, TagName, MaTK)
-                    VALUES ('$MaSP', '$TenSP', '$NSX', '$PhanLoai', $SoLuong, $GiaTien, '$MoTa', '$BaoHanh', '$ImageSP', '$TagName', '$MaTK')";
-            $this->setQuery($sql);
-            $this->excuteQuery();
-        }
-
-        // Đọc file cart.json
-        $jsonCart = file_get_contents('../public/Data/carts.json');
-        $carts = json_decode($jsonCart, true);
-
-        foreach ($carts as $item) {
-            $MaTK = $item['MaTK'];
-            $MaSP = $item['MaSP'];
-            $SoLuong = $item['SoLuong'];
-            $GiaTien = $item['GiaTien'];
-            $State = $item['State'];
-
-            $sql = "INSERT INTO Cart (MaTK, MaSP, SoLuong, GiaTien, State)
-                    VALUES ('$MaTK', '$MaSP', $SoLuong, $GiaTien, '$State')";
-            $this->setQuery($sql);
-            $this->excuteQuery();
-        }
-
-        // Đọc file hoadon.json
-        $jsonHD = file_get_contents('../public/Data/hoadon.json');
-        $hoadons = json_decode($jsonHD, true);
-
-        foreach ($hoadons as $hd) {
-            $MaHD = $hd['MaHD'];
-            $MaTK = $hd['MaTK'];
-            $SoTien = $hd['SoTien'];
-
-            $sql = "INSERT INTO HoaDon (MaHD, MaTK, SoTien)
-                    VALUES ('$MaHD', '$MaTK', $SoTien)";
-            $this->setQuery($sql);
-            $this->excuteQuery();
-        }
-
-        // Đọc file ls_mua.json
-        $jsonLS = file_get_contents('../public/Data/ls_mua.json');
-        $lsmuas = json_decode($jsonLS, true);
-
-        foreach ($lsmuas as $ls) {
-            $MaHD = $ls['MaHD'];
-            $MaTK = $ls['MaTK'];
-            $MaSP = $ls['MaSP'];
-            $SoLuong = $ls['SoLuong'];
-            $State = $ls['State'];
-
-            $sql = "INSERT INTO LS_Mua (MaHD, MaTK, MaSP, SoLuong, State)
-                    VALUES ('$MaHD', '$MaTK', '$MaSP', $SoLuong, '$State')";
-            $this->setQuery($sql);
-            $this->excuteQuery();
-        }
-
-        // Đọc file vouchers.json
-        $jsonVouchers = file_get_contents('../public/Data/vouchers.json');
-        $vouchers = json_decode($jsonVouchers, true);
-
-        foreach ($vouchers as $vc) {
-            $MaV = $vc['MaV'];
-            $Discount = $vc['Discount'];
-
-            $sql = "INSERT INTO Vouchers (MaV, Discount)
-                    VALUES ('$MaV', $Discount)";
-            $this->setQuery($sql);
-            $this->excuteQuery();
-        }
+        // VOUCHERS (FIX STRUCTURE)
+        $this->setQuery("
+            CREATE TABLE IF NOT EXISTS Vouchers (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                Code VARCHAR(100) NOT NULL,
+                Description TEXT,
+                DiscountPercent INT DEFAULT NULL,
+                DiscountAmount DECIMAL(10,2) DEFAULT NULL,
+                ValidFrom DATE DEFAULT NULL,
+                ValidTo DATE DEFAULT NULL,
+                Quantity INT DEFAULT NULL,
+                CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ");
+        $this->excuteQuery();
     }
 
-    }
-    $myInit = new M_init();
-    $myInit->Create_Structure();
-    $myInit->Insert_Data();
+    public function Insert_Data() {
 
-    echo "Cơ sở dữ liệu đã được tạo thành công!";
+        // ===== ACCOUNT =====
+        $accounts = json_decode(file_get_contents('../public/Data/accounts.json'), true);
+        if ($accounts) {
+            foreach ($accounts as $acc) {
+
+                $sql = "INSERT IGNORE INTO Account 
+                (LevelID, TenTK, Password, Email, SDT, DiaChi, MaLV)
+                VALUES (
+                    {$acc['LevelID']},
+                    '".addslashes($acc['TenTK'])."',
+                    '".password_hash($acc['Password'], PASSWORD_DEFAULT)."',
+                    '{$acc['Email']}',
+                    '{$acc['SDT']}',
+                    '".addslashes($acc['DiaChi'])."',
+                    0
+                )";
+
+                $this->setQuery($sql);
+                $this->excuteQuery();
+            }
+        }
+
+        // ===== PRODUCTS =====
+        $products = json_decode(file_get_contents('../public/Data/products.json'), true);
+        if ($products) {
+            foreach ($products as $p) {
+
+                $sql = "INSERT IGNORE INTO Products
+                (MaSP, TenSP, NSX, PhanLoai, SoLuong, GiaTien, MoTa, BaoHanh, ImageSP, TagName, MaTK, Sold)
+                VALUES (
+                    '{$p['MaSP']}',
+                    '".addslashes($p['TenSP'])."',
+                    '{$p['NSX']}',
+                    '".addslashes($p['PhanLoai'])."',
+                    {$p['SoLuong']},
+                    {$p['GiaTien']},
+                    '".addslashes($p['MoTa'])."',
+                    '".addslashes($p['BaoHanh'])."',
+                    '".addslashes($p['ImageSP'])."',
+                    '".addslashes($p['TagName'])."',
+                    '{$p['MaTK']}',
+                    0
+                )";
+
+                $this->setQuery($sql);
+                $this->excuteQuery();
+            }
+        }
+
+        // ===== CART =====
+        $carts = json_decode(file_get_contents('../public/Data/carts.json'), true);
+        if ($carts) {
+            foreach ($carts as $c) {
+
+                $sql = "INSERT IGNORE INTO Cart
+                (MaTK, MaSP, SoLuong, GiaTien, State)
+                VALUES (
+                    '{$c['MaTK']}',
+                    '{$c['MaSP']}',
+                    {$c['SoLuong']},
+                    {$c['GiaTien']},
+                    '{$c['State']}'
+                )";
+
+                $this->setQuery($sql);
+                $this->excuteQuery();
+            }
+        }
+
+        // ===== HOADON =====
+        $hoadons = json_decode(file_get_contents('../public/Data/hoadon.json'), true);
+        if ($hoadons) {
+            foreach ($hoadons as $h) {
+
+                $sql = "INSERT IGNORE INTO HoaDon (MaHD, MaTK, SoTien)
+                        VALUES ('{$h['MaHD']}', '{$h['MaTK']}', {$h['SoTien']})";
+
+                $this->setQuery($sql);
+                $this->excuteQuery();
+            }
+        }
+
+        // ===== LS_MUA (FIX THIẾU FIELD) =====
+        $ls = json_decode(file_get_contents('../public/Data/ls_mua.json'), true);
+        if ($ls) {
+            foreach ($ls as $l) {
+
+                $sql = "INSERT IGNORE INTO LS_Mua
+                (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State)
+                VALUES (
+                    '{$l['MaHD']}',
+                    '{$l['MaTK']}',
+                    '{$l['MaSP']}',
+                    '".addslashes($l['TenSP'] ?? 'Unknown')."',
+                    {$l['SoLuong']},
+                    ".($l['GiaTien'] ?? 0).",
+                    '{$l['State']}'
+                )";
+
+                $this->setQuery($sql);
+                $this->excuteQuery();
+            }
+        }
+
+        // ===== VOUCHERS (NEW STRUCTURE) =====
+        $vouchers = json_decode(file_get_contents('../public/Data/vouchers.json'), true);
+        if ($vouchers) {
+            foreach ($vouchers as $v) {
+
+                $sql = "INSERT INTO Vouchers
+                (Code, Description, DiscountAmount)
+                VALUES (
+                    '{$v['MaV']}',
+                    '',
+                    {$v['Discount']}
+                )";
+
+                $this->setQuery($sql);
+                $this->excuteQuery();
+            }
+        }
+    }
+}
+
+// RUN
+$init = new M_init();
+$init->Create_Structure();
+$init->Insert_Data();
+
+echo "✅ Database initialized successfully!";
 ?>

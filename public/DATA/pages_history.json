@@ -577,7 +577,7 @@
         ]
     },
     "homepage": {
-        "current": 32,
+        "current": 34,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:17",
@@ -2229,6 +2229,108 @@
                     "updatedAt": "2026-03-31 04:29:06",
                     "layout": "sidebar-right"
                 }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:29",
+                "action": "addBlock",
+                "description": "Thêm block vouchers",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69e5d254f3b3d",
+                            "type": "vouchers",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Vouchers",
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:32",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
             }
         ]
     },
@@ -2667,7 +2769,7 @@
         ]
     },
     "introduce": {
-        "current": 16,
+        "current": 22,
         "items": [
             {
                 "timestamp": "2026-03-31 04:23:16",
@@ -3058,6 +3160,145 @@
                     "status": "draft",
                     "createdAt": "2026-03-30",
                     "updatedAt": "2026-03-31 04:23:45",
+                    "blocks": [],
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:37",
+                "action": "addBlock",
+                "description": "Thêm block vouchers",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 18:08:48",
+                    "blocks": [
+                        {
+                            "id": "block-69e5d25dc4de7",
+                            "type": "vouchers",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "title": "Vouchers",
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:41",
+                "action": "addBlock",
+                "description": "Thêm block text",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 18:08:48",
+                    "blocks": [
+                        {
+                            "id": "block-69e5d25dc4de7",
+                            "type": "vouchers",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "title": "Vouchers",
+                                "description": ""
+                            }
+                        },
+                        {
+                            "id": "block-69e5d2610b55d",
+                            "type": "text",
+                            "section": "right",
+                            "order": 2,
+                            "data": {
+                                "content": "Nội dung ở đây"
+                            }
+                        }
+                    ],
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:47",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 18:08:48",
+                    "blocks": [
+                        {
+                            "id": "block-69e5d2610b55d",
+                            "type": "text",
+                            "section": "right",
+                            "order": 2,
+                            "data": {
+                                "content": "Nội dung ở đây"
+                            }
+                        }
+                    ],
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:49",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 18:08:48",
+                    "blocks": [],
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:52",
+                "action": "addBlock",
+                "description": "Thêm block hero",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 18:08:48",
+                    "blocks": [
+                        {
+                            "id": "block-69e5d26cb34e1",
+                            "type": "hero",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Chào mừng",
+                                "subtitle": "Mô tả ngắn gọn",
+                                "buttonText": "Bắt đầu",
+                                "buttonLink": "#",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ],
+                    "layout": "full-width"
+                }
+            },
+            {
+                "timestamp": "2026-04-20 09:14:56",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Giới thiệu",
+                    "slug": "introduce",
+                    "status": "published",
+                    "createdAt": "2026-03-30",
+                    "updatedAt": "2026-03-31 18:08:48",
                     "blocks": [],
                     "layout": "full-width"
                 }
