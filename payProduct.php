@@ -132,20 +132,26 @@ a.cancel-payment:hover {
                             $tmp = $row['GiaTien'] * $row['SoLuong'];
                             $tongTien += $tmp;
                         ?>
-                            <div class="list-group-item d-flex align-items-center">
+                            <div class="list-group-item d-flex align-items-center cart-line" data-product-id="<?= $row['MaSP'] ?>" data-price="<?= $row['GiaTien'] ?>">
+                                <div class="me-3">
+                                    <button class="remove-cart-btn" data-product-id="<?= $row['MaSP'] ?>" title="Xóa" aria-label="Xóa sản phẩm">&times;</button>
+                                </div>
                                 <img src="<?= htmlspecialchars($row['ImageSP']) ?>" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:6px;margin-right:12px;">
                                 <div class="flex-grow-1">
-                                    <div class="fw-semibold"><?= htmlspecialchars($row['TenSP']) ?></div>
-                                    <div class="text-muted small">Giá: <?= number_format($row['GiaTien'],0,',','.') ?> đ × <?= $row['SoLuong'] ?></div>
+                                        <div class="product-name mb-1"><?= htmlspecialchars($row['TenSP']) ?></div>
+                                        <div class="text-muted small">Giá: <?= number_format($row['GiaTien'],0,',','.') ?> đ</div>
                                 </div>
-                                <div class="text-end fw-bold"><?= number_format($tmp,0,',','.') ?> đ</div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" min="0" class="form-control form-control-sm cart-qty-input" style="width:80px;" value="<?= $row['SoLuong'] ?>" data-product-id="<?= $row['MaSP'] ?>">
+                                    </div>
+                                    <div class="fw-bold text-end ms-3 item-total"><?= number_format($tmp,0,',','.') ?> đ</div>
                             </div>
                         <?php endwhile; ?>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="text-muted">Tổng cộng</div>
-                        <div class="fw-bold"><?= number_format($tongTien,0,',','.') ?> đ</div>
+                        <div id="orderTotal" class="fw-bold"><?= number_format($tongTien,0,',','.') ?> đ</div>
                     </div>
                     <p class="small text-muted">Trang này chỉ hiển thị danh sách sản phẩm trong giỏ. Thao tác thanh toán sẽ ở bước tiếp theo.</p>
                 <?php else: ?>

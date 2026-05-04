@@ -577,7 +577,7 @@
         ]
     },
     "homepage": {
-        "current": 35,
+        "current": 44,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:17",
@@ -2336,6 +2336,474 @@
                 "timestamp": "2026-05-04 06:33:14",
                 "action": "updateBlock",
                 "description": "Cập nhật block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:09",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69f8499983fc4",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:25",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69f8499983fc4",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:38",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:45",
+                "action": "addBlock",
+                "description": "Thêm block announcement",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69f849bd04f96",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "message": "",
+                                "type": "info",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:52",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:55",
+                "action": "addBlock",
+                "description": "Thêm block contact",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69f849c7aeeae",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:24:58",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:25:02",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        },
+                        {
+                            "id": "block-69f849cdf32c4",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 09:25:05",
+                "action": "deleteBlock",
+                "description": "Xóa block",
                 "data": {
                     "title": "Trang chủ",
                     "slug": "homepage",

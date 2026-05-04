@@ -121,6 +121,21 @@
                                 <li><a class="dropdown-item text-center" href="admin/notifications.php">Quản lý thông báo</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item d-none d-lg-block ms-2">
+                            <a class="nav-link position-relative" href="wishlist.php">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-1.12 2.17-.163 4.703 2.3 6.357L8 15l4.3-5.59c2.463-1.654 3.42-4.187 2.3-6.357C13.486.878 10.4.28 8.717 2.01L8 2.748z"/>
+                                </svg>
+                                <?php 
+                                    if ($isLoggedIn) {
+                                        include_once(__DIR__ . '/../model/m_wishlist.php');
+                                        $mw = new M_wishlist();
+                                        $ws = $mw->countByUser($maKH);
+                                        if ($ws>0) echo '<span class="badge bg-danger rounded-pill wishlist-count position-absolute" style="top:-6px;right:-6px;font-size:11px;">'.($ws>99?'99+':$ws).'</span>';
+                                    }
+                                ?>
+                            </a>
+                        </li>
                     <?php endif; ?>
                     <li class="nav-item dropdown d-none d-lg-block">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">

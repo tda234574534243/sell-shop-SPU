@@ -277,3 +277,32 @@ body {
 
 /* ----------------Slider----------------- */
 
+/* Wishlist (favorite) button on product cards */
+.product-card-hover { position: relative; }
+.product-card-hover .fav-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    cursor: pointer;
+    z-index: 20;
+}
+.product-card-hover .fav-btn .fas { color: #999; }
+.product-card-hover .fav-btn[data-favorited="1"] .fas { color: #e74c3c !important; }
+.product-card-hover .fav-btn:hover { transform: translateY(-2px); }
+
+/* Cart page improvements */
+.cart-line { padding: 12px; border-radius: 8px; background: #fff; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.cart-line .item-total { min-width: 90px; }
+.remove-cart-btn { background: #fff; border: 1px solid #f5c6cb; color: #e53e3e; font-size: 18px; cursor: pointer; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.remove-cart-btn:hover { background:#ffecec; color: #b52a2a; border-color:#f1aeb6; }
+
+

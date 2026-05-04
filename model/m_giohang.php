@@ -98,5 +98,40 @@
             return isset($row['total']) ? (int)$row['total'] : 0;
         }
 
+        public function setCartQuantity($maTK, $maSP, $newQty)
+        {
+            // if newQty <= 0, remove
+            $currentRes = $this->getCartItem($maTK, $maSP);
+            $current = $currentRes ? $currentRes->fetch_assoc() : null;
+            $oldQty = $current['SoLuong'] ?? 0;
+
+            if ($newQty <= 0) {
+                return $this->removeFromCart($maTK, $maSP);
+            }
+
+            $diff = $newQty - $oldQty;
+
+            $this->setQuery("UPDATE Cart SET SoLuong = ? WHERE MaTK = ? AND MaSP = ?");
+            $stmt = $this->conn->prepare($this->query);
+            $stmt->bind_param("iis", $newQty, $maTK, $maSP);
+            $stmt->execute();
+
+            if ($diff > 0) {
+                // reduce stock
+                $this->setQuery("UPDATE Products SET SoLuong = SoLuong - ? WHERE MaSP = ?");
+                $s = $this->conn->prepare($this->query);
+                $s->bind_param("is", $diff, $maSP);
+                $s->execute();
+            } elseif ($diff < 0) {
+                $inc = abs($diff);
+                $this->setQuery("UPDATE Products SET SoLuong = SoLuong + ? WHERE MaSP = ?");
+                $s = $this->conn->prepare($this->query);
+                $s->bind_param("is", $inc, $maSP);
+                $s->execute();
+            }
+
+            return $stmt->affected_rows >= 0;
+        }
+
     }
 ?>

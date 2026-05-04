@@ -17,6 +17,7 @@
     include_once 'model/m_notification.php';
     include_once 'model/m_voucher.php';
     include_once 'helper/block_renderer.php';
+    include_once 'model/m_wishlist.php';
 
     $db = new M_database(); // Khởi tạo DB dùng chung
     $pageBuilder = new M_pagebuilder();
@@ -117,14 +118,18 @@
                                     <div class="card-body p-2 d-flex flex-column text-center">
                                         <p class="card-title small mb-1 fw-bold text-truncate-2"><?= htmlspecialchars($p['TenSP']) ?></p>
                                         <p class="text-danger small mb-2 fw-bold"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
-                                        <div class="d-flex gap-2 mt-auto justify-content-center">
-                                            <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary rounded-pill">Chi tiết</a>
-                                            <form method="post" action="controller/c_addToCart.php" style="display:inline-block;">
-                                                <input type="hidden" name="product_id" value="<?= $p['MaSP'] ?>">
-                                                <input type="hidden" name="quantity" value="1">
-                                                <button type="submit" class="btn btn-sm btn-primary rounded-pill">Thêm</button>
-                                            </form>
-                                        </div>
+                                                <div class="d-flex gap-2 mt-auto justify-content-center align-items-center">
+                                                    <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary rounded-pill">Chi tiết</a>
+                                                    <form method="post" action="controller/c_addToCart.php" style="display:inline-block;">
+                                                        <input type="hidden" name="product_id" value="<?= $p['MaSP'] ?>">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <button type="submit" class="btn btn-sm btn-primary rounded-pill">Thêm</button>
+                                                    </form>
+                                                    <?php $fav = ($isLoggedIn) ? (new M_wishlist())->isFavorited($maKH, $p['MaSP']) : false; ?>
+                                                    <button type="button" class="btn btn-sm btn-light fav-btn" data-product-id="<?= $p['MaSP'] ?>" data-favorited="<?= $fav?1:0 ?>" title="Yêu thích">
+                                                        <i class="fas fa-heart text-<?= $fav? 'danger':'muted' ?>"></i>
+                                                    </button>
+                                                </div>
                                     </div>
                                 </div>
                             </div>

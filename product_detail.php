@@ -1,6 +1,7 @@
 <?php include('template/head.php') ?>
 <?php include('template/header.php') ?>
 <?php include('template/toastMess.php') ?>
+<?php include_once 'model/m_wishlist.php'; ?>
 
 <?php
     $id = isset($_GET['id']) ? $_GET['id'] : 0;
@@ -80,8 +81,46 @@
                 </div>
 
                 <button type="submit" class="btn btn-success">🛒 Thêm vào giỏ hàng</button>
+                <?php $fav = ($isLoggedIn) ? (new M_wishlist())->isFavorited($maKH, $product['MaSP']) : false; ?>
+                <button type="button" class="btn btn-outline-danger ms-2 fav-btn" data-product-id="<?= $product['MaSP'] ?>" data-favorited="<?= $fav?1:0 ?>">
+                    <i class="fas fa-heart text-<?= $fav? 'danger':'muted' ?>"></i> Yêu thích
+                </button>
                 <a href="index.php" class="btn btn-secondary ms-2">← Quay lại</a>
             </form>
+
+            <script>
+                (function(){
+                    try {
+                        document.querySelectorAll('.fav-btn').forEach(function(btn){
+                            btn.addEventListener('click', function(e){
+                                console.log('[inline-fav] clicked', this);
+                                var productId = this.getAttribute('data-product-id');
+                                var fav = this.getAttribute('data-favorited') === '1';
+                                var action = fav ? 'remove' : 'add';
+                                fetch('controller/c_wishlist.php', {
+                                    method: 'POST',
+                                    headers: {'X-Requested-With':'XMLHttpRequest','Content-Type':'application/x-www-form-urlencoded'},
+                                    body: 'action=' + encodeURIComponent(action) + '&product_id=' + encodeURIComponent(productId)
+                                }).then(function(r){ return r.json(); }).then(function(data){
+                                    console.log('[inline-fav] response', data);
+                                    if (data && data.success) {
+                                        // visual feedback: toggle class and attribute
+                                        btn.setAttribute('data-favorited', fav ? '0' : '1');
+                                        var ic = btn.querySelector('i.fas'); if (ic) {
+                                            if (fav) { ic.classList.remove('text-danger'); ic.classList.add('text-muted'); }
+                                            else { ic.classList.remove('text-muted'); ic.classList.add('text-danger'); }
+                                        }
+                                        // update wishlist badge if present
+                                        var badge = document.querySelector('.wishlist-count'); if (badge) badge.innerText = data.count>99? '99+' : data.count;
+                                    } else if (data && data.message) {
+                                        alert(data.message);
+                                    }
+                                }).catch(function(err){ console.error(err); alert('Lỗi kết nối tới server'); });
+                            });
+                        });
+                    } catch(e) { console.error(e); }
+                })();
+            </script>
 
             <hr>
             <!-- Comments & Rating -->
