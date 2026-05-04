@@ -42,6 +42,15 @@ $db->setQuery("
 $orders = $db->excuteQuery();
 $tongTien = 0;
 
+// Calculate total first
+if ($orders) {
+    $orders->data_seek(0); // Reset pointer
+    while ($row = $orders->fetch_assoc()) {
+        $tongTien += $row['GiaTien'] * $row['SoLuong'];
+    }
+    $orders->data_seek(0); // Reset pointer for later use
+}
+
 // Get vouchers list
 $db->setQuery("SELECT * FROM vouchers");
 $list_voucher = $db->excuteQuery();
@@ -130,7 +139,6 @@ a.cancel-payment:hover {
                     <div class="list-group mb-3">
                         <?php while ($row = $orders->fetch_assoc()):
                             $tmp = $row['GiaTien'] * $row['SoLuong'];
-                            $tongTien += $tmp;
                         ?>
                             <div class="list-group-item d-flex align-items-center cart-line" data-product-id="<?= $row['MaSP'] ?>" data-price="<?= $row['GiaTien'] ?>">
                                 <div class="me-3">
@@ -160,11 +168,75 @@ a.cancel-payment:hover {
                 <a href="index.php" class="btn btn-sm btn-secondary">Tiếp tục mua sắm</a>
                 <a href="payProduct.php?action=checkout" class="btn btn-sm btn-primary ms-2">Tiến hành thanh toán</a>
             </section>
+
+            <?php if (isset($_GET['action']) && $_GET['action'] === 'checkout'): ?>
+            <section class="bg-white rounded shadow-sm p-4 mt-4" aria-label="Checkout">
+                <h2 class="fs-5 fw-bold mb-3">Thanh toán</h2>
+
+                <!-- Voucher Section -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0">Mã giảm giá</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" id="voucherInput" class="form-control" placeholder="Nhập mã voucher" maxlength="50">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" id="applyVoucherBtn" class="btn btn-outline-primary w-100">Áp dụng</button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" id="clearVoucherBtn" class="btn btn-outline-secondary w-100">Xóa</button>
+                            </div>
+                        </div>
+                        <div id="voucherMessage" class="mt-2 small"></div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="mb-0">Tóm tắt đơn hàng</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Tổng tiền hàng:</span>
+                            <span id="originalTotal"><?= number_format($tongTien, 0, ',', '.') ?> đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Giảm giá:</span>
+                            <span id="discountAmount">0 đ</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Tổng thanh toán:</span>
+                            <span id="finalTotal"><?= number_format($tongTien, 0, ',', '.') ?> đ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <form action="controller/c_thanhToan.php" method="POST" id="paymentForm">
+                    <input type="hidden" name="soTien" id="soTienInput" value="<?= $tongTien ?>">
+                    <input type="hidden" name="voucherCode" id="voucherCodeInput" value="">
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success btn-secure flex-fill">
+                            <i class="fas fa-credit-card me-2"></i>Thanh toán ngay
+                        </button>
+                        <a href="payProduct.php" class="btn btn-outline-secondary">Quay lại giỏ hàng</a>
+                    </div>
+                </form>
+            </section>
+            <?php endif; ?>
+
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.getElementById('applyVoucherBtn').addEventListener('click', function() {
+    // Voucher functionality
+    document.getElementById('applyVoucherBtn')?.addEventListener('click', function() {
         const voucherCode = document.getElementById('voucherInput').value.trim();
         const messageDiv = document.getElementById('voucherMessage');
 
@@ -174,6 +246,7 @@ a.cancel-payment:hover {
             messageDiv.classList.add('text-danger');
             return;
         }
+
         fetch('model/m_checkVoucher.php?voucher=' + encodeURIComponent(voucherCode))
             .then(res => {
                 if (!res.ok) {
@@ -183,35 +256,35 @@ a.cancel-payment:hover {
             })
             .then(data => {
                 if (data.valid) {
-                    const originalTotal = <?= $tongTien + $tax ?>;
+                    const originalTotal = <?= $tongTien ?>;
+                    let discount = 0;
                     let discounted = originalTotal;
-                    
+
                     // Kiểm tra giảm theo percentage
                     if (data.discountPercent && data.discountPercent > 0) {
-                        discounted = Math.round(originalTotal * (1 - data.discountPercent / 100));
+                        discount = Math.round(originalTotal * (data.discountPercent / 100));
+                        discounted = originalTotal - discount;
                     }
                     // Kiểm tra giảm theo số tiền
                     else if (data.discountAmount && data.discountAmount > 0) {
-                        discounted = Math.round(originalTotal - data.discountAmount);
+                        discount = data.discountAmount;
+                        discounted = Math.max(0, originalTotal - discount);
                     }
-                    
-                    // Đảm bảo số tiền không âm
-                    if (discounted < 0) discounted = 0;
 
-                    document.getElementById('discountedTotal').textContent = discounted.toLocaleString(
-                        'vi-VN') + ' đ';
+                    // Cập nhật hiển thị
+                    document.getElementById('discountAmount').textContent = discount.toLocaleString('vi-VN') + ' đ';
+                    document.getElementById('finalTotal').textContent = discounted.toLocaleString('vi-VN') + ' đ';
                     document.getElementById('soTienInput').value = discounted;
+                    document.getElementById('voucherCodeInput').value = voucherCode;
 
                     messageDiv.textContent = data.message || 'Áp dụng mã thành công!';
                     messageDiv.classList.remove('text-danger');
                     messageDiv.classList.add('text-success');
-                    
-                    // Lưu voucher code vào hidden input
-                    document.getElementById('voucherCodeInput').value = voucherCode;
-                    
-                    // Disable voucherInput và button để tránh áp dụng nhiều lần
+
+                    // Disable inputs
                     document.getElementById('voucherInput').disabled = true;
                     document.getElementById('applyVoucherBtn').disabled = true;
+                    document.getElementById('clearVoucherBtn').disabled = false;
                 } else {
                     messageDiv.textContent = data.message || 'Mã giảm giá không hợp lệ.';
                     messageDiv.classList.remove('text-success');
@@ -224,6 +297,32 @@ a.cancel-payment:hover {
                 messageDiv.classList.remove('text-success');
                 messageDiv.classList.add('text-danger');
             });
+    });
+
+    // Clear voucher functionality
+    document.getElementById('clearVoucherBtn')?.addEventListener('click', function() {
+        const originalTotal = <?= $tongTien ?>;
+
+        // Reset hiển thị
+        document.getElementById('discountAmount').textContent = '0 đ';
+        document.getElementById('finalTotal').textContent = originalTotal.toLocaleString('vi-VN') + ' đ';
+        document.getElementById('soTienInput').value = originalTotal;
+        document.getElementById('voucherCodeInput').value = '';
+        document.getElementById('voucherInput').value = '';
+        document.getElementById('voucherMessage').textContent = '';
+
+        // Reset trạng thái
+        document.getElementById('voucherInput').disabled = false;
+        document.getElementById('applyVoucherBtn').disabled = false;
+        document.getElementById('clearVoucherBtn').disabled = true;
+    });
+
+    // Initialize clear button state
+    document.addEventListener('DOMContentLoaded', function() {
+        const clearBtn = document.getElementById('clearVoucherBtn');
+        if (clearBtn) {
+            clearBtn.disabled = true;
+        }
     });
     </script>
 

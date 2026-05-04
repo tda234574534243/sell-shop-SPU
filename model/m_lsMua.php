@@ -39,6 +39,16 @@
             $stmt->execute();
         }
 
+        public function updateState($maHD, $maSP, $state)
+        {
+            $this->setQuery("UPDATE LS_Mua SET State = ? WHERE MaHD = ? AND MaSP = ?");
+            $stmt = $this->conn->prepare($this->query);
+            if ($stmt === false) {
+                return false;
+            }
+            $stmt->bind_param("sis", $state, $maHD, $maSP);
+            return $stmt->execute();
+        }
 
         public function getLSMuaByMaSP($maSP)
         {

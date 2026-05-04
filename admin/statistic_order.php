@@ -1,5 +1,13 @@
 <?php include "../template/sidebar.php"; ?>
 <?php require_once "../controller/c_donhang.php"; ?>
+<?php
+function orderStatusBadgeClass($status) {
+    if ($status === 'Đã giao hàng') return 'bg-success';
+    if ($status === 'Đang giao hàng') return 'bg-primary';
+    if ($status === 'Đang chuẩn bị hàng') return 'bg-warning text-dark';
+    return 'bg-secondary';
+}
+?>
 <div class="bg-light flex-fill">
     <div id="mainContent" class="p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -60,11 +68,11 @@
                         <th>Số lượng</th>
                         <th>Tổng tiền</th>
                         <th>Ngày mua</th>
+                        <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tbody>
                         <?php while ($row = $lich_su->fetch_assoc()): ?>
                             <tr>
                                 <td><?= $row['MaHD'] ?></td>
@@ -74,17 +82,31 @@
                                 <td><?= number_format($row['TongTien'], 0, ',', '.') ?> ₫</td>
                                 <td><?= $row['NgayMua'] ?></td>
                                 <td>
-                                    <a href="../controller/c_exportInvoice.php?ma_hd=<?= urlencode($row['MaHD']) ?>&action=pdf" class="btn btn-sm btn-danger" target="_blank" title="Xuất PDF">
-                                        <i class="fa-solid fa-file-pdf"></i> PDF
-                                    </a>
-                                    <a href="../controller/c_exportInvoice.php?ma_hd=<?= urlencode($row['MaHD']) ?>&action=csv" class="btn btn-sm btn-success" title="Xuất CSV">
-                                        <i class="fa-solid fa-file-csv"></i> CSV
-                                    </a>
+                                    <span class="badge <?= orderStatusBadgeClass($row['State']) ?>"><?= htmlspecialchars($row['State']) ?></span>
+                                </td>
+                                <td>
+                                    <form method="POST" action="../controller/c_donhang.php" class="d-flex gap-2 align-items-center">
+                                        <input type="hidden" name="action" value="updateStatus">
+                                        <input type="hidden" name="ma_hd" value="<?= htmlspecialchars($row['MaHD']) ?>">
+                                        <input type="hidden" name="ma_sp" value="<?= htmlspecialchars($row['MaSP']) ?>">
+                                        <select name="state" class="form-select form-select-sm">
+                                            <option value="Đang chuẩn bị hàng" <?= $row['State'] === 'Đang chuẩn bị hàng' ? 'selected' : '' ?>>Đang chuẩn bị hàng</option>
+                                            <option value="Đang giao hàng" <?= $row['State'] === 'Đang giao hàng' ? 'selected' : '' ?>>Đang giao hàng</option>
+                                            <option value="Đã giao hàng" <?= $row['State'] === 'Đã giao hàng' ? 'selected' : '' ?>>Đã giao hàng</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-secondary">Cập nhật</button>
+                                    </form>
+                                    <div class="mt-2">
+                                        <a href="../controller/c_exportInvoice.php?ma_hd=<?= urlencode($row['MaHD']) ?>&action=pdf" class="btn btn-sm btn-danger" target="_blank" title="Xuất PDF">
+                                            <i class="fa-solid fa-file-pdf"></i> PDF
+                                        </a>
+                                        <a href="../controller/c_exportInvoice.php?ma_hd=<?= urlencode($row['MaHD']) ?>&action=csv" class="btn btn-sm btn-success" title="Xuất CSV">
+                                            <i class="fa-solid fa-file-csv"></i> CSV
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
-                        </tbody>
-
                 </tbody>
             </table>
         </div>

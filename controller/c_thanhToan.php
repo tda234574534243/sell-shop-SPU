@@ -86,7 +86,7 @@
             $lsMua->updateLSMua($maKH, $maSP, $soLuong);
         } else {
             // Use per-item unit price ($giaTien) instead of total order amount
-            $added = $lsMua->addLSMua($maHD, $maKH, $maSP, $tenSP, $soLuong, $giaTien, 'Đã thanh toán');
+            $added = $lsMua->addLSMua($maHD, $maKH, $maSP, $tenSP, $soLuong, $giaTien, 'Đang chuẩn bị hàng');
             if ($added === false) {
                 error_log("addLSMua failed for MaHD={$maHD} MaSP={$maSP} MaTK={$maKH}");
             }

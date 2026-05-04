@@ -1,5 +1,6 @@
 <?php
 require_once "../model/m_donhang.php";
+require_once "../model/m_lsMua.php";
 
 class DonHangController {
     public function hienThiDonHang() {
@@ -30,6 +31,21 @@ class DonHangController {
     }
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updateStatus') {
+    $maHD = $_POST['ma_hd'] ?? '';
+    $maSP = $_POST['ma_sp'] ?? '';
+    $state = $_POST['state'] ?? '';
+    $redirect = $_SERVER['HTTP_REFERER'] ?? '../admin/statistic_order.php';
+
+    if ($maHD && $maSP && $state) {
+        $lsMua = new M_lsMua();
+        $lsMua->updateState($maHD, $maSP, $state);
+    }
+
+    header('Location: ' . $redirect);
+    exit;
+}
 
 $donhang_controller = new DonHangController();
 $data = $donhang_controller->hienThiDonHang();

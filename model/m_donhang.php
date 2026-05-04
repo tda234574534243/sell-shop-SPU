@@ -8,10 +8,12 @@ class DonHangModel extends M_database {
             SELECT 
                 ls.MaHD,
                 acc.TenTK,
+                ls.MaSP,
                 p.TenSP,
                 ls.SoLuong,
                 (ls.SoLuong * p.GiaTien) AS TongTien,
-                ls.NgayMua
+                ls.NgayMua,
+                ls.State
             FROM LS_Mua ls
             JOIN Account acc ON acc.MaTK = ls.MaTK
             JOIN Products p ON p.MaSP = ls.MaSP
