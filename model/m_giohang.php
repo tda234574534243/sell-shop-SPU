@@ -87,5 +87,16 @@
             return $stmt->affected_rows > 0;
         }
 
+        public function getCartCount($maTK)
+        {
+            $this->setQuery("SELECT SUM(SoLuong) as total FROM Cart WHERE MaTK = ?");
+            $stmt = $this->conn->prepare($this->query);
+            $stmt->bind_param("i", $maTK);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $row = $res ? $res->fetch_assoc() : null;
+            return isset($row['total']) ? (int)$row['total'] : 0;
+        }
+
     }
 ?>

@@ -240,6 +240,17 @@ body {
     height: 200px;
     position: relative;
     bottom: 0;
+    margin-top: auto;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 #footer .col-4, #footer .col-6 {

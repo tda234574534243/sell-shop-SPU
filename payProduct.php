@@ -123,88 +123,36 @@ a.cancel-payment:hover {
 
 <body>
     <main class="d-flex justify-content-center py-4 px-3">
-        <div class="d-flex flex-column flex-md-row gap-4 w-100" style="max-width: 960px;">
-            <section class="bg-white rounded shadow-sm p-4 flex-fill" aria-label="Payment method selection">
-                <h2 class="fs-6 fw-semibold text-dark mb-3">Hình thức thanh toán</h2>
-                <div class="d-flex flex-wrap gap-3 payment-methods">
-                    <img src="./media/image/other/visa.png" alt="Visa credit card logo in blue" height="30"
-                        width="80" />
-                    <img src="./media/image/other/mastercard.png"
-                        alt="MasterCard credit card logo with red and orange circles" height="30" width="80" />
-                    <img src="./media/image/other/momo.png" alt="PayPal logo in blue shades" height="30" width="80" />
-                    <img src="./media/image/other/bidv.jpg" alt="Carte Bancaire (CB) logo in green" height="30"
-                        width="80" />
-                    <img src="./media/image/other/vietcombank.png" alt="iDEAL payment logo in dark red" height="30"
-                        width="80" />
-                </div>
-            </section>
-
-            <section class="bg-white rounded shadow-sm p-4 flex-fill" aria-label="Order summary">
-                <div class="d-flex justify-content-between text-secondary small mb-3" style="font-size: 0.7rem;">
-                    <div>
-                        <span class="border-bottom border-secondary pb-1 fw-semibold text-success">
-                            Giỏ hàng <i class="fas fa-check"></i>
-                        </span>
+        <div class="w-100" style="max-width:960px;">
+            <section class="bg-white rounded shadow-sm p-4" aria-label="Cart list">
+                <h2 class="fs-5 fw-bold mb-3">Giỏ hàng của bạn</h2>
+                <?php if ($orders && $orders->num_rows > 0): ?>
+                    <div class="list-group mb-3">
+                        <?php while ($row = $orders->fetch_assoc()):
+                            $tmp = $row['GiaTien'] * $row['SoLuong'];
+                            $tongTien += $tmp;
+                        ?>
+                            <div class="list-group-item d-flex align-items-center">
+                                <img src="<?= htmlspecialchars($row['ImageSP']) ?>" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:6px;margin-right:12px;">
+                                <div class="flex-grow-1">
+                                    <div class="fw-semibold"><?= htmlspecialchars($row['TenSP']) ?></div>
+                                    <div class="text-muted small">Giá: <?= number_format($row['GiaTien'],0,',','.') ?> đ × <?= $row['SoLuong'] ?></div>
+                                </div>
+                                <div class="text-end fw-bold"><?= number_format($tmp,0,',','.') ?> đ</div>
+                            </div>
+                        <?php endwhile; ?>
                     </div>
-                    <div>Chi tiết thanh toán</div>
-                    <div class="text-muted">Thanh toán thành công</div>
-                </div>
-                <h3 class="fw-semibold fs-6 text-dark mb-1">Đơn hàng</h3>
-                <p class="text-secondary small mb-4">
-                    Tổng số sản phẩm: <span class="fw-normal"><?php echo $orders->num_rows; ?></span>
-                </p>
 
-                <?php while ($row = $orders->fetch_assoc()): ?>
-                <div class="d-flex align-items-center mb-3">
-                    <img src="<?php echo htmlspecialchars($row['ImageSP']); ?>" alt="<?php echo htmlspecialchars($row['TenSP']); ?>" class="product-img"
-                        width="40" height="40" />
-                    <div class="flex-grow-1">
-                        <p class="product-name mb-0"><?php echo htmlspecialchars($row['TenSP']); ?></p>
-                        <p class="product-price mb-0"><?php echo number_format($row['GiaTien'], 0, ',','.'); ?> đ</p>
-                        <p class="product-qty mb-0">× <?php echo $row['SoLuong']; ?></p>
-                    </div>
-                    <?php 
-              $tmp = $row['GiaTien'] * $row['SoLuong'];
-              $tongTien += $tmp; 
-            ?>
-                    <div class="fw-semibold text-dark small"><?php $row['GiaTien'];?></div>
-                </div>
-                <?php endwhile; ?>
-
-                <div class="d-flex justify-content-between text-secondary small mb-1">
-                    <span>Phí vận chuyển</span>
-                    <span>Free</span>
-                </div>
-                <div class="d-flex justify-content-between text-secondary small mb-4">
-                    <?php $tax=$tongTien*0.001;?>
-                    <span>Thuế</span>
-                    <span><?php echo number_format($tax,0,',','.')?> đ</span>
-                </div>
-
-                <div class="d-flex justify-content-between fw-bold text-dark mb-4" style="font-size: 0.9rem;">
-                    <span>Tổng cộng</span>
-                    <span><?php echo number_format($tongTien+$tax, 0,',','.'); ?> đ</span>
-                </div>
-                <form action="controller/c_thanhToan.php" method="post">
-                    <input type="hidden" name="maTK" value="<?php echo $user['MaTK']; ?>">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <input type="text" class="form-control me-2" id="voucherInput" placeholder="Nhập mã giảm giá">
-                        <button type="button" class="btn btn-success" id="applyVoucherBtn">Enter</button>
+                        <div class="text-muted">Tổng cộng</div>
+                        <div class="fw-bold"><?= number_format($tongTien,0,',','.') ?> đ</div>
                     </div>
-                    <div id="voucherMessage" class="text-danger small mb-2"></div>
-
-
-                    <div class="d-flex justify-content-between fw-bold text-dark mb-4" style="font-size: 0.9rem;">
-                        <span>Sau giảm: </span>
-                        <span id="discountedTotal"><?php echo number_format($tongTien+$tax, 0,',','.'); ?> đ</span>
-                    </div>
-                    <input type="hidden" name="soTien" id="soTienInput" value="<?php echo $tongTien+$tax; ?>">
-                    <input type="hidden" name="voucherCode" id="voucherCodeInput" value="">
-                    <button type="submit" class="btn btn-secure w-100 mb-2">
-                        Tiếp tục thanh toán
-                    </button>
-                </form>
-                <a href="index.php" class="cancel-payment d-block text-center">Hủy thanh toán</a>
+                    <p class="small text-muted">Trang này chỉ hiển thị danh sách sản phẩm trong giỏ. Thao tác thanh toán sẽ ở bước tiếp theo.</p>
+                <?php else: ?>
+                    <div class="text-center py-4 text-muted">Giỏ hàng đang trống.</div>
+                <?php endif; ?>
+                <a href="index.php" class="btn btn-sm btn-secondary">Tiếp tục mua sắm</a>
+                <a href="payProduct.php?action=checkout" class="btn btn-sm btn-primary ms-2">Tiến hành thanh toán</a>
             </section>
         </div>
     </main>

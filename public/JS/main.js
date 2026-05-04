@@ -107,3 +107,44 @@ function toast({ title = "", message = "", type = "info", duration = 3000 }) {
 }
 
 
+// Intercept add-to-cart forms and update cart badge via AJAX
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('form[action="controller/c_addToCart.php"]').forEach(function(form){
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).then(res => res.json()).then(data => {
+                if (data && data.success) {
+                    const badge = document.querySelector('.cart-count');
+                    if (badge) badge.innerText = data.count > 99 ? '99+' : data.count;
+                    else if (data.count > 0) {
+                        // try to add badge to cart icon
+                        const cartLink = document.querySelector('.cart-icon a') || document.querySelector('.cart-icon');
+                        if (cartLink) {
+                            const span = document.createElement('span');
+                            span.className = 'badge bg-danger rounded-pill cart-count';
+                            span.style.cssText = 'position:absolute;top:-6px;right:-6px;font-size:11px;';
+                            span.innerText = data.count > 99 ? '99+' : data.count;
+                            cartLink.appendChild(span);
+                        }
+                    }
+                    toast({ title: 'Thông báo', message: data.message || 'Đã thêm vào giỏ hàng', type: 'success', duration: 3000 });
+                } else {
+                    toast({ title: 'Lỗi', message: (data && data.message) || 'Không thể thêm vào giỏ hàng', type: 'error', duration: 3000 });
+                }
+            }).catch(err => {
+                console.error(err);
+                // fallback to full submit
+                form.submit();
+            });
+        });
+    });
+});
+
+

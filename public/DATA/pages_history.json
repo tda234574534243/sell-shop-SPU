@@ -577,7 +577,7 @@
         ]
     },
     "homepage": {
-        "current": 34,
+        "current": 35,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:17",
@@ -2304,6 +2304,52 @@
                                 "subtitle": "",
                                 "buttonText": "Mua ngay",
                                 "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-04 06:33:14",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
                             }
                         },
                         {

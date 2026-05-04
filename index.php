@@ -117,7 +117,14 @@
                                     <div class="card-body p-2 d-flex flex-column text-center">
                                         <p class="card-title small mb-1 fw-bold text-truncate-2"><?= htmlspecialchars($p['TenSP']) ?></p>
                                         <p class="text-danger small mb-2 fw-bold"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
-                                        <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-primary mt-auto rounded-pill">Chi tiết</a>
+                                        <div class="d-flex gap-2 mt-auto justify-content-center">
+                                            <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary rounded-pill">Chi tiết</a>
+                                            <form method="post" action="controller/c_addToCart.php" style="display:inline-block;">
+                                                <input type="hidden" name="product_id" value="<?= $p['MaSP'] ?>">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <button type="submit" class="btn btn-sm btn-primary rounded-pill">Thêm</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,17 +136,7 @@
 
         <aside class="col-lg-2 d-none d-lg-block">
             <div class="side-promo">
-                <div class="promo-card shadow-sm border-0 mb-3 bg-white p-3 rounded border-start border-4 border-primary">
-                    <h6 class="fw-bold text-primary small text-uppercase"><i class="fas fa-shopping-basket me-2"></i>Giỏ hàng</h6>
-                    <div class="cart-status mt-2">
-                        <?php if($totalCartQty > 0): ?>
-                            <p class="small mb-2">Bạn đang có <strong class="text-danger"><?= $totalCartQty ?></strong> món.</p>
-                            <a href="cart.php" class="btn btn-sm btn-primary w-100 py-1 rounded-pill" style="font-size: 11px;">THANH TOÁN</a>
-                        <?php else: ?>
-                            <p class="text-muted small mb-0" style="font-size: 11px;">Chưa có sản phẩm nào.</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
+
 
                 <div class="promo-card shadow-sm border-0 mb-3 p-3 rounded bg-white">
                     <h6 class="fw-bold mb-3 small text-uppercase"><i class="fas fa-bolt me-2 text-warning"></i>Có thể bạn thích</h6>
