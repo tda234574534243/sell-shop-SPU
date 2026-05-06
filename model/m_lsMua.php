@@ -39,8 +39,9 @@
                 $stmt->bind_param("iis", $soLuong, $maTK, $maSP);
                 return $stmt->execute();
             } else {
+                // Preserve original NgayMua to avoid ON UPDATE CURRENT_TIMESTAMP changing purchase date
                 $this->setQuery("UPDATE LS_Mua 
-                                SET SoLuong = SoLuong + ?, State = ? 
+                                SET SoLuong = SoLuong + ?, State = ?, NgayMua = NgayMua 
                                 WHERE MaTK = ? AND MaSP = ?");
                 $stmt = $this->conn->prepare($this->query);
                 if ($stmt === false) return false;
@@ -52,7 +53,8 @@
 
         public function updateState($maHD, $maSP, $state)
         {
-            $this->setQuery("UPDATE LS_Mua SET State = ? WHERE MaHD = ? AND MaSP = ?");
+            // Preserve NgayMua when updating state so revenue month stays tied to purchase date
+            $this->setQuery("UPDATE LS_Mua SET State = ?, NgayMua = NgayMua WHERE MaHD = ? AND MaSP = ?");
             $stmt = $this->conn->prepare($this->query);
             if ($stmt === false) {
                 return false;

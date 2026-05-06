@@ -12,20 +12,21 @@
     $month = date('n');
     $year = date('Y');
     
-    // Doanh thu
-    $monthlyRevenue = $stat->getMonthlyRevenue($month, $year);
-    $revenueChange = $stat->getRevenueChange($month, $year);
+    // Doanh thu (chỉ tính các mục đã giao)
+    $monthlyRevenue = $stat->getMonthlyDeliveredRevenue($month, $year);
+    $revenueChange = $stat->getRevenueChangeDelivered($month, $year);
     
-    // Đơn hàng
-    $totalOrders = $stat->getTotalOrders($month, $year);
+    // Đơn hàng (đã giao)
+    $totalOrders = $stat->getTotalDeliveredOrders($month, $year);
+    // Note: ordersChange is still based on all orders by default; keep original behavior
     $ordersChange = $stat->getOrdersChange($month, $year);
     
     // Sản phẩm & Khách hàng
     $totalProducts = $stat->getTotalProducts();
     $totalCustomers = $stat->getTotalCustomers();
     
-    // Doanh thu theo tháng trong năm
-    $yearlyData = $stat->getYearlyRevenue($year);
+    // Doanh thu theo tháng trong năm (đã giao)
+    $yearlyData = $stat->getYearlyDeliveredRevenue($year);
 ?>
 <div class="bg-light flex-fill">
     <style>

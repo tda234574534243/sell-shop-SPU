@@ -27,6 +27,30 @@ class M_statistic extends M_database {
     }
 
     /**
+     * Lấy tổng doanh thu của tháng chỉ tính những mục đã giao
+     */
+    public function getMonthlyDeliveredRevenue($month = null, $year = null) {
+        if (!$month) $month = date('n');
+        if (!$year) $year = date('Y');
+
+        $query = "
+            SELECT COALESCE(SUM(ls.SoLuong * p.GiaTien), 0) as total
+            FROM LS_Mua ls
+            JOIN Products p ON p.MaSP = ls.MaSP
+            WHERE MONTH(ls.NgayMua) = $month AND YEAR(ls.NgayMua) = $year
+              AND ls.State = 'Đã giao hàng'
+        ";
+
+        $this->setQuery($query);
+        $result = $this->excuteQuery();
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['total'] ?? 0;
+        }
+        return 0;
+    }
+
+    /**
      * Lấy doanh thu theo từng tháng trong năm
      */
     public function getYearlyRevenue($year = null) {
@@ -55,6 +79,35 @@ class M_statistic extends M_database {
     }
 
     /**
+     * Lấy doanh thu theo từng tháng trong năm chỉ tính những mục đã giao
+     */
+    public function getYearlyDeliveredRevenue($year = null) {
+        if (!$year) $year = date('Y');
+
+        $query = "
+            SELECT 
+                MONTH(ls.NgayMua) as month,
+                COALESCE(SUM(ls.SoLuong * p.GiaTien), 0) as total
+            FROM LS_Mua ls
+            JOIN Products p ON p.MaSP = ls.MaSP
+            WHERE YEAR(ls.NgayMua) = $year
+              AND ls.State = 'Đã giao hàng'
+            GROUP BY MONTH(ls.NgayMua)
+            ORDER BY month
+        ";
+
+        $this->setQuery($query);
+        $result = $this->excuteQuery();
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[$row['month']] = $row['total'];
+            }
+        }
+        return $data;
+    }
+
+    /**
      * Lấy tổng đơn hàng
      */
     public function getTotalOrders($month = null, $year = null) {
@@ -67,6 +120,29 @@ class M_statistic extends M_database {
             WHERE MONTH(NgayMua) = $month AND YEAR(NgayMua) = $year
         ";
         
+        $this->setQuery($query);
+        $result = $this->excuteQuery();
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['total'] ?? 0;
+        }
+        return 0;
+    }
+
+    /**
+     * Tổng đơn hàng đã có ít nhất một mục 'Đã giao' trong tháng
+     */
+    public function getTotalDeliveredOrders($month = null, $year = null) {
+        if (!$month) $month = date('n');
+        if (!$year) $year = date('Y');
+
+        $query = "
+            SELECT COUNT(DISTINCT MaHD) as total
+            FROM LS_Mua
+            WHERE MONTH(NgayMua) = $month AND YEAR(NgayMua) = $year
+              AND State = 'Đã giao hàng'
+        ";
+
         $this->setQuery($query);
         $result = $this->excuteQuery();
         if ($result && $result->num_rows > 0) {
@@ -177,6 +253,55 @@ class M_statistic extends M_database {
         
         $this->setQuery($query);
         return $this->excuteQuery();
+    }
+
+    /**
+     * Top sản phẩm theo mục đã giao
+     */
+    public function getTopProductsDelivered($limit = 10) {
+        $query = "
+            SELECT 
+                p.MaSP,
+                p.TenSP,
+                COUNT(ls.MaHD) as times_sold,
+                COALESCE(SUM(ls.SoLuong), 0) as total_qty,
+                COALESCE(SUM(ls.SoLuong * p.GiaTien), 0) as total_revenue
+            FROM LS_Mua ls
+            JOIN Products p ON p.MaSP = ls.MaSP
+            WHERE ls.State = 'Đã giao hàng'
+            GROUP BY p.MaSP, p.TenSP
+            ORDER BY total_qty DESC
+            LIMIT $limit
+        ";
+
+        $this->setQuery($query);
+        return $this->excuteQuery();
+    }
+
+    /**
+     * Tính % thay đổi doanh thu nhưng chỉ với doanh thu đã giao
+     */
+    public function getRevenueChangeDelivered($month = null, $year = null) {
+        if (!$month) $month = date('n');
+        if (!$year) $year = date('Y');
+
+        $currentRevenue = $this->getMonthlyDeliveredRevenue($month, $year);
+
+        if ($month == 1) {
+            $prevMonth = 12;
+            $prevYear = $year - 1;
+        } else {
+            $prevMonth = $month - 1;
+            $prevYear = $year;
+        }
+
+        $prevRevenue = $this->getMonthlyDeliveredRevenue($prevMonth, $prevYear);
+
+        if ($prevRevenue == 0) {
+            return $prevRevenue == 0 ? 0 : 100;
+        }
+
+        return round((($currentRevenue - $prevRevenue) / $prevRevenue) * 100, 2);
     }
 
     /**

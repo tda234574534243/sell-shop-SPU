@@ -12,11 +12,11 @@
     if ($month < 1 || $month > 12) $month = date('n');
     if ($year < 2000 || $year > 2100) $year = date('Y');
     
-    // Dữ liệu
-    $revenue = $stat->getMonthlyRevenue($month, $year);
-    $orders = $stat->getTotalOrders($month, $year);
-    $topProducts = $stat->getTopProducts(10);
-    $change = $stat->getRevenueChange($month, $year);
+    // Dữ liệu (chỉ tính mục đã giao)
+    $revenue = $stat->getMonthlyDeliveredRevenue($month, $year);
+    $orders = $stat->getTotalDeliveredOrders($month, $year);
+    $topProducts = $stat->getTopProductsDelivered(10);
+    $change = $stat->getRevenueChangeDelivered($month, $year);
 ?>
 <?php include('../template/head.php'); ?>
 
