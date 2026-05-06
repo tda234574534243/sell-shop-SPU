@@ -83,7 +83,8 @@
             error_log("getLSMuaByMaSP query failed for MaSP={$maSP}");
         }
         if ($existing && $existing->num_rows > 0) {
-            $lsMua->updateLSMua($maKH, $maSP, $soLuong);
+            // Ensure existing LS_Mua rows are marked as preparing when migrating cart -> order
+            $lsMua->updateLSMua($maKH, $maSP, $soLuong, 'Đang chuẩn bị hàng');
         } else {
             // Use per-item unit price ($giaTien) instead of total order amount
             $added = $lsMua->addLSMua($maHD, $maKH, $maSP, $tenSP, $soLuong, $giaTien, 'Đang chuẩn bị hàng');

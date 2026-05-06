@@ -90,6 +90,9 @@
                             </ul>
                         </li>
                     <?php else: ?>
+                        <li class="nav-item <?= ($currentPage === 'track-order.php') ? 'active' : '' ?>">
+                            <a class="nav-link" href="track-order.php">Đơn hàng</a>
+                        </li>
                         <li class="nav-item cart-icon d-none d-lg-block">
                             <a class="nav-link position-relative" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-basket2" viewBox="0 0 16 16">
@@ -118,7 +121,9 @@
                                     <li class="dropdown-item text-muted">Không có thông báo</li>
                                 <?php endif; ?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-center" href="admin/notifications.php">Quản lý thông báo</a></li>
+                                <?php if ($isAdmin): ?>
+                                    <li><a class="dropdown-item text-center" href="admin/notifications.php">Quản lý thông báo</a></li>
+                                <?php endif; ?>
                             </ul>
                         </li>
                         <li class="nav-item d-none d-lg-block ms-2">

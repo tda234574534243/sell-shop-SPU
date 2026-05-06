@@ -28,15 +28,26 @@
             return $exec;
         }
 
-        public function updateLSMua($maTK, $maSP, $soLuong)
+        public function updateLSMua($maTK, $maSP, $soLuong, $state = null)
         {
-            $this->setQuery("UPDATE LS_Mua 
-                            SET SoLuong = SoLuong + ? 
-                            WHERE MaTK = ? AND MaSP = ?");
-                            
-            $stmt = $this->conn->prepare($this->query);
-            $stmt->bind_param("iis", $soLuong, $maTK, $maSP);
-            $stmt->execute();
+            if ($state === null) {
+                $this->setQuery("UPDATE LS_Mua 
+                                SET SoLuong = SoLuong + ? 
+                                WHERE MaTK = ? AND MaSP = ?");
+                $stmt = $this->conn->prepare($this->query);
+                if ($stmt === false) return false;
+                $stmt->bind_param("iis", $soLuong, $maTK, $maSP);
+                return $stmt->execute();
+            } else {
+                $this->setQuery("UPDATE LS_Mua 
+                                SET SoLuong = SoLuong + ?, State = ? 
+                                WHERE MaTK = ? AND MaSP = ?");
+                $stmt = $this->conn->prepare($this->query);
+                if ($stmt === false) return false;
+                // types: soLuong(int), state(string), maTK(int), maSP(string)
+                $stmt->bind_param("isis", $soLuong, $state, $maTK, $maSP);
+                return $stmt->execute();
+            }
         }
 
         public function updateState($maHD, $maSP, $state)
@@ -78,6 +89,15 @@
         public function getLSMuaByMaTK($maTK)
         {
             $this->setQuery("SELECT * FROM LS_Mua WHERE MaTK = '$maTK'");
+            return $this->excuteQuery();
+        }
+
+        /**
+         * Xóa tất cả dòng LS_Mua theo MaHD (khi xóa hóa đơn)
+         */
+        public function deleteByMaHD($maHD)
+        {
+            $this->setQuery("DELETE FROM LS_Mua WHERE MaHD = '$maHD'");
             return $this->excuteQuery();
         }
     }

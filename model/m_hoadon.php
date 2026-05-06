@@ -32,5 +32,14 @@
             $this->setQuery("SELECT * FROM HoaDon ORDER BY MaHD DESC LIMIT 1");
             return $this->excuteQuery();
         }
+
+        /**
+         * Xóa hóa đơn theo MaHD
+         */
+        public function deleteHoaDon($maHD)
+        {
+            $this->setQuery("DELETE FROM HoaDon WHERE MaHD = '$maHD'");
+            return $this->excuteQuery();
+        }
     }
 ?>
