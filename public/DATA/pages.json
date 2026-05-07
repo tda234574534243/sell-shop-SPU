@@ -103,6 +103,48 @@
             "createdAt": "2026-05-06",
             "updatedAt": "2026-05-06 00:00:00",
             "blocks": []
+        },
+        "san-pham-moi": {
+            "title": "san-pham-moi",
+            "slug": "san-pham-moi",
+            "status": "draft",
+            "createdAt": "2026-05-07 22:55:32",
+            "updatedAt": "2026-05-07 22:55:32",
+            "blocks": [
+                {
+                    "id": "block-69fcb5fe4d881",
+                    "type": "richtext",
+                    "section": "center",
+                    "order": 1,
+                    "data": {
+                        "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                    }
+                },
+                {
+                    "id": "block-69fcb62920a34",
+                    "type": "gallery",
+                    "section": "center",
+                    "order": 2,
+                    "data": {
+                        "columns": "1",
+                        "images": [
+                            {
+                                "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778169396_d8d70124.png",
+                                "caption": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "block-69fcb640a761f",
+                    "type": "richtext",
+                    "section": "center",
+                    "order": 3,
+                    "data": {
+                        "content": "<p>Sticker xinh xắn, siêu đẹp cho người đam mê AOV <\/p>"
+                    }
+                }
+            ]
         }
     }
 }

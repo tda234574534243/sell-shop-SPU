@@ -577,495 +577,8 @@
         ]
     },
     "homepage": {
-        "current": 46,
+        "current": 37,
         "items": [
-            {
-                "timestamp": "2026-03-31 03:19:17",
-                "action": "addBlock",
-                "description": "Thêm block testimonials",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        },
-                        {
-                            "id": "block-69cb2115ce4df",
-                            "type": "testimonials",
-                            "section": "center",
-                            "order": 4,
-                            "data": {
-                                "title": "Nhận xét từ khách hàng",
-                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:22",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:26",
-                "action": "addBlock",
-                "description": "Thêm block announcement",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        },
-                        {
-                            "id": "block-69cb211e285d6",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 4,
-                            "data": {
-                                "message": "",
-                                "type": "info",
-                                "enabled": true
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:29",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:31",
-                "action": "addBlock",
-                "description": "Thêm block richtext",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        },
-                        {
-                            "id": "block-69cb2123e5e2a",
-                            "type": "richtext",
-                            "section": "center",
-                            "order": 4,
-                            "data": {
-                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:39",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:42",
-                "action": "addBlock",
-                "description": "Thêm block contact",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        },
-                        {
-                            "id": "block-69cb212ebac72",
-                            "type": "contact",
-                            "section": "center",
-                            "order": 4,
-                            "data": {
-                                "title": "Liên hệ với chúng tôi",
-                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
-                                "email": "",
-                                "phone": "",
-                                "address": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:42",
-                "action": "addBlock",
-                "description": "Thêm block contact",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        },
-                        {
-                            "id": "block-69cb212ebac72",
-                            "type": "contact",
-                            "section": "center",
-                            "order": 4,
-                            "data": {
-                                "title": "Liên hệ với chúng tôi",
-                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
-                                "email": "",
-                                "phone": "",
-                                "address": ""
-                            }
-                        },
-                        {
-                            "id": "block-69cb212ebeb0d",
-                            "type": "contact",
-                            "section": "center",
-                            "order": 5,
-                            "data": {
-                                "title": "Liên hệ với chúng tôi",
-                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
-                                "email": "",
-                                "phone": "",
-                                "address": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
-            {
-                "timestamp": "2026-03-31 03:19:46",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "\/sell-shop-SPU\/media\/image\/uploads\/img_1774918805_157cf6ba.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69ca063bc7895",
-                            "type": "announcement",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
-                                "type": "success",
-                                "enabled": true
-                            }
-                        },
-                        {
-                            "id": "block-69cb212ebac72",
-                            "type": "contact",
-                            "section": "center",
-                            "order": 4,
-                            "data": {
-                                "title": "Liên hệ với chúng tôi",
-                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
-                                "email": "",
-                                "phone": "",
-                                "address": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-30 20:26:05"
-                }
-            },
             {
                 "timestamp": "2026-03-31 03:19:50",
                 "action": "deleteBlock",
@@ -2950,6 +2463,486 @@
                     "updatedAt": "2026-03-31 18:08:37",
                     "layout": "sidebar-right"
                 }
+            },
+            {
+                "timestamp": "2026-05-07 22:53:04",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:53:36",
+                "action": "addBlock",
+                "description": "Thêm block text",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69fcb5803fc67",
+                            "type": "text",
+                            "section": "left",
+                            "order": 1,
+                            "data": {
+                                "content": "Nội dung ở đây"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:53:47",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69fcb5803fc67",
+                            "type": "text",
+                            "section": "left",
+                            "order": 1,
+                            "data": {
+                                "content": "Hãy ghé shop nhé"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:06",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:09",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69fcb5a1729cc",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:14",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:16",
+                "action": "addBlock",
+                "description": "Thêm block contact",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69fcb5a8bce01",
+                            "type": "contact",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "title": "Liên hệ với chúng tôi",
+                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
+                                "email": "",
+                                "phone": "",
+                                "address": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:20",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:22",
+                "action": "addBlock",
+                "description": "Thêm block featured_products",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69fcb5aee5e57",
+                            "type": "featured_products",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "title": "Sản phẩm nổi bật",
+                                "description": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:26",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:36",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-69fcb5bc5b706",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:54:40",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
             }
         ]
     },
@@ -4150,6 +4143,365 @@
                             "data": {
                                 "title": "Vouchers",
                                 "description": ""
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "san-pham-moi": {
+        "current": 11,
+        "items": [
+            {
+                "timestamp": "2026-05-07 22:55:37",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5f9c6a7f",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:55:41",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:55:42",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:55:47",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p><strong>Nhập nội dung của bạn ở đây<\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:55:59",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p><strong>Nội dung:<\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:56:12",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:56:15",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-69fcb61fdc23d",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:56:18",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:56:25",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-69fcb62920a34",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:56:43",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-69fcb62920a34",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778169396_d8d70124.png",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:56:48",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-69fcb62920a34",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778169396_d8d70124.png",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-69fcb640a761f",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-07 22:57:28",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "san-pham-moi",
+                    "slug": "san-pham-moi",
+                    "status": "draft",
+                    "createdAt": "2026-05-07 22:55:32",
+                    "updatedAt": "2026-05-07 22:55:32",
+                    "blocks": [
+                        {
+                            "id": "block-69fcb5fe4d881",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Nội dung<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-69fcb62920a34",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778169396_d8d70124.png",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-69fcb640a761f",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p>Sticker xinh xắn, siêu đẹp cho người đam mê AOV <\/p>"
                             }
                         }
                     ]

@@ -16,12 +16,34 @@
     $vnpayBankCode = isset($_POST['bankCode']) ? $_POST['bankCode'] : '';
     $vnpayLang = isset($_POST['vnpayLang']) ? $_POST['vnpayLang'] : 'vn';
     $voucherCode = isset($_POST['voucherCode']) ? trim($_POST['voucherCode']) : '';
+    // COD confirmation fields (from payProduct.php)
+    $codConfirm = isset($_POST['cod_confirm']) ? $_POST['cod_confirm'] : '0';
+    $codCaptchaInput = isset($_POST['cod_captcha']) ? strtolower(trim($_POST['cod_captcha'])) : '';
     
     if ($maKH <= 0) {
         die("Vui lòng đăng nhập");
     }
     if ($sotien < 0) {
         die("Số tiền không hợp lệ");
+    }
+
+    // If payment method is local (COD), require explicit confirmation + captcha
+    if ($paymentMethod === 'local') {
+        $sessionCaptcha = isset($_SESSION['cod_captcha']) ? $_SESSION['cod_captcha'] : '';
+        // validate checkbox and captcha (case-insensitive)
+        if ($codConfirm !== '1' || empty($sessionCaptcha) || $codCaptchaInput !== $sessionCaptcha) {
+            // remove stored captcha to avoid reuse
+            if (isset($_SESSION['cod_captcha'])) unset($_SESSION['cod_captcha']);
+            $_SESSION['toast'] = [
+                'title' => 'Lỗi',
+                'message' => 'Xác nhận COD không hợp lệ. Vui lòng đánh dấu và nhập đúng ký tự từ ảnh.',
+                'type' => 'error'
+            ];
+            header("Location: ../payProduct.php?action=checkout");
+            exit;
+        }
+        // consume captcha
+        unset($_SESSION['cod_captcha']);
     }
     
     // Kiểm tra và xử lý voucher nếu có
@@ -114,67 +136,41 @@
         exit;
     }
 
-    // Local / other payment methods: create HoaDon immediately (existing behavior)
-    $resPayment = $hoadon->thanhToan($maTK, $sotien);
-    if ($resPayment === false) {
-        error_log("thanhToan failed for MaTK={$maKH} amount={$sotien}");
-        $_SESSION['toast'] = [
-            'title' => 'Lỗi',
-            'message' => 'Thanh toán thất bại, vui lòng thử lại.',
-            'type' => 'danger',
-            'duration' => 4000
-        ];
-        header("Location: ../cart.php");
-        exit;
-    }
-
-    $lastHDRes = $hoadon->getLastHoaDon();
-    if ($lastHDRes === false || $lastHDRes->num_rows === 0) {
-        error_log("getLastHoaDon failed after thanhToan for MaTK={$maKH}");
-        $_SESSION['toast'] = [
-            'title' => 'Lỗi',
-            'message' => 'Không thể lấy hóa đơn vừa tạo.',
-            'type' => 'danger',
-            'duration' => 4000
-        ];
-        header("Location: ../cart.php");
-        exit;
-    }
-
-    $lastHD = $lastHDRes->fetch_assoc();
-    $maHD = $lastHD['MaHD'];
-    if (empty($cartRows)) {
-        error_log("Cart is empty for MaTK={$maKH} at thanhToan time");
-    }
-    foreach ($cartRows as $row) {
-        $maSP = $row['MaSP'];
-        $tenSP = $row['TenSP'];
-        $soLuong = $row['SoLuong'];
-        $giaTien = $row['GiaTien'];
-            // Check existence for this user+product, not global by product
-            $existing = $lsMua->getLSMuaByMaTKAndMaSP($maKH, $maSP);
-            error_log("Processing LS_Mua insert for MaHD={$maHD} MaTK={$maKH} MaSP={$maSP} SoLuong={$soLuong} GiaTien={$giaTien}");
-        if ($existing === false) {
-            error_log("getLSMuaByMaSP query failed for MaSP={$maSP}");
+    // Local (COD) / other payment methods: create HoaDon immediately with COD status
+    if ($paymentMethod === 'local') {
+        // create invoice with COD status
+        $maHD = $hoadon->createHoaDon($maKH, $sotien, 'Chờ giao (COD)');
+        if ($maHD === false) {
+            error_log("createHoaDon failed for MaTK={$maKH} amount={$sotien}");
+            $_SESSION['toast'] = [ 'title' => 'Lỗi', 'message' => 'Không thể tạo đơn hàng', 'type' => 'danger' ];
+            header("Location: ../payProduct.php");
+            exit;
         }
-        if ($existing && $existing->num_rows > 0) {
-            // Ensure existing LS_Mua rows are marked as preparing when migrating cart -> order
-            $lsMua->updateLSMua($maKH, $maSP, $soLuong, 'Đang chuẩn bị hàng');
-        } else {
-            // Use per-item unit price ($giaTien) instead of total order amount
-            $added = $lsMua->addLSMua($maHD, $maKH, $maSP, $tenSP, $soLuong, $giaTien, 'Đang chuẩn bị hàng');
-            if ($added === false) {
-                error_log("addLSMua failed for MaHD={$maHD} MaSP={$maSP} MaTK={$maKH}");
+
+        // Insert LS_Mua rows with state 'Chờ giao'
+        if (!empty($cartRows)) {
+            foreach ($cartRows as $row) {
+                $maSP = $row['MaSP'];
+                $tenSP = $row['TenSP'];
+                $soLuong = $row['SoLuong'];
+                $giaTien = $row['GiaTien'];
+                $added = $lsMua->addLSMua($maHD, $maKH, $maSP, $tenSP, $soLuong, $giaTien, 'Chờ giao');
+                if ($added === false) {
+                    error_log("addLSMua failed for MaHD={$maHD} MaSP={$maSP} MaTK={$maKH}");
+                }
             }
         }
-    } 
-    $cart->clearCart($maKH);  
-     $_SESSION['toast'] = [
+
+        // Clear cart now
+        $cart->clearCart($maKH);
+
+        $_SESSION['toast'] = [
             'title' => 'Thông báo',
-            'message' => 'Thanh toán thành công số tiền ' . number_format( $sotien, 0, ',', '.') . ' VNĐ' . ($voucherCode ? ' (Sử dụng voucher: ' . htmlspecialchars($voucherCode) . ')' : ''),
+            'message' => 'Đặt hàng thành công (COD). Vui lòng chuẩn bị thanh toán ' . number_format($sotien, 0, ',', '.') . ' VNĐ khi nhận hàng.' . ($voucherCode ? ' (Sử dụng voucher: ' . htmlspecialchars($voucherCode) . ')' : ''),
             'type' => 'success',
             'duration' => 3000
-    ];
-    header("Location: ../index.php");
-    exit;
+        ];
+        header("Location: ../index.php");
+        exit;
+    }
 ?>

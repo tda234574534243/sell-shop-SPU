@@ -268,6 +268,24 @@ a.cancel-payment:hover {
                         </div>
                     </div>
 
+                    <!-- COD confirmation (required when COD selected) -->
+                    <div id="codConfirmation" class="mb-3" style="display:none;">
+                        <label class="form-label fw-bold">Xác nhận COD</label>
+                        <div class="form-text mb-2">Để đảm bảo bạn cam kết thanh toán bằng tiền mặt khi nhận hàng, vui lòng đánh dấu và nhập dòng xác nhận dưới đây.</div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="cod_confirm_checkbox" name="cod_confirm" value="1">
+                            <label class="form-check-label" for="cod_confirm_checkbox">Tôi cam kết sẽ thanh toán bằng tiền mặt (COD) khi nhận hàng.</label>
+                        </div>
+                        <div class="mt-2 d-flex align-items-center gap-2">
+                            <img id="codCaptchaImg" src="captcha.php?ts=<?= time() ?>" alt="captcha" style="height:50px;border:1px solid #ddd;border-radius:4px;">
+                            <button type="button" id="reloadCaptcha" class="btn btn-sm btn-outline-secondary">Làm mới</button>
+                        </div>
+                        <div class="mt-2">
+                            <input type="text" id="cod_captcha_input" name="cod_captcha" class="form-control" placeholder="Nhập ký tự trong ảnh" maxlength="10">
+                        </div>
+                        <div id="codConfirmMessage" class="small text-danger mt-1" style="display:none;"></div>
+                    </div>
+
                     <div id="vnpayOptions" class="mb-3" style="display:none;">
                         <label class="form-label">Chọn phương thức VNPAY (tùy chọn)</label>
                         <select id="vnpayBankCode" name="bankCode" class="form-select" style="max-width:360px;">
@@ -418,6 +436,62 @@ a.cancel-payment:hover {
         // No client-side redirect: when payment method is VNPAY the main form
         // will be submitted to `controller/c_thanhToan.php` and the server
         // will create a pending order and forward to VNPAY. We only toggle UI here.
+
+        // Show/hide COD confirmation block and enforce validation
+        const codBlock = document.getElementById('codConfirmation');
+        const codCheckbox = document.getElementById('cod_confirm_checkbox');
+        const codCaptchaInput = document.getElementById('cod_captcha_input');
+        const codImg = document.getElementById('codCaptchaImg');
+        const reloadBtn = document.getElementById('reloadCaptcha');
+        const codMsg = document.getElementById('codConfirmMessage');
+
+        function refreshPaymentUI() {
+                if (pmVnpay && pmVnpay.checked) {
+                vnpayOptions.style.display = 'block';
+                if (codBlock) codBlock.style.display = 'none';
+                if (codCheckbox) codCheckbox.required = false;
+                if (codCaptchaInput) codCaptchaInput.required = false;
+            } else {
+                vnpayOptions.style.display = 'none';
+                if (codBlock) codBlock.style.display = 'block';
+                if (codCheckbox) codCheckbox.required = true;
+                if (codCaptchaInput) codCaptchaInput.required = true;
+            }
+        }
+
+        pmLocal?.addEventListener('change', refreshPaymentUI);
+        pmVnpay?.addEventListener('change', refreshPaymentUI);
+        refreshPaymentUI();
+
+        // reload captcha image
+        reloadBtn?.addEventListener('click', function() {
+            if (codImg) codImg.src = 'captcha.php?ts=' + Date.now();
+        });
+
+        // Intercept submit to enforce cod confirmation for local payment
+        paymentForm?.addEventListener('submit', function(e) {
+            const selected = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+            if (selected === 'local') {
+                codMsg.style.display = 'none';
+                const captchaVal = (codCaptchaInput && codCaptchaInput.value || '').trim();
+                const checkboxChecked = codCheckbox && codCheckbox.checked;
+                if (!checkboxChecked) {
+                    e.preventDefault();
+                    codMsg.textContent = 'Bạn phải đồng ý cam kết thanh toán bằng tiền mặt khi nhận hàng.';
+                    codMsg.style.display = 'block';
+                    return;
+                }
+                if (captchaVal.length === 0) {
+                    e.preventDefault();
+                    codMsg.textContent = 'Vui lòng nhập ký tự trong ảnh để xác nhận.';
+                    codMsg.style.display = 'block';
+                    return;
+                }
+                // Disable button to avoid double submit
+                const btn = document.getElementById('payNowBtn');
+                if (btn) btn.disabled = true;
+            }
+        });
     });
     </script>
 
