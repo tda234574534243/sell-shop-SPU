@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `HoaDon` (
   `MaHD` INT(6) ZEROFILL AUTO_INCREMENT PRIMARY KEY,
   `MaTK` INT(6) ZEROFILL NOT NULL,
   `SoTien` FLOAT NOT NULL,
+  `Status` VARCHAR(50) NOT NULL DEFAULT 'Chờ thanh toán',
   `NgayThanhToan` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT HD_MaTK_FK FOREIGN KEY (MaTK) REFERENCES Account(MaTK) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -95,6 +96,7 @@ SET FOREIGN_KEY_CHECKS=1;
 -- Safety: ensure compatibility with existing installs
 ALTER TABLE `Account` ADD COLUMN IF NOT EXISTS `MaLV` INT(1) NOT NULL DEFAULT 0;
 ALTER TABLE `Products` ADD COLUMN IF NOT EXISTS `Sold` INT NOT NULL DEFAULT 0;
+ALTER TABLE `HoaDon` ADD COLUMN IF NOT EXISTS `Status` VARCHAR(50) NOT NULL DEFAULT 'Chờ thanh toán';
 
 -- Insert data
 INSERT INTO `Account` (LevelID, TenTK, Password, Email, SDT, DiaChi, MaLV) VALUES (1, 'Admin', '$2y$10$ALfU4BF6WTkY.Tt1RZ6ZzOyLO1CXUDhMN1sni3.cxY89EgwceJqCm', 'admin@web.com', '0000000000', 'System', 1);
@@ -163,17 +165,17 @@ INSERT INTO `HoaDon` (MaHD, MaTK, SoTien) VALUES (8, 2, 900000);
 INSERT INTO `HoaDon` (MaHD, MaTK, SoTien) VALUES (9, 3, 700000);
 INSERT INTO `HoaDon` (MaHD, MaTK, SoTien) VALUES (10, 4, 300000);
 INSERT INTO `HoaDon` (MaHD, MaTK, SoTien) VALUES (11, 5, 400000);
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (1, 1, 'SP0001', 'ASUS Vivobook 15 X1504ZA-NJ517W', 2, 'Đã giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (2, 2, 'SP0002', 'ASUS Gaming VivoBook K3605ZC-RP564W', 1, 'Đang giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (3, 3, 'SP0003', 'ASUS Vivobook 15 X1502VA-BQ886W', 3, 'Đã giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (4, 1, 'SP0004', 'ASUS Vivobook 14 OLED A1405VA-KM257W', 1, 'Chờ lấy hàng');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (5, 2, 'SP0001', 'ASUS Vivobook 15 X1504ZA-NJ517W', 4, 'Đã giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (6, 3, 'SP0005', 'ASUS Vivobook 14 OLED A1405ZA-KM264W', 2, 'Đang giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (7, 2, 'SP0002', 'ASUS Gaming VivoBook K3605ZC-RP564W', 2, 'Đã hủy');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (8, 1, 'SP0003', 'ASUS Vivobook 15 X1502VA-BQ886W', 1, 'Đã giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (9, 3, 'SP0006', 'ASUS Vivobook 15 X1504VA-NJ070W', 2, 'Chờ lấy hàng');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (10, 2, 'SP0004', 'ASUS Vivobook 14 OLED A1405VA-KM257W', 3, 'Đã giao');
-INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES (11, 1, 'SP0002', 'ASUS Gaming VivoBook K3605ZC-RP564W', 1, 'Đang giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (1, 1, 'SP0001', 'ASUS Vivobook 15 X1504ZA-NJ517W', 2, 13790000, 'Đã giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (2, 2, 'SP0002', 'ASUS Gaming VivoBook K3605ZC-RP564W', 1, 17990000, 'Đang giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (3, 3, 'SP0003', 'ASUS Vivobook 15 X1502VA-BQ886W', 3, 16790000, 'Đã giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (4, 1, 'SP0004', 'ASUS Vivobook 14 OLED A1405VA-KM257W', 1, 16990000, 'Chờ lấy hàng');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (5, 2, 'SP0001', 'ASUS Vivobook 15 X1504ZA-NJ517W', 4, 13790000, 'Đã giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (6, 3, 'SP0005', 'ASUS Vivobook 14 OLED A1405ZA-KM264W', 2, 15490000, 'Đang giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (7, 2, 'SP0002', 'ASUS Gaming VivoBook K3605ZC-RP564W', 2, 17990000, 'Đã hủy');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (8, 1, 'SP0003', 'ASUS Vivobook 15 X1502VA-BQ886W', 1, 16790000, 'Đã giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (9, 3, 'SP0006', 'ASUS Vivobook 15 X1504VA-NJ070W', 2, 13990000, 'Chờ lấy hàng');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (10, 2, 'SP0004', 'ASUS Vivobook 14 OLED A1405VA-KM257W', 3, 16990000, 'Đã giao');
+INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES (11, 1, 'SP0002', 'ASUS Gaming VivoBook K3605ZC-RP564W', 1, 17990000, 'Đang giao');
 INSERT INTO `Vouchers` (Code, Description, DiscountAmount) VALUES ('VCNamMoi', '', 50);
 INSERT INTO `Vouchers` (Code, Description, DiscountAmount) VALUES ('VCMungTet', '', 60);
 INSERT INTO `Vouchers` (Code, Description, DiscountAmount) VALUES ('VC30T4', '', 20);

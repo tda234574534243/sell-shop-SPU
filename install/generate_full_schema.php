@@ -67,10 +67,12 @@ $sql .= "  CONSTRAINT C_MaSP_FK FOREIGN KEY (MaSP) REFERENCES Products(MaSP) ON 
 $sql .= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;\n\n";
 
 $sql .= "-- HoaDon (invoices)\n";
+$sql .= "-- HoaDon (invoices)\n";
 $sql .= "CREATE TABLE IF NOT EXISTS `HoaDon` (\n";
 $sql .= "  `MaHD` INT(6) ZEROFILL AUTO_INCREMENT PRIMARY KEY,\n";
 $sql .= "  `MaTK` INT(6) ZEROFILL NOT NULL,\n";
 $sql .= "  `SoTien` FLOAT NOT NULL,\n";
+$sql .= "  `Status` VARCHAR(50) NOT NULL DEFAULT 'Chờ thanh toán',\n";
 $sql .= "  `NgayThanhToan` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
 $sql .= "  CONSTRAINT HD_MaTK_FK FOREIGN KEY (MaTK) REFERENCES Account(MaTK) ON DELETE CASCADE\n";
 $sql .= ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;\n\n";
@@ -170,11 +172,18 @@ foreach ($ls as $row) {
     $MaTK = intval($row['MaTK']);
     $MaSP = addslashes($row['MaSP']);
     $TenSP = '';
-    // try to find TenSP from products
-    foreach ($products as $p) { if ($p['MaSP'] == $row['MaSP']) { $TenSP = addslashes($p['TenSP']); break; } }
+    $GiaTien = 0;
+    // try to find product details
+    foreach ($products as $p) {
+        if ($p['MaSP'] == $row['MaSP']) {
+            $TenSP = addslashes($p['TenSP']);
+            $GiaTien = isset($p['GiaTien']) ? (float)$p['GiaTien'] : 0;
+            break;
+        }
+    }
     $SoLuong = intval($row['SoLuong']);
     $State = addslashes($row['State']);
-    $sql .= "INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, State) VALUES ($MaHD, $MaTK, '".$MaSP."', '".$TenSP."', $SoLuong, '".$State."');\n";
+    $sql .= "INSERT INTO `LS_Mua` (MaHD, MaTK, MaSP, TenSP, SoLuong, GiaTien, State) VALUES ($MaHD, $MaTK, '".$MaSP."', '".$TenSP."', $SoLuong, $GiaTien, '".$State."');\n";
 }
 
 // Vouchers: map MaV -> Code, store Discount into DiscountAmount
