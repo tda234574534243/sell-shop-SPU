@@ -66,6 +66,7 @@
                 <li class="nav-item <?= ($currentPage === 'index.php') ? 'active' : '' ?>"><a class="nav-link" href="index.php">Trang chủ</a></li>
                 <li class="nav-item <?= ($currentPage === 'introduce.php') ? 'active' : '' ?>"><a class="nav-link" href="introduce.php">Giới thiệu</a></li>
                 <li class="nav-item <?= ($currentPage === 'contact.php') ? 'active' : '' ?>"><a class="nav-link" href="contact.php">Liên hệ</a></li>
+                <li class="nav-item <?= ($currentPage === 'track-order.php') ? 'active' : '' ?>"><a class="nav-link" href="track-order.php">Theo dõi đơn hàng</a></li>
                 <?php if ($isLoggedIn && $isAdmin): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="adminDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quản lý</a>

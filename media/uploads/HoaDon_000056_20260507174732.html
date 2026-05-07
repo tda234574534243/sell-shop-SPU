@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { margin: 0; padding: 0; }
+        body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; }
+        .container { width: 800px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .header h1 { font-size: 24px; margin-bottom: 10px; }
+        .info-section { display: table; width: 100%; margin-bottom: 20px; }
+        .info-left, .info-right { display: table-cell; width: 50%; vertical-align: top; }
+        .info-item { margin-bottom: 8px; }
+        .info-item label { font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        table th { background-color: #e0e0e0; border: 1px solid #000; padding: 10px; text-align: left; font-weight: bold; }
+        table td { border: 1px solid #000; padding: 8px; }
+        .total-section { text-align: right; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
+        .total-line { font-size: 14px; font-weight: bold; margin-bottom: 10px; }
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 11px; color: #666; }
+        @media print { body { margin: 0; padding: 0; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HÓA ĐƠN BÁN HÀNG</h1>
+            <p style="margin: 5px 0;">Cửa hàng trực tuyến</p>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-left">
+                <div class="info-item"><label>Mã hóa đơn:</label> <strong>000056</strong></div>
+                <div class="info-item"><label>Ngày:</label> 2026-05-07 05:41:55</div>
+            </div>
+            <div class="info-right">
+                <div class="info-item"><label>Địa chỉ gửi hẹ:</label> sd</div>
+            </div>
+        </div>
+
+        <div style="margin: 30px 0;">
+            <h3 style="margin-bottom: 10px;">THÔNG TIN KHÁCH HÀNG</h3>
+            <div class="info-item"><label>Tên tài khoản:</label> lmao@lmao1.com</div>
+            <div class="info-item"><label>Email:</label> lmao@lmao1.com</div>
+            <div class="info-item"><label>Số điện thoại:</label> 0987654321</div>
+        </div>
+
+        <h3 style="margin-bottom: 15px;">CHI TIẾT ĐƠN HÀNG</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Tên sản phẩm</th>
+                    <th style="text-align: center;">Số lượng</th>
+                    <th style="text-align: right;">Đơn giá</th>
+                    <th style="text-align: right;">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                <tr>
+                    <td>SP0039</td>
+                    <td>PC CPS Quantum Blaze 5070 Ti</td>
+                    <td style="text-align: center;">1</td>
+                    <td style="text-align: right;">69.990.000 ₫</td>
+                    <td style="text-align: right;"><strong>69.990.000 ₫</strong></td>
+                </tr>
+        
+            </tbody>
+        </table>
+
+        <div class="total-section">
+            <div class="total-line">TỔNG CỘNG: 69.990.000 ₫</div>
+        </div>
+
+        <div class="footer">
+            <p>Cảm ơn quý khách đã mua hàng!</p>
+            <p>Vui lòng kiểm tra hạn sử dụng các sản phẩm</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -30,6 +30,9 @@
                                     <input type="hidden" name="quantity" value="1">
                                     <button class="btn btn-sm btn-primary" type="submit">Thêm vào giỏ</button>
                                 </form>
+                                <button type="button" class="btn btn-sm btn-light fav-btn" data-product-id="<?= $r['MaSP'] ?>" data-favorited="1" title="Bỏ yêu thích">
+                                    <i class="fas fa-heart text-danger"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
