@@ -12,6 +12,9 @@
 
     $maKH = $_SESSION['user_id'] ?? 0;
     $sotien = isset($_POST['soTien']) ? $_POST['soTien'] : 0;
+    $paymentMethod = isset($_POST['paymentMethod']) ? $_POST['paymentMethod'] : 'local';
+    $vnpayBankCode = isset($_POST['bankCode']) ? $_POST['bankCode'] : '';
+    $vnpayLang = isset($_POST['vnpayLang']) ? $_POST['vnpayLang'] : 'vn';
     $voucherCode = isset($_POST['voucherCode']) ? trim($_POST['voucherCode']) : '';
     
     if ($maKH <= 0) {
@@ -66,7 +69,53 @@
         $sotien = floatval($sotien) + floatval($shippingConfig['fee']);
     }
 
-    $resPayment = $hoadon->thanhToan($maKH, $sotien);
+    // If payment method is VNPAY we create a pending order and forward to VNPAY
+    if ($paymentMethod === 'vnpay') {
+        // Create HoaDon with status 'Chờ thanh toán'
+        $maHD = $hoadon->createHoaDon($maKH, $sotien, 'Chờ thanh toán');
+        if ($maHD === false) {
+            error_log("createHoaDon failed for MaTK={$maKH} amount={$sotien}");
+            $_SESSION['toast'] = [ 'title' => 'Lỗi', 'message' => 'Không thể tạo đơn hàng', 'type' => 'danger' ];
+            header("Location: ../payProduct.php");
+            exit;
+        }
+
+        // Insert LS_Mua rows with state 'Chờ thanh toán'
+        if (!empty($cartRows)) {
+            foreach ($cartRows as $row) {
+                $maSP = $row['MaSP'];
+                $tenSP = $row['TenSP'];
+                $soLuong = $row['SoLuong'];
+                $giaTien = $row['GiaTien'];
+                $added = $lsMua->addLSMua($maHD, $maKH, $maSP, $tenSP, $soLuong, $giaTien, 'Chờ thanh toán');
+                if ($added === false) {
+                    error_log("addLSMua failed for MaHD={$maHD} MaSP={$maSP} MaTK={$maKH}");
+                }
+            }
+        }
+
+        // Clear cart now to avoid duplicate payment
+        $cart->clearCart($maKH);
+
+        // Forward to VNPAY create payment endpoint via auto-submitting form so we can include MaHD as vnp_TxnRef
+        $amount = floatval($sotien);
+        $bankCode = htmlspecialchars($vnpayBankCode);
+        $lang = htmlspecialchars($vnpayLang);
+
+        echo "<html><body>";
+        echo "<form id='vnpayForward' action='../vnpay_php/vnpay_create_payment.php' method='POST'>";
+        echo "<input type='hidden' name='amount' value='".htmlspecialchars($amount)."'>";
+        echo "<input type='hidden' name='language' value='".htmlspecialchars($lang)."'>";
+        echo "<input type='hidden' name='bankCode' value='".htmlspecialchars($bankCode)."'>";
+        echo "<input type='hidden' name='vnp_TxnRef' value='".htmlspecialchars($maHD)."'>";
+        echo "</form>";
+        echo "<script>document.getElementById('vnpayForward').submit();</script>";
+        echo "</body></html>";
+        exit;
+    }
+
+    // Local / other payment methods: create HoaDon immediately (existing behavior)
+    $resPayment = $hoadon->thanhToan($maTK, $sotien);
     if ($resPayment === false) {
         error_log("thanhToan failed for MaTK={$maKH} amount={$sotien}");
         $_SESSION['toast'] = [

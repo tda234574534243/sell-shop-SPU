@@ -102,5 +102,16 @@
             $this->setQuery("DELETE FROM LS_Mua WHERE MaHD = '$maHD'");
             return $this->excuteQuery();
         }
+
+        /**
+         * Update State for all LS_Mua rows belonging to a MaHD
+         */
+        public function updateStateByMaHD($maHD, $state)
+        {
+            $maHD = $this->real_escape_string($maHD);
+            $state = $this->real_escape_string($state);
+            $this->setQuery("UPDATE LS_Mua SET State = '$state', NgayMua = NgayMua WHERE MaHD = '$maHD'");
+            return $this->excuteQuery();
+        }
     }
 ?>

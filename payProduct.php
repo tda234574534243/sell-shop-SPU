@@ -253,13 +253,51 @@ a.cancel-payment:hover {
                     <input type="hidden" name="soTien" id="soTienInput" value="<?= $tongTien + $shippingFee ?>">
                     <input type="hidden" name="voucherCode" id="voucherCodeInput" value="">
 
+                    <!-- Payment method selection -->
+                    <div class="mb-3">
+                        <label class="form-label">Phương thức thanh toán</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm_local" value="local" checked>
+                                <label class="form-check-label" for="pm_local">Thanh toán tại chỗ / COD</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm_vnpay" value="vnpay">
+                                <label class="form-check-label" for="pm_vnpay">Thanh toán bằng VNPAY</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vnpayOptions" class="mb-3" style="display:none;">
+                        <label class="form-label">Chọn phương thức VNPAY (tùy chọn)</label>
+                        <select id="vnpayBankCode" name="bankCode" class="form-select" style="max-width:360px;">
+                            <option value="">Cổng VNPAY (mặc định)</option>
+                            <option value="VNPAYQR">VNPAYQR</option>
+                            <option value="VNBANK">Ngân hàng nội địa</option>
+                            <option value="INTCARD">Thẻ quốc tế</option>
+                        </select>
+                        <div class="mt-2">
+                            <label class="form-label me-2">Ngôn ngữ:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="vnpayLang" id="vnpayLang_vn" value="vn" checked>
+                                <label class="form-check-label" for="vnpayLang_vn">Tiếng Việt</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="vnpayLang" id="vnpayLang_en" value="en">
+                                <label class="form-check-label" for="vnpayLang_en">English</label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-success btn-secure flex-fill">
+                        <button type="submit" id="payNowBtn" class="btn btn-success btn-secure flex-fill">
                             <i class="fas fa-credit-card me-2"></i>Thanh toán ngay
                         </button>
                         <a href="payProduct.php" class="btn btn-outline-secondary">Quay lại giỏ hàng</a>
                     </div>
                 </form>
+
+                <!-- Note: VNPAY fields are submitted to controller/c_thanhToan.php when VNPAY selected -->
             </section>
             <?php endif; ?>
 
@@ -359,6 +397,27 @@ a.cancel-payment:hover {
         if (clearBtn) {
             clearBtn.disabled = true;
         }
+        // Payment method toggle
+        const pmLocal = document.getElementById('pm_local');
+        const pmVnpay = document.getElementById('pm_vnpay');
+        const vnpayOptions = document.getElementById('vnpayOptions');
+        const paymentForm = document.getElementById('paymentForm');
+
+        function refreshVnpayVisibility() {
+            if (pmVnpay && pmVnpay.checked) {
+                vnpayOptions.style.display = 'block';
+            } else {
+                vnpayOptions.style.display = 'none';
+            }
+        }
+
+        pmLocal?.addEventListener('change', refreshVnpayVisibility);
+        pmVnpay?.addEventListener('change', refreshVnpayVisibility);
+        refreshVnpayVisibility();
+
+        // No client-side redirect: when payment method is VNPAY the main form
+        // will be submitted to `controller/c_thanhToan.php` and the server
+        // will create a pending order and forward to VNPAY. We only toggle UI here.
     });
     </script>
 
