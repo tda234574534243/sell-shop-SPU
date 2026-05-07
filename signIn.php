@@ -18,9 +18,58 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 </head>
 <body class="body-theme-blue">
     <style>
-        /* Inline fallback to force blue background if external CSS fails or is cached */
-        body.body-theme-blue { background: linear-gradient(90deg,#0d6efd,#3b82f6) !important; background-color:#0d6efd !important; min-height:100vh !important; }
-        body.body-theme-blue .uf-form-signin { box-shadow: 0 6px 20px rgba(3, 10, 60, 0.25); border-radius: 12px; background: rgba(255,255,255,0.06); padding: 24px; }
+        /* Improved blue gradient and polished form styles */
+        body.body-theme-blue {
+            background: linear-gradient(135deg, #0d6efd 0%, #3b82f6 45%, #60a5fa 100%) no-repeat fixed !important;
+            background-color: #0d6efd !important;
+            min-height: 100vh !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px;
+            color: #ffffff;
+        }
+
+        /* Sign-in card with subtle glass effect and blur */
+        body.body-theme-blue .uf-form-signin {
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 12px 30px rgba(8, 30, 80, 0.35);
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 28px;
+            backdrop-filter: blur(6px) saturate(120%);
+            -webkit-backdrop-filter: blur(6px) saturate(120%);
+            color: #fff;
+        }
+
+        /* Inputs: translucent background with white text */
+        .uf-input-group .form-control {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #ffffff;
+            box-shadow: none;
+        }
+        .uf-input-group .form-control::placeholder { color: rgba(255,255,255,0.75); }
+        .uf-input-group .input-group-text {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* Primary button: blue-to-cyan gradient */
+        .uf-btn-primary {
+            background: linear-gradient(90deg,#2563eb 0%, #06b6d4 100%);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.22);
+        }
+        .uf-btn-primary:active, .uf-btn-primary:focus { transform: translateY(1px); }
+
+        a { color: #cfeeff; }
+        .text-white a { color: #e6f6ff; }
     </style>
         
     <div class="uf-form-signin">
