@@ -96,6 +96,15 @@
 <div class="container__product container py-5">
     <h2 class="text-center mb-4">Danh sách sản phẩm</h2>
 
+    <style>
+        /* Make product cards slightly wider visually */
+        .container__product .card { min-width: 200px; }
+        .container__product .card .card-img-top { height: 200px; object-fit: cover; }
+        @media (min-width: 992px) {
+            .container__product .col-lg-3 { padding-left: 6px; padding-right: 6px; }
+        }
+    </style>
+
     <div class="row">
         <div class="col-lg-3 mb-4">
             <div class="card p-3">
@@ -148,8 +157,8 @@
 
         <div class="col-lg-9">
     <?php
-        // Pagination: show at most 3 rows per page. Grid shows 3 columns on large screens => 3 rows * 3 cols = 9 items per page.
-        $perPage = 9;
+        // Pagination: show at most 3 rows per page. Grid shows 4 columns on large screens => 3 rows * 4 cols = 12 items per page.
+        $perPage = 12;
         $total = count($products);
         $totalPages = max(1, (int)ceil($total / $perPage));
         $currentPage = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
@@ -165,7 +174,7 @@
                     </div>
                 <?php else: ?>
                     <?php foreach ($pageItems as $product): ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div class="card h-100">
                                 <img src="<?= htmlspecialchars($product['ImageSP']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['TenSP']) ?>">
                                 <div class="card-body d-flex flex-column">

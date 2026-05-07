@@ -50,124 +50,95 @@
 ?>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="index.php" style="font-style:normal">Sup3rDup3rShop</a>
-        <form class="form-inline" method="GET" action="searchProduct.php">
-            <input class="searchbar d-block d-lg-none form-control mr-sm-2" type="search" name="query" placeholder="Bạn cần tìm gì?" aria-label="Search" required>
-        </form>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark px-3">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="index.php">
+            <img src="/sell-shop-SPU/media/image/other/logo.png" alt="logo" style="height:36px;object-fit:contain;margin-right:10px;" onerror="this.style.display='none'">
+            <span class="brand-text">Sup3rDup3rShop</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                 <li class="nav-item">
-                    <form class="form-inline" method="GET" action="searchProduct.php">
-                        <input class="searchbar form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search" required>
-                    </form>
-                </li>
-                <li class="nav-item <?= ($currentPage === 'index.php') ? 'active' : '' ?>">
-                    <a class="nav-link" href="index.php">Trang chủ</a>
-                </li>
-                <li class="nav-item <?= ($currentPage === 'introduce.php') ? 'active' : '' ?>">
-                    <a class="nav-link" href="introduce.php">Giới thiệu</a>
-                </li>
-                <li class="nav-item <?= ($currentPage === 'contact.php') ? 'active' : '' ?>">
-                    <a class="nav-link" href="contact.php">Liên hệ</a>
-                </li>
 
-                <?php if ($isLoggedIn): ?>
-                    <?php if ($isAdmin): ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Quản lý</a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
-                                <li><a class="dropdown-item" href="admin/page-builder.php"><i class="fas fa-wand-magic-sparkles"></i> Page Builder</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="admin/analystic_product.php">Sản phẩm</a></li>
-                                <li><a class="dropdown-item" href="admin/analystic_customer.php">Khách hàng</a></li>
-                                <li><a class="dropdown-item" href="admin/notifications.php">Thông báo</a></li>
-                                <li><a class="dropdown-item" href="admin/vouchers.php">Voucher</a></li>
-                                <li><a class="dropdown-item" href="admin/statistic_order.php">Đơn hàng</a></li>
-                            </ul>
-                        </li>
-                    <?php else: ?>
-                        <li class="nav-item <?= ($currentPage === 'track-order.php') ? 'active' : '' ?>">
-                            <a class="nav-link" href="track-order.php">Đơn hàng</a>
-                        </li>
-                        <li class="nav-item cart-icon d-none d-lg-block">
-                            <a class="nav-link position-relative" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-basket2" viewBox="0 0 16 16">
-                                <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0z"/>
-                                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6z"/>
-                            </svg>
-                            <?php if ($totalCartQty > 0): ?><span class="badge bg-danger rounded-pill cart-count" style="position:absolute;top:-6px;right:-6px;font-size:11px;"><?= $totalCartQty>99? '99+': $totalCartQty ?></span><?php endif; ?>
-                        </a>
-                        </li>
-                        <li class="nav-item cart-sub-icon d-block d-lg-none">
-                         <a class="nav-link" href="#">Giỏ hàng</a>
-                        </li>
-                        <li class="nav-item dropdown d-none d-lg-block">
-                            <a class="nav-link position-relative" href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                                    <path d="M8 16a2 2 0 0 0 1.985-1.75H6.015A2 2 0 0 0 8 16z"/>
-                                    <path d="M8 1a4 4 0 0 0-4 4v2.086l-.707.707A1 1 0 0 0 3 10h10a1 1 0 0 0 .707-1.707L13 7.086V5a4 4 0 0 0-4-4z"/>
-                                </svg>
-                                <?php if ($notifCount > 0): ?><span class="badge bg-danger rounded-pill position-absolute" style="top:-6px;right:-6px;font-size:11px;"><?= $notifCount>99? '99+': $notifCount ?></span><?php endif; ?>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" style="min-width:320px;">
-                                <li class="dropdown-header">Thông báo mới</li>
-                                <?php if ($notifList && $notifList->num_rows>0): while($n = $notifList->fetch_assoc()): ?>
-                                    <li><a class="dropdown-item" href="/sell-shop-SPU/notification_detail.php?id=<?= $n['id'] ?>"><?= htmlspecialchars($n['Title']) ?> <br><small class="text-muted"><?= substr(strip_tags($n['Content']),0,60) ?></small></a></li>
-                                <?php endwhile; else: ?>
-                                    <li class="dropdown-item text-muted">Không có thông báo</li>
-                                <?php endif; ?>
-                                <li><hr class="dropdown-divider"></li>
-                                <?php if ($isAdmin): ?>
-                                    <li><a class="dropdown-item text-center" href="admin/notifications.php">Quản lý thông báo</a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                        <li class="nav-item d-none d-lg-block ms-2">
-                            <a class="nav-link position-relative" href="wishlist.php">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-1.12 2.17-.163 4.703 2.3 6.357L8 15l4.3-5.59c2.463-1.654 3.42-4.187 2.3-6.357C13.486.878 10.4.28 8.717 2.01L8 2.748z"/>
-                                </svg>
-                                <?php 
-                                    if ($isLoggedIn) {
-                                        include_once(__DIR__ . '/../model/m_wishlist.php');
-                                        $mw = new M_wishlist();
-                                        $ws = $mw->countByUser($maKH);
-                                        if ($ws>0) echo '<span class="badge bg-danger rounded-pill wishlist-count position-absolute" style="top:-6px;right:-6px;font-size:11px;">'.($ws>99?'99+':$ws).'</span>';
-                                    }
-                                ?>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                    <li class="nav-item dropdown d-none d-lg-block">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                        <?php $hdrAvatar = ($currentAccount && !empty($currentAccount['Avatar'])) ? $currentAccount['Avatar'] : 'media/image/avatars/default.png'; ?>
-                        <img src="<?= htmlspecialchars($hdrAvatar) ?>" alt="avatar" style="width:32px;height:32px;object-fit:cover;border-radius:50%;margin-right:8px;">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="user.php">Thông tin tài khoản</a></li>
-                            <li><a class="dropdown-item" href="controller/c_logout.php">Đăng xuất</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link" href="user.php">Thông tin tài khoản</a>
-                    </li>
-                    <li class="nav-item d-block d-lg-none">
-                         <a class="nav-link" href="controller/c_logout.php">Đăng xuất</a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item <?= ($currentPage === 'signup.php') ? 'active' : '' ?>">
-                        <a class="nav-link" href="signup.php">Đăng ký</a>
-                    </li>
-                    <li class="nav-item <?= ($currentPage === 'signin.php') ? 'active' : '' ?>">
-                        <a class="nav-link" href="signin.php">Đăng nhập</a>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item <?= ($currentPage === 'index.php') ? 'active' : '' ?>"><a class="nav-link" href="index.php">Trang chủ</a></li>
+                <li class="nav-item <?= ($currentPage === 'introduce.php') ? 'active' : '' ?>"><a class="nav-link" href="introduce.php">Giới thiệu</a></li>
+                <li class="nav-item <?= ($currentPage === 'contact.php') ? 'active' : '' ?>"><a class="nav-link" href="contact.php">Liên hệ</a></li>
+                <?php if ($isLoggedIn && $isAdmin): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quản lý</a>
+                        <div class="dropdown-menu" aria-labelledby="adminDropdown2">
+                            <a class="dropdown-item" href="admin/page-builder.php"><i class="fas fa-wand-magic-sparkles"></i> Page Builder</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="admin/analystic_product.php">Sản phẩm</a>
+                            <a class="dropdown-item" href="admin/analystic_customer.php">Khách hàng</a>
+                            <a class="dropdown-item" href="admin/notifications.php">Thông báo</a>
+                        </div>
                     </li>
                 <?php endif; ?>
             </ul>
+
+            <form class="form-inline d-none d-lg-flex mr-3" method="GET" action="searchProduct.php">
+                <input class="form-control" type="search" name="query" placeholder="Bạn cần tìm gì?" aria-label="Search">
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <!-- Wishlist -->
+                <li class="nav-item me-2">
+                    <a class="nav-link position-relative" href="wishlist.php" title="Wishlist">
+                        <i class="fas fa-heart"></i>
+                        <?php if ($isLoggedIn) { include_once(__DIR__ . '/../model/m_wishlist.php'); $mw = new M_wishlist(); $ws = $mw->countByUser($maKH); if ($ws>0) echo '<span class="badge badge-danger rounded-pill" style="position:absolute;top:-6px;right:-6px;font-size:11px;">'.($ws>99?'99+':$ws).'</span>'; } ?>
+                    </a>
+                </li>
+
+                <!-- Notifications -->
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link position-relative" href="#" id="notifDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Thông báo">
+                        <i class="fas fa-bell"></i>
+                        <?php if ($notifCount>0) echo '<span class="badge badge-danger rounded-pill" style="position:absolute;top:-6px;right:-6px;font-size:11px;">'.($notifCount>99?'99+':$notifCount).'</span>'; ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notifDropdown2" style="min-width:320px;">
+                        <h6 class="dropdown-header">Thông báo mới</h6>
+                        <?php if ($notifList && $notifList->num_rows>0): while($n = $notifList->fetch_assoc()): ?>
+                            <a class="dropdown-item" href="/sell-shop-SPU/notification_detail.php?id=<?= $n['id'] ?>"><?= htmlspecialchars($n['Title']) ?><br><small class="text-muted"><?= substr(strip_tags($n['Content']),0,60) ?></small></a>
+                        <?php endwhile; else: ?>
+                            <div class="dropdown-item text-muted">Không có thông báo</div>
+                        <?php endif; ?>
+                        <?php if ($isAdmin) echo '<div class="dropdown-divider"></div><a class="dropdown-item text-center" href="admin/notifications.php">Quản lý thông báo</a>'; ?>
+                    </div>
+                </li>
+
+                <!-- Cart -->
+                <li class="nav-item me-2">
+                    <a class="nav-link position-relative" href="payProduct.php" title="Giỏ hàng">
+                        <i class="fas fa-shopping-basket"></i>
+                        <?php if ($totalCartQty > 0): ?><span class="badge badge-danger rounded-pill" style="position:absolute;top:-6px;right:-6px;font-size:11px;"><?php echo $totalCartQty>99? '99+': $totalCartQty; ?></span><?php endif; ?>
+                    </a>
+                </li>
+
+                <!-- User / Auth -->
+                <?php if ($isLoggedIn): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php $hdrAvatar = ($currentAccount && !empty($currentAccount['Avatar'])) ? $currentAccount['Avatar'] : 'media/image/avatars/default.png'; ?>
+                            <img src="<?= htmlspecialchars($hdrAvatar) ?>" alt="avatar" style="width:36px;height:36px;object-fit:cover;border-radius:50%;margin-right:8px;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown2">
+                            <a class="dropdown-item" href="user.php">Thông tin tài khoản</a>
+                            <a class="dropdown-item" href="wishlist.php">Yêu thích</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="controller/c_logout.php">Đăng xuất</a>
+                        </div>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="signin.php">Đăng nhập</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.php">Đăng ký</a></li>
+                <?php endif; ?>
+            </ul>
         </div>
+    </div>
 </nav>
 
 
