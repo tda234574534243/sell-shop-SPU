@@ -1,10 +1,17 @@
 html, body{
-	height: 100%;
+    height: 100%;
 }
-.body-theme-blue body{
+/* Support when class is placed on <body> or on a wrapper */
+body.body-theme-blue, .body-theme-blue body{
     display: flex;
     align-items: center;
-    background-image: linear-gradient( to right, #0d6efd, #3b82f6);
+    justify-content: center;
+    background-image: linear-gradient( to right, #0d6efd, #3b82f6) !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-color: #0d6efd !important;
+    min-height: 100vh;
 }
 a{
     color: #0b5ed7;
@@ -66,7 +73,7 @@ a:hover{
 	align-items: center;
 }
 .uf-social-ic:hover{
-	background: #842029;
+	background: #182f61;
 }
 .uf-social-ic:hover i{
 	color: #fff;

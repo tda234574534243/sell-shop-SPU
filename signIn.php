@@ -16,13 +16,13 @@ if (session_status() == PHP_SESSION_NONE) session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
-<body>
+<body class="body-theme-blue">
     <style>
-        /* Page-specific override: place toast under the login box */
-        .uf-form-signin #toastcs { position: relative; top: auto; right: auto; left: auto; margin: 12px auto 0; width: 100%; display: flex; justify-content: center; z-index: 10; }
-        .uf-form-signin #toastcs .toastcs { position: relative; min-width: 320px; max-width: 520px; border-left: 0; }
-        .uf-form-signin #toastcs .toast--error { background: linear-gradient(90deg, #ff6b5f 0%, #ff4d4d 100%); color: #fff; }
+        /* Inline fallback to force blue background if external CSS fails or is cached */
+        body.body-theme-blue { background: linear-gradient(90deg,#0d6efd,#3b82f6) !important; background-color:#0d6efd !important; min-height:100vh !important; }
+        body.body-theme-blue .uf-form-signin { box-shadow: 0 6px 20px rgba(3, 10, 60, 0.25); border-radius: 12px; background: rgba(255,255,255,0.06); padding: 24px; }
     </style>
+        
     <div class="uf-form-signin">
         <div class="text-center">
             <a href="index.php"><img src="./media/image/other/logo-fb.png" alt="" width="100" height="100"></a>
