@@ -49,6 +49,34 @@ if ($orders) {
         $tongTien += $row['GiaTien'] * $row['SoLuong'];
     }
     $orders->data_seek(0); // Reset pointer for later use
+    
+    // Load shipping config and determine fee (apply when any item unit price > threshold)
+    $shippingFee = 0;
+    $shippingThreshold = 10000000;
+    $shippingConfigPath = __DIR__ . '/public/DATA/shipping.json';
+    if (file_exists($shippingConfigPath)) {
+        $raw = file_get_contents($shippingConfigPath);
+        $j = json_decode($raw, true);
+        if (is_array($j)) {
+            if (isset($j['threshold'])) $shippingThreshold = floatval($j['threshold']);
+            if (isset($j['fee'])) $shippingFee = floatval($j['fee']);
+        }
+    }
+
+    // Determine whether to apply fee based on per-item unit price
+    if ($orders && $orders->num_rows > 0 && $shippingFee > 0) {
+        $orders->data_seek(0);
+        while ($r = $orders->fetch_assoc()) {
+            $unit = floatval($r['GiaTien'] ?? 0);
+            if ($unit > $shippingThreshold) {
+                // fee stays as configured
+                break;
+            }
+        }
+        $orders->data_seek(0); // reset for rendering
+    } else {
+        $shippingFee = 0;
+    }
 }
 
 // Get vouchers list
@@ -208,17 +236,21 @@ a.cancel-payment:hover {
                             <span>Giảm giá:</span>
                             <span id="discountAmount">0 đ</span>
                         </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Phí ship:</span>
+                            <span id="shippingFeeDisplay"><?php echo number_format($shippingFee,0,',','.'); ?> đ</span>
+                        </div>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold">
                             <span>Tổng thanh toán:</span>
-                            <span id="finalTotal"><?= number_format($tongTien, 0, ',', '.') ?> đ</span>
+                            <span id="finalTotal"><?= number_format($tongTien + $shippingFee, 0, ',', '.') ?> đ</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Payment Form -->
                 <form action="controller/c_thanhToan.php" method="POST" id="paymentForm">
-                    <input type="hidden" name="soTien" id="soTienInput" value="<?= $tongTien ?>">
+                    <input type="hidden" name="soTien" id="soTienInput" value="<?= $tongTien + $shippingFee ?>">
                     <input type="hidden" name="voucherCode" id="voucherCodeInput" value="">
 
                     <div class="d-flex gap-2">
@@ -236,6 +268,7 @@ a.cancel-payment:hover {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     // Voucher functionality
+    const SHIPPING_FEE = <?= json_encode($shippingFee) ?>;
     document.getElementById('applyVoucherBtn')?.addEventListener('click', function() {
         const voucherCode = document.getElementById('voucherInput').value.trim();
         const messageDiv = document.getElementById('voucherMessage');
@@ -271,11 +304,13 @@ a.cancel-payment:hover {
                         discounted = Math.max(0, originalTotal - discount);
                     }
 
-                    // Cập nhật hiển thị
+                    // Cập nhật hiển thị (bao gồm phí ship)
                     document.getElementById('discountAmount').textContent = discount.toLocaleString('vi-VN') + ' đ';
-                    document.getElementById('finalTotal').textContent = discounted.toLocaleString('vi-VN') + ' đ';
-                    document.getElementById('soTienInput').value = discounted;
+                    const final = discounted + SHIPPING_FEE;
+                    document.getElementById('finalTotal').textContent = final.toLocaleString('vi-VN') + ' đ';
+                    document.getElementById('soTienInput').value = final;
                     document.getElementById('voucherCodeInput').value = voucherCode;
+                    document.getElementById('shippingFeeDisplay').textContent = SHIPPING_FEE.toLocaleString('vi-VN') + ' đ';
 
                     messageDiv.textContent = data.message || 'Áp dụng mã thành công!';
                     messageDiv.classList.remove('text-danger');
@@ -305,11 +340,12 @@ a.cancel-payment:hover {
 
         // Reset hiển thị
         document.getElementById('discountAmount').textContent = '0 đ';
-        document.getElementById('finalTotal').textContent = originalTotal.toLocaleString('vi-VN') + ' đ';
-        document.getElementById('soTienInput').value = originalTotal;
+        document.getElementById('finalTotal').textContent = (originalTotal + SHIPPING_FEE).toLocaleString('vi-VN') + ' đ';
+        document.getElementById('soTienInput').value = originalTotal + SHIPPING_FEE;
         document.getElementById('voucherCodeInput').value = '';
         document.getElementById('voucherInput').value = '';
         document.getElementById('voucherMessage').textContent = '';
+        document.getElementById('shippingFeeDisplay').textContent = SHIPPING_FEE.toLocaleString('vi-VN') + ' đ';
 
         // Reset trạng thái
         document.getElementById('voucherInput').disabled = false;

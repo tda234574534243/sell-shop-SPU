@@ -7,39 +7,10 @@
     $db = new M_database();
 
     $query = $_GET['query'] ?? '';
-
-    if ($query) {
-        $conn = $db->getConnection();
-        $query = $conn->real_escape_string($query);
-
-        $query = $_GET['query'] ?? '';
-        $keywords = explode(" ", $query);
-        $sql = "SELECT * FROM products WHERE ";
-
-        foreach ($keywords as $i => $word) {
-            $sql .= "TenSP LIKE '%" .$word. "%'";
-            $sql .= " OR MaSP LIKE '%" .$word. "%'";
-            $sql .= " OR PhanLoai LIKE '%" .$word. "%'";
-            $sql .= " OR MoTa LIKE '%" .$word. "%'";
-            $sql .= " OR GiaTien LIKE '%" .$word. "%'";
-            if ($i < count($keywords) - 1) {
-                $sql .= " OR ";
-            }
-        }
-
-        $db->setQuery($sql);        
-        $result = $db->excuteQuery();
-
-        if ($result && $result->num_rows > 0) {
-           include ('template/productList.php');
-        }
-        else {
-            echo "<p>Không tìm thấy sản phẩm nào.</p>";
-        }
-    } else {
-        $sql = "SELECT * FROM products WHERE 1=1";
-        include('template/productList.php');
-    }
+    // searchProduct now supports filters via GET params; render a two-column layout
+    // Left: filter/search box; Right: product list (uses template/productList.php)
+    // We'll not run manual queries here; productList.php will build the query based on GET.
+    include('template/productList.php');
 ?>
 
 <?php include('template/footer.php') ?>

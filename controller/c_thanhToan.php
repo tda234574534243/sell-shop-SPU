@@ -35,7 +35,37 @@
             }
         }
     }
-    
+    // Lấy giỏ hàng trước để tính phí vận chuyển nếu cần
+    $cartItems = $cart->getCartItems($maKH);
+    $cartRows = [];
+    if ($cartItems && $cartItems->num_rows > 0) {
+        while ($r = $cartItems->fetch_assoc()) {
+            $cartRows[] = $r;
+        }
+    }
+
+    // Load shipping config
+    $configPath = __DIR__ . '/../public/DATA/shipping.json';
+    $shippingConfig = ['threshold' => 10000000, 'fee' => 0];
+    if (file_exists($configPath)) {
+        $raw = file_get_contents($configPath);
+        $j = json_decode($raw, true);
+        if (is_array($j)) $shippingConfig = array_merge($shippingConfig, $j);
+    }
+
+    // Nếu có bất kỳ mặt hàng nào có giá đơn vị > threshold thì áp phí
+    $applyFee = false;
+    foreach ($cartRows as $it) {
+        $price = floatval($it['GiaTien'] ?? 0);
+        if ($price > floatval($shippingConfig['threshold'])) {
+            $applyFee = true;
+            break;
+        }
+    }
+    if ($applyFee && floatval($shippingConfig['fee']) > 0) {
+        $sotien = floatval($sotien) + floatval($shippingConfig['fee']);
+    }
+
     $resPayment = $hoadon->thanhToan($maKH, $sotien);
     if ($resPayment === false) {
         error_log("thanhToan failed for MaTK={$maKH} amount={$sotien}");
@@ -64,14 +94,10 @@
 
     $lastHD = $lastHDRes->fetch_assoc();
     $maHD = $lastHD['MaHD'];
-    $cartItems = $cart->getCartItems($maKH);
-    if ($cartItems === false) {
-        error_log("getCartItems failed for MaTK={$maKH}");
-    }
-    if ($cartItems && $cartItems->num_rows === 0) {
+    if (empty($cartRows)) {
         error_log("Cart is empty for MaTK={$maKH} at thanhToan time");
     }
-    while ($row = $cartItems->fetch_assoc()) {
+    foreach ($cartRows as $row) {
         $maSP = $row['MaSP'];
         $tenSP = $row['TenSP'];
         $soLuong = $row['SoLuong'];

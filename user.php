@@ -203,16 +203,76 @@
             <td data-label="Trạng thái"><?= $row['State'] ?></td>
         </tr>
         <?php endwhile; ?>
-         <?php while ($row = $orders2->fetch_assoc()): ?>
-        <tr>
-            <td data-label="Tên sản phẩm"><?= $row['TenSP'] ?></td>
-            <td data-label="Ngày mua"><?= date_format(new DateTime($row['NgayMua']), "H:i:s d/m/Y") ?></td>
-            <td data-label="Giá tiền"><?= number_format($row['GiaTien'], 0, ',', '.') ?>đ</td>
-            <td data-label="Số lượng"><?= $row['SoLuong'] ?></td>
-            <td data-label="Tổng tiền"><?= number_format($row['GiaTien']*$row['SoLuong'], 0, ',', '.') ?>đ</td>
-            <td data-label="Trạng thái"><?= $row['State'] ?></td>
-        </tr>
-        <?php endwhile; ?>
+        <?php
+            // Group lsMua rows by MaHD so we can show order total (which includes shipping stored in HoaDon.SoTien)
+            include_once('model/m_hoadon.php');
+            $hoadonModel = new M_hoadon();
+
+            $lsRows = [];
+            while ($r = $orders2->fetch_assoc()) {
+                $maHD = $r['MaHD'] ?? 0;
+                if (!isset($lsRows[$maHD])) $lsRows[$maHD] = ['items' => [], 'date' => $r['NgayMua'] ?? null];
+                $lsRows[$maHD]['items'][] = $r;
+            }
+
+            foreach ($lsRows as $maHD => $group) {
+                // compute sum of line items
+                $sumItems = 0;
+                $applyShip = 0;
+                foreach ($group['items'] as $it) {
+                    $sumItems += floatval($it['GiaTien']) * intval($it['SoLuong']);
+                }
+
+                // load shipping config
+                $shippingFee = 0;
+                $shippingThreshold = 10000000;
+                $shippingConfigPath = __DIR__ . '/public/DATA/shipping.json';
+                if (file_exists($shippingConfigPath)) {
+                    $raw = file_get_contents($shippingConfigPath);
+                    $j = json_decode($raw, true);
+                    if (is_array($j)) {
+                        if (isset($j['threshold'])) $shippingThreshold = floatval($j['threshold']);
+                        if (isset($j['fee'])) $shippingFee = floatval($j['fee']);
+                    }
+                }
+
+                // determine if shipping fee applies for this invoice (any unit price > threshold)
+                $appliedFee = 0;
+                if ($shippingFee > 0) {
+                    foreach ($group['items'] as $it) {
+                        if (floatval($it['GiaTien']) > $shippingThreshold) {
+                            $appliedFee = $shippingFee;
+                            break;
+                        }
+                    }
+                }
+
+                $orderTotal = $sumItems + $appliedFee;
+
+                // show a summary row for the order (total includes shipping)
+                ?>
+                <tr style="background:#f7f9fb;font-weight:700;">
+                    <td colspan="4">Hoá đơn #<?= htmlspecialchars($maHD) ?> - Ngày: <?= date_format(new DateTime($group['date']), "H:i:s d/m/Y") ?></td>
+                    <td><?= number_format($orderTotal,0,',','.') ?>đ <?php if($appliedFee>0) echo "(<small>ship: " . number_format($appliedFee,0,',','.') . "đ</small>)"; ?></td>
+                    <td>--</td>
+                </tr>
+                <?php
+                // then show line items
+                foreach ($group['items'] as $item) {
+                    ?>
+                    <tr>
+                        <td data-label="Tên sản phẩm"><?= htmlspecialchars($item['TenSP']) ?></td>
+                        <td data-label="Ngày mua"><?= date_format(new DateTime($item['NgayMua']), "H:i:s d/m/Y") ?></td>
+                        <td data-label="Giá tiền"><?= number_format($item['GiaTien'], 0, ',', '.') ?>đ</td>
+                        <td data-label="Số lượng"><?= $item['SoLuong'] ?></td>
+                        <td data-label="Tổng tiền"><?= number_format($item['GiaTien']*$item['SoLuong'], 0, ',', '.') ?>đ</td>
+                        <td data-label="Trạng thái"><?= htmlspecialchars($item['State']) ?></td>
+                    </tr>
+                    <?php
+                }
+            }
+            $hoadonModel->close();
+        ?>
     </table>
 </div>
 <?php include('template/footer.php') ?>
