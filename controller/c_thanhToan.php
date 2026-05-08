@@ -11,7 +11,8 @@
     $voucherModel = new M_voucher();
 
     $maKH = $_SESSION['user_id'] ?? 0;
-    $sotien = isset($_POST['soTien']) ? $_POST['soTien'] : 0;
+    // Do not trust client-submitted total; keep for logging only
+    $postedSoTien = isset($_POST['soTien']) ? floatval($_POST['soTien']) : 0;
     $paymentMethod = isset($_POST['paymentMethod']) ? $_POST['paymentMethod'] : 'local';
     $vnpayBankCode = isset($_POST['bankCode']) ? $_POST['bankCode'] : '';
     $vnpayLang = isset($_POST['vnpayLang']) ? $_POST['vnpayLang'] : 'vn';
@@ -23,9 +24,7 @@
     if ($maKH <= 0) {
         die("Vui lòng đăng nhập");
     }
-    if ($sotien < 0) {
-        die("Số tiền không hợp lệ");
-    }
+    // do not validate total here (we recalc on server below)
 
     // If payment method is local (COD), require explicit confirmation + captcha
     if ($paymentMethod === 'local') {
@@ -60,7 +59,7 @@
             }
         }
     }
-    // Lấy giỏ hàng trước để tính phí vận chuyển nếu cần
+    // Lấy giỏ hàng trước để tính toán trên server (product total, shipping, voucher)
     $cartItems = $cart->getCartItems($maKH);
     $cartRows = [];
     if ($cartItems && $cartItems->num_rows > 0) {
@@ -68,7 +67,6 @@
             $cartRows[] = $r;
         }
     }
-
     // Load shipping config
     $configPath = __DIR__ . '/../public/DATA/shipping.json';
     $shippingConfig = ['threshold' => 10000000, 'fee' => 0];
@@ -78,7 +76,15 @@
         if (is_array($j)) $shippingConfig = array_merge($shippingConfig, $j);
     }
 
-    // Nếu có bất kỳ mặt hàng nào có giá đơn vị > threshold thì áp phí
+    // Compute product total on server
+    $productTotal = 0.0;
+    foreach ($cartRows as $it) {
+        $qty = intval($it['SoLuong'] ?? 0);
+        $price = floatval($it['GiaTien'] ?? 0);
+        $productTotal += $price * $qty;
+    }
+
+    // Determine whether to apply shipping fee (any unit price > threshold)
     $applyFee = false;
     foreach ($cartRows as $it) {
         $price = floatval($it['GiaTien'] ?? 0);
@@ -87,8 +93,31 @@
             break;
         }
     }
-    if ($applyFee && floatval($shippingConfig['fee']) > 0) {
-        $sotien = floatval($sotien) + floatval($shippingConfig['fee']);
+    $shippingFee = ($applyFee && floatval($shippingConfig['fee']) > 0) ? floatval($shippingConfig['fee']) : 0.0;
+
+    // Compute voucher discount (server-side) if voucher provided earlier
+    $discount = 0.0;
+    if (!empty($voucherCode) && !empty($voucher)) {
+        $pct = isset($voucher['DiscountPercent']) ? floatval($voucher['DiscountPercent']) : 0;
+        $amt = isset($voucher['DiscountAmount']) ? floatval($voucher['DiscountAmount']) : 0;
+        if ($pct > 0) {
+            $discount = round($productTotal * ($pct / 100.0));
+        } elseif ($amt > 0) {
+            $discount = min($productTotal, $amt);
+        }
+    }
+
+    // Expected total computed on server
+    $expectedTotal = $productTotal - $discount + $shippingFee;
+
+    // Compare posted value and log if mismatch; always trust server calculation
+    if (abs($postedSoTien - $expectedTotal) > 0.01) {
+        error_log("[c_thanhToan] posted soTien ({$postedSoTien}) does not match expected ({$expectedTotal}) for MaTK={$maKH}");
+    }
+    $sotien = $expectedTotal;
+
+    if ($sotien < 0) {
+        die("Số tiền không hợp lệ");
     }
 
     // If payment method is VNPAY we create a pending order and forward to VNPAY

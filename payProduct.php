@@ -51,32 +51,32 @@ if ($orders) {
     $orders->data_seek(0); // Reset pointer for later use
     
     // Load shipping config and determine fee (apply when any item unit price > threshold)
-    $shippingFee = 0;
-    $shippingThreshold = 10000000;
+    $configuredFee = 0.0;
+    $configuredThreshold = 10000000;
     $shippingConfigPath = __DIR__ . '/public/DATA/shipping.json';
     if (file_exists($shippingConfigPath)) {
         $raw = file_get_contents($shippingConfigPath);
         $j = json_decode($raw, true);
         if (is_array($j)) {
-            if (isset($j['threshold'])) $shippingThreshold = floatval($j['threshold']);
-            if (isset($j['fee'])) $shippingFee = floatval($j['fee']);
+            if (isset($j['threshold'])) $configuredThreshold = floatval($j['threshold']);
+            if (isset($j['fee'])) $configuredFee = floatval($j['fee']);
         }
     }
 
     // Determine whether to apply fee based on per-item unit price
-    if ($orders && $orders->num_rows > 0 && $shippingFee > 0) {
+    $applyFee = false;
+    if ($orders && $orders->num_rows > 0 && $configuredFee > 0) {
         $orders->data_seek(0);
         while ($r = $orders->fetch_assoc()) {
             $unit = floatval($r['GiaTien'] ?? 0);
-            if ($unit > $shippingThreshold) {
-                // fee stays as configured
+            if ($unit > $configuredThreshold) {
+                $applyFee = true;
                 break;
             }
         }
         $orders->data_seek(0); // reset for rendering
-    } else {
-        $shippingFee = 0;
     }
+    $shippingFee = $applyFee ? $configuredFee : 0.0;
 }
 
 // Get vouchers list
