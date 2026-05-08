@@ -34,6 +34,11 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="public/JS/main.js"></script>
 
+  <?php
+  // include chat bubble UI (shows a floating chat assistant)
+  if (file_exists(__DIR__ . '/chatBubble.php')) include_once __DIR__ . '/chatBubble.php';
+  ?>
+
 </footer>
 
 </body>

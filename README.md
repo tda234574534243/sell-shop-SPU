@@ -1,63 +1,102 @@
-# Sell-Shop-SPU
+# Sell-Shop-SPU — Hệ thống bán hàng (Project README)
 
-Một hệ thống cửa hàng bán hàng điện tử (sales page) đơn giản bằng PHP, sử dụng MySQL làm cơ sở dữ liệu và một số thư viện frontend phổ biến. Dự án được thiết kế để chạy trên môi trường local (XAMPP / LAMP / WAMP).
+Tài liệu này mô tả kiến trúc, lý thuyết, cách cài đặt và vận hành dự án Sell-Shop-SPU (PHP + MySQL). Hướng dẫn phù hợp cho môi trường phát triển local (XAMPP/WAMP) và staging.
 
-## Tổng quan
-- Ngôn ngữ: PHP (code thuần, không dùng framework MVC lớn)
-- Cơ sở dữ liệu: MySQL (kết nối bằng `mysqli`)
-- Mục đích: website bán hàng (danh sách sản phẩm, giỏ hàng, thanh toán VNPAY, quản trị đơn giản)
+## Mục tiêu hệ thống
+- Trang bán hàng đơn giản: danh sách sản phẩm, giỏ hàng, wishlist, voucher, thanh toán (VNPAY), bảng quản trị cơ bản.
+- Thiết kế không dùng framework nặng — dễ đọc, mở rộng nhanh cho mục đích học tập và thử nghiệm.
 
-## Tính năng chính
-- Trang chủ với sản phẩm nổi bật và khu vực widget (page builder)
-- Thêm/xóa/cập nhật giỏ hàng (session + AJAX)
-- Danh sách yêu thích (wishlist)
-- Hệ thống voucher
-- Quản trị cơ bản (thống kê, quản lý vouchers, thông báo, page-builder)
-- Tích hợp thanh toán VNPAY (thư mục `vnpay_php`)
+## Kiến trúc & luồng dữ liệu (high level)
 
-## Công nghệ & Thư viện sử dụng
+- Trình duyệt (Client)
+  - UI HTML/PHP (trong `template/`) + CSS/JS từ `public/`.
+  - Thực hiện các thao tác: thêm/xóa giỏ hàng (AJAX), đăng nhập, áp voucher, gọi trang thanh toán.
+- Webserver (PHP)
+  - Controllers (`controller/`) nhận request từ client, xử lý logic nghiệp vụ, gọi các model.
+  - Models (`model/`) truy xuất MySQL thông qua `model/m_database.php`.
+  - Templates (`template/`) render HTML, bao gồm component như header/footer. Chatbot UI nằm trong `template/chatBubble.php`.
+- Database (MySQL)
+  - Lưu sản phẩm, khách hàng, đơn hàng, voucher, wishlist, các bảng liên quan.
+- External services
+  - VNPAY (thanh toán) — các file trong `vnpay_php/` xử lý redirect/notify.
+  - Chatbot proxy (Node) — `chatbot/` (tùy chọn) để gọi model AI an toàn.
 
-- Backend
-  - PHP (sử dụng extension `mysqli` trong `model/m_database.php`)
-  - cURL: dùng trong các file VNPAY (`vnpay_querydr.php`, `vnpay_refund.php`)
+Luồng đơn hàng ngắn gọn: Client → `controller/c_thanhToan.php` (tính toán server-side) → tạo hoá đơn vào DB → nếu trả VNPAY thì redirect/confirm.
 
-- Frontend
-  - Bootstrap (CDN + local `public/CSS/bootstrap.min1.css`, `public/JS/bootstrap.min.js`)
-  - jQuery (có `public/JS/jquery-3.5.1.slim.min.js`, nhưng nhiều mã JS dùng Fetch API thuần)
-  - Font Awesome (qua CDN)
-  - SweetAlert2 (qua CDN)
-  - Google Fonts (Roboto)
-  - Vanilla JS: `public/JS/main.js` chứa nhiều xử lý UI/AJAX
+## Lý thuyết & quyết định thiết kế
+- Server-side authoritative: tất cả tính toán quan trọng (tổng tiền, phí ship, voucher) PHẢI được tính trên server, không tin dữ liệu từ client.
+- Hạn chế SQL injection: hiện code dùng chuỗi SQL ở một số nơi — cần chuyển sang prepared statements `mysqli_prepare` trong `model/*`.
+- XSS: escape mọi dữ liệu user-driven trước khi echo ra HTML (use `htmlspecialchars($s, ENT_QUOTES, 'UTF-8')`).
+- Uploads: lưu file an toàn, validate MIME, không cho thực thi mã upload.
 
-- Thanh toán
-  - VNPAY sandbox (cấu hình tại `vnpay_php/config.php`)
+## Thư mục chính
+- `controller/` — các script xử lý request (ví dụ `c_thanhToan.php`, `c_signUp.php`)
+- `model/` — truy vấn DB và logic dữ liệu
+- `template/` — layout và component (header/footer/chat bubble)
+- `public/` — `CSS/`, `JS/`, `image/`
+- `vnpay_php/` — tích hợp VNPAY
+- `install/` — các script SQL và `install.bat`
 
-## Cấu trúc thư mục chính
+## Cài đặt (Windows/XAMPP)
 
-- `controller/` - xử lý form/endpoint (các hành động như thêm giỏ hàng, đăng nhập, wishlist...)
-- `model/` - lớp truy cập dữ liệu (ví dụ `m_database.php`, `m_sanpham.php`, `m_account.php`...)
-- `template/` - layout, header, footer, component (head.php, header.php,...)
-- `public/` - tài nguyên tĩnh: `CSS/`, `JS/`, `DATA/`
-- `vnpay_php/` - mã tích hợp VNPAY
-- `install/` - tập tin SQL để tạo database (`full_schema.sql` ...)
+1) Chuẩn bị môi trường
+   - Cài XAMPP (Apache + MySQL + PHP). Khởi chạy Apache và MySQL.
+   - Đặt project vào `c:\xampp\htdocs\sell-shop-SPU`.
 
-## Cấu hình nhanh để chạy local
+2) Cài Database tự động (script)
+   - Mở `install/install.bat` (Windows) và chạy nó. Script sẽ import các file SQL cần thiết.
+   - Nếu muốn chạy thủ công: import `install/full_schema.sql` hoặc `install/create_db.sql` bằng phpMyAdmin hoặc MySQL client.
 
-1. Cài XAMPP (Apache + MySQL + PHP) hoặc môi trường tương tự.
-2. Đặt thư mục dự án vào `htdocs` (ví dụ `c:\xampp\htdocs\sell-shop-SPU`).
-3. Tạo database: import `install/full_schema.sql` hoặc `create_db.sql` bằng phpMyAdmin hoặc mysql client.
-4. Kiểm tra và tùy chỉnh cấu hình database (nếu cần):
-   - Mặc định kết nối DB xem `model/m_database.php` (server=localhost, user=root, password="", dbName=`salespage`).
-5. Cấu hình VNPAY (nếu dùng): cập nhật `vnpay_php/config.php` với `vnp_TmnCode`, `vnp_HashSecret`, `vnp_Returnurl` tương ứng (hiện đang để sandbox/origin là localhost).
-6. Mở trình duyệt truy cập `http://localhost/sell-shop-SPU/`.
+3) Cấu hình kết nối DB
+   - Mở file `model/m_database.php` và kiểm tra cấu hình host/user/password/dbName. Mặc định thường là `localhost`, `root`, `""`.
 
-## Lưu ý vận hành & an ninh
-- Input/output chưa có lớp ORM hay prepared statements đầy đủ; cần kiểm tra và chuyển sang prepared statements để tránh SQL injection.
-- Một số file log lỗi DB được ghi vào thư mục `logs/`.
-- Kiểm tra kỹ các endpoint AJAX (controller) trước khi đưa vào môi trường production.
+4) Cấu hình VNPAY (nếu dùng)
+   - Mở `vnpay_php/config.php` và cập nhật `vnp_TmnCode`, `vnp_HashSecret`, `vnp_Returnurl` theo thông tin sandbox/merchant.
 
-## Tài liệu & tham khảo
-- Mã liên quan VNPAY: `vnpay_php/`
-- Cấu hình DB: `model/m_database.php`
-- Tài nguyên frontend: `public/CSS/`, `public/JS/`
+5) (Tùy chọn) Chatbot proxy
+   - Nếu bạn muốn bật chatbot, vào folder `chatbot/`, chỉnh `.env` (set `GEMINI_API_KEY`, `GEMINI_MODEL`), chạy `npm install` rồi `node server.js`.
+
+6) Mở site
+   - Truy cập `http://localhost/sell-shop-SPU/` trong trình duyệt.
+
+## `install/install.bat` (mô tả)
+- Script này thực thi lệnh MySQL import cho các file SQL trong `install/`. Trước khi chạy, điều chỉnh thông tin kết nối (user/password) nếu không dùng root không password.
+- Nếu script không chạy (quyền admin), bạn có thể import SQL bằng phpMyAdmin.
+
+## Các lệnh hữu ích
+- Import SQL thủ công:
+```powershell
+mysql -u root -p < install\\full_schema.sql
+```
+- Chạy server Node chatbot (nếu dùng):
+```bash
+cd chatbot
+npm install
+node server.js
+```
+
+## Kiểm tra an ninh cơ bản (check-list)
+- Chuyển query nhạy cảm sang prepared statements (`mysqli_prepare`).
+- Thực hiện `htmlspecialchars()` khi echo các giá trị từ user.
+- Thêm CSRF token cho form admin và endpoint thay đổi dữ liệu.
+- Kiểm tra upload path và disable PHP execution trong thư mục upload.
+
+## Triển khai & vận hành
+- Không commit file cấu hình chứa mật khẩu hoặc key.
+- Thiết lập backup DB định kỳ.
+- Giới hạn quyền DB của tài khoản ứng dụng (không dùng root cho ứng dụng production).
+
+## Test & Dev notes
+- Có một số file test trong `tests/` (ví dụ `test_wishlist_model_only.php`) — dùng để kiểm tra model wishlist độc lập.
+- Logs DB được ghi trong `logs/` — kiểm tra khi gặp lỗi SQL.
+
+## Các bước ưu tiên tiếp theo (gợi ý)
+- 1) Xây dựng migration/convert toàn bộ query sang prepared statements.
+- 2) Thêm escape đầu ra và kiểm tra XSS.
+- 3) Thêm xác thực/CSRF cho admin controllers.
+- 4) Thêm unit/integration tests cho checkout + voucher flows.
+
+---
+Nếu bạn muốn, tôi sẽ: tạo script migration để thay các query sang prepared statements, hoặc bắt đầu vá file `product_detail.php` trước vì nơi đó có dấu hiệu bị tấn công SQLi — bạn muốn tôi làm bước nào tiếp theo?
+
 
