@@ -57,6 +57,9 @@ GEMINI_API_KEY=YOUR_KEY_HERE
 GEMINI_MODEL=models/gemini-2.5-flash
 PORT=3000
 PRODUCTS_API_URL=http://localhost/sell-shop-SPU/chatbot/get_products.php
+NODE_ENV=development
+# Optional: limit prompt size or product count
+MAX_PRODUCTS_CONTEXT=30
 ```
 3. Start:
 ```bash
