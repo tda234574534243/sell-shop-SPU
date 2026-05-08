@@ -78,6 +78,14 @@
         </aside>
 
         <main class="col-12 col-lg-8">
+
+            <div class="search-section my-4">
+                <form class="input-group shadow-sm" method="GET" action="searchProduct.php">
+                    <input type="search" name="query" class="form-control form-control-lg border-primary" placeholder="Nhập tên linh kiện, thiết bị..." required>
+                    <button class="btn btn-primary px-4 fw-bold" type="submit">TÌM KIẾM</button>
+                </form>
+            </div>
+
             <div class="main__container">
                 <?php if (!empty($centerBlocks)): ?>
                     <?php foreach ($centerBlocks as $block): ?>
@@ -94,13 +102,6 @@
                         </div>
                     </div>
                 <?php endif; ?>
-            </div>
-
-            <div class="search-section my-4">
-                <form class="input-group shadow-sm" method="GET" action="searchProduct.php">
-                    <input type="search" name="query" class="form-control form-control-lg border-primary" placeholder="Nhập tên linh kiện, thiết bị..." required>
-                    <button class="btn btn-primary px-4 fw-bold" type="submit">TÌM KIẾM</button>
-                </form>
             </div>
 
             <?php if (empty($centerBlocks)): ?>

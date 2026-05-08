@@ -16,8 +16,31 @@
 <body class="body-theme-blue">
     <style>
         /* Inline fallback to force blue background if external CSS fails or is cached */
-        body.body-theme-blue { background: linear-gradient(90deg,#0d6efd,#3b82f6) !important; background-color:#0d6efd !important; min-height:100vh !important; }
-        body.body-theme-blue .uf-form-signin { box-shadow: 0 6px 20px rgba(3, 10, 60, 0.25); border-radius: 12px; background: rgba(255,255,255,0.06); padding: 24px; }
+        body.body-theme-blue { background: linear-gradient(to bottom, #FF6070, #9F33FF, #168AFF) no-repeat fixed !important;
+            background-color: #0d6efd !important;
+            min-height: 100vh !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px;
+            color: #ffffff;
+        }
+        body.body-theme-blue .uf-form-signin {width: 100%;
+            max-width: 460px;
+            box-shadow: 0 12px 30px rgba(8, 30, 80, 0.35);
+            border-radius: 14px;
+            background: rgba(0, 142, 250, 0.59);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 28px;
+            color: #fff; 
+        }
+        .uf-input-group .form-control:focus {
+            background: white !important;
+            color: black !important;
+            border: 1px solid #ccc !important;
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(37,99,235,0.25) !important;
+        }
     </style>
     <div class="uf-form-signin">
         <div class="text-center">

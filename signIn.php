@@ -20,7 +20,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
     <style>
         /* Improved blue gradient and polished form styles */
         body.body-theme-blue {
-            background: linear-gradient(135deg, #0d6efd 0%, #3b82f6 45%, #60a5fa 100%) no-repeat fixed !important;
+            background: linear-gradient(to bottom, #FF6070, #9F33FF, #168AFF) no-repeat fixed !important;
             background-color: #0d6efd !important;
             min-height: 100vh !important;
             display: flex;
@@ -36,11 +36,9 @@ if (session_status() == PHP_SESSION_NONE) session_start();
             max-width: 460px;
             box-shadow: 0 12px 30px rgba(8, 30, 80, 0.35);
             border-radius: 14px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 142, 250, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 28px;
-            backdrop-filter: blur(6px) saturate(120%);
-            -webkit-backdrop-filter: blur(6px) saturate(120%);
             color: #fff;
         }
 
@@ -50,6 +48,13 @@ if (session_status() == PHP_SESSION_NONE) session_start();
             border: 1px solid rgba(255,255,255,0.12);
             color: #ffffff;
             box-shadow: none;
+        }
+        .uf-input-group .form-control:focus {
+            background: white !important;
+            color: black !important;
+            border: 1px solid #ccc !important;
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(37,99,235,0.25) !important;
         }
         .uf-input-group .form-control::placeholder { color: rgba(255,255,255,0.75); }
         .uf-input-group .input-group-text {
