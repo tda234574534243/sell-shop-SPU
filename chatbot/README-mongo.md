@@ -5,17 +5,17 @@ Instructions to enable MongoDB chat history
    npm install mongodb axios express cors dotenv @google/genai
 
 2) Create a `.env` file in `chatbot/` with these variables (replace with your URI):
-```
+```bash
    MONGODB_URI=mongodb+srv********
    MONGODB_DB=chatbot_db
    GEMINI_API_KEY=your_gemini_key_here
    PORT=3000
 ```
-3) Start the server from `chatbot/`:
-
+3) Start the server from `chatbot/`
+```bash
    node server.js
-
-4) The server will save chat messages into the `chat_history` collection in the configured database. Each incoming `/api/chat` request will save a `user` record and the `bot` reply record. You can pass `session_id` and `user_id` in the POST body to associate messages with sessions/users.
+```
+5) The server will save chat messages into the `chat_history` collection in the configured database. Each incoming `/api/chat` request will save a `user` record and the `bot` reply record. You can pass `session_id` and `user_id` in the POST body to associate messages with sessions/users.
 
 Notes:
 - Make sure your MongoDB user has write permissions for the database specified by `MONGODB_DB`.
