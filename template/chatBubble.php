@@ -39,7 +39,14 @@
             <div class="title">Trợ lý mua hàng</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.9)">Gợi ý + hỗ trợ chọn sản phẩm</div>
         </div>
-        <button id="closeChatBtn" class="btn btn-sm btn-light">×</button>
+        <div style="display:flex;gap:6px;align-items:center">
+            <div id="chatTabs" style="display:flex;gap:6px;margin-right:6px">
+                <button id="tabChat" class="btn btn-sm btn-light" title="Chat">Chat</button>
+                <button id="tabHistory" class="btn btn-sm btn-light" title="Lịch sử">Lịch sử</button>
+            </div>
+            <button id="newChatBtn" class="btn btn-sm btn-outline-light" title="Cuộc chat mới">New</button>
+            <button id="closeChatBtn" class="btn btn-sm btn-light">×</button>
+        </div>
     </div>
     <div class="messages" id="chatMessages" role="log" aria-live="polite"></div>
     <div class="composer">
@@ -51,15 +58,50 @@
 
 <script>
 window.CHATBOT_API_URL = window.CHATBOT_API_URL || 'http://localhost:3000/api/chat';
+// Adjust HISTORY URL to project path. If your site is hosted under /sell-shop-SPU, use that prefix.
+window.CHATBOT_HISTORY_URL = window.CHATBOT_HISTORY_URL || '/sell-shop-SPU/chatbot/get_history.php';
+// expose current PHP session user id to JS (0 when not logged in)
+window.CURRENT_USER_ID = <?php echo isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : 0; ?>;
 const openBtn = document.getElementById('openChatBtn');
 const closeBtn = document.getElementById('closeChatBtn');
 const chatWindow = document.getElementById('chatWindow');
 const chatMessages = document.getElementById('chatMessages');
 const chatInput = document.getElementById('chatInput');
 const chatSendBtn = document.getElementById('chatSendBtn');
+const tabChat = document.getElementById('tabChat');
+const tabHistory = document.getElementById('tabHistory');
+const newChatBtn = document.getElementById('newChatBtn');
 
 openBtn.addEventListener('click', ()=>{ chatWindow.style.display='block'; chatWindow.setAttribute('aria-hidden','false'); chatInput.focus(); });
 closeBtn.addEventListener('click', ()=>{ chatWindow.style.display='none'; chatWindow.setAttribute('aria-hidden','true'); });
+
+// Tab handling
+function setActiveTab(t){
+    if (t === 'history'){
+        tabHistory.classList.add('active'); tabChat.classList.remove('active');
+        // hide composer
+        document.querySelector('.composer').style.display = 'none';
+        loadHistory(true);
+    } else {
+        tabChat.classList.add('active'); tabHistory.classList.remove('active');
+        document.querySelector('.composer').style.display = 'flex';
+        // show current session chat (local messages)
+        // keep messages as-is (session messages are appended when sending)
+    }
+}
+
+tabHistory.addEventListener('click', ()=> setActiveTab('history'));
+tabChat.addEventListener('click', ()=> setActiveTab('chat'));
+
+newChatBtn.addEventListener('click', ()=>{
+    // generate new session id and clear chat area for new conversation
+    window.CHAT_SESSION_ID = (function(){
+        const a = new Uint8Array(12); window.crypto.getRandomValues(a); return Array.from(a).map(x=>x.toString(16).padStart(2,'0')).join('');
+    })();
+    chatMessages.innerHTML = '';
+    setActiveTab('chat');
+    chatInput.focus();
+});
 
 function escapeHtml(s){
         return String(s)
@@ -111,6 +153,49 @@ function appendMessage(who, text, opts){
         return div;
 }
 
+// Load history for current logged-in user when opening chat
+let _loadingHistory = false;
+async function loadHistory(force){
+    if (_loadingHistory) return;
+    _loadingHistory = true;
+    tabHistory.disabled = true;
+    try{
+        const r = await fetch(window.CHATBOT_HISTORY_URL, { credentials: 'same-origin' });
+        if (r.status === 401) {
+            // user not logged in
+            chatMessages.innerHTML = '<div style="padding:12px;color:#6b7280">Vui lòng đăng nhập để xem lịch sử chat.</div>';
+            return;
+        }
+        if (!r.ok) {
+            chatMessages.innerHTML = '<div style="padding:12px;color:#6b7280">Không thể tải lịch sử.</div>';
+            return;
+        }
+        const j = await r.json();
+        const msgs = j.messages || [];
+        // clear first to avoid duplicates
+        chatMessages.innerHTML = '';
+        for (const m of msgs) {
+            const who = (m.role === 'user') ? 'user' : 'bot';
+            appendMessage(who, m.message || '');
+        }
+    } catch(e){
+        console.warn('Could not load chat history', e);
+    } finally {
+        _loadingHistory = false;
+        tabHistory.disabled = false;
+    }
+}
+
+// call loadHistory when opening chat
+openBtn.addEventListener('click', ()=>{ 
+    // default to chat tab when opening
+    if (!window.CHAT_SESSION_ID) {
+        window.CHAT_SESSION_ID = (function(){ const a = new Uint8Array(12); window.crypto.getRandomValues(a); return Array.from(a).map(x=>x.toString(16).padStart(2,'0')).join(''); })();
+    }
+    setActiveTab('chat');
+    setTimeout(()=>{},40);
+ });
+
 function makeTypingElement(){
     const div = document.createElement('div'); div.className='chat-msg bot';
     const avatar = document.createElement('div'); avatar.className='avatar'; avatar.style.background='#e6eef6';
@@ -132,7 +217,7 @@ async function sendMessage(){
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         try{
-                const r = await fetch(window.CHATBOT_API_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ message: v }) });
+                    const r = await fetch(window.CHATBOT_API_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ message: v, user_id: (window.CURRENT_USER_ID || null), session_id: (window.CHAT_SESSION_ID || null) }) });
                 const j = await r.json();
                 // replace typing with actual reply
                 typingEl.remove();
