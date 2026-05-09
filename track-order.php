@@ -79,18 +79,21 @@
                             }
                         }
 
-                        if (!$canDelete) {
-                            $message = 'Không thể xóa đơn đang trong trạng thái chuẩn bị hoặc đang giao.';
-                        } else {
-                            // Delete items first, then invoice
-                            $okItems = $lsModel->deleteByMaHD($delMaHD);
-                            $okHd = $hdModel->deleteHoaDon($delMaHD);
-                            if ($okHd === false || $okItems === false) {
-                                $message = 'Xóa đơn thất bại, vui lòng thử lại.';
-                            } else {
-                                $message = 'Xóa đơn thành công.';
-                            }
-                        }
+                                if (!$canDelete) {
+                                    $message = 'Không thể xóa đơn đang trong trạng thái chuẩn bị hoặc đang giao.';
+                                } else {
+                                    // Soft-hide invoice for this user so admin data remains intact
+                                    $uid = intval($_SESSION['user_id']);
+                                    $ok = $hdModel->hideForUser($delMaHD, $uid);
+                                    if ($ok === false) {
+                                        $message = 'Xóa đơn thất bại, vui lòng thử lại.';
+                                    } else {
+                                        $message = 'Đã xóa đơn khỏi danh sách của bạn (không ảnh hưởng đến quản trị).';
+                                        if (function_exists('log_action')) {
+                                            log_action('INFO', 'User hid invoice from their view', ['MaHD' => $delMaHD, 'MaTK' => $uid]);
+                                        }
+                                    }
+                                }
                     }
                 } else {
                     $message = 'Đơn không tồn tại.';
@@ -103,7 +106,7 @@
     $ordersArr = [];
     if (isset($_SESSION['user_id']) && intval($_SESSION['user_id']) > 0) {
         $maTK = intval($_SESSION['user_id']);
-        $ordersRes = $hdModel->getHoaDonByMaTK($maTK);
+        $ordersRes = $hdModel->getVisibleHoaDonByMaTK($maTK);
         if ($ordersRes === false || ($ordersRes && $ordersRes->num_rows === 0)) {
             $message = 'Bạn chưa có đơn hàng nào.';
         } else {

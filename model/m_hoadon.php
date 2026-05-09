@@ -63,6 +63,64 @@
             return $this->excuteQuery();
         }
 
+            /**
+             * Ensure the table tracking user-hidden invoices exists.
+             */
+            protected function ensureUserHiddenTable()
+            {
+                $this->setQuery("CREATE TABLE IF NOT EXISTS User_Hidden_HoaDon (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    MaHD INT NOT NULL,
+                    MaTK INT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE KEY uniq_mahd_matk (MaHD, MaTK)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+                $this->excuteQuery();
+            }
+
+            /**
+             * Mark an invoice as hidden for a specific user (soft-delete for user view).
+             */
+            public function hideForUser($maHD, $maTK)
+            {
+                $this->ensureUserHiddenTable();
+                $maHD = $this->real_escape_string($maHD);
+                $maTK = $this->real_escape_string($maTK);
+                $this->setQuery("INSERT INTO User_Hidden_HoaDon (MaHD, MaTK) VALUES ('$maHD', '$maTK') ON DUPLICATE KEY UPDATE created_at = CURRENT_TIMESTAMP");
+                return $this->excuteQuery();
+            }
+
+            public function unhideForUser($maHD, $maTK)
+            {
+                $this->ensureUserHiddenTable();
+                $maHD = $this->real_escape_string($maHD);
+                $maTK = $this->real_escape_string($maTK);
+                $this->setQuery("DELETE FROM User_Hidden_HoaDon WHERE MaHD = '$maHD' AND MaTK = '$maTK'");
+                return $this->excuteQuery();
+            }
+
+            public function isHiddenForUser($maHD, $maTK)
+            {
+                $this->ensureUserHiddenTable();
+                $maHD = $this->real_escape_string($maHD);
+                $maTK = $this->real_escape_string($maTK);
+                $this->setQuery("SELECT 1 FROM User_Hidden_HoaDon WHERE MaHD = '$maHD' AND MaTK = '$maTK' LIMIT 1");
+                $r = $this->excuteQuery();
+                return ($r && $r->num_rows > 0);
+            }
+
+            /**
+             * Get invoices for a user excluding those the user hid.
+             */
+            public function getVisibleHoaDonByMaTK($maTK)
+            {
+                $this->ensureUserHiddenTable();
+                $maTK = $this->real_escape_string($maTK);
+                $q = "SELECT h.* FROM HoaDon h LEFT JOIN User_Hidden_HoaDon uh ON uh.MaHD = h.MaHD AND uh.MaTK = '$maTK' WHERE h.MaTK = '$maTK' AND uh.id IS NULL ORDER BY h.MaHD DESC";
+                $this->setQuery($q);
+                return $this->excuteQuery();
+            }
+
         /**
          * Xóa hóa đơn theo MaHD
          */
