@@ -109,10 +109,16 @@ app.post('/api/chat', async (req, res) => {
       console.warn('Could not fetch products list:', e.message);
     }
 
-    // Build context with product name + description (limit length)
-    const examples = products.slice(0, 50).map(p => `- ${p.TenSP}: ${p.MoTa || ''}`).join('\n');
+    // Build context with product name, code, price, manufacturer, stock and warranty (limit length)
+    const examples = products.slice(0, 50).map(p => {
+      const gia = p.Gia || (p.GiaTien || p.GiaTien === 0 ? `${Number(p.GiaTien).toLocaleString('vi-VN')}₫` : 'N/A');
+      const nsx = p.NSX || 'N/A';
+      const soluong = (p.SoLuong !== undefined && p.SoLuong !== null) ? p.SoLuong : 'N/A';
+      const baohanh = p.BaoHanh || 'N/A';
+      return `- ${p.TenSP} (MaSP: ${p.MaSP || 'N/A'}, Gia: ${gia}, NSX: ${nsx}, SoLuong: ${soluong}, BaoHanh: ${baohanh}): ${p.MoTa || ''}`;
+    }).join('\n');
 
-    const system = `You are a helpful product recommendation assistant. Use the provided product list to recommend suitable items based on the user's request. Reply concisely and include product names and reasons.`;
+    const system = `You are a helpful product recommendation assistant. Use the provided product list to recommend suitable items based on the user's request. If available, include price, stock (SoLuong), manufacturer (NSX), and warranty (BaoHanh) in your reply when relevant. Reply concisely and include product names and reasons.`;
     const prompt = `SYSTEM:\n${system}\n\nPRODUCTS:\n${examples}\n\nUSER:\n${message}\n\nRESPONSE:`;
 
     const modelName = process.env.GEMINI_MODEL || 'gemini-3.5-mini';
