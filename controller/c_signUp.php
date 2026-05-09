@@ -1,5 +1,6 @@
 <?php
 require('../model/m_account.php');
+if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -36,6 +37,9 @@ if ($acc->insertAccount($tenTK, $email, $sdt, $diaChi, $password)) {
             'type' => 'success',
             'duration' => 3000
     ];
+    if (function_exists('log_action')) {
+        log_action('INFO', 'New user registered', ['username' => $tenTK, 'email' => $email]);
+    }
     header("Location: ../signUp.php?message=Đăng ký tài khoản thành công! Vui lòng đợi 2s...&status=success");
     exit();
 } else {

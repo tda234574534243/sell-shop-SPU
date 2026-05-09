@@ -145,6 +145,48 @@
                     }
                 }
             ]
+        },
+        "blog": {
+            "title": "blog",
+            "slug": "blog",
+            "status": "published",
+            "createdAt": "2026-05-09 17:05:14",
+            "updatedAt": "2026-05-09 17:07:14",
+            "blocks": [
+                {
+                    "id": "block-69ff06e148561",
+                    "type": "richtext",
+                    "section": "center",
+                    "order": 1,
+                    "data": {
+                        "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                    }
+                },
+                {
+                    "id": "block-69ff0710c2ade",
+                    "type": "gallery",
+                    "section": "center",
+                    "order": 2,
+                    "data": {
+                        "columns": "1",
+                        "images": [
+                            {
+                                "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778321175_fb2374af.jpg",
+                                "caption": ""
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "block-69ff0724c7df4",
+                    "type": "text",
+                    "section": "center",
+                    "order": 3,
+                    "data": {
+                        "content": "Nội dung ở đâyLoại card đồ họa\t\nNVIDIA GeForce RTX 4050 6GB GDDR6 (194 AI TOPs) 2420MHz* at 140W (2370MHz Boost Clock 50MHz OC, 115W 25W Dynamic Boost)\nIntel Iris Xe Graphics\n\nDung lượng RAM\t\n16GB\n\nLoại RAM\t\nDDR5-5600 SO-DIMM, tốc độ bộ nhớ của hệ thống thay đổi tùy theo CPU\n\nSố khe ram\t\n2x SO-DIMM (Tối đa 64GB)\n\nỔ cứng\t\n512GB PCIe 4.0 NVMe M.2 SSD (2 Khe cắm M.2 hỗ trợ SATA hoặc NVMe, tối đa 2TB)\n\nKích thước màn hình\t\n16 inches\n\nCông nghệ màn hình\t\nĐộ sáng 300nits\nĐộ phủ màu 45%\nMàn hình chống chói\nG-Sync\n\nPin\t\n56WHrs, 4S1P, 4-cell Li-ion\nSạc lại từ 0-50% trong 30 phút\n\nHệ điều hành\t\nWindows 11 Home\n\nĐộ phân giải màn hình\t\n1920 x 1200 pixels (FullHD )\n\nLoại CPU\t\nIntel Core 5 210H 2.2 GHz (12MB Cache, up to 4.8 GHz, 8 lõi, 12 luồng)\n\nCổng giao tiếp\t\n1x LAN RJ45\n1x Thunderbolt 4 hỗ trợ DisplayPort (40Gbps)\n1x USB 3.2 Gen 2 Type-C hỗ trợ DisplayPort \/ Sạc \/ G-SYNC (10Gbps)\n2x USB 3.2 Gen 1 Type-A (5Gbps)\n1x HDMI 2.1 FRL\n1x Giắc cắm âm thanh kết hợp 3.5mm\nMicrô mảng tích hợp"
+                    }
+                }
+            ]
         }
     }
 }

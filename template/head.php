@@ -59,6 +59,10 @@
         if (file_exists(__DIR__ . '/../helper/user_tracking.php')) {
             include __DIR__ . '/../helper/user_tracking.php';
         }
+        // Global middleware logger
+        if (file_exists(__DIR__ . '/../helper/middleware_logger.php')) {
+            include __DIR__ . '/../helper/middleware_logger.php';
+        }
     ?>
 </head>
 <body>

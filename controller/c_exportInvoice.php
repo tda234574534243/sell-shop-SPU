@@ -1,5 +1,6 @@
 <?php
 require_once "../model/m_donhang.php";
+if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
 
 class ExportInvoiceController {
     public function exportCsv() {
@@ -93,6 +94,7 @@ class ExportInvoiceController {
         fputcsv($output, array(''), ';');
         fputcsv($output, array('TỔNG CỘNG:', number_format($total, 0, ',', '.')), ';');
 
+        if (function_exists('log_action')) log_action('INFO', 'Exported invoice CSV', ['MaHD' => $ma_hd, 'format' => 'csv', 'by' => $_SESSION['username'] ?? 'unknown']);
         fclose($output);
         exit();
     }
@@ -254,6 +256,7 @@ class ExportInvoiceController {
         // Download file
         header('Content-Type: text/html; charset=utf-8');
         header('Content-Disposition: attachment; filename="HoaDon_' . $ma_hd . '.html"');
+        if (function_exists('log_action')) log_action('INFO', 'Exported invoice PDF/HTML', ['MaHD' => $ma_hd, 'format' => 'pdf/html', 'by' => $_SESSION['username'] ?? 'unknown']);
         echo $html;
         exit();
     }

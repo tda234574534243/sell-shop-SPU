@@ -43,6 +43,10 @@ class SanPhamController {
             'type' => 'success',
             'duration' => 3000
         ];
+        if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
+        if (function_exists('log_action')) {
+            log_action('INFO', 'Product added', ['MaSP' => $_POST['masp'] ?? '', 'TenSP' => $_POST['tensp'] ?? '', 'by' => $_SESSION['username'] ?? 'unknown']);
+        }
         return $this->model->deleteProduct($masp);
     }
     public function themSanPham($data, $image) {
@@ -255,6 +259,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
             'duration' => 3000
         ];
         echo "<script>window.location.href = '?';</script>";
+        if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
+        if (function_exists('log_action')) {
+            log_action('INFO', 'Product updated', ['MaSP' => $_POST['masp'] ?? '', 'TenSP' => $_POST['tensp'] ?? '', 'by' => $_SESSION['username'] ?? 'unknown']);
+        }
     } else {
         $_SESSION['toast'] = [
             'title' => 'Thông báo',

@@ -4,6 +4,7 @@
     include_once("../model/m_giohang.php");
     include_once("../model/m_lsMua.php");
     include_once("../model/m_voucher.php");
+    if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
     
     $hoadon = new M_hoadon();
     $cart = new M_giohang();
@@ -148,6 +149,10 @@
         // Clear cart now to avoid duplicate payment
         $cart->clearCart($maKH);
 
+        if (function_exists('log_action')) {
+            log_action('INFO', 'Order created (pending VNPAY)', ['MaHD' => $maHD, 'MaTK' => $maKH, 'SoTien' => $sotien, 'payment' => 'vnpay']);
+        }
+
         // Forward to VNPAY create payment endpoint via auto-submitting form so we can include MaHD as vnp_TxnRef
         $amount = floatval($sotien);
         $bankCode = htmlspecialchars($vnpayBankCode);
@@ -192,6 +197,10 @@
 
         // Clear cart now
         $cart->clearCart($maKH);
+
+        if (function_exists('log_action')) {
+            log_action('INFO', 'Order created (COD)', ['MaHD' => $maHD, 'MaTK' => $maKH, 'SoTien' => $sotien, 'payment' => 'cod']);
+        }
 
         $_SESSION['toast'] = [
             'title' => 'Thông báo',

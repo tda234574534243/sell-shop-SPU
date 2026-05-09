@@ -1,5 +1,6 @@
 <?php
 require('../model/m_account.php');
+if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -53,6 +54,9 @@ if ($result && $result->num_rows > 0) {
             'type' => 'success',
             'duration' => 3000
         ];
+        if (function_exists('log_action')) {
+            log_action('INFO', 'User logged in', ['user_id' => $account['MaTK'], 'username' => $account['TenTK']]);
+        }
         header('Location: ../index.php');
         exit();
     }

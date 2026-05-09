@@ -1,6 +1,7 @@
 <?php
 require_once "../model/m_donhang.php";
 require_once "../model/m_lsMua.php";
+if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
 
 class DonHangController {
     public function hienThiDonHang() {
@@ -40,7 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
 
     if ($maHD && $maSP && $state) {
         $lsMua = new M_lsMua();
-        $lsMua->updateState($maHD, $maSP, $state);
+        $ok = $lsMua->updateState($maHD, $maSP, $state);
+        if ($ok && function_exists('log_action')) {
+            log_action('INFO', 'Order item state updated', ['MaHD' => $maHD, 'MaSP' => $maSP, 'State' => $state, 'by' => $_SESSION['username'] ?? 'unknown']);
+        }
     }
 
     header('Location: ' . $redirect);

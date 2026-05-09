@@ -48,6 +48,7 @@
     }
 
     $acc = new M_account();
+    if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
     $res = $acc->updateProfile($maKH, $hoTen, $email, $sdt, $diaChi, $avatarDbPath, $currentPassword, $newPassword);
 
     if ($res === 'wrong_password') {
@@ -74,6 +75,12 @@
             'type' => 'success',
             'duration' => 3000
         ];
+        if (function_exists('log_action')) {
+            $changes = ['HoTen' => $hoTen, 'Email' => $email, 'SDT' => $sdt, 'DiaChi' => $diaChi];
+            if ($avatarDbPath) $changes['Avatar'] = $avatarDbPath;
+            if (!empty($newPassword)) $changes['PasswordChanged'] = true;
+            log_action('INFO', 'Profile updated', ['MaTK' => $maKH, 'changes' => $changes]);
+        }
     } else {
         $_SESSION['toast'] = [
             'title' => 'Lỗi',

@@ -577,7 +577,7 @@
         ]
     },
     "homepage": {
-        "current": 37,
+        "current": 39,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:50",
@@ -2465,44 +2465,9 @@
                 }
             },
             {
-                "timestamp": "2026-05-07 22:53:04",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:53:36",
+                "timestamp": "2026-05-09 16:55:00",
                 "action": "addBlock",
-                "description": "Thêm block text",
+                "description": "Thêm block vouchers",
                 "data": {
                     "title": "Trang chủ",
                     "slug": "homepage",
@@ -2529,298 +2494,23 @@
                             }
                         },
                         {
-                            "id": "block-69fcb5803fc67",
-                            "type": "text",
-                            "section": "left",
-                            "order": 1,
-                            "data": {
-                                "content": "Nội dung ở đây"
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:53:47",
-                "action": "updateBlock",
-                "description": "Cập nhật block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69fcb5803fc67",
-                            "type": "text",
-                            "section": "left",
-                            "order": 1,
-                            "data": {
-                                "content": "Hãy ghé shop nhé"
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:06",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:09",
-                "action": "addBlock",
-                "description": "Thêm block testimonials",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69fcb5a1729cc",
-                            "type": "testimonials",
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
                             "section": "center",
                             "order": 3,
                             "data": {
-                                "title": "Nhận xét từ khách hàng",
-                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:14",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
                             }
                         },
                         {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
+                            "id": "block-69ff0474917de",
+                            "type": "vouchers",
                             "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:16",
-                "action": "addBlock",
-                "description": "Thêm block contact",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
                             "order": 2,
-                            "section": "center",
                             "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69fcb5a8bce01",
-                            "type": "contact",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "title": "Liên hệ với chúng tôi",
-                                "description": "Chúng tôi rất sẵn lòng nghe từ bạn",
-                                "email": "",
-                                "phone": "",
-                                "address": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:20",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:22",
-                "action": "addBlock",
-                "description": "Thêm block featured_products",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69fcb5aee5e57",
-                            "type": "featured_products",
-                            "section": "center",
-                            "order": 3,
-                            "data": {
-                                "title": "Sản phẩm nổi bật",
+                                "title": "Vouchers",
                                 "description": ""
                             }
                         }
@@ -2831,7 +2521,7 @@
                 }
             },
             {
-                "timestamp": "2026-05-07 22:54:26",
+                "timestamp": "2026-05-09 16:55:03",
                 "action": "deleteBlock",
                 "description": "Xóa block",
                 "data": {
@@ -2858,84 +2548,16 @@
                             "data": {
                                 "content": ""
                             }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:36",
-                "action": "addBlock",
-                "description": "Thêm block richtext",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
                         },
                         {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
-                            }
-                        },
-                        {
-                            "id": "block-69fcb5bc5b706",
-                            "type": "richtext",
+                            "id": "block-69ca063bc7895",
+                            "type": "announcement",
                             "section": "center",
                             "order": 3,
                             "data": {
-                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
-                            }
-                        }
-                    ],
-                    "status": "published",
-                    "updatedAt": "2026-03-31 18:08:37",
-                    "layout": "sidebar-right"
-                }
-            },
-            {
-                "timestamp": "2026-05-07 22:54:40",
-                "action": "deleteBlock",
-                "description": "Xóa block",
-                "data": {
-                    "title": "Trang chủ",
-                    "slug": "homepage",
-                    "blocks": [
-                        {
-                            "id": "block-69c9f2e628052",
-                            "type": "banner",
-                            "order": 2,
-                            "section": "center",
-                            "data": {
-                                "title": "Banner",
-                                "subtitle": "",
-                                "buttonText": "Mua ngay",
-                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
-                            }
-                        },
-                        {
-                            "id": "block-69c9fd8086390",
-                            "type": "text",
-                            "section": "right",
-                            "order": 1,
-                            "data": {
-                                "content": ""
+                                "message": "trang web hiện tại đang trong beta vui lòng thử nghiệm trong lúc vui vẻ",
+                                "type": "success",
+                                "enabled": true
                             }
                         }
                     ],
@@ -4502,6 +4124,303 @@
                             "order": 3,
                             "data": {
                                 "content": "<p>Sticker xinh xắn, siêu đẹp cho người đam mê AOV <\/p>"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "blog": {
+        "current": 8,
+        "items": [
+            {
+                "timestamp": "2026-05-09 17:05:21",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:05:52",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:01",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:04",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        },
+                        {
+                            "id": "block-69ff070c978da",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:07",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:08",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        },
+                        {
+                            "id": "block-69ff0710c2ade",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:19",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        },
+                        {
+                            "id": "block-69ff0710c2ade",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778321175_fb2374af.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:28",
+                "action": "addBlock",
+                "description": "Thêm block text",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        },
+                        {
+                            "id": "block-69ff0710c2ade",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778321175_fb2374af.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-69ff0724c7df4",
+                            "type": "text",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "Nội dung ở đây"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-09 17:06:52",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "draft",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-09 17:05:14",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        },
+                        {
+                            "id": "block-69ff0710c2ade",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778321175_fb2374af.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-69ff0724c7df4",
+                            "type": "text",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "Nội dung ở đâyLoại card đồ họa\t\nNVIDIA GeForce RTX 4050 6GB GDDR6 (194 AI TOPs) 2420MHz* at 140W (2370MHz Boost Clock 50MHz OC, 115W 25W Dynamic Boost)\nIntel Iris Xe Graphics\n\nDung lượng RAM\t\n16GB\n\nLoại RAM\t\nDDR5-5600 SO-DIMM, tốc độ bộ nhớ của hệ thống thay đổi tùy theo CPU\n\nSố khe ram\t\n2x SO-DIMM (Tối đa 64GB)\n\nỔ cứng\t\n512GB PCIe 4.0 NVMe M.2 SSD (2 Khe cắm M.2 hỗ trợ SATA hoặc NVMe, tối đa 2TB)\n\nKích thước màn hình\t\n16 inches\n\nCông nghệ màn hình\t\nĐộ sáng 300nits\nĐộ phủ màu 45%\nMàn hình chống chói\nG-Sync\n\nPin\t\n56WHrs, 4S1P, 4-cell Li-ion\nSạc lại từ 0-50% trong 30 phút\n\nHệ điều hành\t\nWindows 11 Home\n\nĐộ phân giải màn hình\t\n1920 x 1200 pixels (FullHD )\n\nLoại CPU\t\nIntel Core 5 210H 2.2 GHz (12MB Cache, up to 4.8 GHz, 8 lõi, 12 luồng)\n\nCổng giao tiếp\t\n1x LAN RJ45\n1x Thunderbolt 4 hỗ trợ DisplayPort (40Gbps)\n1x USB 3.2 Gen 2 Type-C hỗ trợ DisplayPort \/ Sạc \/ G-SYNC (10Gbps)\n2x USB 3.2 Gen 1 Type-A (5Gbps)\n1x HDMI 2.1 FRL\n1x Giắc cắm âm thanh kết hợp 3.5mm\nMicrô mảng tích hợp"
                             }
                         }
                     ]

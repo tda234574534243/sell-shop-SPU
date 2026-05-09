@@ -176,6 +176,9 @@
                     <a href="./page-builder.php"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="ms-2">Page Builder</span></a>
                 </li>
                 <li>
+                    <a href="./logs.php"><i class="fa-solid fa-file-medical"></i><span class="ms-2">Logs</span></a>
+                </li>
+                <li>
                     <a href="#" id="logoutButton">
                         <i class="fa-solid fa-right-from-bracket"></i><span class="ms-2">Đăng xuất</span>
                     </a>

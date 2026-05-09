@@ -1,12 +1,12 @@
 <?php
-    include('template/head.php');
-    include('template/header.php');
     if (session_status() == PHP_SESSION_NONE) session_start();
     $maTK = $_SESSION['user_id'] ?? 0;
     if (!$maTK) {
         $_SESSION['toast'] = ['title'=>'Lỗi','message'=>'Vui lòng đăng nhập để xem yêu thích','type'=>'error'];
         header('Location: signIn.php'); exit;
     }
+    include('template/head.php');
+    include('template/header.php');
     include_once 'model/m_wishlist.php';
     include_once 'model/m_giohang.php';
     $mw = new M_wishlist();
