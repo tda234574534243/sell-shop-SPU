@@ -5,12 +5,12 @@ Instructions to enable MongoDB chat history
    npm install mongodb axios express cors dotenv @google/genai
 
 2) Create a `.env` file in `chatbot/` with these variables (replace with your URI):
-
+```
    MONGODB_URI=mongodb+srv********
    MONGODB_DB=chatbot_db
    GEMINI_API_KEY=your_gemini_key_here
    PORT=3000
-s
+```
 3) Start the server from `chatbot/`:
 
    node server.js
