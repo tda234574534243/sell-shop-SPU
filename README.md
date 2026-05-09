@@ -97,6 +97,6 @@ node server.js
 - 4) Thêm unit/integration tests cho checkout + voucher flows.
 
 ---
-Nếu bạn muốn, tôi sẽ: tạo script migration để thay các query sang prepared statements, hoặc bắt đầu vá file `product_detail.php` trước vì nơi đó có dấu hiệu bị tấn công SQLi — bạn muốn tôi làm bước nào tiếp theo?
+
 
 
