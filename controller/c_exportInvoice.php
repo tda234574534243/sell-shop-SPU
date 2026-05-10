@@ -12,6 +12,8 @@ class ExportInvoiceController {
         $ma_hd = $_GET['ma_hd'];
         // sanitize ma_hd for use in filenames: allow only alnum, dash, underscore
         $safe_ma_hd = preg_replace('/[^a-zA-Z0-9_-]/', '_', $ma_hd);
+        // sanitize ma_hd for use in filenames: allow only alnum, dash, underscore
+        $safe_ma_hd = preg_replace('/[^a-zA-Z0-9_-]/', '_', $ma_hd);
 
         // Lấy chi tiết hóa đơn
         $query = "
@@ -245,6 +247,8 @@ class ExportInvoiceController {
 </html>';
 
         // Ghi HTML vào file tạm
+        // Ensure sanitized id for filename is available
+        $safe_ma_hd = isset($safe_ma_hd) ? $safe_ma_hd : preg_replace('/[^a-zA-Z0-9_-]/', '_', $ma_hd);
         $filename = 'HoaDon_' . $safe_ma_hd . '_' . date('YmdHis') . '.html';
         $filepath = realpath(__DIR__ . '/../media/uploads') . DIRECTORY_SEPARATOR . $filename;
         if ($filepath === false) {

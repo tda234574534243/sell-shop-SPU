@@ -23,6 +23,7 @@
 <style>
     #mainContent {
         margin-left: 250px;
+        color: #212529; /* ensure readable dark text on admin white cards */
     }
     
     .revenue-header {
