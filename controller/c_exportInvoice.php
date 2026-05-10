@@ -10,6 +10,8 @@ class ExportInvoiceController {
 
         $model = new DonHangModel();
         $ma_hd = $_GET['ma_hd'];
+        // sanitize ma_hd for use in filenames: allow only alnum, dash, underscore
+        $safe_ma_hd = preg_replace('/[^a-zA-Z0-9_-]/', '_', $ma_hd);
 
         // Lấy chi tiết hóa đơn
         $query = "
@@ -243,8 +245,13 @@ class ExportInvoiceController {
 </html>';
 
         // Ghi HTML vào file tạm
-        $filename = 'HoaDon_' . $ma_hd . '_' . date('YmdHis') . '.html';
-        $filepath = '../media/uploads/' . $filename;
+        $filename = 'HoaDon_' . $safe_ma_hd . '_' . date('YmdHis') . '.html';
+        $filepath = realpath(__DIR__ . '/../media/uploads') . DIRECTORY_SEPARATOR . $filename;
+        if ($filepath === false) {
+            // ensure directory exists and resolve path
+            if (!is_dir(__DIR__ . '/../media/uploads')) @mkdir(__DIR__ . '/../media/uploads', 0755, true);
+            $filepath = __DIR__ . '/../media/uploads' . DIRECTORY_SEPARATOR . $filename;
+        }
         
         // Đảm bảo thư mục tồn tại
         if (!is_dir('../media/uploads')) {

@@ -34,8 +34,14 @@ try {
             break;
             
         case 'createPage':
-            $title = $_POST['title'] ?? '';
-            $slug = $_POST['slug'] ?? '';
+                $title = $_POST['title'] ?? '';
+                $slug = $_POST['slug'] ?? '';
+
+                // Basic validation for slug to avoid path traversal
+                if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+                    echo json_encode(['success' => false, 'message' => 'Invalid slug format']);
+                    break;
+                }
             
             if (!$title || !$slug) {
                 echo json_encode(['success' => false, 'message' => 'Title and slug required']);
@@ -66,6 +72,11 @@ try {
         case 'deletePage':
             if (!$pageSlug) {
                 echo json_encode(['success' => false, 'message' => 'pageSlug không hợp lệ']);
+                break;
+            }
+            // validate pageSlug
+            if (!preg_match('/^[a-zA-Z0-9_-]+$/', $pageSlug)) {
+                echo json_encode(['success' => false, 'message' => 'Invalid pageSlug']);
                 break;
             }
             

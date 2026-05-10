@@ -107,6 +107,11 @@ class M_pagebuilder {
      * Tạo page mới
      */
     public function createPage($slug, $title) {
+        // Validate slug to prevent path traversal and invalid filenames
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+            error_log("Invalid page slug attempted: {$slug}");
+            return false;
+        }
         $data = $this->getData();
         if (isset($data['pages'][$slug])) {
             return false; // Page đã tồn tại
@@ -139,7 +144,11 @@ class M_pagebuilder {
     private function createPageFile($slug, $title) {
         try {
             $rootDir = dirname(dirname(__FILE__));
-            $filePath = $rootDir . '/' . $slug . '.php';
+            // Ensure slug is safe
+            if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+                throw new Exception('Invalid slug');
+            }
+            $filePath = $rootDir . DIRECTORY_SEPARATOR . $slug . '.php';
             
             // Nếu file đã tồn tại, không tạo
             if (file_exists($filePath)) {
@@ -321,6 +330,11 @@ class M_pagebuilder {
      */
     public function deletePage($slug) {
         try {
+            // Validate slug
+            if (!preg_match('/^[a-zA-Z0-9_-]+$/', $slug)) {
+                error_log("Invalid page slug for delete: {$slug}");
+                return false;
+            }
             $data = $this->getData();
             if (!isset($data['pages'][$slug])) {
                 error_log("Cannot delete page: '{$slug}' not found in data");
@@ -330,7 +344,7 @@ class M_pagebuilder {
             // Xóa file PHP nếu tồn tại
             try {
                 $rootDir = dirname(dirname(__FILE__));
-                $filePath = $rootDir . '/' . $slug . '.php';
+                $filePath = $rootDir . DIRECTORY_SEPARATOR . $slug . '.php';
                 if (file_exists($filePath)) {
                     unlink($filePath);
                 }
