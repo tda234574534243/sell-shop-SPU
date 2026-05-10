@@ -46,133 +46,153 @@
     }
 ?>
 
-<div class="container-fluid py-4">
-    <div class="row gx-4">
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="side-promo">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-12 gap-6">
+        <!-- Left Sidebar -->
+        <aside class="col-span-12 lg:col-span-2">
+            <div class="space-y-4">
                 <?php if (!empty($leftBlocks)): foreach ($leftBlocks as $block): ?>
-                    <div class="mb-3"><?= renderBlock($block) ?></div>
+                    <div class="soft-shadow glass-effect rounded-2xl p-4"><?= renderBlock($block) ?></div>
                 <?php endforeach; endif; ?>
 
-                <div class="system-widgets mt-3">
-                    <div class="promo-card mb-3 p-3 shadow-sm rounded bg-white border-top border-warning border-3">
-                        <h6 class="fw-bold mb-2 small text-uppercase"><i class="fas fa-bell text-warning me-2"></i>Tin mới</h6>
+                <!-- Notifications Widget -->
+                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-indigo-500/20">
+                    <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                        <i class="fas fa-bell text-indigo-400"></i> Tin Mới
+                    </h6>
+                    <div class="space-y-2">
                         <?php if ($sideNotifs && $sideNotifs->num_rows > 0): while($s = $sideNotifs->fetch_assoc()): ?>
-                            <div class="mb-2 border-bottom pb-2 last-child-border-0">
-                                <a href="notification_detail.php?id=<?= $s['id'] ?>" class="text-decoration-none text-dark small fw-bold d-block text-truncate"><?= htmlspecialchars($s['Title']) ?></a>
-                            </div>
+                            <a href="notification_detail.php?id=<?= $s['id'] ?>" class="block text-slate-300 hover:text-indigo-400 text-xs hover:translate-x-1 transition">
+                                <p class="font-semibold truncate"><?= htmlspecialchars($s['Title']) ?></p>
+                            </a>
                         <?php endwhile; endif; ?>
                     </div>
+                </div>
 
-                    <?php if ($sideVouchers && $sideVouchers->num_rows > 0): ?>
-                        <div class="promo-card p-3 shadow-sm rounded bg-white border-top border-danger border-3">
-                            <h6 class="fw-bold mb-2 small text-uppercase"><i class="fas fa-ticket-alt text-danger me-2"></i>Voucher</h6>
+                <!-- Vouchers Widget -->
+                <?php if ($sideVouchers && $sideVouchers->num_rows > 0): ?>
+                    <div class="soft-shadow glass-effect rounded-2xl p-4 border border-rose-500/20">
+                        <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                            <i class="fas fa-gift text-rose-400"></i> Voucher
+                        </h6>
+                        <div class="space-y-2">
                             <?php while($vv = $sideVouchers->fetch_assoc()): ?>
-                                <div class="mb-2 p-2 rounded bg-light border border-dashed">
-                                    <strong class="text-success small d-block"><?= htmlspecialchars($vv['Code']) ?></strong>
+                                <div class="p-2 rounded-lg glass-effect border border-dashed border-rose-400/30 hover:border-rose-400/60 transition">
+                                    <p class="text-rose-400 font-bold text-xs"><?= htmlspecialchars($vv['Code']) ?></p>
                                 </div>
                             <?php endwhile; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </aside>
-
-        <main class="col-12 col-lg-8">
-            <div class="main__container">
-                <?php if (!empty($centerBlocks)): ?>
-                    <?php foreach ($centerBlocks as $block): ?>
-                        <div class="mb-4"><?= renderBlock($block) ?></div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="slider-default mb-4 rounded-3 overflow-hidden shadow-sm">
-                        <div class="slider" style="--width: 100px; --height: 50px; --quantity: 10;">
-                            <div class="list">
-                                <?php for($i=1; $i<=10; $i++): ?>
-                                    <div class="item" style="--position: <?= $i ?>"><img src="./media/image/Slider/slider1_<?= $i ?>.png" alt=""></div>
-                                <?php endfor; ?>
-                            </div>
                         </div>
                     </div>
                 <?php endif; ?>
             </div>
+        </aside>
 
-            <div class="search-section my-4">
-                <form class="input-group shadow-sm" method="GET" action="searchProduct.php">
-                    <input type="search" name="query" class="form-control form-control-lg border-primary" placeholder="Nhập tên linh kiện, thiết bị..." required>
-                    <button class="btn btn-primary px-4 fw-bold" type="submit">TÌM KIẾM</button>
-                </form>
-            </div>
+        <!-- Main Content -->
+        <main class="col-span-12 lg:col-span-7">
+            <div class="space-y-6">
+                <!-- Page Builder Blocks or Default Slider -->
+                <?php if (!empty($centerBlocks)): ?>
+                    <?php foreach ($centerBlocks as $block): ?>
+                        <div class="soft-shadow glass-effect rounded-2xl p-6 overflow-hidden border border-indigo-500/10"><?= renderBlock($block) ?></div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="soft-shadow glass-effect rounded-2xl overflow-hidden border border-indigo-500/10 h-96 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-image text-5xl text-slate-400 mb-4 block"></i>
+                            <p class="text-slate-400 text-sm">Gallery Slider</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
-            <?php if (empty($centerBlocks)): ?>
-                <?php
-                    $db->setQuery("SELECT * FROM products ORDER BY Sold DESC LIMIT 8");
-                    $popular = $db->excuteQuery();
-                ?>
-                <div class="popular-products py-3">
-                    <h4 class="mb-3 fw-bold text-uppercase" style="font-size: 1.1rem;">🔥 Top sản phẩm bán chạy</h4>
-                    <div class="row g-3">
-                        <?php while ($p = $popular->fetch_assoc()): ?>
-                            <div class="col-6 col-md-3">
-                                <div class="card h-100 shadow-sm border-0 product-card-hover transition">
-                                    <img src="<?= $p['ImageSP'] ?>" class="card-img-top p-2" alt="..." style="object-fit: contain; height: 160px;">
-                                    <div class="card-body p-2 d-flex flex-column text-center">
-                                        <p class="card-title small mb-1 fw-bold text-truncate-2"><?= htmlspecialchars($p['TenSP']) ?></p>
-                                        <p class="text-danger small mb-2 fw-bold"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
-                                                <div class="d-flex gap-2 mt-auto justify-content-center align-items-center">
-                                                    <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="btn btn-sm btn-outline-primary rounded-pill">Chi tiết</a>
-                                                    <form method="post" action="controller/c_addToCart.php" style="display:inline-block;">
-                                                        <input type="hidden" name="product_id" value="<?= $p['MaSP'] ?>">
-                                                        <input type="hidden" name="quantity" value="1">
-                                                        <button type="submit" class="btn btn-sm btn-primary rounded-pill">Thêm</button>
-                                                    </form>
-                                                    <?php $fav = ($isLoggedIn) ? (new M_wishlist())->isFavorited($maKH, $p['MaSP']) : false; ?>
-                                                    <button type="button" class="btn btn-sm btn-light fav-btn" data-product-id="<?= $p['MaSP'] ?>" data-favorited="<?= $fav?1:0 ?>" title="Yêu thích">
-                                                        <i class="fas fa-heart text-<?= $fav? 'danger':'muted' ?>"></i>
-                                                    </button>
-                                                </div>
+                <!-- Search Section -->
+                <div class="soft-shadow glass-effect rounded-2xl p-6 border border-indigo-500/20">
+                    <form method="GET" action="searchProduct.php" class="flex gap-2">
+                        <input type="search" name="query" placeholder="Tìm kiếm sản phẩm..." class="flex-1 glass-effect rounded-xl px-4 py-3 text-sm placeholder-slate-400 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" required>
+                        <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold text-sm transition hover:shadow-lg">Tìm</button>
+                    </form>
+                </div>
+
+                <!-- Top Products -->
+                <?php if (empty($centerBlocks)): ?>
+                    <?php
+                        $db->setQuery("SELECT * FROM products ORDER BY Sold DESC LIMIT 8");
+                        $popular = $db->excuteQuery();
+                    ?>
+                    <div class="space-y-4">
+                        <h3 class="font-montserrat text-2xl font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fas fa-fire text-rose-400"></i> Top Sản Phẩm
+                        </h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <?php while ($p = $popular->fetch_assoc()): ?>
+                                <div class="group soft-shadow glass-effect rounded-2xl overflow-hidden border border-slate-700/30 hover:border-indigo-400/50 transition p-4 hover:deep-shadow">
+                                    <div class="relative mb-4 h-40 overflow-hidden rounded-xl bg-slate-800 flex items-center justify-center">
+                                        <img src="<?= $p['ImageSP'] ?>" alt="<?= htmlspecialchars($p['TenSP']) ?>" class="h-full w-full object-contain group-hover:scale-110 transition">
+                                    </div>
+                                    <p class="text-slate-300 font-semibold text-sm line-clamp-2 mb-2"><?= htmlspecialchars($p['TenSP']) ?></p>
+                                    <p class="text-rose-400 font-bold text-lg mb-3"><?= number_format($p['GiaTien'],0,',','.') ?>đ</p>
+                                    <div class="flex gap-2 text-xs">
+                                        <a href="product_detail.php?id=<?= $p['MaSP'] ?>" class="flex-1 px-3 py-2 rounded-lg border border-indigo-500/50 text-indigo-400 hover:bg-indigo-500/20 transition text-center">Chi Tiết</a>
+                                        <form method="post" action="controller/c_addToCart.php" style="display:contents;">
+                                            <input type="hidden" name="product_id" value="<?= $p['MaSP'] ?>">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="flex-1 px-3 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white transition">Thêm</button>
+                                        </form>
+                                        <?php $fav = ($isLoggedIn) ? (new M_wishlist())->isFavorited($maKH, $p['MaSP']) : false; ?>
+                                        <button type="button" class="px-3 py-2 rounded-lg border border-slate-600 text-slate-300 hover:text-rose-400 transition fav-btn" data-product-id="<?= $p['MaSP'] ?>" data-favorited="<?= $fav?1:0 ?>">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endwhile; ?>
+                            <?php endwhile; ?>
+                        </div>
                     </div>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
+            </div>
         </main>
 
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="side-promo">
+        <!-- Right Sidebar -->
+        <aside class="col-span-12 lg:col-span-3">
+            <div class="space-y-4">
+                <?php if (!empty($rightBlocks)): foreach ($rightBlocks as $block): ?>
+                    <div class="soft-shadow glass-effect rounded-2xl p-4 border border-slate-700/30"><?= renderBlock($block) ?></div>
+                <?php endforeach; endif; ?>
 
-
-                <div class="promo-card shadow-sm border-0 mb-3 p-3 rounded bg-white">
-                    <h6 class="fw-bold mb-3 small text-uppercase"><i class="fas fa-bolt me-2 text-warning"></i>Có thể bạn thích</h6>
-                    <div class="random-list">
+                <!-- Random Products -->
+                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-indigo-500/20">
+                    <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                        <i class="fas fa-star text-amber-400"></i> Đề Xuất
+                    </h6>
+                    <div class="space-y-3">
                         <?php if($randomProducts && $randomProducts->num_rows > 0): while($rp = $randomProducts->fetch_assoc()): ?>
-                            <div class="d-flex align-items-center mb-3 pb-2 border-bottom last-child-border-0">
-                                <img src="<?= $rp['ImageSP'] ?>" class="rounded" style="width: 45px; height: 45px; object-fit: contain; background: #f8f9fa;">
-                                <div class="ms-2" style="min-width: 0;">
-                                    <a href="product_detail.php?id=<?= $rp['MaSP'] ?>" class="small fw-bold text-dark text-decoration-none text-truncate d-block" style="font-size: 11px;"><?= htmlspecialchars($rp['TenSP']) ?></a>
-                                    <div class="text-danger fw-bold" style="font-size: 10px;"><?= number_format($rp['GiaTien'],0,',','.') ?>đ</div>
+                            <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-800/50 transition">
+                                <img src="<?= $rp['ImageSP'] ?>" alt="<?= htmlspecialchars($rp['TenSP']) ?>" class="w-12 h-12 rounded-lg object-contain bg-slate-800">
+                                <div class="flex-1 min-w-0">
+                                    <a href="product_detail.php?id=<?= $rp['MaSP'] ?>" class="text-xs font-semibold text-slate-300 hover:text-indigo-400 line-clamp-2 block"><?= htmlspecialchars($rp['TenSP']) ?></a>
+                                    <p class="text-rose-400 font-bold text-xs mt-1"><?= number_format($rp['GiaTien'],0,',','.') ?>đ</p>
                                 </div>
                             </div>
                         <?php endwhile; endif; ?>
                     </div>
                 </div>
 
-                <div class="promo-card bg-white p-3 shadow-sm rounded mb-3 border-start border-4 border-info">
-                    <h6 class="fw-bold small mb-2 text-uppercase text-info">Danh mục hot</h6>
-                    <nav class="nav flex-column small">
-                        <a class="nav-link p-1 text-dark" href="searchProduct.php?query=phukien" style="font-size: 12px;"><i class="fas fa-caret-right me-1 opacity-50"></i> Phụ kiện PC</a>
-                        <a class="nav-link p-1 text-dark" href="searchProduct.php?query=loa" style="font-size: 12px;"><i class="fas fa-caret-right me-1 opacity-50"></i> Âm thanh</a>
-                        <a class="nav-link p-1 text-dark" href="searchProduct.php?query=smartwatch" style="font-size: 12px;"><i class="fas fa-caret-right me-1 opacity-50"></i> Smartwatch</a>
+                <!-- Hot Categories -->
+                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-slate-700/30">
+                    <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                        <i class="fas fa-fire text-amber-400"></i> Danh Mục Hot
+                    </h6>
+                    <nav class="space-y-2">
+                        <a href="searchProduct.php?query=phukien" class="block text-xs text-slate-400 hover:text-indigo-400 transition hover:translate-x-1"><i class="fas fa-chevron-right text-xs mr-2"></i> Phụ Kiện PC</a>
+                        <a href="searchProduct.php?query=loa" class="block text-xs text-slate-400 hover:text-indigo-400 transition hover:translate-x-1"><i class="fas fa-chevron-right text-xs mr-2"></i> Âm Thanh</a>
+                        <a href="searchProduct.php?query=smartwatch" class="block text-xs text-slate-400 hover:text-indigo-400 transition hover:translate-x-1"><i class="fas fa-chevron-right text-xs mr-2"></i> Smartwatch</a>
                     </nav>
                 </div>
                 
-                <div class="promo-card p-3 rounded shadow-sm border-0 text-white text-center" style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);">
-                    <i class="fas fa-user-shield mb-2" style="font-size: 1.5rem;"></i>
-                    <h6 class="fw-bold mb-1 small">IT PRO MEMBER</h6>
-                    <p style="font-size: 9px;" class="opacity-75 mb-2">Đặc quyền cho sinh viên ngành CNTT.</p>
-                    <a href="signUp.php" class="btn btn-sm btn-light w-100 py-1 fw-bold text-primary rounded-pill" style="font-size: 10px;">THAM GIA</a>
+                <!-- Special Promo -->
+                <div class="soft-shadow rounded-2xl p-4 border border-indigo-500/30 bg-gradient-to-br from-indigo-500/20 to-rose-500/20 text-center">
+                    <i class="fas fa-crown text-3xl text-indigo-400 mb-2 block"></i>
+                    <h6 class="font-montserrat font-bold text-slate-100 mb-1 text-sm">IT PRO MEMBER</h6>
+                    <p class="text-xs text-slate-400 mb-3">Đặc quyền cho sinh viên ngành CNTT.</p>
+                    <a href="signUp.php" class="inline-block px-6 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold text-xs transition">THAM GIA</a>
                 </div>
             </div>
         </aside>
@@ -180,20 +200,26 @@
 </div>
 
 <?php if ($showBanner): ?>
-    <div id="welcome-banner" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:2000;">
-        <div class="banner-content shadow-lg" style="background:#fff;max-width:700px;width:90%;padding:30px;border-radius:20px;position:relative; animation: slideIn 0.5s ease-out;">
-            <button id="close-banner" style="position:absolute;right:20px;top:15px;border:none;background:none;font-size:25px;cursor:pointer;color:#ccc;">&times;</button>
-            <div class="row align-items-center">
-                <div class="col-md-5 d-none d-md-block"><img src="media/image/Slider/slider1_1.png" class="img-fluid rounded shadow-sm"></div>
-                <div class="col-md-7">
-                    <h3 class="fw-bold text-primary">Kazuhi ơi!</h3>
-                    <p class="text-muted small">Hệ thống vừa cập nhật thêm linh kiện mới cho shop của bạn. Kiểm tra ngay nhé!</p>
-                    <button class="btn btn-primary px-4 py-2 rounded-pill fw-bold small" onclick="document.getElementById('welcome-banner').style.display='none'">KHÁM PHÁ NGAY</button>
+    <div id="welcome-banner" class="fixed inset-0 flex items-center justify-center z-50">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm z-40"></div>
+        <div class="relative z-50 max-w-3xl w-[92%] soft-shadow glass-effect rounded-2xl overflow-hidden p-6 md:p-8 animate-scaleUp">
+            <button id="close-banner" class="absolute top-3 right-3 text-slate-300 hover:text-white text-2xl">&times;</button>
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <div class="w-full md:w-1/3 hidden md:block">
+                    <img src="media/image/Slider/slider1_1.png" class="w-full h-40 object-cover rounded-lg" alt="banner">
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-montserrat font-bold text-slate-100 mb-2">Kazuhi ơi!</h3>
+                    <p class="text-sm text-slate-300 mb-4">Hệ thống vừa cập nhật thêm linh kiện mới cho shop của bạn. Kiểm tra ngay nhé!</p>
+                    <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold" onclick="document.getElementById('welcome-banner').style.display='none'">KHÁM PHÁ NGAY</button>
                 </div>
             </div>
         </div>
-        <div style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:-1; backdrop-filter: blur(3px);"></div>
     </div>
+    <style>
+        @keyframes scaleUp { from { transform: scale(0.96); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+        .animate-scaleUp { animation: scaleUp 0.35s ease-out; }
+    </style>
 <?php endif; ?>
 
 <style>

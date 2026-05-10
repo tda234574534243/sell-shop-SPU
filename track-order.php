@@ -153,139 +153,153 @@
     }
 ?>
 
-<style>
-    .track-card { background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-    .track-form input { padding: 12px; border-radius: 8px; border: 1px solid #ddd; width: 100%; }
-    .track-form button { background:#ff6600;color:#fff;border:none;padding:10px 16px;border-radius:8px; }
-    .state-badge { padding:6px 10px;border-radius:999px;font-size:13px; }
-    .state-pending{ background:#fff3cd;color:#856404;border:1px solid #ffeeba; }
-    .state-success{ background:#d4edda;color:#155724;border:1px solid #c3e6cb; }
-    .state-cancel{ background:#f8d7da;color:#721c24;border:1px solid #f5c6cb; }
-</style>
-
-<div class="container-fluid py-4">
-    <div class="row gx-4">
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="side-promo">
-                <div class="system-widgets mt-3">
-                    <div class="promo-card mb-3 p-3 shadow-sm rounded bg-white border-top border-warning border-3">
-                        <h6 class="fw-bold mb-2 small text-uppercase"><i class="fas fa-bell text-warning me-2"></i>Tin mới</h6>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-12 gap-6">
+        <!-- Left Sidebar -->
+        <aside class="col-span-12 lg:col-span-2">
+            <div class="space-y-4">
+                <!-- Notifications Widget -->
+                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-indigo-500/20">
+                    <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                        <i class="fas fa-bell text-indigo-400"></i> Tin Mới
+                    </h6>
+                    <div class="space-y-2">
                         <?php if ($sideNotifs && $sideNotifs->num_rows > 0): while($s = $sideNotifs->fetch_assoc()): ?>
-                            <div class="mb-2 border-bottom pb-2 last-child-border-0">
-                                <a href="notification_detail.php?id=<?= $s['id'] ?>" class="text-decoration-none text-dark small fw-bold d-block text-truncate"><?= htmlspecialchars($s['Title']) ?></a>
-                            </div>
+                            <a href="notification_detail.php?id=<?= $s['id'] ?>" class="block text-slate-300 hover:text-indigo-400 text-xs hover:translate-x-1 transition">
+                                <p class="font-semibold truncate"><?= htmlspecialchars($s['Title']) ?></p>
+                            </a>
                         <?php endwhile; endif; ?>
                     </div>
+                </div>
 
-                    <?php if ($sideVouchers && $sideVouchers->num_rows > 0): ?>
-                        <div class="promo-card p-3 shadow-sm rounded bg-white border-top border-danger border-3">
-                            <h6 class="fw-bold mb-2 small text-uppercase"><i class="fas fa-ticket-alt text-danger me-2"></i>Voucher</h6>
+                <!-- Vouchers Widget -->
+                <?php if ($sideVouchers && $sideVouchers->num_rows > 0): ?>
+                    <div class="soft-shadow glass-effect rounded-2xl p-4 border border-rose-500/20">
+                        <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                            <i class="fas fa-gift text-rose-400"></i> Voucher
+                        </h6>
+                        <div class="space-y-2">
                             <?php while($vv = $sideVouchers->fetch_assoc()): ?>
-                                <div class="mb-2 p-2 rounded bg-light border border-dashed">
-                                    <strong class="text-success small d-block"><?= htmlspecialchars($vv['Code']) ?></strong>
+                                <div class="p-2 rounded-lg glass-effect border border-dashed border-rose-400/30 hover:border-rose-400/60 transition">
+                                    <p class="text-rose-400 font-bold text-xs"><?= htmlspecialchars($vv['Code']) ?></p>
                                 </div>
                             <?php endwhile; ?>
                         </div>
-                    <?php endif; ?>
-                </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </aside>
 
-        <main class="col-12 col-lg-8">
-            <div class="main__container">
-                <div class="track-card">
-                    <h3>Theo dõi đơn hàng</h3>
-                    <p class="text-muted">Nhập mã đơn hàng (MaHD) để kiểm tra trạng thái.</p>
+        <!-- Main Content -->
+        <main class="col-span-12 lg:col-span-7">
+            <div class="space-y-6">
+                <!-- Track Card -->
+                <div class="soft-shadow glass-effect rounded-2xl p-6 border border-indigo-500/20">
+                    <h3 class="font-montserrat text-2xl font-bold text-slate-100 mb-2 flex items-center gap-2">
+                        <i class="fas fa-box text-indigo-400"></i> Theo Dõi Đơn Hàng
+                    </h3>
+                    <p class="text-slate-400 text-sm mb-4">Nhập mã đơn hoặc tên sản phẩm để kiểm tra trạng thái.</p>
 
-                    <form class="track-form row g-2 mb-3" method="GET" action="track-order.php">
-                        <div class="col-9">
-                            <input type="text" name="q" placeholder="Tìm kiếm đơn (mã đơn, tên sản phẩm, ngày...)" value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>">
-                        </div>
-                        <div class="col-3">
-                            <button type="submit" class="w-100">Tìm</button>
-                        </div>
+                    <!-- Search Form -->
+                    <form class="flex gap-2 mb-4" method="GET" action="track-order.php">
+                        <input type="text" name="q" placeholder="Tìm kiếm đơn (mã, tên, ngày...)" value="<?= isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '' ?>" class="flex-1 glass-effect rounded-xl px-4 py-3 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition text-sm">
+                        <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold text-sm transition">Tìm</button>
                     </form>
 
                     <?php if ($message): ?>
-                        <div class="alert alert-warning"><?= htmlspecialchars($message) ?></div>
+                        <div class="p-3 rounded-lg bg-amber-500/20 border border-amber-500/50 mb-4">
+                            <p class="text-amber-300 text-sm"><?= htmlspecialchars($message) ?></p>
+                        </div>
                     <?php endif; ?>
 
+                    <!-- Orders List -->
                     <?php if (!empty($ordersArr)): ?>
-                        <h5>Đơn hàng của bạn</h5>
-                        <?php foreach($ordersArr as $o):
-                            $maHD = $o['MaHD'];
-                            $orderItems = $o['items'] ?? [];
-                            // determine deletable
-                            $forbiddenStates = ['Đang chuẩn bị hàng', 'Đang giao hàng'];
-                            $deletable = true;
-                            foreach ($orderItems as $oi) {
-                                if (in_array(trim($oi['State']), $forbiddenStates, true)) { $deletable = false; break; }
-                            }
-                        ?>
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="font-montserrat font-bold text-slate-100 mb-4">Đơn Hàng Của Bạn</h5>
+                        <div class="space-y-4">
+                            <?php foreach($ordersArr as $o):
+                                $maHD = $o['MaHD'];
+                                $orderItems = $o['items'] ?? [];
+                                // determine deletable
+                                $forbiddenStates = ['Đang chuẩn bị hàng', 'Đang giao hàng'];
+                                $deletable = true;
+                                foreach ($orderItems as $oi) {
+                                    if (in_array(trim($oi['State']), $forbiddenStates, true)) { $deletable = false; break; }
+                                }
+                            ?>
+                                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-slate-700/30">
+                                    <div class="flex justify-between items-start mb-3">
                                         <div>
-                                            <strong>Đơn #<?= htmlspecialchars($o['MaHD']) ?></strong>
-                                            <div class="small text-muted">Thời gian: <?= htmlspecialchars($o['created_at'] ?? ($o['createdAt'] ?? '')) ?></div>
+                                            <p class="font-bold text-slate-100 text-lg">Đơn #<?= htmlspecialchars($o['MaHD']) ?></p>
+                                            <p class="text-slate-400 text-xs">Thời gian: <?= htmlspecialchars($o['created_at'] ?? ($o['createdAt'] ?? '')) ?></p>
                                         </div>
-                                        <div class="text-end">
-                                            <div>Tổng: <strong><?= number_format($o['SoTien'] ?? 0) ?> VND</strong></div>
+                                        <div class="text-right">
+                                            <p class="text-rose-400 font-bold">₫<?= number_format($o['SoTien'] ?? 0,0,',','.') ?></p>
                                         </div>
                                     </div>
 
-                                            <div class="d-flex justify-content-end mb-2">
-                                                <?php if ($deletable): ?>
-                                                    <form method="POST" onsubmit="return confirm('Bạn chắc chắn muốn xóa đơn #<?= htmlspecialchars($o['MaHD']) ?>?');">
-                                                        <input type="hidden" name="action" value="delete">
-                                                        <input type="hidden" name="maHD" value="<?= htmlspecialchars($o['MaHD']) ?>">
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger">Xóa đơn</button>
-                                                    </form>
-                                                <?php else: ?>
-                                                    <button class="btn btn-sm btn-outline-secondary" disabled title="Đơn đang xử lý, không thể xóa">Không thể xóa</button>
-                                                <?php endif; ?>
-                                            </div>
+                                    <div class="flex justify-end mb-3">
+                                        <?php if ($deletable): ?>
+                                            <form method="POST" onsubmit="return confirm('Bạn chắc chắn muốn xóa đơn #<?= htmlspecialchars($o['MaHD']) ?>?');">
+                                                <input type="hidden" name="action" value="delete">
+                                                <input type="hidden" name="maHD" value="<?= htmlspecialchars($o['MaHD']) ?>">
+                                                <button type="submit" class="px-4 py-2 rounded-lg border border-rose-500/50 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold transition">Xóa Đơn</button>
+                                            </form>
+                                        <?php else: ?>
+                                            <button disabled class="px-4 py-2 rounded-lg border border-slate-600 text-slate-400 text-xs font-semibold cursor-not-allowed" title="Đơn đang xử lý">Không thể xóa</button>
+                                        <?php endif; ?>
+                                    </div>
 
-                                    <div class="list-group">
+                                    <div class="space-y-2">
                                         <?php if (is_array($orderItems) && count($orderItems) > 0): foreach($orderItems as $it): ?>
-                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div class="flex justify-between items-center p-3 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 transition">
                                                 <div>
-                                                    <div class="fw-bold"><?= htmlspecialchars($it['TenSP']) ?></div>
-                                                    <div class="small text-muted">Số lượng: <?= intval($it['SoLuong']) ?> &nbsp; | &nbsp; Giá: <?= number_format($it['GiaTien']) ?> VND</div>
+                                                    <p class="font-semibold text-slate-200 text-sm"><?= htmlspecialchars($it['TenSP']) ?></p>
+                                                    <p class="text-slate-400 text-xs">SL: <?= intval($it['SoLuong']) ?> | Giá: ₫<?= number_format($it['GiaTien'],0,',','.') ?></p>
                                                 </div>
                                                 <div>
-                                                        <?php $stateRaw = $it['State'] ?? ''; $stateClass = getOrderStateClass($stateRaw); ?>
-                                                        <span class="state-badge <?= $stateClass ?>"><?= htmlspecialchars($it['State']) ?></span>
+                                                    <?php $stateRaw = $it['State'] ?? '';
+                                                    $stateClass = getOrderStateClass($stateRaw);
+                                                    $stateBg = ($stateClass === 'state-success') ? 'bg-green-500/20 border-green-500/30 text-green-400' : 
+                                                               (($stateClass === 'state-cancel') ? 'bg-rose-500/20 border-rose-500/30 text-rose-400' : 'bg-amber-500/20 border-amber-500/30 text-amber-400');
+                                                    ?>
+                                                    <span class="px-3 py-1 rounded-full border text-xs font-semibold <?= $stateBg ?>"><?= htmlspecialchars($it['State']) ?></span>
                                                 </div>
                                             </div>
                                         <?php endforeach; else: ?>
-                                            <div class="small text-muted">Không có mặt hàng nào trong đơn này.</div>
+                                            <p class="text-slate-400 text-sm">Không có mặt hàng nào trong đơn này.</p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     <?php elseif ($order): ?>
-                        <h5>Thông tin đơn hàng #<?= htmlspecialchars($order['MaHD']) ?></h5>
-                        <p><strong>Khách hàng:</strong> <?= htmlspecialchars($order['MaTK'] ?? 'Khách lẻ') ?></p>
-                        <p><strong>Tổng tiền:</strong> <?= number_format($order['SoTien'] ?? 0) ?> VND</p>
-                        <p><strong>Thời gian:</strong> <?= htmlspecialchars($order['created_at'] ?? ($order['createdAt'] ?? '')) ?></p>
+                        <h5 class="font-montserrat font-bold text-slate-100 mb-4">Thông Tin Đơn #<?= htmlspecialchars($order['MaHD']) ?></h5>
+                        
+                        <div class="space-y-3 mb-6 p-4 rounded-lg bg-slate-800/30">
+                            <div class="flex justify-between"><span class="text-slate-400">Mã khách:</span><span class="text-slate-200 font-semibold"><?= htmlspecialchars($order['MaTK'] ?? 'Khách lẻ') ?></span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Tổng tiền:</span><span class="text-rose-400 font-bold">₫<?= number_format($order['SoTien'] ?? 0,0,',','.') ?></span></div>
+                            <div class="flex justify-between"><span class="text-slate-400">Thời gian:</span><span class="text-slate-200"><?= htmlspecialchars($order['created_at'] ?? ($order['createdAt'] ?? '')) ?></span></div>
+                        </div>
 
-                        <h6 class="mt-3">Mặt hàng</h6>
-                        <div class="list-group">
-                                        <?php if ($items && $items->num_rows > 0): while($it = $items->fetch_assoc()): ?>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <h6 class="font-montserrat font-bold text-slate-100 mb-3">Mặt Hàng</h6>
+                        <div class="space-y-2">
+                            <?php if ($items && $items->num_rows > 0): while($it = $items->fetch_assoc()): ?>
+                                <div class="flex justify-between items-center p-3 rounded-lg bg-slate-800/30 hover:bg-slate-800/50 transition">
                                     <div>
-                                        <div class="fw-bold"><?= htmlspecialchars($it['TenSP']) ?></div>
-                                        <div class="small text-muted">Số lượng: <?= intval($it['SoLuong']) ?> &nbsp; | &nbsp; Giá: <?= number_format($it['GiaTien']) ?> VND</div>
+                                        <p class="font-semibold text-slate-200 text-sm"><?= htmlspecialchars($it['TenSP']) ?></p>
+                                        <p class="text-slate-400 text-xs">SL: <?= intval($it['SoLuong']) ?> | Giá: ₫<?= number_format($it['GiaTien'],0,',','.') ?></p>
                                     </div>
                                     <div>
-                                                    <?php $stateRaw = $it['State'] ?? ''; $stateClass = getOrderStateClass($stateRaw); ?>
-                                        <span class="state-badge <?= $stateClass ?>"><?= htmlspecialchars($it['State']) ?></span>
+                                        <?php $stateRaw = $it['State'] ?? '';
+                                        $stateClass = getOrderStateClass($stateRaw);
+                                        $stateBg = ($stateClass === 'state-success') ? 'bg-green-500/20 border-green-500/30 text-green-400' : 
+                                                   (($stateClass === 'state-cancel') ? 'bg-rose-500/20 border-rose-500/30 text-rose-400' : 'bg-amber-500/20 border-amber-500/30 text-amber-400');
+                                        ?>
+                                        <span class="px-3 py-1 rounded-full border text-xs font-semibold <?= $stateBg ?>"><?= htmlspecialchars($it['State']) ?></span>
                                     </div>
                                 </div>
                             <?php endwhile; else: ?>
-                                <div class="small text-muted">Không có mặt hàng nào được tìm thấy.</div>
+                                <p class="text-slate-400 text-sm">Không có mặt hàng nào được tìm thấy.</p>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
@@ -293,16 +307,24 @@
             </div>
         </main>
 
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="side-promo">
-                <div class="promo-card shadow-sm border-0 mb-3 bg-white p-3 rounded border-start border-4 border-primary">
-                    <h6 class="fw-bold text-primary small text-uppercase"><i class="fas fa-shopping-basket me-2"></i>Giỏ hàng</h6>
-                    <div class="cart-status mt-2">
+        <!-- Right Sidebar -->
+        <aside class="col-span-12 lg:col-span-3">
+            <div class="space-y-4">
+                <!-- Cart Widget -->
+                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-indigo-500/20">
+                    <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
+                        <i class="fas fa-shopping-cart text-indigo-400"></i> Giỏ Hàng
+                    </h6>
+                    <div class="space-y-3">
                         <?php if($totalCartQty > 0): ?>
-                            <p class="small mb-2">Bạn đang có <strong class="text-danger"><?= $totalCartQty ?></strong> món.</p>
-                            <a href="cart.php" class="btn btn-sm btn-primary w-100 py-1 rounded-pill" style="font-size: 11px;">THANH TOÁN</a>
+                            <p class="text-sm text-slate-300 mb-2">
+                                Bạn đang có <strong class="text-rose-400"><?= $totalCartQty ?></strong> sản phẩm.
+                            </p>
+                            <a href="cart.php" class="block px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white text-center font-semibold text-sm transition">
+                                Thanh Toán
+                            </a>
                         <?php else: ?>
-                            <p class="text-muted small mb-0" style="font-size: 11px;">Chưa có sản phẩm nào.</p>
+                            <p class="text-xs text-slate-400">Chưa có sản phẩm trong giỏ hàng.</p>
                         <?php endif; ?>
                     </div>
                 </div>

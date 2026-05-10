@@ -89,9 +89,7 @@ $db->close();
 <style>
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f5f7f6;
-    width: 100%;
-    height: 100vh;
+    background-color: transparent;
 }
 
 main {
@@ -159,92 +157,70 @@ a.cancel-payment:hover {
 </style>
 
 <body>
-    <main class="d-flex justify-content-center py-4 px-3">
-        <div class="w-100" style="max-width:960px;">
-            <section class="bg-white rounded shadow-sm p-4" aria-label="Cart list">
-                <h2 class="fs-5 fw-bold mb-3">Giỏ hàng của bạn</h2>
+    <main class="py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <section class="soft-shadow glass-effect rounded-2xl p-6 mb-6">
+                <h2 class="text-xl font-semibold text-slate-100 mb-4">Giỏ hàng của bạn</h2>
                 <?php if ($orders && $orders->num_rows > 0): ?>
-                    <div class="list-group mb-3">
+                    <div class="space-y-3 mb-4">
                         <?php while ($row = $orders->fetch_assoc()):
                             $tmp = $row['GiaTien'] * $row['SoLuong'];
                         ?>
-                            <div class="list-group-item d-flex align-items-center cart-line" data-product-id="<?= $row['MaSP'] ?>" data-price="<?= $row['GiaTien'] ?>">
-                                <div class="me-3">
-                                    <button class="remove-cart-btn" data-product-id="<?= $row['MaSP'] ?>" title="Xóa" aria-label="Xóa sản phẩm">&times;</button>
+                            <div class="flex items-center gap-4 p-3 rounded-lg bg-slate-900/30 cart-line" data-product-id="<?= $row['MaSP'] ?>" data-price="<?= $row['GiaTien'] ?>">
+                                <button class="text-2xl text-slate-400 remove-cart-btn" data-product-id="<?= $row['MaSP'] ?>" title="Xóa">&times;</button>
+                                <img src="<?= htmlspecialchars($row['ImageSP']) ?>" alt="" class="w-16 h-16 object-cover rounded-md">
+                                <div class="flex-1">
+                                    <div class="product-name font-semibold text-slate-100"><?= htmlspecialchars($row['TenSP']) ?></div>
+                                    <div class="text-sm text-slate-400">Giá: <?= number_format($row['GiaTien'],0,',','.') ?> đ</div>
                                 </div>
-                                <img src="<?= htmlspecialchars($row['ImageSP']) ?>" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:6px;margin-right:12px;">
-                                <div class="flex-grow-1">
-                                        <div class="product-name mb-1"><?= htmlspecialchars($row['TenSP']) ?></div>
-                                        <div class="text-muted small">Giá: <?= number_format($row['GiaTien'],0,',','.') ?> đ</div>
+                                <div class="flex items-center gap-3">
+                                    <input type="number" min="0" class="w-20 rounded-lg bg-slate-900/40 px-2 py-1 cart-qty-input" value="<?= $row['SoLuong'] ?>" data-product-id="<?= $row['MaSP'] ?>">
+                                    <div class="text-right font-semibold text-slate-100 item-total"><?= number_format($tmp,0,',','.') ?> đ</div>
                                 </div>
-                                    <div class="d-flex align-items-center">
-                                        <input type="number" min="0" class="form-control form-control-sm cart-qty-input" style="width:80px;" value="<?= $row['SoLuong'] ?>" data-product-id="<?= $row['MaSP'] ?>">
-                                    </div>
-                                    <div class="fw-bold text-end ms-3 item-total"><?= number_format($tmp,0,',','.') ?> đ</div>
                             </div>
                         <?php endwhile; ?>
                     </div>
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="text-muted">Tổng cộng</div>
-                        <div id="orderTotal" class="fw-bold"><?= number_format($tongTien,0,',','.') ?> đ</div>
+                    <div class="flex justify-between items-center mb-3 text-slate-300">
+                        <div>Tổng cộng</div>
+                        <div id="orderTotal" class="text-lg font-bold text-slate-100"><?= number_format($tongTien,0,',','.') ?> đ</div>
                     </div>
-                    <p class="small text-muted">Trang này chỉ hiển thị danh sách sản phẩm trong giỏ. Thao tác thanh toán sẽ ở bước tiếp theo.</p>
+                    <p class="text-sm text-slate-400 mb-4">Trang này chỉ hiển thị danh sách sản phẩm trong giỏ. Thao tác thanh toán sẽ ở bước tiếp theo.</p>
                 <?php else: ?>
-                    <div class="text-center py-4 text-muted">Giỏ hàng đang trống.</div>
+                    <div class="text-center py-8 text-slate-400">Giỏ hàng đang trống.</div>
                 <?php endif; ?>
-                <a href="index.php" class="btn btn-sm btn-secondary">Tiếp tục mua sắm</a>
-                <a href="payProduct.php?action=checkout" class="btn btn-sm btn-primary ms-2">Tiến hành thanh toán</a>
+                <div class="flex gap-3">
+                    <a href="index.php" class="px-3 py-2 rounded-lg bg-slate-700 text-slate-200">Tiếp tục mua sắm</a>
+                    <a href="payProduct.php?action=checkout" class="px-3 py-2 rounded-lg bg-indigo-600 text-white">Tiến hành thanh toán</a>
+                </div>
             </section>
 
             <?php if (isset($_GET['action']) && $_GET['action'] === 'checkout'): ?>
-            <section class="bg-white rounded shadow-sm p-4 mt-4" aria-label="Checkout">
-                <h2 class="fs-5 fw-bold mb-3">Thanh toán</h2>
+            <section class="soft-shadow glass-effect rounded-2xl p-6">
+                <h2 class="text-xl font-semibold text-slate-100 mb-4">Thanh toán</h2>
 
                 <!-- Voucher Section -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h6 class="mb-0">Mã giảm giá</h6>
+                <div class="mb-4">
+                    <h6 class="text-sm text-slate-300 mb-2">Mã giảm giá</h6>
+                    <div class="flex gap-3 mb-2">
+                        <input type="text" id="voucherInput" class="flex-1 rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" placeholder="Nhập mã voucher" maxlength="50">
+                        <button type="button" id="applyVoucherBtn" class="px-4 py-2 rounded-lg border border-indigo-500 text-indigo-300">Áp dụng</button>
+                        <button type="button" id="clearVoucherBtn" class="px-4 py-2 rounded-lg border border-slate-700 text-slate-300">Xóa</button>
                     </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <input type="text" id="voucherInput" class="form-control" placeholder="Nhập mã voucher" maxlength="50">
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" id="applyVoucherBtn" class="btn btn-outline-primary w-100">Áp dụng</button>
-                            </div>
-                            <div class="col-md-3">
-                                <button type="button" id="clearVoucherBtn" class="btn btn-outline-secondary w-100">Xóa</button>
-                            </div>
-                        </div>
-                        <div id="voucherMessage" class="mt-2 small"></div>
-                    </div>
+                    <div id="voucherMessage" class="text-sm"></div>
                 </div>
 
                 <!-- Order Summary -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h6 class="mb-0">Tóm tắt đơn hàng</h6>
+                <div class="mb-4">
+                    <h6 class="text-sm text-slate-300 mb-2">Tóm tắt đơn hàng</h6>
+                    <div class="space-y-2 text-sm text-slate-300 mb-2">
+                        <div class="flex justify-between"><span>Tổng tiền hàng:</span><span id="originalTotal"><?= number_format($tongTien, 0, ',', '.') ?> đ</span></div>
+                        <div class="flex justify-between"><span>Giảm giá:</span><span id="discountAmount">0 đ</span></div>
+                        <div class="flex justify-between"><span>Phí ship:</span><span id="shippingFeeDisplay"><?php echo number_format($shippingFee,0,',','.'); ?> đ</span></div>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Tổng tiền hàng:</span>
-                            <span id="originalTotal"><?= number_format($tongTien, 0, ',', '.') ?> đ</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Giảm giá:</span>
-                            <span id="discountAmount">0 đ</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Phí ship:</span>
-                            <span id="shippingFeeDisplay"><?php echo number_format($shippingFee,0,',','.'); ?> đ</span>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between fw-bold">
-                            <span>Tổng thanh toán:</span>
-                            <span id="finalTotal"><?= number_format($tongTien + $shippingFee, 0, ',', '.') ?> đ</span>
-                        </div>
+                    <div class="border-t border-slate-700/40 pt-3 flex justify-between font-bold text-slate-100">
+                        <span>Tổng thanh toán:</span>
+                        <span id="finalTotal"><?= number_format($tongTien + $shippingFee, 0, ',', '.') ?> đ</span>
                     </div>
                 </div>
 
@@ -254,74 +230,59 @@ a.cancel-payment:hover {
                     <input type="hidden" name="voucherCode" id="voucherCodeInput" value="">
 
                     <!-- Payment method selection -->
-                    <div class="mb-3">
-                        <label class="form-label">Phương thức thanh toán</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm_local" value="local" checked>
-                                <label class="form-check-label" for="pm_local">Thanh toán tại chỗ / COD</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="pm_vnpay" value="vnpay">
-                                <label class="form-check-label" for="pm_vnpay">Thanh toán bằng VNPAY</label>
-                            </div>
+                    <div class="mb-4">
+                        <label class="text-sm text-slate-300">Phương thức thanh toán</label>
+                        <div class="mt-2 flex gap-4 items-center">
+                            <label class="inline-flex items-center gap-2"><input class="peer" type="radio" name="paymentMethod" id="pm_local" value="local" checked><span class="text-slate-200">Thanh toán tại chỗ / COD</span></label>
+                            <label class="inline-flex items-center gap-2"><input class="peer" type="radio" name="paymentMethod" id="pm_vnpay" value="vnpay"><span class="text-slate-200">Thanh toán bằng VNPAY</span></label>
                         </div>
                     </div>
 
                     <!-- COD confirmation (required when COD selected) -->
-                    <div id="codConfirmation" class="mb-3" style="display:none;">
-                        <label class="form-label fw-bold">Xác nhận COD</label>
-                        <div class="form-text mb-2">Để đảm bảo bạn cam kết thanh toán bằng tiền mặt khi nhận hàng, vui lòng đánh dấu và nhập dòng xác nhận dưới đây.</div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="cod_confirm_checkbox" name="cod_confirm" value="1">
-                            <label class="form-check-label" for="cod_confirm_checkbox">Tôi cam kết sẽ thanh toán bằng tiền mặt (COD) khi nhận hàng.</label>
+                    <div id="codConfirmation" class="mb-4" style="display:none;">
+                        <label class="block text-sm font-semibold text-slate-200">Xác nhận COD</label>
+                        <div class="text-sm text-slate-400 mb-2">Để đảm bảo bạn cam kết thanh toán bằng tiền mặt khi nhận hàng, vui lòng đánh dấu và nhập dòng xác nhận dưới đây.</div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <input class="w-4 h-4" type="checkbox" id="cod_confirm_checkbox" name="cod_confirm" value="1">
+                            <label for="cod_confirm_checkbox" class="text-slate-200">Tôi cam kết sẽ thanh toán bằng tiền mặt (COD) khi nhận hàng.</label>
                         </div>
-                        <div class="mt-2 d-flex align-items-center gap-2">
-                            <img id="codCaptchaImg" src="captcha.php?ts=<?= time() ?>" alt="captcha" style="height:50px;border:1px solid #ddd;border-radius:4px;">
-                            <button type="button" id="reloadCaptcha" class="btn btn-sm btn-outline-secondary">Làm mới</button>
+                        <div class="flex items-center gap-3 mb-2">
+                            <img id="codCaptchaImg" src="captcha.php?ts=<?= time() ?>" alt="captcha" class="h-12 rounded border border-slate-700">
+                            <button type="button" id="reloadCaptcha" class="px-3 py-1 rounded border border-slate-700 text-slate-300">Làm mới</button>
                         </div>
-                        <div class="mt-2">
-                            <input type="text" id="cod_captcha_input" name="cod_captcha" class="form-control" placeholder="Nhập ký tự trong ảnh" maxlength="10">
+                        <div>
+                            <input type="text" id="cod_captcha_input" name="cod_captcha" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" placeholder="Nhập ký tự trong ảnh" maxlength="10">
                         </div>
-                        <div id="codConfirmMessage" class="small text-danger mt-1" style="display:none;"></div>
+                        <div id="codConfirmMessage" class="text-sm text-rose-400 mt-1" style="display:none;"></div>
                     </div>
 
-                    <div id="vnpayOptions" class="mb-3" style="display:none;">
-                        <label class="form-label">Chọn phương thức VNPAY (tùy chọn)</label>
-                        <select id="vnpayBankCode" name="bankCode" class="form-select" style="max-width:360px;">
-                            <option value="">Cổng VNPAY (mặc định)</option>
-                            <option value="VNPAYQR">VNPAYQR</option>
-                            <option value="VNBANK">Ngân hàng nội địa</option>
-                            <option value="INTCARD">Thẻ quốc tế</option>
-                        </select>
+                    <div id="vnpayOptions" class="mb-4" style="display:none;">
+                        <label class="text-sm text-slate-300">Chọn phương thức VNPAY (tùy chọn)</label>
                         <div class="mt-2">
-                            <label class="form-label me-2">Ngôn ngữ:</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="vnpayLang" id="vnpayLang_vn" value="vn" checked>
-                                <label class="form-check-label" for="vnpayLang_vn">Tiếng Việt</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="vnpayLang" id="vnpayLang_en" value="en">
-                                <label class="form-check-label" for="vnpayLang_en">English</label>
-                            </div>
+                            <select id="vnpayBankCode" name="bankCode" class="rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" style="max-width:360px;">
+                                <option value="">Cổng VNPAY (mặc định)</option>
+                                <option value="VNPAYQR">VNPAYQR</option>
+                                <option value="VNBANK">Ngân hàng nội địa</option>
+                                <option value="INTCARD">Thẻ quốc tế</option>
+                            </select>
+                        </div>
+                        <div class="mt-2 flex gap-3 items-center">
+                            <label class="inline-flex items-center gap-2"><input class="peer" type="radio" name="vnpayLang" id="vnpayLang_vn" value="vn" checked><span class="text-slate-200">Tiếng Việt</span></label>
+                            <label class="inline-flex items-center gap-2"><input class="peer" type="radio" name="vnpayLang" id="vnpayLang_en" value="en"><span class="text-slate-200">English</span></label>
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" id="payNowBtn" class="btn btn-success btn-secure flex-fill">
-                            <i class="fas fa-credit-card me-2"></i>Thanh toán ngay
-                        </button>
-                        <a href="payProduct.php" class="btn btn-outline-secondary">Quay lại giỏ hàng</a>
+                    <div class="flex gap-3">
+                        <button type="submit" id="payNowBtn" class="px-4 py-2 rounded-lg bg-emerald-600 text-white flex-1">Thanh toán ngay</button>
+                        <a href="payProduct.php" class="px-4 py-2 rounded-lg border border-slate-700 text-slate-300">Quay lại giỏ hàng</a>
                     </div>
                 </form>
 
-                <!-- Note: VNPAY fields are submitted to controller/c_thanhToan.php when VNPAY selected -->
             </section>
             <?php endif; ?>
 
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     // Voucher functionality
     const SHIPPING_FEE = <?= json_encode($shippingFee) ?>;

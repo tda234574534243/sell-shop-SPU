@@ -3,129 +3,75 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 ?>
 <!doctype html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./public/css/bootstrap.min1.css">
-    <!-- FontAwesome CSS -->
-    <link rel="stylesheet" href="./public/css/all.min.css">
-    <link rel="stylesheet" href="./public/css/uf-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-</head>
-<body class="body-theme-blue">
+    <title>Đăng Nhập - Sup3rDup3r Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Improved blue gradient and polished form styles */
-        body.body-theme-blue {
-            background: linear-gradient(135deg, #0d6efd 0%, #3b82f6 45%, #60a5fa 100%) no-repeat fixed !important;
-            background-color: #0d6efd !important;
-            min-height: 100vh !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 16px;
-            color: #ffffff;
-        }
-
-        /* Sign-in card with subtle glass effect and blur */
-        body.body-theme-blue .uf-form-signin {
-            width: 100%;
-            max-width: 460px;
-            box-shadow: 0 12px 30px rgba(8, 30, 80, 0.35);
-            border-radius: 14px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 28px;
-            backdrop-filter: blur(6px) saturate(120%);
-            -webkit-backdrop-filter: blur(6px) saturate(120%);
-            color: #fff;
-        }
-
-        /* Inputs: translucent background with white text */
-        .uf-input-group .form-control {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #ffffff;
-            box-shadow: none;
-        }
-        .uf-input-group .form-control::placeholder { color: rgba(255,255,255,0.75); }
-        .uf-input-group .input-group-text {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.95);
-        }
-
-        /* Primary button: blue-to-cyan gradient */
-        .uf-btn-primary {
-            background: linear-gradient(90deg,#2563eb 0%, #06b6d4 100%);
-            border: none;
-            color: #fff;
-            font-weight: 600;
-            box-shadow: 0 8px 20px rgba(37,99,235,0.22);
-        }
-        .uf-btn-primary:active, .uf-btn-primary:focus { transform: translateY(1px); }
-
-        a { color: #cfeeff; }
-        .text-white a { color: #e6f6ff; }
+        * { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .heading { font-family: 'Montserrat', sans-serif; }
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); }
+        .glass-form { background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(10px); border: 1px solid rgba(99, 102, 241, 0.2); }
+        .input-glass { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(99, 102, 241, 0.3); }
+        .input-glass:focus { background: rgba(255, 255, 255, 0.12); border-color: rgba(99, 102, 241, 0.6); }
     </style>
-        
-    <div class="uf-form-signin">
-        <div class="text-center">
-            <a href="index.php"><img src="./media/image/other/logo-fb.png" alt="" width="100" height="100"></a>
-            <h1 class="text-white h3">Account Login</h1>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-8">
+    <div class="glass-form rounded-3xl p-8 w-full max-w-md shadow-2xl border border-indigo-500/20">
+        <!-- Logo & Title -->
+        <div class="text-center mb-8">
+            <img src="./media/image/other/logo.png" alt="logo" class="w-20 h-20 mx-auto mb-4" onerror="this.style.display='none'">
+            <h1 class="font-montserrat text-3xl font-bold bg-gradient-to-r from-indigo-400 to-rose-400 bg-clip-text text-transparent mb-2">Sup3rDup3r</h1>
+            <p class="text-slate-400 text-sm">Đăng nhập tài khoản của bạn</p>
         </div>
-        <form class="mt-4" method="POST" action="controller/c_signIn.php">
-            <div class="input-group uf-input-group input-group-lg mb-3">
-                <span class="input-group-text fa fa-envelope"></span>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Vui lòng nhập địa chỉ email hợp lệ.">
+
+        <!-- Sign In Form -->
+        <form method="POST" action="controller/c_signIn.php" class="space-y-4">
+            <!-- Email Input -->
+            <div>
+                <label class="block text-slate-300 text-sm font-semibold mb-2">Email</label>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-indigo-400 mr-3 text-sm"></i>
+                    <input type="email" name="email" placeholder="your@email.com" required class="input-glass flex-1 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                </div>
             </div>
-            <div class="input-group uf-input-group input-group-lg mb-3">
-                <span class="input-group-text fa fa-lock"></span>
-                <input type="password" name="password" id="password" class="form-control" placeholder="password" required>
+
+            <!-- Password Input -->
+            <div>
+                <label class="block text-slate-300 text-sm font-semibold mb-2">Mật Khẩu</label>
+                <div class="flex items-center">
+                    <i class="fas fa-lock text-indigo-400 mr-3 text-sm"></i>
+                    <input type="password" name="password" placeholder="••••••••" required class="input-glass flex-1 rounded-xl px-4 py-3 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
+                </div>
             </div>
+
+            <!-- Error Message -->
             <?php if (isset($_GET['error']) && $_GET['error'] == 'invalid'): ?>
-                <p style="color: red; text-align: center; font-weight: bold;">
-                    Đăng nhập thất bại.
-                </p>
+                <div class="p-3 rounded-lg bg-rose-500/20 border border-rose-500/50">
+                    <p class="text-rose-400 text-sm font-semibold">❌ Đăng nhập thất bại. Kiểm tra lại email/mật khẩu.</p>
+                </div>
             <?php endif; ?>
 
-            <div class="d-flex mb-3 justify-content-between">
-                <!-- <div class="form-check">
-                    <input type="checkbox" class="form-check-input uf-form-check-input" id="exampleCheck1">
-                    <label class="form-check-label text-white" for="exampleCheck1">Remember Me</label>
-                </div>
-                <a href="#">Forgot password?</a> -->
-            </div>
-
-            <div class="d-grid mb-4">
-                <button type="submit" class="btn uf-btn-primary btn-lg">Login</button>
-            </div>
-            <!-- <div class="d-flex mb-3">
-                <div class="dropdown-divider m-auto w-25"></div>
-                <small class="text-nowrap text-white">Or login with</small>
-                <div class="dropdown-divider m-auto w-25"></div>
-            </div> -->
-            <!-- <div class="uf-social-login d-flex justify-content-center">
-
-                <a href="controller/c_google_login.php" class="uf-social-ic" title="Login with Google"><i class="fa-brands fa-google"></i></a>
-            </div> -->
-            <div class="mt-4 text-center">
-                <span class="text-white">Don't have an account?</span>
-                <a href="signUp.php">Sign Up</a>
-            </div>
+            <!-- Login Button -->
+            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg mt-6">
+                <i class="fas fa-sign-in-alt mr-2"></i>Đăng Nhập
+            </button>
         </form>
-        <?php include 'template/toastMess.php'; ?>
+
+        <!-- Sign Up Link -->
+        <div class="mt-6 text-center border-t border-slate-700/30 pt-6">
+            <p class="text-slate-400 text-sm mb-2">Chưa có tài khoản?</p>
+            <a href="signUp.php" class="px-6 py-2 rounded-xl glass-form border border-indigo-500/50 text-indigo-300 hover:text-indigo-200 hover:bg-indigo-500/20 transition font-semibold text-sm inline-block">
+                Tạo tài khoản mới
+            </a>
+        </div>
     </div>
 
-    <!-- JavaScript -->
-
-    <!-- Separate Popper and Bootstrap JS -->
-    <script src="./public/JS/main.js"></script>
-    <script src="./public/js/popper.min.js"></script>
-    <script src="./public/js/bootstrap.min.js"></script>
+    <?php include 'template/toastMess.php'; ?>
 </body>
-
 </html>

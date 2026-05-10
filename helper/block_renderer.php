@@ -42,8 +42,8 @@ function renderBannerBlock($data) {
     $bgImage = $data['backgroundImage'] ?? '/sell-shop-SPU/media/image/Slider/slider-1.jpg';
     
     return <<<HTML
-    <div class="container__banner" style="background-image: url('$bgImage'); background-size: cover; background-position: center;">
-        <div class="banner__inner">
+    <div class="container__banner" style="background-image: url('$bgImage'); background-size: contain; background-repeat: no-repeat; background-position: center; min-height:220px; display:flex; align-items:center;">
+        <div class="banner__inner" style="width:100%;">
             <div class="banner__title">
                 <h3>$title</h3>
             </div>

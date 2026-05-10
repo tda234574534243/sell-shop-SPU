@@ -3,27 +3,27 @@
 <?php include('template/toastMess.php') ?>
 
 <style>
+    /* Use site defaults; remove forced white backgrounds so page matches Tailwind/glass theme */
     body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9f9f9;
+        font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         padding: 0;
+        background: transparent;
     }
 
     .main__container {
         max-width: 920px;
         margin: 36px auto;
-        background-color: #ffffff;
         padding: 28px;
         border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     }
 
     h2 {
-        color: #2c3e50;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 5px;
-        margin-bottom: 20px;
+        color: #e6eef9;
+        border-bottom: 1px solid rgba(99,102,241,0.12);
+        padding-bottom: 8px;
+        margin-bottom: 18px;
+        font-size: 1.25rem;
     }
 
     form input[type="text"],
@@ -34,30 +34,31 @@
         width: 100%;
         padding: 10px 12px;
         margin-bottom: 12px;
-        border: 1px solid #e0e0e0;
+        border: 1px solid rgba(255,255,255,0.06);
         border-radius: 8px;
         transition: border 0.18s ease, box-shadow 0.18s ease;
-        background: #fbfbfb;
+        background: rgba(15,23,42,0.45);
+        color: #e6eef9;
     }
 
     form input:focus,
     form textarea:focus {
-        border-color: #3498db;
+        border-color: rgba(99,102,241,0.9);
         outline: none;
     }
 
     form button {
         padding: 10px 18px;
-        background-color: #1f6feb;
+        background-color: linear-gradient(90deg,#6366f1,#4f46e5);
         color: white;
         border: none;
         border-radius: 8px;
         cursor: pointer;
         transition: background 0.18s ease, transform 0.08s ease;
-        box-shadow: 0 4px 10px rgba(31,111,235,0.12);
+        box-shadow: 0 6px 18px rgba(20,20,40,0.25);
     }
 
-    form button:hover { background-color: #155ed8; transform: translateY(-1px); }
+    form button:hover { transform: translateY(-1px); }
 
     table {
         width: 100%;
@@ -68,57 +69,34 @@
     table th, table td {
         text-align: left;
         padding: 10px;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        color: #dbeafe;
     }
 
     table th {
-        background-color: #ecf0f1;
-        color: #2c3e50;
+        background-color: rgba(255,255,255,0.02);
+        color: #c7d2fe;
     }
 
     table tr:hover {
-        background-color: #f1f1f1;
+        background-color: rgba(255,255,255,0.02);
     }
 
     @media screen and (max-width: 600px) {
-        .main__container {
-            padding: 20px;
-        }
-
-        table, thead, tbody, th, td, tr {
-            display: block;
-        }
-
-        table tr {
-            margin-bottom: 15px;
-            background: #fff;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        table td {
-            text-align: right;
-            padding-left: 50%;
-            position: relative;
-        }
-
-        table td::before {
-            content: attr(data-label);
-            position: absolute;
-            left: 10px;
-            width: 45%;
-            font-weight: bold;
-            text-align: left;
-        }
+        .main__container { padding: 20px; }
+        table, thead, tbody, th, td, tr { display: block; }
+        table tr { margin-bottom: 15px; background: transparent; padding: 10px; border-radius: 8px; }
+        table td { text-align: right; padding-left: 50%; position: relative; }
+        table td::before { content: attr(data-label); position: absolute; left: 10px; width: 45%; font-weight: bold; text-align: left; }
     }
 
     /* Profile layout tweaks */
     .profile-grid { display: grid; grid-template-columns: 160px 1fr; gap: 18px; align-items: start; }
-    .avatar-box img { width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 1px solid #f0f0f0; }
-    .profile-card { padding: 18px; background: #ffffff; border-radius: 10px; }
+    .avatar-box img { width: 140px; height: 140px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04); }
+    .profile-card { padding: 18px; background: transparent; border-radius: 10px; }
 </style>
 
-<div class="main__container">
+<div class="main__container glass-effect soft-shadow">
     <?php
         include_once('model/m_account.php');
         include_once('model/m_giohang.php');

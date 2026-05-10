@@ -19,13 +19,16 @@
     }
 ?>
 
-<div class="container py-5" style="min-height: 68vh;">
-    <div class="row">
-        <div class="col-md-5">
-            <img src="<?= $product['ImageSP'] ?>" class="img-fluid rounded shadow" alt="<?= $product['TenSP'] ?>">
+<div class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8" style="min-height:68vh;">
+    <div class="grid grid-cols-12 gap-6 items-start">
+        <div class="col-span-12 md:col-span-5">
+            <div class="soft-shadow glass-effect rounded-2xl overflow-hidden p-4">
+                <img src="<?= $product['ImageSP'] ?>" class="w-full h-80 object-contain bg-slate-900 rounded-lg" alt="<?= $product['TenSP'] ?>">
+            </div>
         </div>
-        <div class="col-md-7">
-            <h2><?= $product['TenSP'] ?></h2>
+        <div class="col-span-12 md:col-span-7">
+            <div class="soft-shadow glass-effect rounded-2xl p-6">
+                <h2 class="text-2xl font-montserrat font-bold text-slate-100 mb-2"><?= $product['TenSP'] ?></h2>
             <?php
                 require_once 'model/m_comment.php';
                 $cm = new M_comment();
@@ -64,36 +67,39 @@
                     document.addEventListener('DOMContentLoaded', function(){ initStars('.star-rating'); });
                 })();
             </script>
-            <p class="text-muted">Phân loại: <?= $product['PhanLoai'] ?> | Ngày sản xuất: <?= $product['NSX'] ?></p>
-            <h4 class="text-danger"><?= number_format($product['GiaTien'], 0, ',', '.') ?>đ</h4>
-            
-            <p><strong>Đã bán:</strong> <?= $product['Sold'] ?? 0 ?></p>
-            <p><strong>Còn lại:</strong> <?= $product['SoLuong'] ?? 0 ?></p>
-
-            <p class="mt-3">Thông tin sản phẩm: <?= nl2br($product['MoTa']) ?></p>
-
-            <form method="post" action="controller/c_addToCart.php" class="mt-4">
-                <input type="hidden" id="product_id" name="product_id" value="<?= $product['MaSP'] ?>" required>
-
-                <div class="mb-3">
-                    <label for="quantity" class="form-label me-2">Số lượng:</label>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?= $product['SoLuong'] ?>" class="form-control w-25 d-inline-block" required>
+                <p class="text-sm text-slate-400">Phân loại: <?= $product['PhanLoai'] ?> · Ngày sản xuất: <?= $product['NSX'] ?></p>
+                <div class="mt-4 mb-4">
+                    <div class="text-2xl text-rose-400 font-bold"><?= number_format($product['GiaTien'], 0, ',', '.') ?>đ</div>
+                    <div class="flex gap-4 text-sm text-slate-300 mt-2">
+                        <div>Đã bán: <span class="font-semibold text-slate-100"><?= $product['Sold'] ?? 0 ?></span></div>
+                        <div>Còn lại: <span class="font-semibold text-slate-100"><?= $product['SoLuong'] ?? 0 ?></span></div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-success">🛒 Thêm vào giỏ hàng</button>
-                <?php $fav = ($isLoggedIn) ? (new M_wishlist())->isFavorited($maKH, $product['MaSP']) : false; ?>
-                <button type="button" class="btn btn-outline-danger ms-2 fav-btn" data-product-id="<?= $product['MaSP'] ?>" data-favorited="<?= $fav?1:0 ?>">
-                    <i class="fas fa-heart text-<?= $fav? 'danger':'muted' ?>"></i> Yêu thích
-                </button>
-                <a href="index.php" class="btn btn-secondary ms-2">← Quay lại</a>
-            </form>
+                <div class="prose prose-invert mb-4 text-slate-200">Thông tin sản phẩm:<div class="mt-2 text-sm"><?= nl2br($product['MoTa']) ?></div></div>
+
+                <form method="post" action="controller/c_addToCart.php" class="mt-4 flex flex-col sm:flex-row items-start gap-3">
+                    <input type="hidden" id="product_id" name="product_id" value="<?= $product['MaSP'] ?>" required>
+                    <div class="flex items-center gap-3">
+                        <label for="quantity" class="text-sm text-slate-300">Số lượng:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?= $product['SoLuong'] ?>" class="w-20 rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" required>
+                    </div>
+
+                    <div class="flex gap-2 mt-2 sm:mt-0">
+                        <button type="submit" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold">🛒 Thêm vào giỏ hàng</button>
+                        <?php $fav = ($isLoggedIn) ? (new M_wishlist())->isFavorited($maKH, $product['MaSP']) : false; ?>
+                        <button type="button" class="px-4 py-2 rounded-xl border border-rose-500 text-rose-400 fav-btn" data-product-id="<?= $product['MaSP'] ?>" data-favorited="<?= $fav?1:0 ?>">
+                            <i class="fas fa-heart <?= $fav? 'text-rose-400':'' ?>"></i>
+                        </button>
+                        <a href="index.php" class="inline-flex items-center px-4 py-2 rounded-xl bg-slate-800 text-slate-300">← Quay lại</a>
+                    </div>
+                </form>
 
             <script>
                 (function(){
                     try {
                         document.querySelectorAll('.fav-btn').forEach(function(btn){
                             btn.addEventListener('click', function(e){
-                                console.log('[inline-fav] clicked', this);
                                 var productId = this.getAttribute('data-product-id');
                                 var fav = this.getAttribute('data-favorited') === '1';
                                 var action = fav ? 'remove' : 'add';
@@ -102,15 +108,12 @@
                                     headers: {'X-Requested-With':'XMLHttpRequest','Content-Type':'application/x-www-form-urlencoded'},
                                     body: 'action=' + encodeURIComponent(action) + '&product_id=' + encodeURIComponent(productId)
                                 }).then(function(r){ return r.json(); }).then(function(data){
-                                    console.log('[inline-fav] response', data);
                                     if (data && data.success) {
-                                        // visual feedback: toggle class and attribute
                                         btn.setAttribute('data-favorited', fav ? '0' : '1');
                                         var ic = btn.querySelector('i.fas'); if (ic) {
-                                            if (fav) { ic.classList.remove('text-danger'); ic.classList.add('text-muted'); }
-                                            else { ic.classList.remove('text-muted'); ic.classList.add('text-danger'); }
+                                            if (fav) { ic.classList.remove('text-rose-400'); ic.classList.add('text-slate-300'); }
+                                            else { ic.classList.remove('text-slate-300'); ic.classList.add('text-rose-400'); }
                                         }
-                                        // update wishlist badge if present
                                         var badge = document.querySelector('.wishlist-count'); if (badge) badge.innerText = data.count>99? '99+' : data.count;
                                     } else if (data && data.message) {
                                         alert(data.message);
@@ -122,32 +125,31 @@
                 })();
             </script>
 
-            <hr>
-            <!-- Comments & Rating -->
-            <div class="card mt-4 p-3">
-                <h5>Đánh giá và bình luận</h5>
+            <hr class="my-6 border-slate-700/40">
+            <div class="mt-4">
+                <h4 class="text-lg font-semibold text-slate-100 mb-3">Đánh giá và bình luận</h4>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <form method="post" action="controller/c_comment.php" class="mb-3" id="comment-form">
+                    <form method="post" action="controller/c_comment.php" class="mb-4" id="comment-form">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="MaSP" value="<?= htmlspecialchars($product['MaSP']) ?>">
                         <div class="mb-2">
-                            <label class="form-label">Đánh giá:</label>
-                            <div class="star-rating" data-target-input="rating-input">
-                                <span class="star" data-value="1">☆</span>
-                                <span class="star" data-value="2">☆</span>
-                                <span class="star" data-value="3">☆</span>
-                                <span class="star" data-value="4">☆</span>
-                                <span class="star" data-value="5">☆</span>
+                            <label class="block text-sm text-slate-300 mb-1">Đánh giá:</label>
+                            <div class="star-rating flex gap-1" data-target-input="rating-input">
+                                <button type="button" class="star text-2xl" data-value="1">☆</button>
+                                <button type="button" class="star text-2xl" data-value="2">☆</button>
+                                <button type="button" class="star text-2xl" data-value="3">☆</button>
+                                <button type="button" class="star text-2xl" data-value="4">☆</button>
+                                <button type="button" class="star text-2xl" data-value="5">☆</button>
                             </div>
                             <input type="hidden" name="Rating" id="rating-input" value="">
                         </div>
                         <div class="mb-2">
-                            <textarea name="Content" class="form-control" rows="3" placeholder="Viết bình luận..."></textarea>
+                            <textarea name="Content" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" rows="3" placeholder="Viết bình luận..."></textarea>
                         </div>
-                        <button class="btn btn-primary btn-sm">Gửi</button>
+                        <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white">Gửi</button>
                     </form>
                 <?php else: ?>
-                    <p><a href="signIn.php">Đăng nhập</a> để đánh giá hoặc bình luận.</p>
+                    <p><a href="signIn.php" class="text-indigo-400">Đăng nhập</a> để đánh giá hoặc bình luận.</p>
                 <?php endif; ?>
 
                 <?php
@@ -155,72 +157,61 @@
                     if ($comments && $comments->num_rows > 0):
                         while ($c = $comments->fetch_assoc()):
                             if ($c['Hidden']) {
-                                // show placeholder for hidden comment except to admin or owner
                                 $isOwner = (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $c['MaTK']);
                                 $isAdmin = isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1;
                                 if (!($isOwner || $isAdmin)) continue;
                             }
                 ?>
-                    <?php $hiddenClass = (isset($c['Hidden']) && $c['Hidden']) ? 'comment-hidden' : ''; ?>
-                    <div class="border rounded p-2 mb-2 <?= $hiddenClass ?>">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-start">
-                                <?php $avatarSrc = !empty($c['Avatar']) ? $c['Avatar'] : 'media/image/avatars/default.png'; ?>
-                                <img src="<?= htmlspecialchars($avatarSrc) ?>" alt="avatar" style="width:46px;height:46px;object-fit:cover;border-radius:50%;margin-right:10px;">
-                                <div>
-                                    <strong><?= htmlspecialchars($c['TenTK']) ?></strong>
-                                    <?php if (!empty($c['Rating'])): ?>
-                                        <span style="color:#f39c12;"> - <?= intval($c['Rating']) ?>★</span>
-                                    <?php endif; ?>
-                                    <small class="text-muted"> · <?= $c['CreatedAt'] ?></small>
+                    <?php $hiddenClass = (isset($c['Hidden']) && $c['Hidden']) ? 'opacity-60' : ''; ?>
+                    <div class="p-3 rounded-lg mb-3 bg-slate-900/30 <?= $hiddenClass ?>">
+                        <div class="flex items-start gap-3">
+                            <?php $avatarSrc = !empty($c['Avatar']) ? $c['Avatar'] : 'media/image/avatars/default.png'; ?>
+                            <img src="<?= htmlspecialchars($avatarSrc) ?>" alt="avatar" class="w-12 h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <strong class="text-slate-100"><?= htmlspecialchars($c['TenTK']) ?></strong>
+                                        <?php if (!empty($c['Rating'])): ?><span class="text-amber-400"> - <?= intval($c['Rating']) ?>★</span><?php endif; ?>
+                                        <div class="text-xs text-slate-400"><?= $c['CreatedAt'] ?></div>
+                                    </div>
+                                    <div class="text-right">
+                                        <?php $isOwner = (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $c['MaTK']); $isAdmin = isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1; ?>
+                                        <?php if ($isAdmin || $isOwner): ?>
+                                            <a href="#" onclick="document.getElementById('edit-<?= $c['id'] ?>').style.display='block';return false;" class="text-sm text-indigo-400 mr-2">Sửa</a>
+                                            <a href="controller/c_comment.php?action=delete&id=<?= $c['id'] ?>&MaSP=<?= urlencode($product['MaSP']) ?>" onclick="return confirm('Xóa bình luận này?')" class="text-sm text-rose-400">Xóa</a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <?php $isOwner = (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $c['MaTK']); $isAdmin = isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1; ?>
-                                <?php if ($isAdmin || $isOwner): ?>
-                                    <a href="#" onclick="document.getElementById('edit-<?= $c['id'] ?>').style.display='block';return false;" class="me-2">Sửa</a>
-                                    <a href="controller/c_comment.php?action=delete&id=<?= $c['id'] ?>&MaSP=<?= urlencode($product['MaSP']) ?>" onclick="return confirm('Xóa bình luận này?')" class="text-danger me-2">Xóa</a>
-                                <?php else: ?>
-                                    <!-- other users can hide (soft-hide) their own? only owner can hide -->
-                                <?php endif; ?>
-                                <?php if ($isOwner || $isAdmin): ?>
-                                    <form method="post" action="controller/c_comment.php" style="display:inline;">
-                                        <input type="hidden" name="action" value="hide">
+                                <div class="mt-2 text-sm text-slate-200"><?= nl2br(htmlspecialchars($c['Content'])) ?></div>
+
+                                <div id="edit-<?= $c['id'] ?>" style="display:none;margin-top:8px;">
+                                    <form method="post" action="controller/c_comment.php" class="mt-3 space-y-2">
+                                        <input type="hidden" name="action" value="edit">
                                         <input type="hidden" name="id" value="<?= $c['id'] ?>">
                                         <input type="hidden" name="MaSP" value="<?= htmlspecialchars($product['MaSP']) ?>">
-                                        <input type="hidden" name="hidden" value="<?= (isset($c['Hidden']) && $c['Hidden'])?0:1 ?>">
-                                        <button class="btn btn-sm btn-outline-secondary" type="submit"><?= (isset($c['Hidden']) && $c['Hidden']) ? 'Bỏ ẩn' : 'Ẩn' ?></button>
+                                        <div>
+                                            <select name="Rating" class="rounded-lg bg-slate-900/40 px-2 py-1 text-slate-100">
+                                                <option value="">Không đánh giá</option>
+                                                <?php for ($r=5;$r>=1;$r--): ?>
+                                                    <option value="<?= $r ?>" <?= (isset($c['Rating']) && $c['Rating']==$r)?'selected':'' ?>><?= $r ?> sao</option>
+                                                <?php endfor; ?>
+                                            </select>
+                                        </div>
+                                        <textarea name="Content" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100"><?= htmlspecialchars($c['Content']) ?></textarea>
+                                        <div class="flex gap-2">
+                                            <button class="px-3 py-1 rounded bg-indigo-600 text-white" type="submit">Lưu</button>
+                                            <button class="px-3 py-1 rounded bg-slate-700 text-slate-200" type="button" onclick="this.closest('#edit-<?= $c['id'] ?>').style.display='none'">Hủy</button>
+                                        </div>
                                     </form>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="mt-2"><?= nl2br(htmlspecialchars($c['Content'])) ?></div>
-
-                        <!-- edit area (hidden) -->
-                        <div id="edit-<?= $c['id'] ?>" style="display:none;margin-top:8px;">
-                            <form method="post" action="controller/c_comment.php">
-                                <input type="hidden" name="action" value="edit">
-                                <input type="hidden" name="id" value="<?= $c['id'] ?>">
-                                <input type="hidden" name="MaSP" value="<?= htmlspecialchars($product['MaSP']) ?>">
-                                <div class="mb-2">
-                                    <select name="Rating" class="form-select w-25">
-                                        <option value="">Không đánh giá</option>
-                                        <?php for ($r=5;$r>=1;$r--): ?>
-                                            <option value="<?= $r ?>" <?= (isset($c['Rating']) && $c['Rating']==$r)?'selected':'' ?>><?= $r ?> sao</option>
-                                        <?php endfor; ?>
-                                    </select>
                                 </div>
-                                <textarea name="Content" class="form-control mb-2"><?= htmlspecialchars($c['Content']) ?></textarea>
-                                <button class="btn btn-primary btn-sm" type="submit">Lưu</button>
-                                <button class="btn btn-secondary btn-sm" type="button" onclick="this.closest('#edit-<?= $c['id'] ?>').style.display='none'">Hủy</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 <?php
                         endwhile;
                     else:
                 ?>
-                    <p class="text-muted">Chưa có bình luận nào.</p>
+                    <p class="text-slate-400">Chưa có bình luận nào.</p>
                 <?php endif; ?>
             </div>
         </div>

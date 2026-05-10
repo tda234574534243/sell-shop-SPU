@@ -93,69 +93,61 @@
 ?>
 
 
-<div class="container__product container py-5">
-    <h2 class="text-center mb-4">Danh sách sản phẩm</h2>
+<div class="container__product max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <h2 class="text-center text-slate-100 mb-6 text-2xl font-montserrat font-bold">Danh sách sản phẩm</h2>
 
-    <style>
-        /* Make product cards slightly wider visually */
-        .container__product .card { min-width: 200px; }
-        .container__product .card .card-img-top { height: 200px; object-fit: cover; }
-        @media (min-width: 992px) {
-            .container__product .col-lg-3 { padding-left: 6px; padding-right: 6px; }
-        }
-    </style>
-
-    <div class="row">
-        <div class="col-lg-3 mb-4">
-            <div class="card p-3">
-                <h5>Lọc tìm kiếm</h5>
-                <form method="get">
-                    <div class="mb-2">
-                        <label class="form-label">Từ khóa</label>
-                        <input type="text" name="query" class="form-control" value="<?= htmlspecialchars($_GET['query'] ?? '') ?>" placeholder="Tên, mã, mô tả...">
+    <div class="grid grid-cols-12 gap-6">
+        <!-- Filters -->
+        <aside class="col-span-12 lg:col-span-3">
+            <div class="soft-shadow glass-effect rounded-2xl p-4">
+                <h5 class="font-semibold text-slate-100 mb-3">Lọc tìm kiếm</h5>
+                <form method="get" class="space-y-3">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Từ khóa</label>
+                        <input type="text" name="query" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-100 placeholder-slate-400" value="<?= htmlspecialchars($_GET['query'] ?? '') ?>" placeholder="Tên, mã, mô tả...">
                     </div>
-                    <div class="mb-2">
-                        <label class="form-label">Năm</label>
-                        <select name="year" class="form-select">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Năm</label>
+                        <select name="year" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
                             <option value="">Tất cả</option>
                             <?php foreach($years as $y): ?>
                                 <option value="<?= $y ?>" <?= $filterYear===$y?'selected':'' ?>><?= $y ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="mb-2">
-                        <label class="form-label">Phân loại</label>
-                        <select name="category" class="form-select">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Phân loại</label>
+                        <select name="category" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
                             <option value="">Tất cả</option>
                             <?php foreach($categories as $c): ?>
                                 <option value="<?= htmlspecialchars($c) ?>" <?= $filterCategory===$c?'selected':'' ?>><?= htmlspecialchars($c) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="mb-2">
-                        <label class="form-label">Sắp xếp theo giá</label>
-                        <select name="sort" class="form-select">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Sắp xếp theo giá</label>
+                        <select name="sort" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
                             <option value="">Không</option>
                             <option value="asc" <?= $sortPrice==='asc'?'selected':'' ?>>Giá tăng dần</option>
                             <option value="desc" <?= $sortPrice==='desc'?'selected':'' ?>>Giá giảm dần</option>
                         </select>
                     </div>
-                    <div class="mb-2">
-                        <label class="form-label">Sắp xếp đặc biệt</label>
-                        <select name="order" class="form-select">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Sắp xếp đặc biệt</label>
+                        <select name="order" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
                             <option value="">Mặc định</option>
                             <option value="rating" <?= (($_GET['order'] ?? '')==='rating')?'selected':'' ?>>Theo đánh giá cao</option>
                             <option value="bestseller" <?= (($_GET['order'] ?? '')==='bestseller')?'selected':'' ?>>Sản phẩm bán chạy</option>
                         </select>
                     </div>
-                    <div class="d-grid">
-                        <button class="btn btn-success">Áp dụng</button>
+                    <div>
+                        <button class="w-full py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-semibold">Áp dụng</button>
                     </div>
                 </form>
             </div>
-        </div>
+        </aside>
 
-        <div class="col-lg-9">
+        <section class="col-span-12 lg:col-span-9">
     <?php
         // Pagination: show at most 3 rows per page. Grid shows 4 columns on large screens => 3 rows * 4 cols = 12 items per page.
         $perPage = 12;
@@ -167,22 +159,26 @@
         $pageItems = array_slice($products, $start, $perPage);
     ?>
 
-            <div class="row">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <?php if(empty($products)): ?>
-                    <div class="col-12">
-                        <p class="text-center text-muted">Không có sản phẩm nào phù hợp.</p>
+                    <div class="col-span-full">
+                        <p class="text-center text-slate-400">Không có sản phẩm nào phù hợp.</p>
                     </div>
                 <?php else: ?>
                     <?php foreach ($pageItems as $product): ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div class="card h-100">
-                                <img src="<?= htmlspecialchars($product['ImageSP']) ?>" class="card-img-top" alt="<?= htmlspecialchars($product['TenSP']) ?>">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title"><?= htmlspecialchars($product['TenSP']) ?></h5>
-                                    <p class="card-text text-danger fw-bold"><?= number_format($product['GiaTien'],0,',','.') ?>đ</p>
-                                    <p class="card-text small text-muted mb-1">
-                                    </p>
-                                    <a href="product_detail.php?id=<?= $product['MaSP'] ?>" class="btn btn-primary mt-auto">Xem chi tiết</a>
+                        <div class="">
+                            <div class="soft-shadow glass-effect rounded-2xl overflow-hidden h-full flex flex-col">
+                                <div class="w-full h-48 bg-slate-800">
+                                    <img src="<?= htmlspecialchars($product['ImageSP']) ?>" alt="<?= htmlspecialchars($product['TenSP']) ?>" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-4 flex-1 flex flex-col">
+                                    <h3 class="text-sm md:text-base font-semibold text-slate-100 mb-2 line-clamp-2"><?= htmlspecialchars($product['TenSP']) ?></h3>
+                                    <div class="mt-auto">
+                                        <div class="text-indigo-300 font-bold text-lg"><?= number_format($product['GiaTien'],0,',','.') ?>đ</div>
+                                        <div class="mt-3">
+                                            <a href="product_detail.php?id=<?= $product['MaSP'] ?>" class="inline-block w-full text-center py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">Xem chi tiết</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -191,24 +187,23 @@
             </div>
 
             <?php if ($totalPages > 1): ?>
-                <nav aria-label="Product pagination">
-                    <ul class="pagination justify-content-center">
-                        <?php
-                            // build base url preserving existing query parameters except page
-                            $params = $_GET;
-                            unset($params['page']);
-                            $base = strtok($_SERVER["REQUEST_URI"], '?');
-                            $baseQuery = http_build_query($params);
-                            if ($baseQuery) $base .= '?' . $baseQuery . '&page='; else $base .= '?page=';
-                        ?>
-                        <?php for ($p = 1; $p <= $totalPages; $p++): ?>
-                            <li class="page-item <?= $p === $currentPage ? 'active' : '' ?>">
-                                <a class="page-link" href="<?= $base . $p ?>"><?= $p ?></a>
-                            </li>
-                        <?php endfor; ?>
-                    </ul>
+                <nav aria-label="Product pagination" class="mt-6">
+                    <div class="flex justify-center">
+                        <div class="inline-flex items-center space-x-2 bg-slate-900/40 soft-shadow glass-effect rounded-full px-3 py-2">
+                            <?php
+                                $params = $_GET;
+                                unset($params['page']);
+                                $base = strtok($_SERVER["REQUEST_URI"], '?');
+                                $baseQuery = http_build_query($params);
+                                if ($baseQuery) $base .= '?' . $baseQuery . '&page='; else $base .= '?page=';
+                            ?>
+                            <?php for ($p = 1; $p <= $totalPages; $p++): ?>
+                                <a href="<?= $base . $p ?>" class="px-3 py-1 rounded-md <?php if ($p === $currentPage) echo 'bg-indigo-600 text-white'; else echo 'text-slate-300 hover:bg-slate-800'; ?>"><?php echo $p ?></a>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
                 </nav>
             <?php endif; ?>
-        </div>
+        </section>
     </div>
 </div>
