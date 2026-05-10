@@ -19,6 +19,15 @@
         * {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
+        /* Toast container: fixed so it doesn't push page content down */
+        #toastcs {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 99999;
+            pointer-events: none;
+            margin: 0;
+        }
         h1, h2, h3, h4, h5, h6, .heading {
             font-family: 'Montserrat', sans-serif;
         }
