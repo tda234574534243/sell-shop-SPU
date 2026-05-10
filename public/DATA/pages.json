@@ -149,9 +149,9 @@
         "blog": {
             "title": "blog",
             "slug": "blog",
-            "status": "published",
+            "status": "private",
             "createdAt": "2026-05-09 17:05:14",
-            "updatedAt": "2026-05-09 17:07:14",
+            "updatedAt": "2026-05-09 19:03:17",
             "blocks": [
                 {
                     "id": "block-69ff06e148561",

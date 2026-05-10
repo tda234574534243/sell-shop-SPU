@@ -29,7 +29,8 @@
     $rightBlocks = $pageBuilder->getBlocksBySection('homepage', 'right');
 
     // Dữ liệu hệ thống mặc định
-    $sideNotifs = $nm->getActive(5);
+    $maKH = $_SESSION['user_id'] ?? null;
+    $sideNotifs = $nm->getActive(5, $maKH);
     $sideVouchers = $vm->getAll(5);
 
     // Lấy 3 sản phẩm ngẫu nhiên cho Sidebar Phải

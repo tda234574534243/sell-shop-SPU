@@ -5,7 +5,18 @@
     // ensure notifications loaded
     require_once '../model/m_notification.php';
     $m = new M_notification();
-    $res = $m->getActive(100);
+    $res = $m->getActive(100, null, true); // admin: load all active notifications
+
+    // load users for recipient selection
+    require_once '../model/m_database.php';
+    $db = new M_database();
+    $usersRes = $db->getConnection()->query("SELECT MaTK, TenTK, Email FROM account ORDER BY TenTK ASC");
+    $usersMap = [];
+    if ($usersRes) {
+        while ($u = $usersRes->fetch_assoc()) {
+            $usersMap[intval($u['MaTK'])] = $u;
+        }
+    }
 
     // edit mode: load item if id provided
     $editId = intval($_GET['id'] ?? 0);
@@ -31,10 +42,13 @@
                             <input name="Title" class="form-control" value="<?= htmlspecialchars($editItem['Title'] ?? '') ?>" required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label class="form-label">Loại</label>
-                            <select name="Type" class="form-select">
-                                <option value="notice" <?= (!$editItem || $editItem['Type']=='notice')? 'selected':'' ?>>Thông báo</option>
-                                <option value="voucher" <?= ($editItem && $editItem['Type']=='voucher')? 'selected':'' ?>>Voucher</option>
+                            <label class="form-label">Người nhận</label>
+                            <select name="Recipient" class="form-select">
+                                <option value="0" <?= (intval(
+                                    $editItem['RecipientUserId'] ?? 0)===0)? 'selected':'' ?>>Tất cả người dùng</option>
+                                <?php foreach ($usersMap as $uid => $u): ?>
+                                    <option value="<?= $uid ?>" <?= (intval($editItem['RecipientUserId'] ?? 0)===$uid)? 'selected':'' ?>><?= htmlspecialchars(($u['TenTK']?: $u['Email'])) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -60,13 +74,19 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover table-bordered">
-                        <thead class="table-dark"><tr><th>ID</th><th>Tiêu đề</th><th>Loại</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+                        <thead class="table-dark"><tr><th>ID</th><th>Tiêu đề</th><th>Người nhận</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
                         <tbody>
                         <?php if ($res && $res->num_rows>0): while ($row = $res->fetch_assoc()): ?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
                                 <td><?= htmlspecialchars($row['Title']) ?></td>
-                                <td><?= htmlspecialchars($row['Type']) ?></td>
+                                <td>
+                                    <?php $rid = intval($row['RecipientUserId'] ?? 0); if ($rid===0): ?>
+                                        Tất cả
+                                    <?php else: ?>
+                                        <?= htmlspecialchars($usersMap[$rid]['TenTK'] ?? ($usersMap[$rid]['Email'] ?? 'Người dùng #'.$rid)) ?>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?= $row['IsActive']? 'Hoạt động':'Không hoạt động' ?></td>
                                 <td>
                                     <a href="notifications.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Sửa</a>

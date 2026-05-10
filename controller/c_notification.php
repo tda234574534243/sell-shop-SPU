@@ -14,9 +14,9 @@ if ($action === 'add') {
     $data = [
         'Title' => $_POST['Title'] ?? '',
         'Content' => $_POST['Content'] ?? '',
-        'Type' => $_POST['Type'] ?? 'notice',
         'RelatedID' => !empty($_POST['RelatedID']) ? intval($_POST['RelatedID']) : null,
-        'IsActive' => isset($_POST['IsActive']) ? 1 : 0
+        'IsActive' => isset($_POST['IsActive']) ? 1 : 0,
+        'RecipientUserId' => isset($_POST['Recipient']) ? intval($_POST['Recipient']) : 0
     ];
     $model->add($data);
     header('Location: ../admin/notifications.php'); exit;
@@ -26,9 +26,9 @@ if ($action === 'edit') {
     $data = [
         'Title' => $_POST['Title'] ?? '',
         'Content' => $_POST['Content'] ?? '',
-        'Type' => $_POST['Type'] ?? 'notice',
         'RelatedID' => !empty($_POST['RelatedID']) ? intval($_POST['RelatedID']) : null,
-        'IsActive' => isset($_POST['IsActive']) ? 1 : 0
+        'IsActive' => isset($_POST['IsActive']) ? 1 : 0,
+        'RecipientUserId' => isset($_POST['Recipient']) ? intval($_POST['Recipient']) : 0
     ];
     $model->update($id, $data);
     header('Location: ../admin/notifications.php'); exit;

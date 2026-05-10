@@ -24,8 +24,8 @@
     // notifications for header bell
     include_once(__DIR__ . '/../model/m_notification.php');
     $notifModel = new M_notification();
-    $notifCount = $notifModel->countActive();
-    $notifList = $notifModel->getActive(5);
+    $notifCount = $notifModel->countActive($isLoggedIn ? $maKH : null);
+    $notifList = $notifModel->getActive(5, $isLoggedIn ? $maKH : null);
 
     if ($isLoggedIn) {
         $result = $cart->getCartItems($maKH);

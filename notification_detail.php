@@ -7,6 +7,17 @@ $m = new M_notification();
 $id = intval($_GET['id'] ?? 0);
 $item = $m->getById($id);
 
+if ($item) {
+    if (session_status() == PHP_SESSION_NONE) session_start();
+    $currentUser = $_SESSION['user_id'] ?? null;
+    $isAdmin = isset($_SESSION['levelID']) && $_SESSION['levelID']==1;
+    $rid = intval($item['RecipientUserId'] ?? 0);
+    if ($rid !== 0 && !$isAdmin && intval($currentUser) !== $rid) {
+        // not allowed to view private notification
+        $item = null;
+    }
+}
+
 $pageBuilder = new M_pagebuilder();
 $centerBlocks = $pageBuilder->getBlocksBySection('notification_detail', 'center');
 ?>

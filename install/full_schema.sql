@@ -91,12 +91,26 @@ CREATE TABLE IF NOT EXISTS `Vouchers` (
   `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- Notifications table (admin notifications, supports recipient per-user or 0 = all)
+CREATE TABLE IF NOT EXISTS `Notifications` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `Title` VARCHAR(255) NOT NULL,
+  `Content` TEXT,
+  `Type` VARCHAR(50) DEFAULT 'notice',
+  `RecipientUserId` INT NOT NULL DEFAULT 0,
+  `RelatedID` INT DEFAULT NULL,
+  `IsActive` TINYINT(1) NOT NULL DEFAULT 1,
+  `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedAt` TIMESTAMP NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 SET FOREIGN_KEY_CHECKS=1;
 
 -- Safety: ensure compatibility with existing installs
 ALTER TABLE `Account` ADD COLUMN IF NOT EXISTS `MaLV` INT(1) NOT NULL DEFAULT 0;
 ALTER TABLE `Products` ADD COLUMN IF NOT EXISTS `Sold` INT NOT NULL DEFAULT 0;
 ALTER TABLE `HoaDon` ADD COLUMN IF NOT EXISTS `Status` VARCHAR(50) NOT NULL DEFAULT 'Chờ thanh toán';
+ALTER TABLE `Notifications` ADD COLUMN IF NOT EXISTS `RecipientUserId` INT NOT NULL DEFAULT 0;
 
 -- Insert data
 INSERT INTO `Account` (LevelID, TenTK, Password, Email, SDT, DiaChi, MaLV) VALUES (1, 'Admin', '$2y$10$ALfU4BF6WTkY.Tt1RZ6ZzOyLO1CXUDhMN1sni3.cxY89EgwceJqCm', 'admin@web.com', '0000000000', 'System', 1);
