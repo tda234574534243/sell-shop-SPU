@@ -175,18 +175,7 @@
                     </div>
                 </div>
 
-                <!-- Hot Categories -->
-                <div class="soft-shadow glass-effect rounded-2xl p-4 border border-slate-700/30">
-                    <h6 class="font-montserrat font-bold text-slate-100 mb-3 text-sm flex items-center gap-2">
-                        <i class="fas fa-fire text-amber-400"></i> Danh Mục Hot
-                    </h6>
-                    <nav class="space-y-2">
-                        <a href="searchProduct.php?query=phukien" class="block text-xs text-slate-400 hover:text-indigo-400 transition hover:translate-x-1"><i class="fas fa-chevron-right text-xs mr-2"></i> Phụ Kiện PC</a>
-                        <a href="searchProduct.php?query=loa" class="block text-xs text-slate-400 hover:text-indigo-400 transition hover:translate-x-1"><i class="fas fa-chevron-right text-xs mr-2"></i> Âm Thanh</a>
-                        <a href="searchProduct.php?query=smartwatch" class="block text-xs text-slate-400 hover:text-indigo-400 transition hover:translate-x-1"><i class="fas fa-chevron-right text-xs mr-2"></i> Smartwatch</a>
-                    </nav>
-                </div>
-                
+
                 <!-- Special Promo -->
                 <div class="soft-shadow rounded-2xl p-4 border border-indigo-500/30 bg-gradient-to-br from-indigo-500/20 to-rose-500/20 text-center">
                     <i class="fas fa-crown text-3xl text-indigo-400 mb-2 block"></i>

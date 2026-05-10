@@ -7,25 +7,17 @@
 ?>
 <?php include('../template/head.php'); ?>
 
+<!-- Include Bootstrap for admin pages (CSS + JS) to keep admin UI functional -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+
 <style>
-    #mainContent {
-        margin-left: 250px;
-    }
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+    #mainContent { margin-left: 250px; }
+
+    .pages-table table { margin: 0; width: 100%; }
     
-    .pages-table table {
-        margin: 0;
-        width: 100%;
-    }
-    
-    .pages-table td, .pages-table th {
-        padding: 15px;
-        vertical-align: middle;
-    }
+    .pages-table td, .pages-table th { padding: 15px; vertical-align: middle; }
     
     .pages-table th {
         background: #f8f9fa;
@@ -136,13 +128,7 @@
         margin-bottom: 30px;
     }
     
-    .stat-card {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        border-left: 4px solid #007bff;
-    }
+    .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #007bff; }
     
     .stat-number {
         font-size: 28px;

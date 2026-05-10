@@ -12,6 +12,17 @@
 
 <?php include('../template/head.php'); ?>
 
+<!-- Restore Bootstrap for Admin (head.php now uses Tailwind globally) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-8a6Y3a5Z6mQv1Kc1F5a9Dq3y2Vq7Z1Q9w6l0r6b3f9p2v5g7t8c0x1y2z3a4b5c6" crossorigin="anonymous">
+<style>
+    /* Admin-only overrides to keep admin UI readable under the global dark theme */
+    body { background: #f8f9fa; color: #212529; }
+    .builder-wrapper { margin-left: 150px; }
+    .builder-header, .builder-left, .preview-container { background: #fff; color: #212529; }
+    .form-control { border-radius: 4px; }
+    .btn { font-size: 13px; }
+</style>
+
 <!-- Quill Rich Text Editor -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -73,7 +84,7 @@
     }
     
     .builder-left {
-        flex: 0 0 30%;
+        flex: 0 0 40%;
         border-right: 1px solid #ddd;
         background: white;
         overflow-y: auto;
@@ -269,7 +280,7 @@
     
     /* Gallery Styles */
     .gallery-preview { background: #f9f9f9; }
-    .gallery-preview img { object-fit: cover; }
+    .gallery-preview img { object-fit: contain; max-height: 300px; max-width: 100%; }
 </style>
 
 <div class="builder-wrapper">
@@ -626,7 +637,7 @@ function selectBlock(blockId) {
 }
 
 function saveBlock(blockId) {
-    const fields = document.querySelectorAll('.block-field');
+    const fields = document.querySelectorAll('#blockEditForm .block-field');
     const data = {};
     fields.forEach(f => {
         data[f.name] = f.type === 'checkbox' ? f.checked : f.value;
@@ -728,8 +739,9 @@ function uploadImage(event, blockId, fieldName) {
     .then(r => r.json())
     .then(data => {
         if (data.success) {
-            document.querySelector(`[name="${fieldName}"]`).value = data.imageUrl;
-            const img = document.querySelector('.form-section img');
+            const targetInput = document.querySelector(`#blockEditForm [name="${fieldName}"]`) || document.querySelector(`[name="${fieldName}"]`);
+            if (targetInput) targetInput.value = data.imageUrl;
+            const img = document.querySelector('#blockEditForm .form-section img') || document.querySelector('.form-section img');
             if (img) {
                 img.src = data.imageUrl;
             }
@@ -810,9 +822,11 @@ function renderGalleryImages(blockId, images) {
     let html = '';
     images.forEach((img, idx) => {
         html += `
-            <div class="gallery-preview" style="border: 1px solid #ddd; padding: 8px; border-radius: 4px; margin-bottom: 8px;">
-                <img src="${img.url}" style="width: 100%; height: 120px; object-fit: cover; margin-bottom: 8px; border-radius: 3px;">
-                <input type="text" class="form-control form-control-sm mb-2" value="${img.caption || ''}" placeholder="Chú thích" onchange="updateGalleryCaption('${blockId}', ${idx}, this.value)">
+            <div class="gallery-preview" style="border: 1px solid #ddd; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                <div style="width: 100%; min-height: 250px; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; border-radius: 3px; overflow: auto;">
+                    <img src="${img.url}" style="max-width: 100%; max-height: 250px; object-fit: contain;">
+                </div>
+                <input type="text" class="form-control form-control-sm mb-2" value="${(img.caption||'').replace(/"/g, '&quot;')}" placeholder="Chú thích" onchange="updateGalleryCaption('${blockId}', ${idx}, this.value)">
                 <button type="button" class="btn btn-sm btn-danger w-100" onclick="removeGalleryImage('${blockId}', ${idx})">Xóa</button>
             </div>
         `;
@@ -830,7 +844,8 @@ function removeGalleryImage(blockId, index) {
 }
 
 function saveGalleryBlock(blockId) {
-    const columns = document.querySelector('[name="columns"]').value;
+    const columnsEl = document.querySelector('#blockEditForm [name="columns"]') || document.querySelector('[name="columns"]');
+    const columns = columnsEl ? parseInt(columnsEl.value || 1, 10) : 1;
     const images = window[`galleryImages_${blockId}`] || [];
     
     const data = { columns, images };

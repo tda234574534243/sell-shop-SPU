@@ -577,7 +577,7 @@
         ]
     },
     "homepage": {
-        "current": 39,
+        "current": 42,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:50",
@@ -2565,6 +2565,133 @@
                     "updatedAt": "2026-03-31 18:08:37",
                     "layout": "sidebar-right"
                 }
+            },
+            {
+                "timestamp": "2026-05-10 15:09:13",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:14:17",
+                "action": "addBlock",
+                "description": "Thêm block announcement",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-6a003e5986e47",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "",
+                                "type": "info",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:14:27",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        },
+                        {
+                            "id": "block-6a003e5986e47",
+                            "type": "announcement",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "message": "skibidi",
+                                "type": "warning",
+                                "enabled": true
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
             }
         ]
     },
@@ -4421,6 +4548,1290 @@
                             "order": 3,
                             "data": {
                                 "content": "Nội dung ở đâyLoại card đồ họa\t\nNVIDIA GeForce RTX 4050 6GB GDDR6 (194 AI TOPs) 2420MHz* at 140W (2370MHz Boost Clock 50MHz OC, 115W 25W Dynamic Boost)\nIntel Iris Xe Graphics\n\nDung lượng RAM\t\n16GB\n\nLoại RAM\t\nDDR5-5600 SO-DIMM, tốc độ bộ nhớ của hệ thống thay đổi tùy theo CPU\n\nSố khe ram\t\n2x SO-DIMM (Tối đa 64GB)\n\nỔ cứng\t\n512GB PCIe 4.0 NVMe M.2 SSD (2 Khe cắm M.2 hỗ trợ SATA hoặc NVMe, tối đa 2TB)\n\nKích thước màn hình\t\n16 inches\n\nCông nghệ màn hình\t\nĐộ sáng 300nits\nĐộ phủ màu 45%\nMàn hình chống chói\nG-Sync\n\nPin\t\n56WHrs, 4S1P, 4-cell Li-ion\nSạc lại từ 0-50% trong 30 phút\n\nHệ điều hành\t\nWindows 11 Home\n\nĐộ phân giải màn hình\t\n1920 x 1200 pixels (FullHD )\n\nLoại CPU\t\nIntel Core 5 210H 2.2 GHz (12MB Cache, up to 4.8 GHz, 8 lõi, 12 luồng)\n\nCổng giao tiếp\t\n1x LAN RJ45\n1x Thunderbolt 4 hỗ trợ DisplayPort (40Gbps)\n1x USB 3.2 Gen 2 Type-C hỗ trợ DisplayPort \/ Sạc \/ G-SYNC (10Gbps)\n2x USB 3.2 Gen 1 Type-A (5Gbps)\n1x HDMI 2.1 FRL\n1x Giắc cắm âm thanh kết hợp 3.5mm\nMicrô mảng tích hợp"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "blog2": {
+        "current": 31,
+        "items": [
+            {
+                "timestamp": "2026-05-10 15:37:37",
+                "action": "addBlock",
+                "description": "Thêm block featured_products",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d1b3dc4",
+                            "type": "featured_products",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "title": "Sản phẩm nổi bật",
+                                "description": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:37:41",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": []
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:37:43",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:38:44",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p><strong>Thông báo về sản phẩm mới <\/strong><\/p><p><strong><span class=\"ql-cursor\">﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:38:53",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:38:56",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044209e5a4",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:38:59",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:39:15",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:39:18",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044365fd3d",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:39:21",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:39:24",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00443c05ee0",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:39:40",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00443c05ee0",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402377_48cc8994.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:39:50",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:41:10",
+                "action": "addBlock",
+                "description": "Thêm block banner",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044a63cf3a",
+                            "type": "banner",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:41:12",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:41:14",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:42:18",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới <\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402536_bcf3aed5.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:42:37",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới: Ốp lưng Genshin<\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402536_bcf3aed5.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:42:50",
+                "action": "addBlock",
+                "description": "Thêm block featured_products",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới: Ốp lưng Genshin<\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402536_bcf3aed5.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00450aaa228",
+                            "type": "featured_products",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "title": "Sản phẩm nổi bật",
+                                "description": ""
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:42:53",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới: Ốp lưng Genshin<\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402536_bcf3aed5.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:43:07",
+                "action": "addBlock",
+                "description": "Thêm block text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới: Ốp lưng Genshin<\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402536_bcf3aed5.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00451bc9881",
+                            "type": "text",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "Nội dung ở đây"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:43:15",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới: Ốp lưng Genshin<\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778402536_bcf3aed5.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:50:31",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:37:29",
+                    "updatedAt": "2026-05-10 15:37:29",
+                    "blocks": [
+                        {
+                            "id": "block-6a0043d7e4ab2",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo về sản phẩm mới: Ốp lưng Genshin<\/strong><\/h1><p><strong><span class=\"ql-cursor\">﻿﻿﻿﻿<\/span><\/strong><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0044aa32e03",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778403020_6c07f57a.jpg",
+                                        "caption": "ảnh minh họa"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:51:01",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:51:40",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:51:43",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:51:52",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778403110_77af9573.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:52:10",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778403110_77af9573.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 15:52:27",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778403110_77af9573.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 16:24:54",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778403110_77af9573.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a004ee6ba177",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 16:25:05",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a004ee6ba177",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 16:38:15",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-10 15:50:58",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a004ee6ba177",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        },
+                        {
+                            "id": "block-6a005207d55bd",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 5,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "blog3": {
+        "current": 4,
+        "items": [
+            {
+                "timestamp": "2026-05-10 16:55:08",
+                "action": "addBlock",
+                "description": "Thêm block richtext",
+                "data": {
+                    "title": "blog3",
+                    "slug": "blog3",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 16:54:43",
+                    "updatedAt": "2026-05-10 16:54:43",
+                    "blocks": [
+                        {
+                            "id": "block-6a0055fcac7e9",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 16:55:10",
+                "action": "addBlock",
+                "description": "Thêm block gallery",
+                "data": {
+                    "title": "blog3",
+                    "slug": "blog3",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 16:54:43",
+                    "updatedAt": "2026-05-10 16:54:43",
+                    "blocks": [
+                        {
+                            "id": "block-6a0055fcac7e9",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0055fe3b26b",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 16:55:20",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog3",
+                    "slug": "blog3",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 16:54:43",
+                    "updatedAt": "2026-05-10 16:54:43",
+                    "blocks": [
+                        {
+                            "id": "block-6a0055fcac7e9",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>Nhập nội dung của bạn ở đây<\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0055fe3b26b",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "3",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778406917_0b950b53.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 16:55:30",
+                "action": "updateBlock",
+                "description": "Cập nhật Rich Text",
+                "data": {
+                    "title": "blog3",
+                    "slug": "blog3",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 16:54:43",
+                    "updatedAt": "2026-05-10 16:54:43",
+                    "blocks": [
+                        {
+                            "id": "block-6a0055fcac7e9",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>lỗi ko <\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0055fe3b26b",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "3",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778406917_0b950b53.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-10 17:06:07",
+                "action": "updateBlock",
+                "description": "Cập nhật Gallery",
+                "data": {
+                    "title": "blog3",
+                    "slug": "blog3",
+                    "status": "draft",
+                    "createdAt": "2026-05-10 16:54:43",
+                    "updatedAt": "2026-05-10 16:54:43",
+                    "blocks": [
+                        {
+                            "id": "block-6a0055fcac7e9",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<p>lỗi ko <\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0055fe3b26b",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778407565_d17b0449.png",
+                                        "caption": ""
+                                    }
+                                ]
                             }
                         }
                     ]

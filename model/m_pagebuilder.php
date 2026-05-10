@@ -146,7 +146,7 @@ class M_pagebuilder {
                 return false;
             }
             
-            // Template PHP cho trang mới
+            // Template PHP cho trang mới (Tailwind + glass styling)
             $phpContent = '<?php include(\'template/head.php\') ?>
 <?php include(\'template/header.php\') ?>
 <?php include(\'template/toastMess.php\') ?>
@@ -196,39 +196,45 @@ class M_pagebuilder {
     }
 </style>
 
-<div class="container-fluid py-4">
-    <div class="row gx-4">
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="side-promo">
+<main class="py-4">
+    <div class="grid grid-cols-1 md:grid-cols-[16rem_1fr_16rem] gap-4 px-4 max-w-7xl mx-auto">
+        <!-- Left Sidebar -->
+        <aside class="hidden md:block">
+            <div class="space-y-3">
                 <?php if (!empty($leftBlocks)): foreach ($leftBlocks as $block): ?>
-                    <div class="mb-3"><?= renderBlock($block) ?></div>
+                    <div><?= renderBlock($block) ?></div>
                 <?php endforeach; endif; ?>
 
-                <div class="system-widgets mt-3">
-                    <div class="promo-card mb-3 p-3 shadow-sm rounded bg-white border-top border-warning border-3">
-                        <h6 class="fw-bold mb-2 small text-uppercase"><i class="fas fa-bell text-warning me-2"></i>Tin mới</h6>
+                <!-- Notifications Widget -->
+                <div class="glass-effect soft-shadow rounded-2xl p-4 border border-slate-700/30">
+                    <h6 class="font-bold mb-3 text-sm uppercase text-slate-200"><i class="fas fa-bell text-amber-400 mr-2"></i>Tin mới</h6>
+                    <div class="space-y-2">
                         <?php if ($sideNotifs && $sideNotifs->num_rows > 0): while($s = $sideNotifs->fetch_assoc()): ?>
-                            <div class="mb-2 border-bottom pb-2 last-child-border-0">
-                                <a href="notification_detail.php?id=<?= $s[\'id\'] ?>" class="text-decoration-none text-dark small fw-bold d-block text-truncate"><?= htmlspecialchars($s[\'Title\']) ?></a>
+                            <div class="pb-2 border-b border-slate-700/20 last:border-0">
+                                <a href="notification_detail.php?id=<?= $s[\'id\'] ?>" class="text-sm text-slate-300 hover:text-indigo-400 font-semibold line-clamp-2"><?= htmlspecialchars($s[\'Title\']) ?></a>
                             </div>
                         <?php endwhile; endif; ?>
                     </div>
+                </div>
 
-                    <?php if ($sideVouchers && $sideVouchers->num_rows > 0): ?>
-                        <div class="promo-card p-3 shadow-sm rounded bg-white border-top border-danger border-3">
-                            <h6 class="fw-bold mb-2 small text-uppercase"><i class="fas fa-ticket-alt text-danger me-2"></i>Voucher</h6>
+                <!-- Vouchers Widget -->
+                <?php if ($sideVouchers && $sideVouchers->num_rows > 0): ?>
+                    <div class="glass-effect soft-shadow rounded-2xl p-4 border border-slate-700/30">
+                        <h6 class="font-bold mb-3 text-sm uppercase text-slate-200"><i class="fas fa-ticket-alt text-rose-400 mr-2"></i>Voucher</h6>
+                        <div class="space-y-2">
                             <?php while($vv = $sideVouchers->fetch_assoc()): ?>
-                                <div class="mb-2 p-2 rounded bg-light border border-dashed">
-                                    <strong class="text-success small d-block"><?= htmlspecialchars($vv[\'Code\']) ?></strong>
+                                <div class="p-2 rounded-lg bg-slate-900/40 border border-dashed border-slate-600/30">
+                                    <strong class="text-emerald-400 text-xs block"><?= htmlspecialchars($vv[\'Code\']) ?></strong>
                                 </div>
                             <?php endwhile; ?>
                         </div>
-                    <?php endif; ?>
-                </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </aside>
 
-        <main class="col-12 col-lg-8">
+        <!-- Main Content -->
+        <main>
             <div class="main__container">
                 <?php if (!empty($centerBlocks)): ?>
                     <!-- Page Builder Blocks -->
@@ -237,37 +243,27 @@ class M_pagebuilder {
                     <?php endforeach; ?>
                 <?php else: ?>
                     <!-- Default Content -->
-                    <div class="alert alert-info" role="alert">
-                        <h4 class="alert-heading">' . htmlspecialchars($title) . '</h4>
-                        <p>Sử dụng Page Builder trong Admin để thêm nội dung cho trang này.</p>
-                        <hr>
-                        <p class="mb-0">Vào <strong>Admin > Quản lý trang > ' . htmlspecialchars($title) . '</strong> để bắt đầu chỉnh sửa.</p>
+                    <div class="glass-effect soft-shadow rounded-2xl p-6 border border-indigo-500/20 bg-indigo-600/5">
+                        <h4 class="font-montserrat text-2xl font-bold text-indigo-300 mb-2">' . htmlspecialchars($title) . '</h4>
+                        <p class="text-slate-300 mb-3">Sử dụng Page Builder trong Admin để thêm nội dung cho trang này.</p>
+                        <hr class="border-slate-700/30 my-3">
+                        <p class="text-slate-400 text-sm mb-0">Vào <strong class="text-slate-200">Admin > Quản lý trang > ' . htmlspecialchars($title) . '</strong> để bắt đầu chỉnh sửa.</p>
                     </div>
                 <?php endif; ?>
             </div>
         </main>
 
-        <aside class="col-lg-2 d-none d-lg-block">
-            <div class="side-promo">
-                <div class="promo-card shadow-sm border-0 mb-3 bg-white p-3 rounded border-start border-4 border-primary">
-                    <h6 class="fw-bold text-primary small text-uppercase"><i class="fas fa-shopping-basket me-2"></i>Giỏ hàng</h6>
-                    <div class="cart-status mt-2">
-                        <?php if($totalCartQty > 0): ?>
-                            <p class="small mb-2">Bạn đang có <strong class="text-danger"><?= $totalCartQty ?></strong> món.</p>
-                            <a href="cart.php" class="btn btn-sm btn-primary w-100 py-1 rounded-pill" style="font-size: 11px;">THANH TOÁN</a>
-                        <?php else: ?>
-                            <p class="text-muted small mb-0" style="font-size: 11px;">Chưa có sản phẩm nào.</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
+        <!-- Right Sidebar -->
+        <aside class="hidden md:block">
+            <div class="space-y-3">
+                <!-- Right Blocks -->
                 <?php if (!empty($rightBlocks)): foreach ($rightBlocks as $block): ?>
-                    <div class="mb-3"><?= renderBlock($block) ?></div>
+                    <div><?= renderBlock($block) ?></div>
                 <?php endforeach; endif; ?>
             </div>
         </aside>
     </div>
-</div>
+</main>
 
 <?php include(\'template/footer.php\') ?>
 ';

@@ -19,7 +19,7 @@
     }
 ?>
 
-<div class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8" style="min-height:68vh;">
+<main class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-12 gap-6 items-start">
         <div class="col-span-12 md:col-span-5">
             <div class="soft-shadow glass-effect rounded-2xl overflow-hidden p-4">
@@ -216,6 +216,6 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <?php include('template/footer.php') ?>

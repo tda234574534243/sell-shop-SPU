@@ -66,34 +66,35 @@ function renderFeaturedProductsBlock($data) {
     $products = $db->excuteQuery();
     
     $html = <<<HTML
-    <div class="container py-4" id="products">
-        <h3 class="mb-3">$title</h3>
-        <p class="text-muted">$description</p>
-        <div class="row">
+    <div id="products" class="py-4">
+        <h3 class="font-montserrat text-xl font-bold text-slate-100 mb-2">$title</h3>
+        <p class="text-slate-400 mb-4 text-sm">$description</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 HTML;
     
     if ($products && $products->num_rows > 0) {
         while ($p = $products->fetch_assoc()) {
             $price = number_format($p['GiaTien'], 0, ',', '.');
             $html .= <<<HTML
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card h-100">
-                    <img src="{$p['ImageSP']}" class="card-img-top" alt="{$p['TenSP']}">
-                    <div class="card-body d-flex flex-column">
-                        <h6 class="card-title mb-1" style="font-size:14px">{$p['TenSP']}</h6>
-                        <p class="text-danger fw-bold mb-2" style="font-size:14px">{$price}đ</p>
-                        <a href="product_detail.php?id={$p['MaSP']}" class="btn btn-sm btn-outline-primary mt-auto">Xem</a>
-                    </div>
+            <div class="group soft-shadow glass-effect rounded-2xl overflow-hidden p-4">
+                <div class="relative mb-4 h-40 flex items-center justify-center bg-slate-800 rounded-lg">
+                    <img src="{$p['ImageSP']}" alt="{$p['TenSP']}" class="h-full w-full object-contain transition group-hover:scale-105">
+                </div>
+                <p class="text-slate-300 font-semibold text-sm line-clamp-2 mb-2">{$p['TenSP']}</p>
+                <p class="text-rose-400 font-bold text-lg mb-3">{$price}đ</p>
+                <div class="flex gap-2 text-xs">
+                    <a href="product_detail.php?id={$p['MaSP']}" class="flex-1 px-3 py-2 rounded-lg border border-indigo-500/50 text-indigo-400 hover:bg-indigo-500/20 text-center">Chi Tiết</a>
+                    <form method="post" action="controller/c_addToCart.php" style="display:contents;">
+                        <input type="hidden" name="product_id" value="{$p['MaSP']}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="flex-1 px-3 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-600 text-white">Thêm</button>
+                    </form>
                 </div>
             </div>
 HTML;
         }
     }
-    
-    $html .= <<<HTML
-        </div>
-    </div>
-HTML;
+    $html .= "\n        </div>\n    </div>\n";
     
     return $html;
 }
@@ -106,12 +107,9 @@ function renderAnnouncementBlock($data) {
     $message = htmlspecialchars($data['message'] ?? '');
     $type = htmlspecialchars($data['type'] ?? 'info');
     
-    return <<<HTML
-    <div class="alert alert-{$type} alert-dismissible fade show mb-0" role="alert">
-        <strong>Thông báo:</strong> $message
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-HTML;
+    $color = $type === 'success' ? 'bg-emerald-600/10 border-emerald-500/20 text-emerald-300' : ($type === 'warning' ? 'bg-amber-600/10 border-amber-500/20 text-amber-300' : ($type === 'error' ? 'bg-rose-600/10 border-rose-500/20 text-rose-300' : 'bg-indigo-600/10 border-indigo-500/20 text-indigo-300'));
+
+    return "<div class=\"glass-effect rounded-lg p-3 mb-4 border $color\"><div class=\"flex justify-between items-start gap-4\"><div><strong class=\"font-semibold\">Thông báo:</strong> <span class=\"ml-2\">".htmlspecialchars($message)."</span></div><button class=\"ml-4 text-slate-300\" onclick=\"this.closest('div').style.display='none'\">×</button></div></div>";
 }
 
 function renderVouchersBlock($data) {
@@ -123,54 +121,38 @@ function renderVouchersBlock($data) {
     $vouchers = $vm->getAll(6);
     
     $html = <<<HTML
-    <div class="container py-4 bg-light">
-        <h3 class="mb-3">$title</h3>
-        <p class="text-muted">$description</p>
-        <div class="row">
+    <div class="py-4">
+        <h3 class="font-montserrat text-xl font-bold text-slate-100 mb-2">$title</h3>
+        <p class="text-slate-400 mb-4 text-sm">$description</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 HTML;
     
     if ($vouchers && $vouchers->num_rows > 0) {
         while ($v = $vouchers->fetch_assoc()) {
             $discount = $v['DiscountPercent'] ? $v['DiscountPercent'] . '%' : $v['DiscountAmount'] . 'đ';
             $html .= <<<HTML
-            <div class="col-md-4 mb-3">
-                <div class="card border-2 border-warning">
-                    <div class="card-body">
-                        <h6 class="card-title"><code>{$v['Code']}</code></h6>
-                        <p class="card-text small">{$v['Description']}</p>
-                        <p class="mb-1"><strong>Giảm: $discount</strong></p>
-                        <a href="voucher_detail.php?id={$v['id']}" class="btn btn-sm btn-warning">Chi tiết</a>
-                    </div>
-                </div>
+            <div class="rounded-lg p-3 glass-effect soft-shadow">
+                <p class="text-rose-400 font-bold text-sm mb-1">{$v['Code']}</p>
+                <p class="text-slate-300 text-sm mb-2">{$v['Description']}</p>
+                <p class="text-slate-200 text-sm mb-3"><strong>Giảm: $discount</strong></p>
+                <a href="voucher_detail.php?id={$v['id']}" class="inline-block px-3 py-2 rounded-md bg-rose-400/10 text-rose-300 text-sm">Chi tiết</a>
             </div>
 HTML;
         }
     }
-    
-    $html .= <<<HTML
-        </div>
-    </div>
-HTML;
+    $html .= "\n        </div>\n    </div>\n";
     
     return $html;
 }
 
 function renderTextBlock($data) {
     $content = htmlspecialchars($data['content'] ?? '');
-    return <<<HTML
-    <div class="container py-4">
-        <p>$content</p>
-    </div>
-HTML;
+    return "<div class=\"py-4\"><div class=\"prose prose-invert text-slate-200\">".$content."</div></div>";
 }
 
 function renderHtmlBlock($data) {
     $content = $data['content'] ?? '';
-    return <<<HTML
-    <div class="container py-4">
-        $content
-    </div>
-HTML;
+    return "<div class=\"py-4\"><div class=\"rich-html\">".$content."</div></div>";
 }
 
 function renderHeroBlock($data) {
@@ -181,12 +163,12 @@ function renderHeroBlock($data) {
     $bgImage = $data['backgroundImage'] ?? '/sell-shop-SPU/media/image/Slider/slider-1.jpg';
     
     return <<<HTML
-    <div class="hero-section" style="background-image: url('$bgImage'); background-size: cover; background-position: center; min-height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);"></div>
-        <div style="position: relative; z-index: 1; max-width: 600px; padding: 40px 20px;">
-            <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">$title</h1>
-            <p style="font-size: 16px; margin-bottom: 30px;">$subtitle</p>
-            <a href="$buttonLink" class="btn btn-primary btn-lg">$buttonText</a>
+    <div class="relative rounded-2xl overflow-hidden" style="background-image: url('$bgImage'); background-size: cover; background-position: center; min-height: 360px;">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div class="relative z-10 max-w-3xl mx-auto p-8 text-center text-slate-100">
+            <h1 class="text-3xl md:text-5xl font-montserrat font-bold mb-4">$title</h1>
+            <p class="text-sm md:text-base mb-6">$subtitle</p>
+            <a href="$buttonLink" class="inline-block px-6 py-3 rounded-xl bg-indigo-600 text-white font-semibold">$buttonText</a>
         </div>
     </div>
 HTML;
@@ -200,36 +182,23 @@ function renderContactBlock($data) {
     $address = htmlspecialchars($data['address'] ?? '');
     
     return <<<HTML
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>$title</h3>
-                <p>$description</p>
-                <div class="mt-4">
-                    <h6><i class="fas fa-envelope"></i> Email</h6>
-                    <p><a href="mailto:$email">$email</a></p>
-                </div>
-                <div class="mt-3">
-                    <h6><i class="fas fa-phone"></i> Điện thoại</h6>
-                    <p><a href="tel:$phone">$phone</a></p>
-                </div>
-                <div class="mt-3">
-                    <h6><i class="fas fa-map-marker-alt"></i> Địa chỉ</h6>
-                    <p>$address</p>
+    <div class="py-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-montserrat text-2xl font-bold text-slate-100 mb-2">$title</h3>
+                <p class="text-slate-300 mb-4">$description</p>
+                <div class="space-y-3 text-slate-300 text-sm">
+                    <div><i class="fas fa-envelope text-indigo-400 mr-2"></i><a href="mailto:$email" class="text-indigo-300">$email</a></div>
+                    <div><i class="fas fa-phone text-indigo-400 mr-2"></i><a href="tel:$phone" class="text-indigo-300">$phone</a></div>
+                    <div><i class="fas fa-map-marker-alt text-indigo-400 mr-2"></i><span>$address</span></div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <form method="post" action="contact.php">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" name="fullname" placeholder="Tên của bạn" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email của bạn" required>
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" name="message" rows="4" placeholder="Nội dung tin nhắn" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Gửi</button>
+            <div>
+                <form method="post" action="contact.php" class="space-y-3">
+                    <input type="text" name="fullname" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" placeholder="Tên của bạn" required>
+                    <input type="email" name="email" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" placeholder="Email của bạn" required>
+                    <textarea name="message" rows="4" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" placeholder="Nội dung tin nhắn" required></textarea>
+                    <button type="submit" class="w-full inline-block px-4 py-2 rounded-lg bg-indigo-600 text-white">Gửi</button>
                 </form>
             </div>
         </div>
@@ -243,51 +212,30 @@ function renderTestimonialsBlock($data) {
     $testimonials = array_filter(array_map('trim', explode("\n", $content)));
     
     $html = <<<HTML
-    <div class="container py-4">
-        <h3 class="text-center mb-4">$title</h3>
-        <div class="row">
+    <div class="py-4">
+        <h3 class="text-center font-montserrat text-2xl font-bold text-slate-100 mb-6">$title</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 HTML;
     
     foreach ($testimonials as $i => $testimonial) {
         if (empty($testimonial)) continue;
-        $html .= <<<HTML
-            <div class="col-md-4 mb-3">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                        </div>
-                        <p class="card-text">"$testimonial"</p>
-                    </div>
-                    <div class="card-footer bg-light">
-                        <small class="text-muted">Khách hàng</small>
-                    </div>
-                </div>
+            $html .= <<<HTML
+            <div class="rounded-lg p-4 glass-effect soft-shadow">
+                <div class="mb-2 text-amber-400">★★★★★</div>
+                <p class="text-slate-200">"$testimonial"</p>
+                <div class="mt-4 text-sm text-slate-400">Khách hàng</div>
             </div>
 HTML;
     }
     
-    $html .= <<<HTML
-        </div>
-    </div>
-HTML;
+    $html .= "\n        </div>\n    </div>\n";
     
     return $html;
 }
 
 function renderRichTextBlock($data) {
     $content = $data['content'] ?? '';
-    return <<<HTML
-    <div class="container py-4">
-        <div class="rich-text-content">
-            $content
-        </div>
-    </div>
-HTML;
+    return "<div class=\"py-4\"><div class=\"prose prose-invert rich-text-content\">".$content."</div></div>";
 }
 
 function renderGalleryBlock($data) {
@@ -298,32 +246,21 @@ function renderGalleryBlock($data) {
         return '<div class="container py-4"><p class="text-muted">Không có hình ảnh</p></div>';
     }
     
-    $colSize = $columns === 1 ? 12 : ($columns === 2 ? 6 : 4);
-    
-    $html = <<<HTML
-    <div class="container py-4">
-        <div class="row g-3">
-HTML;
+    $colsClass = $columns === 1 ? 'grid-cols-1' : ($columns === 2 ? 'grid-cols-2 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-3');
+
+    $html = "<div class=\"py-4\"><div class=\"grid $colsClass gap-3\">";
     
     foreach ($images as $img) {
         if (empty($img['url'])) continue;
         $caption = htmlspecialchars($img['caption'] ?? '');
-        $html .= <<<HTML
-            <div class="col-12 col-md-$colSize">
-                <div class="gallery-item">
-                    <img src="{$img['url']}" class="img-fluid rounded shadow-sm" alt="$caption" style="width: 100%; height: auto;">
-                    <?php if (!empty('$caption')): ?>
-                        <p class="text-center mt-2 small text-muted">$caption</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-HTML;
+        $html .= "<div class=\"gallery-item\">";
+        $html .= "<img src=\"{$img['url']}\" class=\"w-full h-100 object-contain rounded shadow-sm\" alt=\"$caption\">";
+        if (!empty($caption)) {
+            $html .= "<p class=\"text-center mt-2 text-sm text-slate-400\">$caption</p>";
+        }
+        $html .= "</div>";
     }
-    
-    $html .= <<<HTML
-        </div>
-    </div>
-HTML;
+    $html .= "</div></div>";
     
     return $html;
 }
