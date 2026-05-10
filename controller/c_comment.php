@@ -15,7 +15,15 @@ switch ($action) {
         if (!$userId) { header('Location: ../signIn.php'); exit; }
         $content = trim($_POST['Content'] ?? '');
         $rating = isset($_POST['Rating']) ? intval($_POST['Rating']) : null;
-        $model->addComment($product, $userId, $content, $rating);
+        $ok = $model->addComment($product, $userId, $content, $rating);
+        if (!$ok) {
+            $_SESSION['toast'] = [
+                'title' => 'Lỗi',
+                'message' => 'Bạn chỉ được đánh giá/bình luận 1 lần cho sản phẩm này.',
+                'type' => 'error',
+                'duration' => 4000
+            ];
+        }
         header("Location: ../product_detail.php?id=".urlencode($product));
         exit;
 

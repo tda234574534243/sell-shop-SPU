@@ -20,10 +20,27 @@ class M_comment extends M_database {
     }
 
     public function addComment($MaSP, $MaTK, $content, $rating = null) {
+        // Prevent duplicate comment/rating by the same user for the same product
+        if ($this->userHasComment($MaSP, $MaTK)) {
+            return false;
+        }
+
         $conn = $this->getConnection();
         $stmt = $conn->prepare("INSERT INTO Comments (MaSP, MaTK, Content, Rating) VALUES (?, ?, ?, ?)");
         $stmt->bind_param('sisi', $MaSP, $MaTK, $content, $rating);
         return $stmt->execute();
+    }
+
+    public function userHasComment($MaSP, $MaTK) {
+        $conn = $this->getConnection();
+        $stmt = $conn->prepare("SELECT COUNT(*) as cnt FROM Comments WHERE MaSP = ? AND MaTK = ?");
+        $stmt->bind_param('si', $MaSP, $MaTK);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        if ($row = $res->fetch_assoc()) {
+            return intval($row['cnt']) > 0;
+        }
+        return false;
     }
 
     public function getCommentsByProduct($MaSP) {

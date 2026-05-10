@@ -4,12 +4,23 @@
 <?php include_once 'model/m_wishlist.php'; ?>
 
 <?php
-    $id = isset($_GET['id']) ? $_GET['id'] : 0;
+    $id = isset($_GET['id']) ? $_GET['id'] : '';
     $db = new M_database();
-    $db->setQuery("SELECT * FROM products WHERE MaSP = '$id'");
-    $result = $db->excuteQuery();
-
-    $product = $result ? $result->fetch_assoc() : null;
+    $conn = $db->getConnection();
+    $product = null;
+    if ($stmt = $conn->prepare("SELECT * FROM products WHERE MaSP = ?")) {
+        $stmt->bind_param('s', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $product = $result ? $result->fetch_assoc() : null;
+        $stmt->close();
+    } else {
+        // fallback to safe escaped query if prepare fails
+        $safeId = $db->real_escape_string($id);
+        $db->setQuery("SELECT * FROM products WHERE MaSP = '$safeId'");
+        $result = $db->excuteQuery();
+        $product = $result ? $result->fetch_assoc() : null;
+    }
     $db->close();
 
     if (!$product) {
@@ -128,7 +139,10 @@
             <hr class="my-6 border-slate-700/40">
             <div class="mt-4">
                 <h4 class="text-lg font-semibold text-slate-100 mb-3">Đánh giá và bình luận</h4>
-                <?php if (isset($_SESSION['user_id'])): ?>
+                <?php if (isset($_SESSION['user_id'])):
+                    $hasComment = $cm->userHasComment($product['MaSP'], $_SESSION['user_id']);
+                ?>
+                    <?php if (!$hasComment): ?>
                     <form method="post" action="controller/c_comment.php" class="mb-4" id="comment-form">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="MaSP" value="<?= htmlspecialchars($product['MaSP']) ?>">
@@ -148,6 +162,9 @@
                         </div>
                         <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white">Gửi</button>
                     </form>
+                    <?php else: ?>
+                        <p class="text-slate-300">Bạn đã gửi đánh giá/bình luận cho sản phẩm này. Nếu muốn chỉnh sửa, tìm bình luận của bạn bên dưới và chọn <strong>Sửa</strong>.</p>
+                    <?php endif; ?>
                 <?php else: ?>
                     <p><a href="signIn.php" class="text-indigo-400">Đăng nhập</a> để đánh giá hoặc bình luận.</p>
                 <?php endif; ?>
