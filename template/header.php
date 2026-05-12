@@ -95,7 +95,7 @@
                             <i class="fas fa-bell"></i>
                             <?php if ($notifCount>0) echo '<span class="absolute -top-2 -right-2 bg-indigo-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">'.($notifCount>99?'99+':$notifCount).'</span>'; ?>
                         </button>
-                        <div class="absolute hidden group-hover:block glass-effect rounded-xl p-3 w-80 right-0 shadow-xl top-full mt-2">
+                        <div class="absolute hidden group-hover:block glass-effect rounded-xl p-3 w-80 right-0 shadow-xl top-full mt-0 transform translate-y-1">
                             <p class="font-montserrat font-semibold text-slate-100 mb-2 text-sm">Thông Báo Mới</p>
                             <div class="max-h-64 overflow-y-auto">
                                 <?php if ($notifList && $notifList->num_rows>0): while($n = $notifList->fetch_assoc()): ?>
@@ -122,7 +122,7 @@
                         <div class="relative group">
                             <?php $hdrAvatar = ($currentAccount && !empty($currentAccount['Avatar'])) ? $currentAccount['Avatar'] : 'media/image/avatars/default.png'; ?>
                             <img src="<?= htmlspecialchars($hdrAvatar) ?>" alt="avatar" class="w-9 h-9 rounded-full border-2 border-indigo-400 cursor-pointer hover:border-rose-400 transition">
-                            <div class="absolute hidden group-hover:block glass-effect rounded-xl p-2 min-w-40 right-0 shadow-xl top-full mt-2">
+                            <div class="absolute hidden group-hover:block glass-effect rounded-xl p-2 min-w-40 right-0 shadow-xl top-full mt-0 transform translate-y-1">
                                 <a href="user.php" class="block px-4 py-2 hover:text-indigo-400 text-slate-300 transition text-sm rounded-lg hover:bg-indigo-500/20">Tài Khoản</a>
                                 <a href="wishlist.php" class="block px-4 py-2 hover:text-indigo-400 text-slate-300 transition text-sm rounded-lg hover:bg-indigo-500/20">Yêu Thích</a>
                                 <div class="border-t border-slate-700/30 my-1"></div>
