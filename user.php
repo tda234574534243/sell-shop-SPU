@@ -82,6 +82,13 @@
         background-color: rgba(255,255,255,0.02);
     }
 
+    /* Orders improvements */
+    .orders-wrap { max-height: 480px; overflow-y: auto; border-radius:8px; padding:6px; }
+    .invoice-row { background: rgba(99,102,241,0.06); font-weight:700; border-left: 4px solid rgba(99,102,241,0.6); }
+    .money, .currency { text-align: right; font-variant-numeric: tabular-nums; }
+    .line-item { background: transparent; }
+    .empty-note { color: #94a3b8; font-size:0.95rem; padding:12px 6px; }
+
     @media screen and (max-width: 600px) {
         .main__container { padding: 20px; }
         table, thead, tbody, th, td, tr { display: block; }
@@ -167,20 +174,23 @@
     <hr>
 
     <h2>Lịch sử mua hàng</h2>
-    <table style="max-height: 400px; overflow-y: auto;">
+    <div class="orders-wrap">
+    <table>
         <tr>
-            <th>Tên sản phẩm</th><th>Ngày mua</th><th>Giá tiền</th><th>Số lượng</th><th>Tổng tiền</th><th>Trạng thái</th>
+            <th>Tên sản phẩm</th><th>Ngày mua</th><th class="money">Giá tiền</th><th>Số lượng</th><th class="money">Tổng tiền</th><th>Trạng thái</th>
         </tr>
-        <?php while ($row = $orders1->fetch_assoc()): ?>
-        <tr>
-            <td data-label="Tên sản phẩm"><?= $row['TenSP'] ?></td>
+        <?php $hasRows = false; while ($row = $orders1->fetch_assoc()): $hasRows = true; ?>
+        <tr class="line-item">
+            <td data-label="Tên sản phẩm"><?= htmlspecialchars($row['TenSP']) ?></td>
             <td data-label="Ngày mua"><?= date_format(new DateTime($row['NgayMua']), "H:i:s d/m/Y") ?></td>
-            <td data-label="Giá tiền"><?= number_format($row['GiaTien'], 0, ',', '.') ?>đ</td>
-            <td data-label="Số lượng"><?= $row['SoLuong'] ?></td>
-            <td data-label="Tổng tiền"><?= number_format($row['GiaTien']*$row['SoLuong'], 0, ',', '.') ?>đ</td>
-            <td data-label="Trạng thái"><?= $row['State'] ?></td>
+            <td data-label="Giá tiền" class="money currency"><?= number_format($row['GiaTien'], 0, ',', '.') ?>đ</td>
+            <td data-label="Số lượng"><?= intval($row['SoLuong']) ?></td>
+            <td data-label="Tổng tiền" class="money currency"><?= number_format($row['GiaTien']*$row['SoLuong'], 0, ',', '.') ?>đ</td>
+            <td data-label="Trạng thái"><?= htmlspecialchars($row['State']) ?></td>
         </tr>
-        <?php endwhile; ?>
+        <?php endwhile; if (!$hasRows): ?>
+            <tr><td colspan="6" class="empty-note">Không có đặt hàng chờ xử lý.</td></tr>
+        <?php endif; ?>
         <?php
             // Group lsMua rows by MaHD so we can show order total (which includes shipping stored in HoaDon.SoTien)
             include_once('model/m_hoadon.php');
@@ -229,9 +239,9 @@
 
                 // show a summary row for the order (total includes shipping)
                 ?>
-                <tr style="background:#f7f9fb;font-weight:700;">
-                    <td colspan="4">Hoá đơn #<?= htmlspecialchars($maHD) ?> - Ngày: <?= date_format(new DateTime($group['date']), "H:i:s d/m/Y") ?></td>
-                    <td><?= number_format($orderTotal,0,',','.') ?>đ <?php if($appliedFee>0) echo "(<small>ship: " . number_format($appliedFee,0,',','.') . "đ</small>)"; ?></td>
+                <tr class="invoice-row">
+                    <td colspan="4">Hoá đơn #<?= htmlspecialchars($maHD) ?> &nbsp; — &nbsp; Ngày: <?= date_format(new DateTime($group['date']), "H:i:s d/m/Y") ?></td>
+                    <td class="money currency"><?= number_format($orderTotal,0,',','.') ?>đ <?php if($appliedFee>0) echo "(<small>ship: " . number_format($appliedFee,0,',','.') . "đ</small>)"; ?></td>
                     <td>--</td>
                 </tr>
                 <?php
