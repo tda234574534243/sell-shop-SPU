@@ -31,6 +31,16 @@ if ($acc->isUserExist($email, $sdt)) {
 
 // Thêm tài khoản
 if ($acc->insertAccount($tenTK, $email, $sdt, $diaChi, $password)) {
+    // Ensure Verified column exists and mark this new account as unverified (0)
+    $conn = $acc->getConnection();
+    $colCheck = $conn->query("SHOW COLUMNS FROM account LIKE 'Verified'");
+    if ($colCheck && $colCheck->num_rows == 0) {
+        $conn->query("ALTER TABLE account ADD COLUMN Verified tinyint(1) NOT NULL DEFAULT 0");
+    } else {
+        // set explicitly to 0 for this email in case default isn't present
+        $stmtSet = $conn->prepare("UPDATE account SET Verified = 0 WHERE Email = ?");
+        if ($stmtSet) { $stmtSet->bind_param('s', $email); $stmtSet->execute(); }
+    }
     // create verification token and store in redis
     require_once __DIR__ . '/../redis/redis_helper.php';
     require_once __DIR__ . '/../redis/email_helper.php';
@@ -40,7 +50,11 @@ if ($acc->insertAccount($tenTK, $email, $sdt, $diaChi, $password)) {
     // store email under verify:token for 24 hours
     $rh->set('verify:' . $token, $email, 60*60*24);
 
-    $verifyUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost')) . dirname($_SERVER['REQUEST_URI']) . '/redis/verify.php?token=' . $token;
+    $scheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost');
+    // Build base path to project root (two levels up from controller)
+    $basePath = dirname(dirname($_SERVER['SCRIPT_NAME'])); // e.g. /sell-shop-SPU
+    $verifyUrl = $scheme . '://' . $host . rtrim($basePath, '/') . '/redis/verify.php?token=' . $token;
 
     $eh = new EmailHelper('no-reply@yourdomain.local', 'Sup3rDup3r');
     $subject = 'Xác thực email của bạn';
