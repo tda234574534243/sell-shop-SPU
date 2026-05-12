@@ -90,6 +90,3 @@ node server.js
 - If `generateContent` returns model-not-found: call `/api/list-models` to see supported model ids, then set `GEMINI_MODEL` accordingly.
 - If model calls fail with 401/403: check `GEMINI_API_KEY` and provider permissions.
 - If responses are cut off: reduce product count or use a model with larger token limit.
-
----
-If you want, I can: add structured JSON output from the model for richer UI, persist chat history, or add rate-limiting and auth. Which would you like next?
