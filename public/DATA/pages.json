@@ -24,17 +24,6 @@
                     "data": {
                         "content": ""
                     }
-                },
-                {
-                    "id": "block-6a003e5986e47",
-                    "type": "announcement",
-                    "section": "center",
-                    "order": 3,
-                    "data": {
-                        "message": "skibidi",
-                        "type": "warning",
-                        "enabled": true
-                    }
                 }
             ],
             "status": "published",
@@ -176,24 +165,15 @@
                             }
                         ]
                     }
-                },
-                {
-                    "id": "block-69ff0724c7df4",
-                    "type": "text",
-                    "section": "center",
-                    "order": 3,
-                    "data": {
-                        "content": "Nội dung ở đâyLoại card đồ họa\t\nNVIDIA GeForce RTX 4050 6GB GDDR6 (194 AI TOPs) 2420MHz* at 140W (2370MHz Boost Clock 50MHz OC, 115W 25W Dynamic Boost)\nIntel Iris Xe Graphics\n\nDung lượng RAM\t\n16GB\n\nLoại RAM\t\nDDR5-5600 SO-DIMM, tốc độ bộ nhớ của hệ thống thay đổi tùy theo CPU\n\nSố khe ram\t\n2x SO-DIMM (Tối đa 64GB)\n\nỔ cứng\t\n512GB PCIe 4.0 NVMe M.2 SSD (2 Khe cắm M.2 hỗ trợ SATA hoặc NVMe, tối đa 2TB)\n\nKích thước màn hình\t\n16 inches\n\nCông nghệ màn hình\t\nĐộ sáng 300nits\nĐộ phủ màu 45%\nMàn hình chống chói\nG-Sync\n\nPin\t\n56WHrs, 4S1P, 4-cell Li-ion\nSạc lại từ 0-50% trong 30 phút\n\nHệ điều hành\t\nWindows 11 Home\n\nĐộ phân giải màn hình\t\n1920 x 1200 pixels (FullHD )\n\nLoại CPU\t\nIntel Core 5 210H 2.2 GHz (12MB Cache, up to 4.8 GHz, 8 lõi, 12 luồng)\n\nCổng giao tiếp\t\n1x LAN RJ45\n1x Thunderbolt 4 hỗ trợ DisplayPort (40Gbps)\n1x USB 3.2 Gen 2 Type-C hỗ trợ DisplayPort \/ Sạc \/ G-SYNC (10Gbps)\n2x USB 3.2 Gen 1 Type-A (5Gbps)\n1x HDMI 2.1 FRL\n1x Giắc cắm âm thanh kết hợp 3.5mm\nMicrô mảng tích hợp"
-                    }
                 }
             ]
         },
         "blog2": {
             "title": "blog2",
             "slug": "blog2",
-            "status": "draft",
+            "status": "published",
             "createdAt": "2026-05-10 15:50:58",
-            "updatedAt": "2026-05-10 15:50:58",
+            "updatedAt": "2026-05-12 00:24:30",
             "blocks": [
                 {
                     "id": "block-6a0046f567a78",
@@ -229,23 +209,13 @@
                     }
                 },
                 {
-                    "id": "block-6a004ee6ba177",
-                    "type": "gallery",
+                    "id": "block-6a02110f3afb9",
+                    "type": "featured_products",
                     "section": "center",
                     "order": 4,
                     "data": {
-                        "columns": 3,
-                        "images": []
-                    }
-                },
-                {
-                    "id": "block-6a005207d55bd",
-                    "type": "gallery",
-                    "section": "center",
-                    "order": 5,
-                    "data": {
-                        "columns": 3,
-                        "images": []
+                        "title": "Sản phẩm nổi bật",
+                        "description": ""
                     }
                 }
             ]
@@ -253,9 +223,9 @@
         "blog3": {
             "title": "blog3",
             "slug": "blog3",
-            "status": "draft",
+            "status": "published",
             "createdAt": "2026-05-10 16:54:43",
-            "updatedAt": "2026-05-10 16:54:43",
+            "updatedAt": "2026-05-12 00:24:32",
             "blocks": [
                 {
                     "id": "block-6a0055fcac7e9",

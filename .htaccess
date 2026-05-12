@@ -1,0 +1,64 @@
+# Security-focused .htaccess for sell-shop-SPU
+# - Prevent directory listing
+# - Deny access to sensitive files and directories
+# - Disable PHP execution in upload/media folders
+# - Set basic security headers
+
+Options -Indexes
+
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(\.env|\.ini|\.sql|\.bak|composer\.(json|lock)|\.git)($|\.)">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^(\.env|\.ini|\.sql|\.bak|composer\.(json|lock)|\.git)($|\.)">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+# Block access to common sensitive filenames
+<FilesMatch "^(create_db\.sql|full_schema\.sql|create_wishlist_table\.sql|install\.bat)$">
+  Require all denied
+</FilesMatch>
+
+# Note: Blocking entire directories (like `controller` or `model`) can break
+# application endpoints that are meant to be accessed directly. Instead of
+# denying whole directories, we restrict access to sensitive file types and
+# specific filenames above. Keep directory access open so legitimate app
+# workflows continue to work.
+
+# Prevent access to the .git directory
+RedirectMatch 404 \.git
+
+# Disable execution of PHP and related scripts in upload and media folders
+<IfModule mod_rewrite.c>
+  RewriteCond %{REQUEST_URI} ^/uploads/ [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/media/ [NC]
+  RewriteRule \.(php|php5|phtml|phar)$ - [F,L,NC]
+</IfModule>
+
+# Deny direct reading of common sensitive file extensions anywhere
+<IfModule mod_authz_core.c>
+  <FilesMatch "\.(sql|env|ini|bak|log|txt|md)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "\.(sql|env|ini|bak|log|txt|md)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+# Basic security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "no-referrer-when-downgrade"
+</IfModule>
+
+# Hide Apache version from responses
+ServerSignature Off

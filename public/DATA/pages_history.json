@@ -577,7 +577,7 @@
         ]
     },
     "homepage": {
-        "current": 42,
+        "current": 43,
         "items": [
             {
                 "timestamp": "2026-03-31 03:19:50",
@@ -2692,6 +2692,41 @@
                     "updatedAt": "2026-03-31 18:08:37",
                     "layout": "sidebar-right"
                 }
+            },
+            {
+                "timestamp": "2026-05-12 00:24:18",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "Trang chủ",
+                    "slug": "homepage",
+                    "blocks": [
+                        {
+                            "id": "block-69c9f2e628052",
+                            "type": "banner",
+                            "order": 2,
+                            "section": "center",
+                            "data": {
+                                "title": "Banner",
+                                "subtitle": "",
+                                "buttonText": "Mua ngay",
+                                "backgroundImage": "https:\/\/cellphones.com.vn\/sforum\/wp-content\/uploads\/2022\/09\/f1662574287.jpg"
+                            }
+                        },
+                        {
+                            "id": "block-69c9fd8086390",
+                            "type": "text",
+                            "section": "right",
+                            "order": 1,
+                            "data": {
+                                "content": ""
+                            }
+                        }
+                    ],
+                    "status": "published",
+                    "updatedAt": "2026-03-31 18:08:37",
+                    "layout": "sidebar-right"
+                }
             }
         ]
     },
@@ -4259,7 +4294,7 @@
         ]
     },
     "blog": {
-        "current": 8,
+        "current": 9,
         "items": [
             {
                 "timestamp": "2026-05-09 17:05:21",
@@ -4552,11 +4587,49 @@
                         }
                     ]
                 }
+            },
+            {
+                "timestamp": "2026-05-12 00:24:41",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog",
+                    "slug": "blog",
+                    "status": "published",
+                    "createdAt": "2026-05-09 17:05:14",
+                    "updatedAt": "2026-05-10 15:09:39",
+                    "blocks": [
+                        {
+                            "id": "block-69ff06e148561",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<ul><li><strong>Sản phẩm LAPTOP ASUS TUF đã được ra mắt<\/strong><\/li><\/ul>"
+                            }
+                        },
+                        {
+                            "id": "block-69ff0710c2ade",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778321175_fb2374af.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
             }
         ]
     },
     "blog2": {
-        "current": 31,
+        "current": 39,
         "items": [
             {
                 "timestamp": "2026-05-10 15:37:37",
@@ -5657,6 +5730,452 @@
                             "data": {
                                 "columns": 3,
                                 "images": []
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:24:55",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": {
+                        "0": {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        "1": {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        "2": {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        "4": {
+                            "id": "block-6a005207d55bd",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 5,
+                            "data": {
+                                "columns": 3,
+                                "images": []
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:24:59",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:25:05",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0210f145bc8",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:25:16",
+                "action": "updateBlock",
+                "description": "Cập nhật block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0210f145bc8",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "skibidi",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:25:21",
+                "action": "addBlock",
+                "description": "Thêm block testimonials",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0210f145bc8",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "skibidi",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        },
+                        {
+                            "id": "block-6a0211015e419",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 5,
+                            "data": {
+                                "title": "Nhận xét từ khách hàng",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:25:27",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a0210f145bc8",
+                            "type": "testimonials",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "skibidi",
+                                "content": "Nhận xét 1\nNhận xét 2\nNhận xét 3"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:25:30",
+                "action": "deleteBlock",
+                "description": "Xóa block",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "timestamp": "2026-05-12 00:25:35",
+                "action": "addBlock",
+                "description": "Thêm block featured_products",
+                "data": {
+                    "title": "blog2",
+                    "slug": "blog2",
+                    "status": "published",
+                    "createdAt": "2026-05-10 15:50:58",
+                    "updatedAt": "2026-05-12 00:24:30",
+                    "blocks": [
+                        {
+                            "id": "block-6a0046f567a78",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 1,
+                            "data": {
+                                "content": "<h1><strong>Thông báo sản phẩm mới được ra mắt: Ốp lưng Genshin Impact<\/strong><\/h1>"
+                            }
+                        },
+                        {
+                            "id": "block-6a00471f50443",
+                            "type": "gallery",
+                            "section": "center",
+                            "order": 2,
+                            "data": {
+                                "columns": "1",
+                                "images": [
+                                    {
+                                        "url": "\/sell-shop-SPU\/media\/image\/uploads\/img_1778405102_41c9b2cf.jpg",
+                                        "caption": ""
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "block-6a00473ae1111",
+                            "type": "richtext",
+                            "section": "center",
+                            "order": 3,
+                            "data": {
+                                "content": "<p><strong>Mô tả sản phẩm:<\/strong><\/p><ol><li>Thiết kế thời trang giúp điện thoại của bạn luôn độc đáo<\/li><li>100% thương hiệu mới và chưa sử dụng<\/li><li>Vỏ mềm dễ dàng lắp đặt và tháo gỡ.<\/li><li>Với bảo vệ camera toàn bộ.<\/li><li>Vỏ kết hợp màu sắc trang nhã và duy trì cảm giác thẩm mỹ ban đầu.<\/li><li>Đơn giản, thời trang, cao cấp, thoải mái và nhẹ nhàng.<\/li><li>Vừa vặn hoàn hảo mà không ảnh hưởng đến bất kỳ phím chức năng nào.<\/li><\/ol><p><br><\/p>"
+                            }
+                        },
+                        {
+                            "id": "block-6a02110f3afb9",
+                            "type": "featured_products",
+                            "section": "center",
+                            "order": 4,
+                            "data": {
+                                "title": "Sản phẩm nổi bật",
+                                "description": ""
                             }
                         }
                     ]
