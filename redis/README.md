@@ -50,6 +50,3 @@ Gợi ý phát triển tiếp
 - Thêm rate-limit cho `request_otp.php` (ví dụ: key `rl:otp:<ip>` trong Redis).
 - Thêm `resend_verify` UI/flow (đã có endpoint).
 - Ghi log chi tiết gửi mail để dễ debug (hoặc bật `mail.log` trong `php.ini`).
-
-Liên hệ
-- Nếu cần mình có thể: triển khai PHPMailer đầy đủ, thêm rate-limit, hoặc cài MailHog để test mail cục bộ.
