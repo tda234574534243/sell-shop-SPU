@@ -153,9 +153,6 @@
         <!-- Right Sidebar -->
         <aside class="col-span-12 lg:col-span-3">
             <div class="space-y-4">
-                <?php if (!empty($rightBlocks)): foreach ($rightBlocks as $block): ?>
-                    <div class="soft-shadow glass-effect rounded-2xl p-4 border border-slate-700/30"><?= renderBlock($block) ?></div>
-                <?php endforeach; endif; ?>
 
                 <!-- Random Products -->
                 <div class="soft-shadow glass-effect rounded-2xl p-4 border border-indigo-500/20">
