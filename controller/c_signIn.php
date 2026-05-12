@@ -26,16 +26,17 @@ $result = $acc->findAccountByEmail($email);
 if ($result && $result->num_rows > 0) {
     $account = $result->fetch_assoc();
 
-    // If Verified column exists and account is not verified, block login
+    // If Verified column exists and account is not verified, block login and offer resend link
     if (array_key_exists('Verified', $account) && intval($account['Verified']) === 0) {
         if (session_status() == PHP_SESSION_NONE) session_start();
         $_SESSION['toast'] = [
             'title' => 'Xác thực email',
-            'message' => 'Tài khoản chưa xác thực email. Vui lòng kiểm tra email hoặc yêu cầu gửi lại.',
+            'message' => 'Vui lòng kiểm tra mail để xác thực đăng ký',
             'type' => 'error',
             'duration' => 6000
         ];
-        header('Location: ../signIn.php');
+        // redirect back to signIn with a flag so UI can show resend link
+        header('Location: ../signIn.php?unverified=1&email=' . urlencode($email));
         exit();
     }
 
