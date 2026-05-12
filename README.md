@@ -90,12 +90,6 @@ node server.js
 - Có một số file test trong `tests/` (ví dụ `test_wishlist_model_only.php`) — dùng để kiểm tra model wishlist độc lập.
 - Logs DB được ghi trong `logs/` — kiểm tra khi gặp lỗi SQL.
 
-## Các bước ưu tiên tiếp theo (gợi ý)
-- 1) Xây dựng migration/convert toàn bộ query sang prepared statements.
-- 2) Thêm escape đầu ra và kiểm tra XSS.
-- 3) Thêm xác thực/CSRF cho admin controllers.
-- 4) Thêm unit/integration tests cho checkout + voucher flows.
-
 ---
 
 
