@@ -63,6 +63,10 @@ if (session_status() == PHP_SESSION_NONE) session_start();
             </button>
         </form>
 
+        <div class="mt-3 text-center">
+            <a href="/sell-shop-SPU/redis/forgot.php" class="text-sm text-indigo-300 hover:text-indigo-200">Quên mật khẩu?</a>
+        </div>
+
         <!-- Sign Up Link -->
         <div class="mt-6 text-center border-t border-slate-700/30 pt-6">
             <p class="text-slate-400 text-sm mb-2">Chưa có tài khoản?</p>

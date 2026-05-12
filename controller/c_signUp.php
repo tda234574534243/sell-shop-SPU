@@ -31,16 +31,35 @@ if ($acc->isUserExist($email, $sdt)) {
 
 // Thêm tài khoản
 if ($acc->insertAccount($tenTK, $email, $sdt, $diaChi, $password)) {
+    // create verification token and store in redis
+    require_once __DIR__ . '/../redis/redis_helper.php';
+    require_once __DIR__ . '/../redis/email_helper.php';
+
+    $token = bin2hex(random_bytes(16));
+    $rh = new RedisHelper();
+    // store email under verify:token for 24 hours
+    $rh->set('verify:' . $token, $email, 60*60*24);
+
+    $verifyUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!=='off' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost')) . dirname($_SERVER['REQUEST_URI']) . '/redis/verify.php?token=' . $token;
+
+    $eh = new EmailHelper('no-reply@yourdomain.local', 'Sup3rDup3r');
+    $subject = 'Xác thực email của bạn';
+    $body = "<p>Xin chào " . htmlspecialchars($tenTK) . ",</p>" .
+            "<p>Cảm ơn bạn đã đăng ký. Vui lòng bấm vào liên kết bên dưới để xác thực email:</p>" .
+            "<p><a href=\"{$verifyUrl}\">Xác thực email</a></p>" .
+            "<p>Liên kết sẽ hết hạn sau 24 giờ.</p>";
+    @ $eh->send($email, $subject, $body);
+
      $_SESSION['toast'] = [
             'title' => 'Thông báo',
-            'message' => 'Đăng kí tài khoản thành công!',
+            'message' => 'Đăng kí tài khoản thành công! Vui lòng kiểm tra email để xác thực.',
             'type' => 'success',
-            'duration' => 3000
+            'duration' => 5000
     ];
     if (function_exists('log_action')) {
-        log_action('INFO', 'New user registered', ['username' => $tenTK, 'email' => $email]);
+        log_action('INFO', 'New user registered (pending verification)', ['username' => $tenTK, 'email' => $email]);
     }
-    header("Location: ../signUp.php?message=Đăng ký tài khoản thành công! Vui lòng đợi 2s...&status=success");
+    header("Location: ../signUp.php?message=Đăng ký thành công. Vui lòng kiểm tra email để xác thực.&status=success");
     exit();
 } else {
     header("Location: ../signUp.php?error=insertfail");

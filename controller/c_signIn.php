@@ -26,6 +26,19 @@ $result = $acc->findAccountByEmail($email);
 if ($result && $result->num_rows > 0) {
     $account = $result->fetch_assoc();
 
+    // If Verified column exists and account is not verified, block login
+    if (array_key_exists('Verified', $account) && intval($account['Verified']) === 0) {
+        if (session_status() == PHP_SESSION_NONE) session_start();
+        $_SESSION['toast'] = [
+            'title' => 'Xác thực email',
+            'message' => 'Tài khoản chưa xác thực email. Vui lòng kiểm tra email hoặc yêu cầu gửi lại.',
+            'type' => 'error',
+            'duration' => 6000
+        ];
+        header('Location: ../signIn.php');
+        exit();
+    }
+
     // Nếu cột Locked tồn tại và bằng 1 thì chặn đăng nhập
     if (isset($account['Locked']) && intval($account['Locked']) === 1) {
         if (session_status() == PHP_SESSION_NONE) session_start();
