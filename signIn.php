@@ -63,6 +63,18 @@ if (session_status() == PHP_SESSION_NONE) session_start();
             </button>
         </form>
 
+        <div class="mt-3 text-center">
+            <a href="/sell-shop-SPU/redis/forgot.php" class="text-sm text-indigo-300 hover:text-indigo-200">Quên mật khẩu?</a>
+        </div>
+
+        <?php if (isset($_GET['unverified']) && $_GET['unverified'] == '1'): ?>
+            <div class="mt-4 p-4 rounded-lg bg-yellow-500/10 border border-yellow-400/20 text-center">
+                <p class="text-yellow-300 text-sm mb-2">Vui lòng kiểm tra mail để xác thực đăng ký.</p>
+                <?php $e = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>
+                <a href="/sell-shop-SPU/redis/resend_verify.php?email=<?php echo urlencode($e); ?>" class="inline-block px-4 py-2 rounded-lg bg-yellow-500 text-yellow-900 font-semibold text-sm">Gửi lại email xác thực</a>
+            </div>
+        <?php endif; ?>
+
         <!-- Sign Up Link -->
         <div class="mt-6 text-center border-t border-slate-700/30 pt-6">
             <p class="text-slate-400 text-sm mb-2">Chưa có tài khoản?</p>
