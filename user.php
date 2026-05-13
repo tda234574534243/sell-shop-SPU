@@ -41,6 +41,15 @@
         color: #e6eef9;
     }
 
+    /* Visually mute readonly email field to indicate non-editable */
+    input.readonly-muted {
+        opacity: 0.6;
+        background: rgba(255,255,255,0.02);
+        color: #bfcfe8;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
     form input:focus,
     form textarea:focus {
         border-color: rgba(99,102,241,0.9);
@@ -144,7 +153,8 @@
                 <input type="text" name="HoTen" value="<?= htmlspecialchars($user['TenTK']) ?>" required>
 
                 <label for="Email">Email:</label>
-                <input type="email" name="Email" value="<?= htmlspecialchars($user['Email']) ?>" required>
+                <input type="email" name="Email" value="<?= htmlspecialchars($user['Email']) ?>" readonly class="readonly-muted" aria-disabled="true">
+                <small style="display:block;color:#94a3b8;margin-bottom:8px;">Email không thể thay đổi từ đây. Liên hệ quản trị nếu muốn cập nhật.</small>
 
                 <label for="SDT">Số điện thoại:</label>
                 <input type="text" name="SDT" value="<?= htmlspecialchars($user['SDT']) ?>">

@@ -6,7 +6,11 @@
     if ($maKH <= 0) die("Không xác định người dùng.");
 
     $hoTen = $_POST['HoTen'] ?? '';
-    $email = $_POST['Email'] ?? '';
+    // Do NOT trust client-submitted email. Load existing email from DB and ignore changes from POST.
+    $accCheck = new M_account();
+    $existing = $accCheck->getAccount($maKH);
+    $existingRow = ($existing && $existing->num_rows>0) ? $existing->fetch_assoc() : null;
+    $email = $existingRow['Email'] ?? '';
     $sdt = $_POST['SDT'] ?? '';
     $diaChi = $_POST['DiaChi'] ?? '';
 
@@ -49,6 +53,13 @@
 
     $acc = new M_account();
     if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
+    // If user attempted to change email in the POST payload, log it and ignore the change.
+    $postedEmail = $_POST['Email'] ?? '';
+    if (!empty($postedEmail) && $postedEmail !== $email) {
+        if (file_exists(__DIR__ . '/../helper/logger.php')) require_once __DIR__ . '/../helper/logger.php';
+        if (function_exists('log_action')) log_action('WARN', 'User attempted client-side email change ignored', ['MaTK'=>$maKH, 'postedEmail'=>$postedEmail, 'actualEmail'=>$email]);
+    }
+
     $res = $acc->updateProfile($maKH, $hoTen, $email, $sdt, $diaChi, $avatarDbPath, $currentPassword, $newPassword);
 
     if ($res === 'wrong_password') {
