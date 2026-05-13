@@ -108,6 +108,34 @@ class M_statistic extends M_database {
     }
 
     /**
+     * Lấy số đơn hàng đã giao theo từng tháng trong năm
+     */
+    public function getYearlyDeliveredOrders($year = null) {
+        if (!$year) $year = date('Y');
+
+        $query = "
+            SELECT 
+                MONTH(ls.NgayMua) as month,
+                COUNT(DISTINCT ls.MaHD) as total
+            FROM LS_Mua ls
+            WHERE YEAR(ls.NgayMua) = $year
+              AND ls.State = 'Đã giao hàng'
+            GROUP BY MONTH(ls.NgayMua)
+            ORDER BY month
+        ";
+
+        $this->setQuery($query);
+        $result = $this->excuteQuery();
+        $data = [];
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[$row['month']] = (int)$row['total'];
+            }
+        }
+        return $data;
+    }
+
+    /**
      * Lấy tổng đơn hàng
      */
     public function getTotalOrders($month = null, $year = null) {
@@ -201,7 +229,8 @@ class M_statistic extends M_database {
         $prevRevenue = $this->getMonthlyRevenue($prevMonth, $prevYear);
         
         if ($prevRevenue == 0) {
-            return $prevRevenue == 0 ? 0 : 100;
+            if ($currentRevenue == 0) return 0;
+            return 100; // previous 0 and current > 0 -> show 100% (new growth)
         }
         
         return round((($currentRevenue - $prevRevenue) / $prevRevenue) * 100, 2);
@@ -227,7 +256,8 @@ class M_statistic extends M_database {
         $prevOrders = $this->getTotalOrders($prevMonth, $prevYear);
         
         if ($prevOrders == 0) {
-            return $prevOrders == 0 ? 0 : 100;
+            if ($currentOrders == 0) return 0;
+            return 100;
         }
         
         return round((($currentOrders - $prevOrders) / $prevOrders) * 100, 2);
@@ -298,10 +328,38 @@ class M_statistic extends M_database {
         $prevRevenue = $this->getMonthlyDeliveredRevenue($prevMonth, $prevYear);
 
         if ($prevRevenue == 0) {
-            return $prevRevenue == 0 ? 0 : 100;
+            if ($currentRevenue == 0) return 0;
+            return 100;
         }
 
         return round((($currentRevenue - $prevRevenue) / $prevRevenue) * 100, 2);
+    }
+
+    /**
+     * Lấy thay đổi % số đơn hàng đã giao so với tháng trước
+     */
+    public function getOrdersChangeDelivered($month = null, $year = null) {
+        if (!$month) $month = date('n');
+        if (!$year) $year = date('Y');
+
+        $currentOrders = $this->getTotalDeliveredOrders($month, $year);
+
+        if ($month == 1) {
+            $prevMonth = 12;
+            $prevYear = $year - 1;
+        } else {
+            $prevMonth = $month - 1;
+            $prevYear = $year;
+        }
+
+        $prevOrders = $this->getTotalDeliveredOrders($prevMonth, $prevYear);
+
+        if ($prevOrders == 0) {
+            if ($currentOrders == 0) return 0;
+            return 100;
+        }
+
+        return round((($currentOrders - $prevOrders) / $prevOrders) * 100, 2);
     }
 
     /**

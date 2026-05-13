@@ -140,10 +140,12 @@
             <h2>Thống kê tháng <?= str_pad($month, 2, '0', STR_PAD_LEFT) ?>/<?= $year ?></h2>
             <div class="amount"><?= number_format($revenue, 0, ',', '.') ?> ₫</div>
             <div class="change">
-                <?php if ($change >= 0): ?>
+                <?php if ($change > 0): ?>
                     <span style="color: #4ade80;">↑ +<?= $change ?>% so với tháng trước</span>
-                <?php else: ?>
+                <?php elseif ($change < 0): ?>
                     <span style="color: #f87171;">↓ <?= $change ?>% so với tháng trước</span>
+                <?php else: ?>
+                    <span style="color: #6c757d;">0% so với tháng trước</span>
                 <?php endif; ?>
             </div>
         </div>

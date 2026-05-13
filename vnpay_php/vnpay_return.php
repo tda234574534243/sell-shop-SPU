@@ -112,6 +112,7 @@
                                                 $lsUpd = $lsModel->updateStateByMaHD($maHD, 'Đang chuẩn bị hàng');
                                                 if ($lsUpd !== false) {
                                                     $msg = "<span style='color:blue'>GD Thanh cong. Hóa đơn và trạng thái mặt hàng đã được cập nhật.</span>";
+                                                    echo "<script>window.location.href='http://localhost/sell-shop-SPU/index.php';</script>";
                                                 } else {
                                                     error_log("Failed to update LS_Mua states for MaHD={$maHD}");
                                                     $msg = "<span style='color:orange'>GD Thanh cong. Tuy nhiên không cập nhật được trạng thái mặt hàng.</span>";
