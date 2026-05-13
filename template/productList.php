@@ -100,15 +100,15 @@
         <!-- Filters -->
         <aside class="col-span-12 lg:col-span-3">
             <div class="soft-shadow glass-effect rounded-2xl p-4">
-                <h5 class="font-semibold text-slate-100 mb-3">Lọc tìm kiếm</h5>
+                <h5 class="font-semibold text-slate-200 mb-3">Lọc tìm kiếm</h5>
                 <form method="get" class="space-y-3">
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Từ khóa</label>
-                        <input type="text" name="query" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-100 placeholder-slate-400" value="<?= htmlspecialchars($_GET['query'] ?? '') ?>" placeholder="Tên, mã, mô tả...">
+                        <label class="block text-xs text-slate-300 mb-1">Từ khóa</label>
+                        <input type="text" name="query" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-200 placeholder-slate-400 bg-slate-800/40 border border-slate-700" value="<?= htmlspecialchars($_GET['query'] ?? '') ?>" placeholder="Tên, mã, mô tả...">
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Năm</label>
-                        <select name="year" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
+                        <label class="block text-xs text-slate-300 mb-1">Năm</label>
+                        <select name="year" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-200 bg-slate-800/40 border border-slate-700">
                             <option value="">Tất cả</option>
                             <?php foreach($years as $y): ?>
                                 <option value="<?= $y ?>" <?= $filterYear===$y?'selected':'' ?>><?= $y ?></option>
@@ -116,8 +116,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Phân loại</label>
-                        <select name="category" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
+                        <label class="block text-xs text-slate-300 mb-1">Phân loại</label>
+                        <select name="category" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-200 bg-slate-800/40 border border-slate-700">
                             <option value="">Tất cả</option>
                             <?php foreach($categories as $c): ?>
                                 <option value="<?= htmlspecialchars($c) ?>" <?= $filterCategory===$c?'selected':'' ?>><?= htmlspecialchars($c) ?></option>
@@ -125,16 +125,16 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Sắp xếp theo giá</label>
-                        <select name="sort" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
+                        <label class="block text-xs text-slate-300 mb-1">Sắp xếp theo giá</label>
+                        <select name="sort" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-200 bg-slate-800/40 border border-slate-700">
                             <option value="">Không</option>
                             <option value="asc" <?= $sortPrice==='asc'?'selected':'' ?>>Giá tăng dần</option>
                             <option value="desc" <?= $sortPrice==='desc'?'selected':'' ?>>Giá giảm dần</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Sắp xếp đặc biệt</label>
-                        <select name="order" class="w-full glass-effect rounded-XL px-3 py-2 text-slate-100">
+                        <label class="block text-xs text-slate-300 mb-1">Sắp xếp đặc biệt</label>
+                        <select name="order" class="w-full glass-effect rounded-xl px-3 py-2 text-slate-200 bg-slate-800/40 border border-slate-700">
                             <option value="">Mặc định</option>
                             <option value="rating" <?= (($_GET['order'] ?? '')==='rating')?'selected':'' ?>>Theo đánh giá cao</option>
                             <option value="bestseller" <?= (($_GET['order'] ?? '')==='bestseller')?'selected':'' ?>>Sản phẩm bán chạy</option>
