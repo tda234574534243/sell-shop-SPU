@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSHOP Việt Nam - Premium Tech Store</title>
+    <title>Sup3rDup3r Việt Nam - Premium Tech Store</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter & Montserrat Font -->
