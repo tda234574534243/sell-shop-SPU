@@ -77,6 +77,10 @@
 
             <!-- Search & Right Icons -->
             <div class="flex items-center gap-6">
+                <!-- Mobile menu button -->
+                <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-indigo-400 transition text-xl p-2 rounded-lg" aria-label="Mở menu">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <form method="GET" action="searchProduct.php" class="hidden lg:flex">
                     <input type="search" name="query" placeholder="Tìm kiếm..." class="glass-effect rounded-full px-4 py-2 text-sm placeholder-slate-400 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" required>
                 </form>
@@ -145,3 +149,44 @@
         <input type="search" name="query" placeholder="Tìm kiếm..." class="w-full glass-effect rounded-lg px-4 py-2 text-sm placeholder-slate-400 text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" required>
     </form>
 </div>
+
+<!-- Mobile Navigation Panel -->
+<div id="mobileMenu" class="md:hidden hidden bg-[#071025] border-b border-indigo-500/10">
+    <div class="px-4 py-3 space-y-2">
+        <a href="index.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Trang Chủ</a>
+        <a href="introduce.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Giới Thiệu</a>
+        <a href="contact.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Liên Hệ</a>
+        <a href="track-order.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Theo Dõi</a>
+        <?php if ($isLoggedIn && $isAdmin): ?>
+            <a href="admin/page-builder.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Quản Lý</a>
+        <?php endif; ?>
+        <div class="border-t border-slate-700/30 mt-2 pt-2"></div>
+        <?php if ($isLoggedIn): ?>
+            <a href="user.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Tài Khoản</a>
+            <a href="wishlist.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Yêu Thích</a>
+            <a href="controller/c_logout.php" class="block text-rose-400 py-2 rounded-lg hover:bg-rose-500/10">Đăng Xuất</a>
+        <?php else: ?>
+            <a href="signin.php" class="block text-slate-200 py-2 rounded-lg hover:bg-indigo-500/10">Đăng Nhập</a>
+            <a href="signup.php" class="block text-indigo-300 py-2 rounded-lg hover:bg-indigo-500/20">Đăng Ký</a>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script>
+    (function(){
+        var btn = document.getElementById('mobileMenuBtn');
+        var menu = document.getElementById('mobileMenu');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function(){
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('block');
+                btn.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('block');
+                btn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    })();
+</script>

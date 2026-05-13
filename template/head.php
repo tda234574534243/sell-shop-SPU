@@ -40,6 +40,19 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        /* Reduce heavy effects on small screens for performance and readability */
+        @media (max-width: 768px) {
+            .glass-effect {
+                backdrop-filter: none;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.04);
+            }
+            /* Improve comment UI on small screens */
+            .star { padding: 0.5rem; border-radius: 0.5rem; }
+            textarea { min-height: 4.5rem; }
+            .comment-avatar { margin: 0 auto; }
+            .comment-actions button, .comment-actions a { padding: .5rem .75rem; }
+        }
         .soft-shadow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05); }
         .deep-shadow { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08); }
         html, body { height: 100%; background: #0f172a; }

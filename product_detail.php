@@ -149,18 +149,18 @@
                         <div class="mb-2">
                             <label class="block text-sm text-slate-300 mb-1">Đánh giá:</label>
                             <div class="star-rating flex gap-1" data-target-input="rating-input">
-                                <button type="button" class="star text-2xl" data-value="1">☆</button>
-                                <button type="button" class="star text-2xl" data-value="2">☆</button>
-                                <button type="button" class="star text-2xl" data-value="3">☆</button>
-                                <button type="button" class="star text-2xl" data-value="4">☆</button>
-                                <button type="button" class="star text-2xl" data-value="5">☆</button>
+                                <button type="button" class="star text-2xl px-3 py-2 rounded-md touch-manage" data-value="1">☆</button>
+                                <button type="button" class="star text-2xl px-3 py-2 rounded-md touch-manage" data-value="2">☆</button>
+                                <button type="button" class="star text-2xl px-3 py-2 rounded-md touch-manage" data-value="3">☆</button>
+                                <button type="button" class="star text-2xl px-3 py-2 rounded-md touch-manage" data-value="4">☆</button>
+                                <button type="button" class="star text-2xl px-3 py-2 rounded-md touch-manage" data-value="5">☆</button>
                             </div>
                             <input type="hidden" name="Rating" id="rating-input" value="">
                         </div>
                         <div class="mb-2">
-                            <textarea name="Content" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100" rows="3" placeholder="Viết bình luận..."></textarea>
+                            <textarea name="Content" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100 min-h-[80px]" placeholder="Viết bình luận..."></textarea>
                         </div>
-                        <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white">Gửi</button>
+                        <button class="px-4 py-2 rounded-lg bg-indigo-600 text-white w-full sm:w-auto">Gửi</button>
                     </form>
                     <?php else: ?>
                         <p class="text-slate-300">Bạn đã gửi đánh giá/bình luận cho sản phẩm này. Nếu muốn chỉnh sửa, tìm bình luận của bạn bên dưới và chọn <strong>Sửa</strong>.</p>
@@ -181,21 +181,23 @@
                 ?>
                     <?php $hiddenClass = (isset($c['Hidden']) && $c['Hidden']) ? 'opacity-60' : ''; ?>
                     <div class="p-3 rounded-lg mb-3 bg-slate-900/30 <?= $hiddenClass ?>">
-                        <div class="flex items-start gap-3">
+                        <div class="flex flex-col sm:flex-row items-start gap-3">
                             <?php $avatarSrc = !empty($c['Avatar']) ? $c['Avatar'] : 'media/image/avatars/default.png'; ?>
-                            <img src="<?= htmlspecialchars($avatarSrc) ?>" alt="avatar" class="w-12 h-12 rounded-full object-cover">
+                            <img src="<?= htmlspecialchars($avatarSrc) ?>" alt="avatar" class="w-12 h-12 rounded-full object-cover comment-avatar mb-2 sm:mb-0">
                             <div class="flex-1">
-                                <div class="flex justify-between items-start">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
                                     <div>
                                         <strong class="text-slate-100"><?= htmlspecialchars($c['TenTK']) ?></strong>
                                         <?php if (!empty($c['Rating'])): ?><span class="text-amber-400"> - <?= intval($c['Rating']) ?>★</span><?php endif; ?>
                                         <div class="text-xs text-slate-400"><?= $c['CreatedAt'] ?></div>
                                     </div>
-                                    <div class="text-right">
+                                    <div class="text-right mt-2 sm:mt-0">
                                         <?php $isOwner = (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $c['MaTK']); $isAdmin = isset($_SESSION['levelID']) && $_SESSION['levelID'] == 1; ?>
                                         <?php if ($isAdmin || $isOwner): ?>
-                                            <a href="#" onclick="document.getElementById('edit-<?= $c['id'] ?>').style.display='block';return false;" class="text-sm text-indigo-400 mr-2">Sửa</a>
-                                            <a href="controller/c_comment.php?action=delete&id=<?= $c['id'] ?>&MaSP=<?= urlencode($product['MaSP']) ?>" onclick="return confirm('Xóa bình luận này?')" class="text-sm text-rose-400">Xóa</a>
+                                            <div class="comment-actions">
+                                                <a href="#" onclick="document.getElementById('edit-<?= $c['id'] ?>').style.display='block';return false;" class="inline-block text-sm text-indigo-400 mr-2">Sửa</a>
+                                                <a href="controller/c_comment.php?action=delete&id=<?= $c['id'] ?>&MaSP=<?= urlencode($product['MaSP']) ?>" onclick="return confirm('Xóa bình luận này?')" class="inline-block text-sm text-rose-400">Xóa</a>
+                                            </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -207,17 +209,17 @@
                                         <input type="hidden" name="id" value="<?= $c['id'] ?>">
                                         <input type="hidden" name="MaSP" value="<?= htmlspecialchars($product['MaSP']) ?>">
                                         <div>
-                                            <select name="Rating" class="rounded-lg bg-slate-900/40 px-2 py-1 text-slate-100">
+                                            <select name="Rating" class="rounded-lg bg-slate-900/40 px-2 py-1 text-slate-100 w-full sm:w-auto">
                                                 <option value="">Không đánh giá</option>
                                                 <?php for ($r=5;$r>=1;$r--): ?>
                                                     <option value="<?= $r ?>" <?= (isset($c['Rating']) && $c['Rating']==$r)?'selected':'' ?>><?= $r ?> sao</option>
                                                 <?php endfor; ?>
                                             </select>
                                         </div>
-                                        <textarea name="Content" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100"><?= htmlspecialchars($c['Content']) ?></textarea>
-                                        <div class="flex gap-2">
-                                            <button class="px-3 py-1 rounded bg-indigo-600 text-white" type="submit">Lưu</button>
-                                            <button class="px-3 py-1 rounded bg-slate-700 text-slate-200" type="button" onclick="this.closest('#edit-<?= $c['id'] ?>').style.display='none'">Hủy</button>
+                                        <textarea name="Content" class="w-full rounded-lg bg-slate-900/40 px-3 py-2 text-slate-100 min-h-[80px]"><?= htmlspecialchars($c['Content']) ?></textarea>
+                                        <div class="flex flex-col sm:flex-row gap-2">
+                                            <button class="px-3 py-2 rounded bg-indigo-600 text-white w-full sm:w-auto" type="submit">Lưu</button>
+                                            <button class="px-3 py-2 rounded bg-slate-700 text-slate-200 w-full sm:w-auto" type="button" onclick="this.closest('#edit-<?= $c['id'] ?>').style.display='none'">Hủy</button>
                                         </div>
                                     </form>
                                 </div>
