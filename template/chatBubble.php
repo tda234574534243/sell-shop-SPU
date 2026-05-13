@@ -1,9 +1,23 @@
 <?php /* Chat bubble UI using Tailwind CSS */ ?>
+<style>
+    /* Expanded chat window styling */
+    #chatWindow.chat-expanded{
+        width: calc(100vw - 48px) !important;
+        right: 24px !important;
+        bottom: 24px !important;
+        max-height: calc(100vh - 48px) !important;
+        height: calc(100vh - 48px) !important;
+        border-radius: 12px !important;
+    }
+    #chatWindow .chat-messages-full{
+        height: calc(100% - 144px) !important;
+    }
+</style>
 
-<div class="fixed right-4 bottom-4 z-50 flex items-end gap-3">
+<div id="chatLauncher" class="fixed right-4 bottom-4 z-50 flex items-end gap-3 touch-none cursor-grab" style="touch-action:none;">
     <div>
-        <button id="openChatBtn" class="bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 focus:outline-none" title="Chat tư vấn">
-            <i class="fas fa-comments"></i>
+        <button id="openChatBtn" class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white p-3 rounded-full shadow-md hover:scale-105 transform transition-transform focus:outline-none" title="Chat tư vấn" aria-label="Mở chat">
+            <i class="fas fa-robot" aria-hidden="true"></i>
         </button>
     </div>
     <div>
@@ -13,28 +27,37 @@
     </div>
 </div>
 
-<div id="chatWindow" class="hidden fixed right-4 bottom-20 w-80 max-w-[calc(100vw-36px)] max-h-[70vh] z-50 rounded-lg shadow-xl overflow-hidden font-sans bg-white" aria-hidden="true">
-    <div class="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-green-700 to-green-800 text-white">
-        <img src="/public/image/avatars/assistant.png" onerror="this.style.display='none'" class="w-8 h-8 rounded-full" alt="assistant">
-        <div class="flex-1">
-            <div class="font-semibold">Trợ lý mua hàng</div>
-            <div class="text-sm text-white/90">Gợi ý + hỗ trợ chọn sản phẩm</div>
+<div id="chatWindow" class="hidden fixed right-4 bottom-20 w-80 max-w-[calc(100vw-36px)] max-h-[70vh] z-50 rounded-xl shadow-2xl overflow-hidden font-sans bg-slate-900 text-slate-100" aria-hidden="true">
+    <div id="chatHeader" class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-indigo-700 to-indigo-600 text-white" style="touch-action:none; cursor:grab;">
+        <img src="/public/image/avatars/assistant.png" onerror="this.style.display='none'" class="w-9 h-9 rounded-md ring-1 ring-white/10 flex-shrink-0" alt="assistant">
+        <div class="flex-1 min-w-0">
+            <div class="truncate">
+                <div class="font-semibold text-sm leading-5 truncate">Trợ lý mua hàng</div>
+                <div class="text-xs text-white/80 truncate">Gợi ý & hỗ trợ chọn sản phẩm</div>
+            </div>
         </div>
         <div class="flex items-center gap-2">
-            <div id="chatTabs" class="flex gap-2 mr-1">
-                <button id="tabChat" class="px-2 py-1 text-sm rounded bg-white/10">Chat</button>
-                <button id="tabHistory" class="px-2 py-1 text-sm rounded bg-white/10">Lịch sử</button>
+            <div id="chatTabs" role="tablist" class="flex gap-1 mr-1">
+                <button id="tabChat" role="tab" class="px-3 py-1 text-xs rounded-full bg-white/10 hover:bg-white/20">Chat</button>
+                <button id="tabHistory" role="tab" class="px-3 py-1 text-xs rounded-full bg-white/5 hover:bg-white/20">Lịch sử</button>
             </div>
-            <button id="newChatBtn" class="px-2 py-1 text-sm rounded border border-white/20">New</button>
-            <button id="closeChatBtn" class="px-2 py-1 text-sm rounded bg-white/10">×</button>
+            <button id="newChatBtn" class="p-2 rounded-full bg-white/6 hover:bg-white/10 text-white text-xs" title="Cuộc trò chuyện mới" aria-label="Cuộc trò chuyện mới">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button id="toggleSizeBtn" class="p-2 rounded-full bg-white/6 hover:bg-white/10 text-white text-sm" title="Phóng to/Thu nhỏ" aria-pressed="false" aria-label="Phóng to khung chat">
+                <i class="fas fa-expand-alt" aria-hidden="true"></i>
+            </button>
+            <button id="closeChatBtn" class="p-2 rounded-full bg-white/6 hover:bg-white/10 text-white text-sm" aria-label="Đóng cửa sổ chat">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
-    <div id="chatMessages" class="p-3 bg-white h-80 overflow-auto" role="log" aria-live="polite"></div>
-    <div class="composer flex gap-2 items-center px-3 py-2 bg-gray-50 border-t border-gray-200">
-        <input id="chatInput" class="flex-1 px-3 py-2 text-sm border rounded-md focus:outline-none" placeholder="Bạn cần tư vấn gì?" aria-label="Nhập câu hỏi" />
-        <button id="chatSendBtn" class="bg-blue-600 text-white px-3 py-1.5 rounded text-sm">Gửi</button>
+    <div id="chatMessages" class="p-3 bg-slate-900 h-80 overflow-auto" role="log" aria-live="polite"></div>
+    <div class="composer flex gap-2 items-center px-3 py-3 bg-slate-800 border-t border-slate-700">
+        <input id="chatInput" class="flex-1 px-3 py-2 text-sm bg-slate-700 text-slate-100 border border-slate-700 rounded-xl focus:outline-none" placeholder="Bạn cần tư vấn gì?" aria-label="Nhập câu hỏi" />
+        <button id="chatSendBtn" class="bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-2 rounded-xl text-sm">Gửi</button>
     </div>
-    <div class="text-sm text-gray-500 px-3 py-2">Ghi chú: Thông tin chỉ mang tính gợi ý.</div>
+    <div class="text-xs text-slate-400 px-3 py-2">Ghi chú: Thông tin chỉ mang tính gợi ý.</div>
 </div>
 
 <script>
@@ -51,10 +74,110 @@ const chatSendBtn = document.getElementById('chatSendBtn');
 const tabChat = document.getElementById('tabChat');
 const tabHistory = document.getElementById('tabHistory');
 const newChatBtn = document.getElementById('newChatBtn');
+const toggleSizeBtn = document.getElementById('toggleSizeBtn');
 const composerEl = document.querySelector('.composer');
 
 openBtn.addEventListener('click', ()=>{ chatWindow.classList.remove('hidden'); chatWindow.setAttribute('aria-hidden','false'); chatInput.focus(); });
 closeBtn.addEventListener('click', ()=>{ chatWindow.classList.add('hidden'); chatWindow.setAttribute('aria-hidden','true'); });
+
+if (toggleSizeBtn){
+    toggleSizeBtn.addEventListener('click', ()=>{
+        const expanded = chatWindow.classList.toggle('chat-expanded');
+        toggleSizeBtn.setAttribute('aria-pressed', expanded ? 'true' : 'false');
+        const icon = toggleSizeBtn.querySelector('i');
+        if (icon){
+            icon.classList.toggle('fa-expand-alt', !expanded);
+            icon.classList.toggle('fa-compress-alt', expanded);
+        }
+        // when expanded, ensure messages area grows
+        if (expanded) {
+            chatMessages.classList.add('chat-messages-full');
+        } else {
+            chatMessages.classList.remove('chat-messages-full');
+        }
+    });
+}
+
+// Draggable behavior for launcher and chat window (pointer events)
+function makeDraggable(containerEl, handleEl, opts){
+    opts = opts || {};
+    let dragging = false;
+    let startX=0, startY=0, startLeft=0, startTop=0;
+
+    function onPointerDown(e){
+        // only primary button
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        e.preventDefault();
+        dragging = true;
+        handleEl.setPointerCapture(e.pointerId);
+        const rect = containerEl.getBoundingClientRect();
+        startX = e.clientX; startY = e.clientY;
+        // ensure fixed left/top for movement
+        containerEl.style.right = 'auto';
+        containerEl.style.bottom = 'auto';
+        containerEl.style.left = rect.left + 'px';
+        containerEl.style.top = rect.top + 'px';
+        startLeft = rect.left; startTop = rect.top;
+        containerEl.style.cursor = 'grabbing';
+        handleEl.style.cursor = 'grabbing';
+    }
+
+    function onPointerMove(e){
+        if (!dragging) return;
+        e.preventDefault();
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        let nx = startLeft + dx;
+        let ny = startTop + dy;
+        // clamp to viewport
+        const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        const w = containerEl.offsetWidth; const h = containerEl.offsetHeight;
+        nx = Math.min(Math.max(6, nx), vw - w - 6);
+        ny = Math.min(Math.max(6, ny), vh - h - 6);
+        containerEl.style.left = nx + 'px';
+        containerEl.style.top = ny + 'px';
+    }
+
+    function onPointerUp(e){
+        if (!dragging) return;
+        dragging = false;
+        try{ handleEl.releasePointerCapture(e.pointerId); }catch(_){}
+        containerEl.style.cursor = '';
+        handleEl.style.cursor = '';
+        // optionally persist position
+        if (opts.persistKey){
+            localStorage.setItem(opts.persistKey, JSON.stringify({ left: containerEl.style.left, top: containerEl.style.top }));
+        }
+    }
+
+    handleEl.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+
+    // restore persisted position
+    if (opts.persistKey){
+        try{
+            const raw = localStorage.getItem(opts.persistKey);
+            if (raw){
+                const pos = JSON.parse(raw);
+                if (pos.left) containerEl.style.left = pos.left;
+                if (pos.top) containerEl.style.top = pos.top;
+                containerEl.style.right = 'auto'; containerEl.style.bottom = 'auto';
+            }
+        }catch(e){/* ignore */}
+    }
+}
+
+// attach draggable: launcher (drag whole launcher) and chatWindow (drag by header)
+const chatLauncher = document.getElementById('chatLauncher');
+if (chatLauncher){
+    makeDraggable(chatLauncher, chatLauncher, { persistKey: 'chat.launcher.pos' });
+}
+if (chatWindow){
+    const chatHeader = document.getElementById('chatHeader');
+    if (chatHeader) makeDraggable(chatWindow, chatHeader, { persistKey: 'chat.window.pos' });
+}
 
 function setActiveTab(t){
     if (t === 'history'){
@@ -108,12 +231,12 @@ function appendMessage(who, text){
     const bubble = document.createElement('div'); bubble.className = 'px-3 py-2 rounded-xl max-w-[78%] text-sm';
 
     if (who === 'user'){
-        avatar.style.background = 'linear-gradient(45deg,#065f46,#10b981)';
-        bubble.classList.add('bg-green-600','text-white','rounded-br-sm');
+        avatar.style.background = 'linear-gradient(90deg,#4f46e5,#6366f1)';
+        bubble.classList.add('bg-gradient-to-r','from-indigo-600','to-indigo-500','text-white','rounded-br-sm');
         bubble.textContent = text;
     } else {
-        avatar.style.background = '#e6eef6';
-        bubble.classList.add('bg-gray-100','text-gray-900');
+        avatar.style.background = '#0f1724';
+        bubble.classList.add('bg-slate-800','text-slate-100','ring','ring-slate-700');
         bubble.innerHTML = renderReplyAsHTML(text);
     }
 
@@ -166,7 +289,7 @@ function makeTypingElement(){
     const avatar = document.createElement('div'); avatar.className='w-8 h-8 rounded-full flex-shrink-0'; avatar.style.background='#e6eef6';
     const bubble = document.createElement('div'); bubble.className='px-3 py-2 rounded-xl max-w-[78%] text-sm bg-gray-100';
     const typing = document.createElement('span'); typing.className='inline-flex gap-1';
-    typing.innerHTML = '<span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:.12s"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:.24s"></span>';
+    typing.innerHTML = '<span class="w-2 h-2 bg-slate-500 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-slate-500 rounded-full animate-bounce" style="animation-delay:.12s"></span><span class="w-2 h-2 bg-slate-500 rounded-full animate-bounce" style="animation-delay:.24s"></span>';
     bubble.appendChild(typing);
     div.appendChild(avatar); div.appendChild(bubble);
     return div;
