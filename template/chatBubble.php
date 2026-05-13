@@ -1,9 +1,16 @@
 <?php /* Chat bubble UI using Tailwind CSS */ ?>
 
-<div class="fixed right-4 bottom-4 z-50">
-    <button id="openChatBtn" class="bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 focus:outline-none" title="Chat tư vấn">
-        <i class="fas fa-comments"></i>
-    </button>
+<div class="fixed right-4 bottom-4 z-50 flex items-end gap-3">
+    <div>
+        <button id="openChatBtn" class="bg-green-600 text-white p-3 rounded-full shadow-lg hover:bg-green-700 focus:outline-none" title="Chat tư vấn">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+    <div>
+        <a id="openZaloBtn" href="https://zalo.me/0917337576" target="_blank" rel="noopener noreferrer" title="Chat qua Zalo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" style="width:46px;height:46px;border-radius:8px;box-shadow:0 6px 12px rgba(0,0,0,0.12);display:block;">
+        </a>
+    </div>
 </div>
 
 <div id="chatWindow" class="hidden fixed right-4 bottom-20 w-80 max-w-[calc(100vw-36px)] max-h-[70vh] z-50 rounded-lg shadow-xl overflow-hidden font-sans bg-white" aria-hidden="true">
