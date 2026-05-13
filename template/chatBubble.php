@@ -102,17 +102,15 @@ if (toggleSizeBtn){
 function makeDraggable(containerEl, handleEl, opts){
     opts = opts || {};
     let dragging = false;
+    let potential = false;
+    let interactive = false;
     let startX=0, startY=0, startLeft=0, startTop=0;
+    let pointerId = null;
 
-    function onPointerDown(e){
-        // only primary button
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        e.preventDefault();
+    function startDragging(e){
         dragging = true;
-        handleEl.setPointerCapture(e.pointerId);
+        try{ handleEl.setPointerCapture(pointerId || e.pointerId); }catch(_){}
         const rect = containerEl.getBoundingClientRect();
-        startX = e.clientX; startY = e.clientY;
-        // ensure fixed left/top for movement
         containerEl.style.right = 'auto';
         containerEl.style.bottom = 'auto';
         containerEl.style.left = rect.left + 'px';
@@ -122,14 +120,34 @@ function makeDraggable(containerEl, handleEl, opts){
         handleEl.style.cursor = 'grabbing';
     }
 
+    function onPointerDown(e){
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        pointerId = e.pointerId;
+        potential = true;
+        interactive = false;
+        try{ if (e.target && e.target.closest && e.target.closest('button, a, input, textarea, select, label')) interactive = true; }catch(err){}
+        startX = e.clientX; startY = e.clientY;
+        const rect = containerEl.getBoundingClientRect();
+        startLeft = rect.left; startTop = rect.top;
+    }
+
     function onPointerMove(e){
-        if (!dragging) return;
-        e.preventDefault();
+        if (!potential && !dragging) return;
         const dx = e.clientX - startX;
         const dy = e.clientY - startY;
+        if (!dragging){
+            if (interactive){
+                if (Math.hypot(dx,dy) > 6){
+                    startDragging(e);
+                } else return;
+            } else {
+                startDragging(e);
+            }
+        }
+        // now dragging
+        e.preventDefault();
         let nx = startLeft + dx;
         let ny = startTop + dy;
-        // clamp to viewport
         const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         const w = containerEl.offsetWidth; const h = containerEl.offsetHeight;
@@ -140,12 +158,12 @@ function makeDraggable(containerEl, handleEl, opts){
     }
 
     function onPointerUp(e){
+        potential = false;
         if (!dragging) return;
         dragging = false;
-        try{ handleEl.releasePointerCapture(e.pointerId); }catch(_){}
+        try{ handleEl.releasePointerCapture(pointerId || e.pointerId); }catch(_){}
         containerEl.style.cursor = '';
         handleEl.style.cursor = '';
-        // optionally persist position
         if (opts.persistKey){
             localStorage.setItem(opts.persistKey, JSON.stringify({ left: containerEl.style.left, top: containerEl.style.top }));
         }
