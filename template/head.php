@@ -40,6 +40,18 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        /* Star rating visuals */
+        .star {
+            color: #94a3b8;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .star.filled {
+            color: #f39c12;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+        }
         /* Reduce heavy effects on small screens for performance and readability */
         @media (max-width: 768px) {
             .glass-effect {

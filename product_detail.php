@@ -60,7 +60,10 @@
                             var input = document.getElementById(inputId);
                             var setRating = function(value){
                                 stars.forEach(function(s){
-                                    s.classList.toggle('filled', parseInt(s.dataset.value) <= value);
+                                    var v = parseInt(s.dataset.value);
+                                    var filled = v <= value;
+                                    s.classList.toggle('filled', filled);
+                                    s.innerText = filled ? '★' : '☆';
                                 });
                                 if (input) input.value = value || '';
                             };
