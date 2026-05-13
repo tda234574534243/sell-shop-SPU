@@ -90,9 +90,15 @@
                             if (isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode'] == '00') {
                                 // Payment success according to VNPAY. Verify amount and update order status.
                                 $maHD = isset($_GET['vnp_TxnRef']) ? $_GET['vnp_TxnRef'] : '';
-                                $vnpAmountRaw = isset($_GET['vnp_Amount']) ? intval($_GET['vnp_Amount']) : 0;
-                                // VNPAY sends amount in smallest currency unit (e.g., cents), sample uses 100x
-                                $vnpAmount = $vnpAmountRaw / 100.0;
+                                $vnpAmountRaw = isset($_GET['vnp_Amount']) ? $_GET['vnp_Amount'] : '0';
+                                // VNPAY sends amount in smallest currency unit (e.g., cents) — sample uses 100x.
+                                // Use floatval/string handling to avoid 32-bit intval overflow on large amounts.
+                                if (is_numeric($vnpAmountRaw)) {
+                                    $vnpAmount = floatval($vnpAmountRaw) / 100.0;
+                                } else {
+                                    $vnpAmount = 0.0;
+                                }
+                                error_log("[vnpay_return] raw_vnp_Amount={$vnpAmountRaw} parsed_vnpAmount={$vnpAmount} maHD={$maHD}");
 
                                 $msg = '';
                                 if ($maHD === '') {

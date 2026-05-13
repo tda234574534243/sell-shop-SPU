@@ -36,7 +36,14 @@ foreach ($inputData as $key => $value) {
 $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
 $vnpTranId = $inputData['vnp_TransactionNo']; //Mã giao dịch tại VNPAY
 $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
-$vnp_Amount = $inputData['vnp_Amount']/100; // Số tiền thanh toán VNPAY phản hồi
+$vnp_Amount = isset($inputData['vnp_Amount']) ? $inputData['vnp_Amount'] : '0'; // raw from VNPAY
+// Parse amount safely (avoid 32-bit intval overflow); VNPAY sends amount * 100
+if (is_numeric($vnp_Amount)) {
+    $vnp_Amount = floatval($vnp_Amount) / 100.0;
+} else {
+    $vnp_Amount = 0.0;
+}
+error_log("[vnpay_ipn] parsed vnp_Amount={$vnp_Amount} vnp_TransactionNo={$vnpTranId}"); // debug
 
 $Status = 0; // Là trạng thái thanh toán của giao dịch chưa có IPN lưu tại hệ thống của merchant chiều khởi tạo URL thanh toán.
 $orderId = $inputData['vnp_TxnRef'];
