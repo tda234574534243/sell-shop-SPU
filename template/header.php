@@ -47,7 +47,7 @@
 ?>
 
 <!-- Modern Luxury Navigation -->
-<nav class="glass-effect sticky top-0 z-50 border-b border-indigo-500/10">
+<nav class="<?= ($currentPage === 'introduce.php') ? 'border-b border-indigo-500/10' : 'glass-effect sticky top-0 z-50 border-b border-indigo-500/10' ?>">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
             <!-- Logo & Brand -->
